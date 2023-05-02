@@ -24,7 +24,7 @@
 1. `cd packages/server`
 2. `yarn db:setup` to run example migrations and seeds
 3. `yarn dev` to start the server in development mode
-4. check http://localhost:5001/api/exampleResources to verify that the API works and you can read data from the database
+4. check http://localhost:5001/api/movies to verify that the API works and you can read data from the database
 
 <br>
 

@@ -2,12 +2,7 @@ const express = require('express');
 
 const router = express.Router();
 
-const exampleResources = require('./exampleResources.router');
-
-/* GET home page. */
-// router.get('/', function(req, res, next) {
-//   res.render('index', { title: 'Express' });
-// });
+const movies = require('./movies.router');
 
 const swaggerJsDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
@@ -32,6 +27,6 @@ const swaggerDocument = swaggerJsDoc(swaggerOptions);
 // Route for Swagger API Documentation
 router.use('/documentation', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-router.use('/exampleResources', exampleResources);
+router.use('/movies', movies);
 
 module.exports = router;

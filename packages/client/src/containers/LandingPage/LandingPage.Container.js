@@ -3,22 +3,25 @@ import { apiURL } from '../../apiURL';
 import './LandingPage.Style.css';
 
 export const LandingPage = () => {
-  const [exampleResources, setExampleResources] = useState([]);
+  const [movies, setMovies] = useState([]);
   useEffect(() => {
-    async function fetchExampleResources() {
-      const response = await fetch(`${apiURL()}/exampleResources`);
+    async function fetchMovies() {
+      const response = await fetch(`${apiURL()}/movies`);
       const examples = await response.json();
-      setExampleResources(examples);
+      setMovies(examples);
     }
 
-    fetchExampleResources();
+    fetchMovies();
   }, []);
 
   return (
     <div className="landing-page-container">
       <span>Landing Page</span>
-      {exampleResources.map((example) => (
-        <div key={example.id}>{example.title}</div>
+      {movies.map((movie) => (
+        <div key={movie.id}>
+          <p>{movie.title}</p>
+          <p>{movie.description}</p>
+        </div>
       ))}
     </div>
   );
