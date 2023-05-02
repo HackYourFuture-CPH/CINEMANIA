@@ -15,11 +15,11 @@ const getMovieByID = async (id) => {
   }
 
   try {
-    const movie = await knex('movies').select('*').first({ id });
-    if (movies.length === 0) {
-      throw new Error(`incorrect entry with the ID of ${id}`, 404);
+    const movie = await knex('movies').select('*').where({ id }).first();
+    if (!movie) {
+      throw new Error(`incorrect entry with the movie ID ${id}`, 404);
     }
-    return movies;
+    return movie;
   } catch (error) {
     return error.message;
   }
