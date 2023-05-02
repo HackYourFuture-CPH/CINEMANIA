@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { Card, CardContent, Chip } from '@mui/material';
 import { blue } from '@mui/material/colors';
 import React, { useEffect, useState } from 'react';
@@ -31,13 +30,7 @@ export const LandingPage = () => {
           </CardContent>
         </Card>
       ))}
-
-      <Button
-        label="click me!"
-        color="primary"
-        variant="contained"
-        onClick={() => console.log('hej!')}
-      />
+      <Button label="click me!" color="primary" variant="contained" />
     </div>
   );
 };
