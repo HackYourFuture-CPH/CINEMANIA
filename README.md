@@ -4,7 +4,7 @@
 
 ## Prerequisites
 
-- `node` >= 17.3.0
+- `node` >= 18.16.0
 - `yarn` installed
 - `.env.example` in `client` and in `server` copied, renamed and filled with the right credentials (optional for `server` if you plan to use Docker)
 - \*`Docker` insalled - if you plan to use it instead of `MySQL`
