@@ -1,6 +1,9 @@
+/* eslint-disable no-console */
+import { Card, CardContent, Chip } from '@mui/material';
+import { blue } from '@mui/material/colors';
 import React, { useEffect, useState } from 'react';
 import { apiURL } from '../../apiURL';
-import './LandingPage.Style.css';
+import { Button } from '../../components/Button/Button.component';
 
 export const LandingPage = () => {
   const [movies, setMovies] = useState([]);
@@ -16,13 +19,25 @@ export const LandingPage = () => {
 
   return (
     <div className="landing-page-container">
-      <span>Landing Page</span>
       {movies.map((movie) => (
-        <div key={movie.id}>
-          <p>{movie.title}</p>
-          <p>{movie.description}</p>
-        </div>
+        <Card sx={{ width: 550, margin: 10 }} variant="outlined" key={movie.id}>
+          <CardContent sx={{ margin: '20px', bgcolor: blue[100] }}>
+            <Chip
+              sx={{ fontSize: '1.2rem' }}
+              color="secondary"
+              label={movie.title}
+            />
+            <p>{movie.description}</p>
+          </CardContent>
+        </Card>
       ))}
+
+      <Button
+        label="click me!"
+        color="primary"
+        variant="contained"
+        onClick={() => console.log('hej!')}
+      />
     </div>
   );
 };
