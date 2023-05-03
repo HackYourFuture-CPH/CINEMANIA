@@ -7,6 +7,7 @@
 - `node` >= 18.16.0
 - `yarn` installed
 - `.env.example` in `client` and in `server` copied, renamed to `.env` and filled with the right credentials (optional for `server` if you plan to use Docker)
+- create the database according to the name in the `.env` file (optional if you plan to use Docker)
 - `Docker` installed - if you plan to use it instead of directly using `MySQL`
 
 <br>
