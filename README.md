@@ -32,7 +32,7 @@
 
 <br>
 
-`npm` commands are replaced with Yarn which provides a faster experience and better organisation of dependencies.
+`npm` commands are replaced with `yarn` which provides a faster experience and better organisation of dependencies.
 Do not run any `npm` commands!
 
 <br>
