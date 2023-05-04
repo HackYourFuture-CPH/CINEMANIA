@@ -22,10 +22,11 @@
 
 ### Create, fill and test the database (steps for both docker and no-docker setup)
 
-1. `cd packages/server`
-2. `yarn db:setup` to run example migrations and seeds
-3. `yarn dev` to start the server in development mode
-4. check http://localhost:5001/api/movies to verify that the API works and you can read data from the database
+1. `yarn` at the root to install dependencies
+2. `cd packages/server`
+3. `yarn db:setup` to run example migrations and seeds
+4. `yarn dev` to start the server in development mode
+5. check http://localhost:5001/api/movies to verify that the API works and you can read data from the database
 
 <br>
 
