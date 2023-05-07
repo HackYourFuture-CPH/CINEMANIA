@@ -6,6 +6,7 @@ export const Button = (props) => {
   const { label, color, variant } = props;
   return (
     <Tooltip title=":)">
+      hej
       <MuiButton
         type="button"
         color={color}
