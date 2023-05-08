@@ -23,6 +23,14 @@ router.get('/:id', (req, res, next) => {
     .catch(next);
 });
 
+// get /:id/reviews
+router.get('/:id/reviews', (req, res, next) => {
+  moviesController
+    .getReviewsByMovieID(req.params.id)
+    .then((result) => res.json(result))
+    .catch(next);
+});
+
 // post
 router.post('/', (req, res) => {
   moviesController

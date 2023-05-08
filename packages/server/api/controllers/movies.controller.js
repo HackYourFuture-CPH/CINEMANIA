@@ -25,6 +25,22 @@ const getMovieByID = async (id) => {
   }
 };
 
+const getReviewsByMovieID = async (id) => {
+  if (!id) {
+    throw new HttpError('ID should be a number', 400);
+  }
+
+  try {
+    const reviews = await knex('reviews').select('*').where({ movie_id: id });
+    if (!reviews.length) {
+      throw new Error(`incorrect entry with the movie ID ${id}`, 404);
+    }
+    return reviews;
+  } catch (error) {
+    return error.message;
+  }
+};
+
 const editMovie = async (movieID, updateMovie) => {
   if (!movieID) {
     throw new HttpError('movie ID should be a number', 400);
@@ -53,6 +69,7 @@ const createMovie = async (body) => {
 module.exports = {
   getMovies,
   getMovieByID,
+  getReviewsByMovieID,
   editMovie,
   deleteMovie,
   createMovie,
