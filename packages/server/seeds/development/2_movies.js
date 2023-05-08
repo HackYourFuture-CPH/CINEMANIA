@@ -22,5 +22,13 @@ exports.seed = async function (knex) {
       movie_year: 1994,
       price: 80,
     },
+    {
+      category_id: 8,
+      title: 'Interstellar',
+      description:
+        'The adventures of a group of explorers who make use of a newly discovered wormhole to surpass the limitations on human space travel and conquer the vast distances involved in an interstellar voyage.',
+      movie_year: 2014,
+      price: 180,
+    },
   ]);
 };
