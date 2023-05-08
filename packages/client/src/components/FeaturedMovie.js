@@ -6,7 +6,6 @@ import {
   CardContent,
   IconButton,
   Typography,
-  backdropClasses,
 } from '@mui/material';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 

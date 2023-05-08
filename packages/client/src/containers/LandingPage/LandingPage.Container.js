@@ -3,7 +3,7 @@ import { blue } from '@mui/material/colors';
 import React, { useEffect, useState } from 'react';
 import { apiURL } from '../../apiURL';
 import { Button } from '../../components/Button/Button.component';
-import FeaturedMovie from '../../components/Button/FeaturedMovie';
+import FeaturedMovie from '../../components/FeaturedMovie';
 
 export const LandingPage = () => {
   const [movies, setMovies] = useState([]);
