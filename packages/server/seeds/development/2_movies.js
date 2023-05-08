@@ -63,12 +63,14 @@ exports.seed = async function (knex) {
       price: 90,
     },
     {
-      category_id: 2,
-      title: 'Lucifer',
+      category_id: 1,
+      title: 'Legend',
       description:
-        'Bored and unhappy as the Lord of Hell, Lucifer Morningstar abandoned his throne and retired to Los Angeles, where he has teamed up with LAPD detective Chloe Decker to take down criminals.',
-      movie_year: 2016,
-      price: 666,
+        'Suave, charming and volatile, Reggie Kray and his unstable twin brother Ronnie start to leave their mark on the London underworld in the 1960s. Using violence to get what they want, the siblings orchestrate robberies and murders.',
+      movie_year: 2015,
+      image_location:
+        'https://www.themoviedb.org/t/p/w1280/4shf5Alq4KWCKqrAAQe0JGJHYp5.jpg',
+      price: 66,
     },
   ]);
 };
