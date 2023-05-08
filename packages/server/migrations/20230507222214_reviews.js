@@ -9,7 +9,7 @@ exports.up = function (knex) {
     table.foreign('movie_id').references('id').inTable('movies');
     table.integer('user_id').unsigned().notNullable();
     table.foreign('user_id').references('id').inTable('users');
-    table.integer('rating').notNullable();
+    table.enu('rating', [1, 2, 3, 4, 5]);
     table.string('review_text').notNullable();
     table.datetime('created_at', { precision: 6 }).defaultTo(knex.fn.now(6));
   });
