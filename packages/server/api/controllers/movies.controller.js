@@ -25,6 +25,30 @@ const getMovieByID = async (id) => {
   }
 };
 
+const getMoviesByCategory = async (categoryId) => {
+  try {
+    const movies = await knex
+      .select(
+        'm.id',
+        'm.title',
+        'm.description',
+        'm.movie_year',
+        'm.image_location',
+        'm.price',
+        'm.created_at',
+      )
+      .from('movies as m')
+      .where('m.category_id', categoryId)
+      .limit(9);
+    if (movies.length === 0) {
+      return { message: `No movies found under this category` };
+    }
+    return movies;
+  } catch (error) {
+    return error.message;
+  }
+};
+
 const editMovie = async (movieID, updateMovie) => {
   if (!movieID) {
     throw new HttpError('movie ID should be a number', 400);
@@ -56,4 +80,5 @@ module.exports = {
   editMovie,
   deleteMovie,
   createMovie,
+  getMoviesByCategory,
 };
