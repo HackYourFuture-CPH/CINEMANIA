@@ -11,7 +11,6 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          {/* Added movies/:id path to be able to test frontend components for the Movie View page */}
           <Route path="movies/:id" element={<MovieView />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
