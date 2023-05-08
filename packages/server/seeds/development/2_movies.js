@@ -72,5 +72,35 @@ exports.seed = async function (knex) {
         'https://www.themoviedb.org/t/p/w1280/4shf5Alq4KWCKqrAAQe0JGJHYp5.jpg',
       price: 66,
     },
+    {
+      category_id: 4,
+      title: 'Stuart Little',
+      description:
+        'The adventures of a heroic and debonair stalwart mouse named Stuart Little with human qualities, who faces some comic misadventures while searching for his lost bird friend and living with a human family as their child.',
+      movie_year: 1999,
+      image_location:
+        'https://www.themoviedb.org/t/p/w1280/jwydlxxLPVxM5uCfJybEsANzvvg.jpg',
+      price: 100,
+    },
+    {
+      category_id: 2,
+      title: 'Gone Girl',
+      description:
+        'With his wife his disappearance having become the focus of an intense media circus, a man sees the spotlight turned on him when it is suspected that he may not be innocent.',
+      movie_year: 2014,
+      image_location:
+        'https://www.themoviedb.org/t/p/w1280/qymaJhucquUwjpb8oiqynMeXnID.jpg',
+      price: 120,
+    },
+    {
+      category_id: 5,
+      title: 'The Exorcist',
+      description:
+        "Ophelia, a young nun recently arriving in the town of San Ramon, is forced to perform an exorcism on a pregnant woman in danger of dying. Just when she thinks her possession has ended, she discovers that the evil presence hasn't disappeared yet",
+      movie_year: 2014,
+      image_location:
+        'https://www.themoviedb.org/t/p/w1280/d07xtqwq1uriQ1hda6qeu8Skt5m.jpg',
+      price: 666,
+    },
   ]);
 };
