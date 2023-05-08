@@ -62,5 +62,13 @@ exports.seed = async function (knex) {
       movie_year: 1995,
       price: 90,
     },
+    {
+      category_id: 2,
+      title: 'Lucifer',
+      description:
+        'Bored and unhappy as the Lord of Hell, Lucifer Morningstar abandoned his throne and retired to Los Angeles, where he has teamed up with LAPD detective Chloe Decker to take down criminals.',
+      movie_year: 2016,
+      price: 666,
+    },
   ]);
 };
