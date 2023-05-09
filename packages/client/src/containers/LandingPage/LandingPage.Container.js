@@ -6,7 +6,6 @@ import { Button } from '../../components/Button/Button.component';
 import FeaturedMovie from '../../components/FeaturedMovie';
 import MovieComponent from '../../components/MovieComponent';
 
-
 export const LandingPage = () => {
   const [movies, setMovies] = useState([]);
   useEffect(() => {
@@ -33,8 +32,8 @@ export const LandingPage = () => {
           </CardContent>
         </Card>
       ))}
-    <FeaturedMovie />
-    <MovieComponent />
+      <FeaturedMovie />
+      <MovieComponent />
       <Button label="click me!" color="primary" variant="contained" />
     </div>
   );
