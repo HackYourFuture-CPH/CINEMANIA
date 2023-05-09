@@ -2,8 +2,10 @@ import { Card, CardContent, Chip } from '@mui/material';
 import { blue } from '@mui/material/colors';
 import React, { useEffect, useState } from 'react';
 import { apiURL } from '../../apiURL';
-
+import { Button } from '../../components/Button/Button.component';
+import FeaturedMovie from '../../components/FeaturedMovie';
 import MovieComponent from '../../components/MovieComponent';
+
 
 export const LandingPage = () => {
   const [movies, setMovies] = useState([]);
@@ -31,7 +33,9 @@ export const LandingPage = () => {
           </CardContent>
         </Card>
       ))}
-      <MovieComponent />
+    <FeaturedMovie />
+    <MovieComponent />
+      <Button label="click me!" color="primary" variant="contained" />
     </div>
   );
 };
