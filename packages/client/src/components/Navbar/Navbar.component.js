@@ -1,55 +1,58 @@
 import React from 'react';
-import { AppBar, Toolbar, Box, Button } from '@mui/material';
+import { AppBar, Toolbar, Box, Button, Grid, MenuItem } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import PersonIcon from '@mui/icons-material/Person';
 
 export const Navbar = () => {
   return (
-    <AppBar component="nav">
-      <Box sx={{ padding: '0.6rem 8.75rem' }} bgcolor="mainGreen">
-        <Toolbar
-          fontFamily="Inter"
-          sx={{
-            height: '3rem',
-            justifyContent: 'space-between',
-          }}
-        >
+    <AppBar component="nav" width="100%" sx={{ bgcolor: 'mainGreen' }}>
+      <Toolbar
+        fontFamily="Inter"
+        sx={{
+          height: '3rem',
+          justifyContent: 'space-around',
+        }}
+      >
+        <MenuItem>
+          <PersonIcon
+            sx={{ width: '1.75rem', height: '1.75rem', color: 'black' }}
+          />
+        </MenuItem>
+        <Grid item xs={12} align="center">
           <Box>
             <img
-              src="https://i.ibb.co/KhL6qmv/Frame-2-transformed.png"
-              alt="Frame-2-transformed"
+              src="https://i.ibb.co/7JGHhKm/image.png"
+              alt="nav bar logo"
               border="0"
-              width="80%"
+              width="286"
+              height="98"
             />
           </Box>
-          <Box>
-            <img
-              src="https://i.ibb.co/LnHZThJ/Frame-16.png"
-              alt="Frame_16-removebg-preview"
-              border="0"
-            />
-          </Box>
-          <Box>
-            <ShoppingCartIcon
-              sx={{
-                width: '1.75rem',
-                height: '1.75rem',
-                color: '#000000',
-                marginRight: '1rem',
-              }}
-            />
-            <FavoriteBorderIcon
-              sx={{ width: '1.9rem', height: '1.75rem', color: '#000000' }}
-            />
-          </Box>
-        </Toolbar>
-      </Box>
+        </Grid>
+
+        <MenuItem>
+          <ShoppingCartIcon
+            sx={{
+              width: '1.75rem',
+              height: '1.75rem',
+              color: '#000000',
+              marginRight: '1rem',
+            }}
+          />
+          <FavoriteBorderIcon
+            sx={{ width: '1.9rem', height: '1.75rem', color: '#000000' }}
+          />
+        </MenuItem>
+      </Toolbar>
+
       <Toolbar
         sx={{
           height: '4.75rem',
           background: '#000000',
           justifyContent: 'center',
           alignItems: 'center',
+          width: '100%',
         }}
       >
         <Button
