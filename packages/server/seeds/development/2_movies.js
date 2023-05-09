@@ -114,5 +114,15 @@ exports.seed = async function (knex) {
         'https://www.themoviedb.org/t/p/w1280/d07xtqwq1uriQ1hda6qeu8Skt5m.jpg',
       price: 666,
     },
+    {
+      category_id: 3,
+      title: 'The Dark Knight',
+      description:
+        'Batman raises the stakes in his war on crime. With the help of Lt. Jim Gordon and District Attorney Harvey Dent, Batman sets out to dismantle the remaining criminal organizations that plague the streets. The partnership proves to be effective.',
+      movie_year: 2008,
+      image_location:
+        'https://www.themoviedb.org/t/p/w1280/z4XwvnDZSm40PCdg9vFJmo0W9ri.jpg',
+      price: 120,
+    },
   ]);
 };
