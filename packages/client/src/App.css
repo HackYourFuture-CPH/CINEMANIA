@@ -5,3 +5,27 @@
   align-items: center;
   justify-content: center;
 }
+.view-each-card-carousel {
+  width: 110px;
+  height: 60px;
+  /* background: url(20230201_Banner_whale_l20230201.jpg); */
+  background-color: rgb(84, 218, 91);
+  filter: drop-shadow(15px 15px 37.5px rgba(0, 0, 0, 0.25));
+  border-radius: 112.5px;
+}
+.view-carousel-2 {
+  background-color: #cbf696;
+}
+.box {
+  background-color: #cd76c4;
+  width: 110px;
+  height: 60px;
+  filter: drop-shadow(15px 15px 37.5px rgba(0, 0, 0, 0.25));
+  border-radius: 112.5px;
+}
+.box h3 {
+  text-align: center;
+}
+.slick-slide div {
+  margin: 0 1px;
+}
