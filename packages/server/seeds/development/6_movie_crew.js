@@ -18,5 +18,16 @@ exports.seed = async function (knex) {
     { movie_id: 11, crew_member_id: 10, role: 'Actor' },
     { movie_id: 11, crew_member_id: 11, role: 'Actor' },
     { movie_id: 11, crew_member_id: 12, role: 'Actor' },
+    { movie_id: 11, crew_member_id: 12, role: 'Actor' },
+    { movie_id: 12, crew_member_id: 13, role: 'Actor' },
+    { movie_id: 12, crew_member_id: 14, role: 'Actor' },
+    { movie_id: 12, crew_member_id: 15, role: 'Actor' },
+    { movie_id: 12, crew_member_id: 16, role: 'Actor' },
+    { movie_id: 12, crew_member_id: 17, role: 'Actor' },
+    { movie_id: 12, crew_member_id: 18, role: 'Actor' },
+    { movie_id: 12, crew_member_id: 19, role: 'Actor' },
+    { movie_id: 12, crew_member_id: 20, role: 'Director' },
+    { movie_id: 12, crew_member_id: 21, role: 'Writer' },
+    { movie_id: 12, crew_member_id: 22, role: 'Writer' },
   ]);
 };
