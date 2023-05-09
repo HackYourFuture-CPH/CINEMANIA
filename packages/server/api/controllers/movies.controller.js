@@ -51,30 +51,12 @@ const createMovie = async (body) => {
 };
 
 const getFeaturedMovie = async (req, res) => {
-  // this will be replaced with a real database call in the future for last movie
-  /*
-  try {
-    const featuredMovie = {
-      category_id: 8,
-      title: 'Dune',
-      description:
-        "Paul Atreides, a brilliant and gifted young man born into a great destiny beyond his understanding, must travel to the most dangerous planet in the universe to ensure the future of his family and his people. As malevolent forces explode into conflict over the planet's exclusive supply of the most precious resource in existence-a commodity capable of unlocking humanity's greatest potential-only those who can conquer their fear will survive.",
-      image_location:
-        'https://dunenewsnet.com/wp-content/uploads/2021/08/Dune-Movie-Official-Poster-banner-feature.jpg',
-      movie_year: 2021,
-      price: 299,
-    };
-    res.json(featuredMovie);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-  */
   try {
     const lastMovie = await knex('movies')
       .orderBy('movie_year', 'desc')
       .first();
     if (!lastMovie) {
-      throw new Error('No movies found in the database');
+      throw new HttpError('No movies found in the database');
     }
     const featuredMovie = {
       category_id: lastMovie.category_id,
