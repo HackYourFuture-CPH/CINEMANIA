@@ -1,14 +1,11 @@
 import * as React from 'react';
-import { useState } from 'react';
 import { Card, CardMedia, Typography, Rating } from '@mui/material';
 
 const BasicRating = () => {
-  const [value, setValue] = useState(4);
-
   return (
     <Rating
       name="read-only"
-      value={value}
+      value={2}
       readOnly
       sx={{
         position: 'relative',
