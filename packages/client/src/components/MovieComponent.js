@@ -1,11 +1,12 @@
 import * as React from 'react';
-import { Card, CardMedia, Typography, Rating } from '@mui/material';
+import { Card, CardMedia, Typography, Rating, Box } from '@mui/material';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 const BasicRating = () => {
   return (
     <Rating
       name="read-only"
-      value={2}
+      value={4}
       readOnly
       sx={{
         position: 'relative',
@@ -34,6 +35,27 @@ export default function MovieComponent() {
         boxShadow: '20px 40px 70px rgba(0, 0, 0, 0.25)',
       }}
     >
+      <Box
+        sx={{
+          position: 'relative',
+        }}
+      >
+        <FavoriteBorderIcon
+          sx={{
+            display: 'block',
+            position: 'absolute',
+            width: '1.9rem',
+            height: '1.75rem',
+            top: '2.62rem',
+            right: '2.62rem',
+            color: '#FFFFFF',
+            padding: '1rem',
+            backgroundColor: '#000000CC',
+            zIndex: 1,
+          }}
+        />
+      </Box>
+
       <CardMedia
         component="img"
         sx={{
