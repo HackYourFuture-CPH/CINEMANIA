@@ -78,5 +78,162 @@ exports.seed = async function (knex) {
       image_location:
         'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/p6F38o1SOCSdNIUwwoih8aIS7Ak.jpg',
     },
+
+    {
+      full_name: 'Ron Howard',
+      birth_date: '1954-03-01',
+      image_location:
+        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/tDKn6gAgvARdQRfuem2JwyNcP3B.jpg',
+    },
+    {
+      full_name: 'Akiva Goldsman',
+      birth_date: '1962-07-07',
+      image_location:
+        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/zjnY7yoXZifRJR9x8hdGIm9ducG.jpg',
+    },
+    {
+      full_name: 'Russell Crowe',
+      birth_date: '1964-04-07',
+      image_location:
+        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/mGTtPuwE8OR00tkJGmVLJmt8KpW.jpg',
+    },
+    {
+      full_name: 'Jennifer Connelly',
+      birth_date: '1970-12-12',
+      image_location:
+        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/3oYDftEbM3YgBiHYcbbIPRNZrTL.jpg',
+    },
+    {
+      full_name: 'Ed Harris',
+      birth_date: '1950-11-28',
+      image_location:
+        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/ryF0KkljweLhPkQ70x6w3u9Qjjj.jpg',
+    },
+    {
+      full_name: 'Paul Bettany',
+      birth_date: '1971-05-27',
+      image_location:
+        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/oNrDowF5cRtK5lJJuCAh0KeFizy.jpg',
+    },
+    {
+      full_name: 'Richard LaGravenese',
+      birth_date: '1959-10-30',
+      image_location:
+        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/4e70Bwm2K7pGM7u1dGTQBe3l8wi.jpg',
+    },
+    {
+      full_name: 'Hilary Swank',
+      birth_date: '1974-07-30',
+      image_location:
+        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/yJ5QEzcUVbe08H3Lche33oEvH2G.jpg',
+    },
+    {
+      full_name: 'Gerard Butler',
+      birth_date: '1969-11-13',
+      image_location:
+        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/hAKPWWvUyvcfqPcoBG45c8NRr6e.jpg',
+    },
+    {
+      full_name: 'Lisa Kudrow',
+      birth_date: '1963-07-30 ',
+      image_location:
+        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/9YNzHuT7L0wdEl3zua6iUYz5tYT.jpg',
+    },
+    {
+      full_name: 'Jeffrey Dean Morgan',
+      birth_date: '1966-04-22',
+      image_location:
+        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/m8bdrmh6ExDCGQ64E83mHg002YV.jpg',
+    },
+    {
+      full_name: 'Tom Shadyac',
+      birth_date: '1958-12-11',
+      image_location:
+        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/kuliB1DrKSbdn2jxESncPbWxGrD.jpg',
+    },
+    {
+      full_name: 'Robin Williams',
+      birth_date: '1951-07-21',
+      image_location:
+        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/iYdeP6K0qz44Wg2Nw9LPJGMBkQ5.jpg',
+    },
+    {
+      full_name: 'Monica Potter',
+      birth_date: '1971-06-30',
+      image_location:
+        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/jCFOlFAjNPMkX9pJF2Au0cquZ6v.jpg',
+    },
+    {
+      full_name: 'Philip Seymour Hoffman',
+      birth_date: '1967-07-23',
+      image_location:
+        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/50rqDkmvXwjwVhFH7q6ph2Rkw7S.jpg',
+    },
+    {
+      full_name: 'Jon Erwin',
+      birth_date: '1982-05-19',
+      image_location:
+        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/fO4FG0QD9gr4jr0mh7Y2BwFF5d3.jpg',
+    },
+    {
+      full_name: 'J. Michael Finley',
+      birth_date: '1988-08-10',
+      image_location:
+        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/Aw2aNQg7mShRwVCUSgBYjaqE0hO.jpg',
+    },
+    {
+      full_name: 'Dennis Quaid',
+      birth_date: '1954-04-09',
+      image_location:
+        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/nvkto83iFngO8jg9UpdSaEBRC8a.jpg',
+    },
+    {
+      full_name: 'Cloris Leachman',
+      birth_date: '1926-04-30',
+      image_location:
+        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/o8pnV9urjuHZDAR2u4UjPy2CR1u.jpg',
+    },
+    {
+      full_name: 'Madeline Carroll',
+      birth_date: '1996-03-18',
+      image_location:
+        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/rUXWRKgyf9vLoC4zSHlu5fHdtxR.jpg',
+    },
+    {
+      full_name: 'Charles Shyer',
+      birth_date: '1941-10-11',
+      image_location:
+        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/stcwg4mJKGQo0UBfWcXVQy6fOdP.jpg',
+    },
+    {
+      full_name: 'Nancy Meyers',
+      birth_date: '1949-12-08',
+      image_location:
+        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/aK2lYDBYhWU9MJdNV0y1EvXiNo0.jpg',
+    },
+    {
+      full_name: 'Steve Martin',
+      birth_date: '1945-08-14 ',
+      image_location:
+        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/d0KthX8hVWU9BxTCG1QUO8FURRm.jpg',
+    },
+    {
+      full_name: 'Diane Keaton',
+      birth_date: '1946-01-05',
+      image_location:
+        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/9WfaYj5iBMyDX4IJyM1bdMRD3x6.jpg',
+    },
+    {
+      full_name: 'Kimberly Williams-Paisley',
+      birth_date: '1971-09-14',
+      image_location:
+        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/qJ4kWr4mDeKWenPeMOff8VtuAIq.jpg',
+    },
+    {
+      full_name: 'Martin Short',
+      birth_date: '1950-03-26',
+      image_location:
+        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/vWoZIOk7K8TSKu1IN90akswsWjZ.jpg',
+    },
   ]);
 };
