@@ -23,6 +23,13 @@ router.get('/:id', (req, res, next) => {
     .catch(next);
 });
 
+router.get('/:id/crew', (req, res, next) => {
+  moviesController
+    .getCrewOfMovieByID(req.params.id)
+    .then((result) => res.json(result))
+    .catch(next);
+});
+
 // post
 router.post('/', (req, res) => {
   moviesController

@@ -25,6 +25,31 @@ const getMovieByID = async (id) => {
   }
 };
 
+const getCrewOfMovieByID = async (id) => {
+  if (!id) {
+    throw new HttpError('ID should be a number', 400);
+  }
+  try {
+    const crew = await knex
+      .select(
+        'crew_members.id',
+        'full_name',
+        'birth_date',
+        'image_location',
+        'role',
+      )
+      .from('movie_crew')
+      .join('crew_members', 'movie_crew.crew_member_id', '=', 'crew_members.id')
+      .where('movie_id', id);
+    if (!crew || crew.length === 0) {
+      throw new Error(`No crew found for this movie`, 404);
+    }
+    return crew;
+  } catch (error) {
+    throw new HttpError(error.message, 500);
+  }
+};
+
 const editMovie = async (movieID, updateMovie) => {
   if (!movieID) {
     throw new HttpError('movie ID should be a number', 400);
@@ -56,4 +81,5 @@ module.exports = {
   editMovie,
   deleteMovie,
   createMovie,
+  getCrewOfMovieByID,
 };
