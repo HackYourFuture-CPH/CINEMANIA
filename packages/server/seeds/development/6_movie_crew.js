@@ -6,18 +6,6 @@ exports.seed = async function (knex) {
   // Deletes ALL existing entries
   await knex('movie_crew').del();
   await knex('movie_crew').insert([
-    { movie_id: 8, crew_member_id: 1, role: 'Actor' },
-    { movie_id: 8, crew_member_id: 2, role: 'Actor' },
-    { movie_id: 8, crew_member_id: 3, role: 'Actor' },
-    { movie_id: 9, crew_member_id: 4, role: 'Actor' },
-    { movie_id: 9, crew_member_id: 5, role: 'Actor' },
-    { movie_id: 9, crew_member_id: 6, role: 'Director' },
-    { movie_id: 10, crew_member_id: 7, role: 'Actor' },
-    { movie_id: 10, crew_member_id: 8, role: 'Actor' },
-    { movie_id: 10, crew_member_id: 9, role: 'Actor' },
-    { movie_id: 11, crew_member_id: 10, role: 'Actor' },
-    { movie_id: 11, crew_member_id: 11, role: 'Actor' },
-    { movie_id: 11, crew_member_id: 12, role: 'Actor' },
     { movie_id: 3, crew_member_id: 23, role: 'Director' },
     { movie_id: 3, crew_member_id: 24, role: 'Writer' },
     { movie_id: 3, crew_member_id: 25, role: 'Actor' },
@@ -43,5 +31,17 @@ exports.seed = async function (knex) {
     { movie_id: 7, crew_member_id: 45, role: 'Actor' },
     { movie_id: 7, crew_member_id: 46, role: 'Actor' },
     { movie_id: 7, crew_member_id: 47, role: 'Actor' },
+    { movie_id: 8, crew_member_id: 1, role: 'Actor' },
+    { movie_id: 8, crew_member_id: 2, role: 'Actor' },
+    { movie_id: 8, crew_member_id: 3, role: 'Actor' },
+    { movie_id: 9, crew_member_id: 4, role: 'Actor' },
+    { movie_id: 9, crew_member_id: 5, role: 'Actor' },
+    { movie_id: 9, crew_member_id: 6, role: 'Director' },
+    { movie_id: 10, crew_member_id: 7, role: 'Actor' },
+    { movie_id: 10, crew_member_id: 8, role: 'Actor' },
+    { movie_id: 10, crew_member_id: 9, role: 'Actor' },
+    { movie_id: 11, crew_member_id: 10, role: 'Actor' },
+    { movie_id: 11, crew_member_id: 11, role: 'Actor' },
+    { movie_id: 11, crew_member_id: 12, role: 'Actor' },
   ]);
 };
