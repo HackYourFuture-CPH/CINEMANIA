@@ -6,7 +6,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 export const Navbar = () => {
   return (
     <AppBar component="nav">
-      <Box sx={{ padding: '0.6rem 8.75rem' }} bgcolor="green">
+      <Box sx={{ padding: '0.6rem 8.75rem' }} bgcolor="mainGreen">
         <Toolbar
           fontFamily="Inter"
           sx={{
