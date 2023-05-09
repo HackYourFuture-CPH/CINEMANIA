@@ -45,7 +45,10 @@ const getMoviesByCategory = async (categoryId) => {
     }
     return movies;
   } catch (error) {
-    return error.message;
+    return {
+      status: 500,
+      message: error.message,
+    };
   }
 };
 
