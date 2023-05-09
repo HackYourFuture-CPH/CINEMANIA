@@ -25,6 +25,47 @@ const getMovieByID = async (id) => {
   }
 };
 
+const getDetailsOfMovieByID = async (id) => {
+  if (!id) {
+    throw new HttpError('ID should be a number', 400);
+  }
+
+  try {
+    const movie = await knex
+      .select(
+        'm.id',
+        'm.title',
+        'm.description',
+        'm.movie_year',
+        'm.image_location',
+        knex.raw('ROUND(AVG(r.rating),1) as rating'),
+        'c.name as category_name',
+        knex.raw(
+          'GROUP_CONCAT(CASE WHEN mc.role = "Director" THEN cm.full_name END) as director',
+        ),
+        knex.raw(
+          'GROUP_CONCAT(CASE WHEN mc.role = "Writer" THEN cm.full_name END) as writer',
+        ),
+      )
+      .from('movies as m')
+      .leftJoin('reviews as r', 'm.id', 'r.movie_id')
+      .leftJoin('categories as c', 'm.category_id', 'c.id')
+      .leftJoin('movie_crew as mc', 'm.id', 'mc.movie_id')
+      .leftJoin('crew_members as cm', 'mc.crew_member_id', 'cm.id')
+      .where('m.id', id)
+      .groupBy('m.id');
+    if (!movie || movie.length === 0) {
+      throw new Error(`Incorrect entry with the movie ID ${id}`, 404);
+    }
+    return movie[0];
+  } catch (error) {
+    return {
+      status: 500,
+      message: error.message,
+    };
+  }
+};
+
 const editMovie = async (movieID, updateMovie) => {
   if (!movieID) {
     throw new HttpError('movie ID should be a number', 400);
@@ -56,4 +97,5 @@ module.exports = {
   editMovie,
   deleteMovie,
   createMovie,
+  getDetailsOfMovieByID,
 };
