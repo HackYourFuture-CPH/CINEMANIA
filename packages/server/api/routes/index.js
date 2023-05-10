@@ -28,7 +28,7 @@ const swaggerDocument = swaggerJsDoc(swaggerOptions);
 // Route for Swagger API Documentation
 router.use('/documentation', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-router.use('/movies/', movies);
+router.use('/movies', movies);
 router.use('/movieList', movieList);
 
 module.exports = router;

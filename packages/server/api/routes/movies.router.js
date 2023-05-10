@@ -8,14 +8,12 @@ const router = express.Router({ mergeParams: true });
 // controllers
 const moviesController = require('../controllers/movies.controller');
 // get /
-/*
 router.get('/', (req, res, next) => {
   moviesController
     .getMovies()
     .then((result) => res.json(result))
     .catch(next);
 });
-*/
 
 // get /:id
 router.get('/:id', (req, res, next) => {
