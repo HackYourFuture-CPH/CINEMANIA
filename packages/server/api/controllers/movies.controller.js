@@ -54,9 +54,6 @@ const getDetailsOfMovieByID = async (id) => {
       .leftJoin('crew_members as cm', 'mc.crew_member_id', 'cm.id')
       .where('m.id', id)
       .groupBy('m.id');
-    if (!movie || movie.length === 0) {
-      throw new Error(`Incorrect entry with the movie ID ${id}`, 404);
-    }
     return movie[0];
   } catch (error) {
     return {
