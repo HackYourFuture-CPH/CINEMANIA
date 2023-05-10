@@ -1,6 +1,3 @@
-/* TODO: This is an example controller to illustrate a server side controller.
-Can be deleted as soon as the first real controller is added. */
-
 const knex = require('../../config/db');
 const HttpError = require('../lib/utils/http-error');
 const moment = require('moment-timezone');
@@ -14,14 +11,7 @@ const getMovieByID = async (id) => {
     throw new HttpError('ID should be a number', 400);
   }
 
-  // try {
-  // if (!movie) {
-  //   throw new Error(`incorrect entry with the movie ID ${id}`, 404);
-  // }
   return knex('movies').select('*').where({ id }).first();
-  // } catch (error) {
-  //   return error.message;
-  // }
 };
 
 const editMovie = async (movieID, updateMovie) => {
@@ -81,6 +71,28 @@ const getMovieList = (sortBy = 'rating', categoryId = null) => {
     });
 };
 
+const getFeaturedMovie = async (req, res) => {
+  try {
+    const lastMovie = await knex('movies')
+      .orderBy('movie_year', 'desc')
+      .first();
+    if (!lastMovie) {
+      throw new HttpError('No movies found in the database');
+    }
+    const featuredMovie = {
+      category_id: lastMovie.category_id,
+      title: lastMovie.title,
+      description: lastMovie.description,
+      image_location: lastMovie.image_location,
+      movie_year: lastMovie.movie_year,
+      price: lastMovie.price,
+    };
+    res.json(featuredMovie);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 module.exports = {
   getMovies,
   getMovieByID,
@@ -88,4 +100,5 @@ module.exports = {
   deleteMovie,
   createMovie,
   getMovieList,
+  getFeaturedMovie,
 };
