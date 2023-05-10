@@ -14,8 +14,6 @@ router.get('/', (req, res, next) => {
     .then((result) => res.json(result))
     .catch(next);
 });
-// GET /featured-movie
-router.get('/featured', moviesController.getFeaturedMovie);
 
 // get /:id
 router.get('/:id', (req, res, next) => {
@@ -25,16 +23,20 @@ router.get('/:id', (req, res, next) => {
     .catch(next);
 });
 
-router.get('/:id/crew', (req, res, next) => {
+router.get('/:id/crew', (req, res) => {
   moviesController
     .getCrewOfMovieByID(req.params.id)
-// add endpoint to retrieve movies by category
-router.get('/category/:categoryId', (req, res, next) => {
-  const { categoryId } = req.params;
-  moviesController
-    .getMoviesByCategory(categoryId)
-    .then((result) => res.json(result))
-    .catch(next);
+    .then((result) => {
+      if (result.length === 0) {
+        res.status(404).send('No crew found for this movie');
+      } else {
+        res.json(result);
+      }
+    })
+    .catch((error) => {
+      req.status(500).json({ error: error.message });
+      throw error;
+    });
 });
 
 // post
@@ -72,15 +74,6 @@ router.delete('/:id', (req, res) => {
     })
     // eslint-disable-next-line no-console
     .catch((error) => console.log(error));
-});
-
-// get /list
-router.get('/list', (req, res, next) => {
-  const { sortBy, categoryId } = req.query;
-  moviesController
-    .getMovieList(sortBy, categoryId)
-    .then((result) => res.json(result))
-    .catch(next);
 });
 
 module.exports = router;

@@ -57,9 +57,6 @@ const getCrewOfMovieByID = async (id) => {
       .from('movie_crew')
       .join('crew_members', 'movie_crew.crew_member_id', '=', 'crew_members.id')
       .where('movie_id', id);
-    if (!crew || crew.length === 0) {
-      throw new Error(`No crew found for this movie`, 404);
-    }
     return crew;
   } catch (error) {
     throw new HttpError(error.message, 500);
