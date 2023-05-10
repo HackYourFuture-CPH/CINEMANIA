@@ -39,6 +39,7 @@ const getDetailsOfMovieByID = async (id) => {
         'm.movie_year',
         'm.image_location',
         knex.raw('ROUND(AVG(r.rating),1) as rating'),
+        knex.raw('COUNT(DISTINCT r.user_id) as number_of_ratings'),
         'c.name as category_name',
         knex.raw(
           'GROUP_CONCAT(CASE WHEN mc.role = "Director" THEN cm.full_name END) as director',
