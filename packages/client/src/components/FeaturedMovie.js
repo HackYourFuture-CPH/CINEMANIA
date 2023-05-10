@@ -1,21 +1,38 @@
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, IconButton, Typography } from '@mui/material';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import { apiURL } from '../apiURL';
 
 export default function FeaturedMovie() {
+  const [featuredMovie, setFeaturedMovie] = useState(null);
+
+  useEffect(() => {
+    async function fetchMovies() {
+      const response = await fetch(`${apiURL()}/movies/featured`);
+      const data = await response.json();
+      setFeaturedMovie(data);
+    }
+
+    fetchMovies();
+  }, []);
+
+  if (!featuredMovie) {
+    return <h4>..Loading</h4>;
+  }
   return (
     <Box sx={{ position: 'relative', display: 'flex' }}>
       <Box
         component="img"
         sx={{
-          width: '100%',
-          height: '100%',
-          borderRadius: 100,
+          width: '104.5rem',
+          height: '49.375rem',
+          borderRadius: '24.688rem',
+          objectFit: 'scale-down',
           background:
-            'linear-gradient(180deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 51.56%)',
+            'linear-gradient(180deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 51.56%)})',
         }}
-        alt="dune movie banner"
-        src="https://dunenewsnet.com/wp-content/uploads/2021/08/Dune-Movie-Official-Poster-banner-feature.jpg"
+        alt={featuredMovie.title}
+        src={featuredMovie.image_location}
       />
       <Box
         sx={{
@@ -31,7 +48,7 @@ export default function FeaturedMovie() {
         }}
       >
         <Typography component="div" variant="h3">
-          Ready for Dune?
+          Ready for {featuredMovie.title}?
         </Typography>
         <Box sx={{ display: 'flex', alignItems: 'center', mt: 1, pb: 10 }}>
           <IconButton
