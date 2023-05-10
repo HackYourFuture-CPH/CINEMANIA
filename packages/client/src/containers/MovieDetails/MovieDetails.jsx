@@ -14,10 +14,3 @@ export const MovieDetails = () => {
     </Container>
   );
 };
-
-/*
-<div className="big-card-container">
-Width: 1518px / 8 = 
-Height: 962px / 8 
-lg: 1200px
-*/
