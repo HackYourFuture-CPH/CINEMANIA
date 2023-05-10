@@ -1,6 +1,3 @@
-/* TODO: This is an example controller to illustrate a server side controller.
-Can be deleted as soon as the first real controller is added. */
-
 const knex = require('../../config/db');
 const HttpError = require('../lib/utils/http-error');
 const moment = require('moment-timezone');
@@ -14,14 +11,7 @@ const getMovieByID = async (id) => {
     throw new HttpError('ID should be a number', 400);
   }
 
-  // try {
-  // if (!movie) {
-  //   throw new Error(`incorrect entry with the movie ID ${id}`, 404);
-  // }
   return knex('movies').select('*').where({ id }).first();
-  // } catch (error) {
-  //   return error.message;
-  // }
 };
 
 const editMovie = async (movieID, updateMovie) => {
@@ -101,8 +91,8 @@ const getFeaturedMovie = async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
-}
-  
+};
+
 module.exports = {
   getMovies,
   getMovieByID,
