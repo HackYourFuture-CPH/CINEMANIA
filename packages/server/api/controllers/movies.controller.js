@@ -14,15 +14,14 @@ const getMovieByID = async (id) => {
     throw new HttpError('ID should be a number', 400);
   }
 
-  try {
-    const movie = await knex('movies').select('*').where({ id }).first();
-    if (!movie) {
-      throw new Error(`incorrect entry with the movie ID ${id}`, 404);
-    }
-    return movie;
-  } catch (error) {
-    return error.message;
-  }
+  // try {
+  // if (!movie) {
+  //   throw new Error(`incorrect entry with the movie ID ${id}`, 404);
+  // }
+  return knex('movies').select('*').where({ id }).first();
+  // } catch (error) {
+  //   return error.message;
+  // }
 };
 
 const getMoviesByCategory = async (categoryId) => {
@@ -77,6 +76,38 @@ const createMovie = async (body) => {
   };
 };
 
+const getMovieList = (sortBy = 'rating', categoryId = null) => {
+  return knex('movies')
+    .leftJoin('reviews', 'reviews.movie_id', '=', 'movies.id')
+    .leftJoin('categories', 'categories.id', '=', 'movies.category_id')
+    .select(
+      'movies.id',
+      'movies.title',
+      'movies.description',
+      'movies.movie_year',
+      'movies.image_location',
+      'movies.created_at',
+      'movies.price',
+      knex.raw('AVG(reviews.rating) as average_rating'),
+    )
+    .groupBy('movies.id')
+    .orderByRaw(
+      `
+      CASE
+        WHEN ? = 'rating' THEN AVG(reviews.rating)
+        WHEN ? = 'recently_added' THEN movies.created_at
+        WHEN ? = 'price' THEN movies.price ASC
+      END 
+    `,
+      [sortBy, sortBy, sortBy],
+    )
+    .modify((queryBuilder) => {
+      if (categoryId) {
+        queryBuilder.where('categories.id', '=', categoryId);
+      }
+    });
+};
+
 module.exports = {
   getMovies,
   getMovieByID,
@@ -84,4 +115,5 @@ module.exports = {
   deleteMovie,
   createMovie,
   getMoviesByCategory,
+  getMovieList,
 };

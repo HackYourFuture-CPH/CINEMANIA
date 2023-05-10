@@ -69,4 +69,13 @@ router.delete('/:id', (req, res) => {
     .catch((error) => console.log(error));
 });
 
+// get /list
+router.get('/list', (req, res, next) => {
+  const { sortBy, categoryId } = req.query;
+  moviesController
+    .getMovieList(sortBy, categoryId)
+    .then((result) => res.json(result))
+    .catch(next);
+});
+
 module.exports = router;
