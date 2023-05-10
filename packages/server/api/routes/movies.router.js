@@ -14,6 +14,8 @@ router.get('/', (req, res, next) => {
     .then((result) => res.json(result))
     .catch(next);
 });
+// GET /featured-movie
+router.get('/featured', moviesController.getFeaturedMovie);
 
 // get /:id
 router.get('/:id', (req, res, next) => {
@@ -26,6 +28,11 @@ router.get('/:id', (req, res, next) => {
 router.get('/:id/crew', (req, res, next) => {
   moviesController
     .getCrewOfMovieByID(req.params.id)
+// add endpoint to retrieve movies by category
+router.get('/category/:categoryId', (req, res, next) => {
+  const { categoryId } = req.params;
+  moviesController
+    .getMoviesByCategory(categoryId)
     .then((result) => res.json(result))
     .catch(next);
 });
