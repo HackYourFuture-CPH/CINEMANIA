@@ -1,11 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
-import { LandingPage } from './containers/LandingPage/LandingPage.Container';
+import { LandingPage } from './containers/LandingPage/LandingPage';
 import { PageNotFound } from './containers/PageNotFound/PageNotFound.Container';
 import { MovieDetails } from './containers/MovieDetails/MovieDetails';
 
-import { Navbar } from './components/Navbar/Navbar.component';
+import { Navbar } from './components/Navbar/Navbar';
 
 // MUI THEME
 import { ThemeProvider } from '@mui/material';
