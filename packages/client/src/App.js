@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 import { LandingPage } from './containers/LandingPage/LandingPage.Container';
 import { PageNotFound } from './containers/PageNotFound/PageNotFound.Container';
-import MovieView from './components/MovieView/MovieView.component';
+import { MovieDetails } from './containers/MovieDetails/MovieDetails';
 
 import { Navbar } from './components/Navbar/Navbar.component';
 
@@ -19,7 +19,7 @@ function App() {
           <Navbar />
           <Routes>
             <Route path="/" element={<LandingPage />} />
-            <Route path="movies/:id" element={<MovieView />} />
+            <Route path="movies/:id" element={<MovieDetails />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
         </Router>
