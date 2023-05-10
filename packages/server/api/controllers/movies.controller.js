@@ -49,7 +49,7 @@ const createMovie = async (body) => {
   };
 };
 
-const getMovieList = (sortBy = 'rating', categoryId = null) => {
+const getMovieList = (sortBy = 'rating', categoryId = null, userId = null) => {
   return knex('movies')
     .leftJoin('reviews', 'reviews.movie_id', '=', 'movies.id')
     .leftJoin('categories', 'categories.id', '=', 'movies.category_id')
@@ -62,8 +62,17 @@ const getMovieList = (sortBy = 'rating', categoryId = null) => {
       'movies.created_at',
       'movies.price',
       'movies.category_id',
-
       knex.raw('AVG(reviews.rating) as average_rating'),
+      knex.raw(
+        `
+        IF(EXISTS(
+          SELECT 1 FROM favorites
+          WHERE favorites.movie_id = movies.id
+          AND favorites.user_id = ?
+        ), 1, 0) as is_favorite
+      `,
+        [userId],
+      ),
     )
     .groupBy('movies.id')
     .orderByRaw(
