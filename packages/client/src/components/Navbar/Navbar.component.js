@@ -24,8 +24,8 @@ export const Navbar = () => {
           <MenuItem>
             <PersonIcon
               sx={{
-                width: '1.75rem',
-                height: '1.75rem',
+                width: '2rem',
+                height: '2rem',
                 color: 'black',
                 borderRight: '2px solid #000000',
                 paddingRight: '.5rem',
