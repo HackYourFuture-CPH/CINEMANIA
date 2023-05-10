@@ -14,6 +14,8 @@ router.get('/', (req, res, next) => {
     .then((result) => res.json(result))
     .catch(next);
 });
+// GET /featured-movie
+router.get('/featured', moviesController.getFeaturedMovie);
 
 // get /:id
 router.get('/:id', (req, res, next) => {
@@ -58,6 +60,15 @@ router.delete('/:id', (req, res) => {
     })
     // eslint-disable-next-line no-console
     .catch((error) => console.log(error));
+});
+
+// get /list
+router.get('/list', (req, res, next) => {
+  const { sortBy, categoryId } = req.query;
+  moviesController
+    .getMovieList(sortBy, categoryId)
+    .then((result) => res.json(result))
+    .catch(next);
 });
 
 module.exports = router;
