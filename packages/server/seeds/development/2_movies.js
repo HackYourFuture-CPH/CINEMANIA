@@ -114,5 +114,45 @@ exports.seed = async function (knex) {
         'https://www.themoviedb.org/t/p/w1280/d07xtqwq1uriQ1hda6qeu8Skt5m.jpg',
       price: 666,
     },
+    {
+      category_id: 3,
+      title: 'The Dark Knight',
+      description:
+        'Batman raises the stakes in his war on crime. With the help of Lt. Jim Gordon and District Attorney Harvey Dent, Batman sets out to dismantle the remaining criminal organizations that plague the streets. The partnership proves to be effective.',
+      movie_year: 2008,
+      image_location:
+        'https://www.themoviedb.org/t/p/w1280/z4XwvnDZSm40PCdg9vFJmo0W9ri.jpg',
+      price: 120,
+    },
+    {
+      category_id: 8,
+      title: 'Interstellar',
+      description:
+        'The adventures of a group of explorers who make use of a newly discovered wormhole to surpass the limitations on human space travel and conquer the vast distances involved in an interstellar voyage.',
+      movie_year: 2014,
+      image_location:
+        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg',
+      price: 120,
+    },
+    {
+      category_id: 3,
+      title: 'Titanic',
+      description:
+        '101-year-old Rose DeWitt Bukater tells the story of her life aboard the Titanic, 84 years later. A young Rose boards the ship with her mother and fiancé. Meanwhile, Jack Dawson and Fabrizio De Rossi win third-class tickets aboard the ship.',
+      movie_year: 1997,
+      image_location:
+        'https://www.themoviedb.org/t/p/w1280/9xjZS2rlVxm8SFx8kPC3aIGCOYQ.jpg',
+      price: 100,
+    },
+    {
+      category_id: 2,
+      title: 'The Silence of the Lambs',
+      description:
+        "Clarice Starling is a top student at the FBI's training academy. Jack Crawford wants Clarice to interview Dr. Hannibal Lecter, a brilliant psychiatrist who is also a violent psychopath, serving life behind bars for various acts of murder and cannibalism.",
+      movie_year: 1991,
+      image_location:
+        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/uS9m8OBk1A8eM9I042bx8XXpqAq.jpg',
+      price: 180,
+    },
   ]);
 };
