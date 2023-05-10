@@ -8,12 +8,14 @@ const router = express.Router({ mergeParams: true });
 // controllers
 const moviesController = require('../controllers/movies.controller');
 // get /
+/*
 router.get('/', (req, res, next) => {
   moviesController
     .getMovies()
     .then((result) => res.json(result))
     .catch(next);
 });
+*/
 
 // get /:id
 router.get('/:id', (req, res, next) => {
@@ -58,15 +60,6 @@ router.delete('/:id', (req, res) => {
     })
     // eslint-disable-next-line no-console
     .catch((error) => console.log(error));
-});
-
-// get /list
-router.get('/list', (req, res, next) => {
-  const { sortBy, categoryId } = req.query;
-  moviesController
-    .getMovieList(sortBy, categoryId)
-    .then((result) => res.json(result))
-    .catch(next);
 });
 
 module.exports = router;

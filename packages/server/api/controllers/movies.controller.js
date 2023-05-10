@@ -61,6 +61,8 @@ const getMovieList = (sortBy = 'rating', categoryId = null) => {
       'movies.image_location',
       'movies.created_at',
       'movies.price',
+      'movies.category_id',
+
       knex.raw('AVG(reviews.rating) as average_rating'),
     )
     .groupBy('movies.id')
@@ -69,8 +71,9 @@ const getMovieList = (sortBy = 'rating', categoryId = null) => {
       CASE
         WHEN ? = 'rating' THEN AVG(reviews.rating)
         WHEN ? = 'recently_added' THEN movies.created_at
-        WHEN ? = 'price' THEN movies.price ASC
-      END 
+        WHEN ? = 'price' THEN movies.price
+      END  ${sortBy === 'price' ? 'ASC' : 'DESC'}
+
     `,
       [sortBy, sortBy, sortBy],
     )
