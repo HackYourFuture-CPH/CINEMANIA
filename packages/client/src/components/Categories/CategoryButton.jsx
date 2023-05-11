@@ -1,9 +1,12 @@
 import React from 'react';
 import { Button as MuiButton } from '@mui/material';
+import { useMovieList } from '../../context/movieListContext';
 
-const CategoryButton = ({ label, catId, setCatId }) => {
+const CategoryButton = ({ label, categoryId }) => {
+  const { setCategoryId } = useMovieList();
+
   const handleClick = () => {
-    setCatId(catId);
+    setCategoryId(categoryId);
   };
 
   return (

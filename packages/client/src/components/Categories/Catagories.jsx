@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import CategoryButton from './button/CategoryButton';
-import { apiURL } from '../apiURL';
+import CategoryButton from './CategoryButton';
+import { apiURL } from '../../apiURL';
+import { useMovieList } from '../../context/movieListContext';
 
-const MovieListPage = () => {
+const Catagories = () => {
   const [categoriesList, setCategoriesList] = useState([]);
-  const [catId, setCatId] = useState(null);
+  const { categoryId } = useMovieList();
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -25,14 +26,13 @@ const MovieListPage = () => {
       {categoriesList.map((category) => (
         <CategoryButton
           label={category.name}
-          catId={category.id}
-          setCatId={setCatId}
+          categoryId={category.id}
           key={category.id}
         />
       ))}
-      {catId && <div style={{ display: 'none' }}> {catId}</div>}
+      {categoryId && <div style={{ display: 'none' }}> {categoryId}</div>}
     </div>
   );
 };
 
-export default MovieListPage;
+export default Catagories;
