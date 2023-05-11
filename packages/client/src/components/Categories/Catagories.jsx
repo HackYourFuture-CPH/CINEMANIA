@@ -6,6 +6,8 @@ import { useMovieList } from '../../context/movieListContext';
 const Catagories = () => {
   const [categoriesList, setCategoriesList] = useState([]);
   const { categoryId } = useMovieList();
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -13,13 +15,23 @@ const Catagories = () => {
         const response = await fetch(`${apiURL()}/categories`);
         const data = await response.json();
         setCategoriesList(data);
-      } catch (error) {
-        error(error);
+        setIsLoading(false);
+      } catch (err) {
+        setError(err);
+        setIsLoading(false);
       }
     };
 
     fetchCategories();
   }, []);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
 
   return (
     <div className="category-button-div">
