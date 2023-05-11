@@ -13,11 +13,11 @@ const CategoryButton = ({ label, categoryId }) => {
     <MuiButton
       sx={{
         fontWeight: 500,
-        fontSize: '18px',
-        lineHeight: '22px',
+        fontSize: '13px',
+        lineHeight: '10px',
         color: '#00FFC2',
         border: '2px solid #00FFC2',
-        borderRadius: '37.5px',
+        borderRadius: '50px',
         padding: '12px 18px',
         backgroundColor: '#003E2F',
         textTransform: 'none',
