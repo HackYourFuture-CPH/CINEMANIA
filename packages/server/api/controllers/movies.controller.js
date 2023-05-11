@@ -1,6 +1,3 @@
-/* TODO: This is an example controller to illustrate a server side controller.
-Can be deleted as soon as the first real controller is added. */
-
 const knex = require('../../config/db');
 const HttpError = require('../lib/utils/http-error');
 const moment = require('moment-timezone');
@@ -14,14 +11,72 @@ const getMovieByID = async (id) => {
     throw new HttpError('ID should be a number', 400);
   }
 
+  return knex('movies').select('*').where({ id }).first();
+};
+
+const getMoviesByCategory = async (categoryId) => {
   try {
-    const movie = await knex('movies').select('*').where({ id }).first();
-    if (!movie) {
-      throw new Error(`incorrect entry with the movie ID ${id}`, 404);
+    const movies = await knex
+      .select(
+        'm.id',
+        'm.title',
+        'm.description',
+        'm.movie_year',
+        'm.image_location',
+        'm.price',
+        'm.created_at',
+      )
+      .from('movies as m')
+      .where('m.category_id', categoryId)
+      .limit(9);
+    if (movies.length === 0) {
+      return { message: `No movies found under this category` };
     }
-    return movie;
+    return movies;
   } catch (error) {
-    return error.message;
+    return {
+      status: 500,
+      message: error.message,
+    };
+  }
+};
+
+const getDetailsOfMovieByID = async (id) => {
+  if (!id) {
+    throw new HttpError('ID should be a number', 400);
+  }
+
+  try {
+    const movie = await knex
+      .select(
+        'm.id',
+        'm.title',
+        'm.description',
+        'm.movie_year',
+        'm.image_location',
+        knex.raw('ROUND(AVG(r.rating),1) as rating'),
+        knex.raw('COUNT(DISTINCT r.user_id) as number_of_ratings'),
+        'c.name as category_name',
+        knex.raw(
+          'GROUP_CONCAT(CASE WHEN mc.role = "Director" THEN cm.full_name END) as director',
+        ),
+        knex.raw(
+          'GROUP_CONCAT(CASE WHEN mc.role = "Writer" THEN cm.full_name END) as writer',
+        ),
+      )
+      .from('movies as m')
+      .leftJoin('reviews as r', 'm.id', 'r.movie_id')
+      .leftJoin('categories as c', 'm.category_id', 'c.id')
+      .leftJoin('movie_crew as mc', 'm.id', 'mc.movie_id')
+      .leftJoin('crew_members as cm', 'mc.crew_member_id', 'cm.id')
+      .where('m.id', id)
+      .groupBy('m.id');
+    return movie[0];
+  } catch (error) {
+    return {
+      status: 500,
+      message: error.message,
+    };
   }
 };
 
@@ -50,10 +105,68 @@ const createMovie = async (body) => {
   };
 };
 
+const getMovieList = (sortBy = 'rating', categoryId = null) => {
+  return knex('movies')
+    .leftJoin('reviews', 'reviews.movie_id', '=', 'movies.id')
+    .leftJoin('categories', 'categories.id', '=', 'movies.category_id')
+    .select(
+      'movies.id',
+      'movies.title',
+      'movies.description',
+      'movies.movie_year',
+      'movies.image_location',
+      'movies.created_at',
+      'movies.price',
+      knex.raw('AVG(reviews.rating) as average_rating'),
+    )
+    .groupBy('movies.id')
+    .orderByRaw(
+      `
+      CASE
+        WHEN ? = 'rating' THEN AVG(reviews.rating)
+        WHEN ? = 'recently_added' THEN movies.created_at
+        WHEN ? = 'price' THEN movies.price ASC
+      END 
+    `,
+      [sortBy, sortBy, sortBy],
+    )
+    .modify((queryBuilder) => {
+      if (categoryId) {
+        queryBuilder.where('categories.id', '=', categoryId);
+      }
+    });
+};
+
+const getFeaturedMovie = async (req, res) => {
+  try {
+    const lastMovie = await knex('movies')
+      .orderBy('movie_year', 'desc')
+      .first();
+    if (!lastMovie) {
+      throw new HttpError('No movies found in the database');
+    }
+    const featuredMovie = {
+      category_id: lastMovie.category_id,
+      title: lastMovie.title,
+      description: lastMovie.description,
+      image_location: lastMovie.image_location,
+      movie_year: lastMovie.movie_year,
+      price: lastMovie.price,
+    };
+    res.json(featuredMovie);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 module.exports = {
   getMovies,
   getMovieByID,
   editMovie,
   deleteMovie,
   createMovie,
+  getDetailsOfMovieByID,
+  getMoviesByCategory,
+  getMovieList,
+  getFeaturedMovie,
 };
