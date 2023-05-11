@@ -5,6 +5,16 @@ import { Box, Container, Divider, Grid, Typography } from '@mui/material';
 const Footer = () => {
   const theme = useTheme();
 
+  const footerLinks = [
+    'Privacy policy',
+    'Cookies policy',
+    'Subscriber agreement',
+    'Help',
+    'Supported devices',
+    'About us',
+    'Manage preferences',
+  ];
+
   const linkStyle = {
     color: '#FFFFFF',
     fontFamily: 'Inter',
@@ -56,76 +66,18 @@ const Footer = () => {
           maxWidth="xl"
           sx={{ gap: 2, padding: 0, justifyContent: 'space-between' }}
         >
-          <Grid item>
-            <Typography
-              variant="subtitle1"
-              component="a"
-              href="#"
-              style={linkStyle}
-            >
-              Privacy policy
-            </Typography>
-          </Grid>
-          <Grid item>
-            <Typography
-              variant="subtitle1"
-              component="a"
-              href="#"
-              style={linkStyle}
-            >
-              Cookies policy
-            </Typography>
-          </Grid>
-          <Grid item>
-            <Typography
-              variant="subtitle1"
-              component="a"
-              href="#"
-              style={linkStyle}
-            >
-              Subscriber agreement
-            </Typography>
-          </Grid>
-          <Grid item>
-            <Typography
-              variant="subtitle1"
-              component="a"
-              href="#"
-              style={linkStyle}
-            >
-              Help
-            </Typography>
-          </Grid>
-          <Grid item>
-            <Typography
-              variant="subtitle1"
-              component="a"
-              href="#"
-              style={linkStyle}
-            >
-              Supported devices
-            </Typography>
-          </Grid>
-          <Grid item>
-            <Typography
-              variant="subtitle1"
-              component="a"
-              href="#"
-              style={linkStyle}
-            >
-              About us
-            </Typography>
-          </Grid>
-          <Grid item>
-            <Typography
-              variant="subtitle1"
-              component="a"
-              href="#"
-              style={linkStyle}
-            >
-              Manage preferences
-            </Typography>
-          </Grid>
+          {footerLinks.map((link) => (
+            <Grid item>
+              <Typography
+                variant="subtitle1"
+                component="a"
+                href="#"
+                style={linkStyle}
+              >
+                {link}
+              </Typography>
+            </Grid>
+          ))}
         </Grid>
         <Typography
           fontFamily="Inter"
