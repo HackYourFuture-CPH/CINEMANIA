@@ -28,7 +28,7 @@ router.get('/:id/details', (req, res) => {
     .getDetailsOfMovieByID(req.params.id)
     .then((result) => {
       if (!result || result.length === 0) {
-        res.status(404).send('No movies found for this id');
+        res.status(404).send('No movie details found for this id');
       } else {
         res.json(result);
       }
