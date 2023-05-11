@@ -7,7 +7,6 @@ import {
   Box,
   Button,
 } from '@mui/material';
-import { styled } from '@mui/material/styles';
 
 const TopCastDisplay = () => {
   return (
