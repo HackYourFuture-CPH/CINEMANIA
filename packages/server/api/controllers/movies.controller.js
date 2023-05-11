@@ -46,7 +46,7 @@ const createMovie = async (body) => {
 };
 
 const getMovies = async (queryParams) => {
-  const { sortBy, categoryId, userId } = queryParams;
+  const { sortBy = 'rating', categoryId = null, userId = null } = queryParams;
 
   let query = knex('movies')
     .leftJoin('reviews', 'reviews.movie_id', '=', 'movies.id')
