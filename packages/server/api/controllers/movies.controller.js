@@ -49,8 +49,12 @@ const createMovie = async (body) => {
   };
 };
 
-const getMovieList = (sortBy = 'rating', categoryId = null, userId = null) => {
-  return knex('movies')
+const getMovieList = async (
+  sortBy = 'rating',
+  categoryId = null,
+  userId = null,
+) => {
+  const query = knex('movies')
     .leftJoin('reviews', 'reviews.movie_id', '=', 'movies.id')
     .leftJoin('categories', 'categories.id', '=', 'movies.category_id')
     .select(
@@ -91,6 +95,13 @@ const getMovieList = (sortBy = 'rating', categoryId = null, userId = null) => {
         queryBuilder.where('categories.id', '=', categoryId);
       }
     });
+
+  const results = await query;
+
+  return results.map((result) => ({
+    ...result,
+    is_favorite: result.is_favorite === 1,
+  }));
 };
 
 module.exports = {
