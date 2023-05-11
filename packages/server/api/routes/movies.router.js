@@ -11,7 +11,7 @@ const moviesController = require('../controllers/movies.controller');
 router.get('/', (req, res, next) => {
   const { sortBy, categoryId, userId } = req.query;
   return moviesController
-    .getMovieList(sortBy, categoryId, userId)
+    .getMovies(sortBy, categoryId, userId)
     .then((result) => res.json(result))
     .catch(next);
 });
