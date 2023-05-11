@@ -8,7 +8,6 @@ import { Navbar } from './components/Navbar/Navbar';
 // MUI THEME
 import { ThemeProvider } from '@mui/material';
 import { theme } from './lib/theme';
-import ViewPage from './containers/ViewPage/ViewPage';
 
 function App() {
   return (
@@ -20,7 +19,6 @@ function App() {
             <Route path="/" element={<LandingPage />} />
             <Route path="movies/:id" element={<MovieDetails />} />
             <Route path="*" element={<PageNotFound />} />
-            <Route path="view" element={<ViewPage />} />
           </Routes>
         </Router>
       </div>
