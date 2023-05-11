@@ -9,9 +9,8 @@ const router = express.Router({ mergeParams: true });
 const moviesController = require('../controllers/movies.controller');
 // get /
 router.get('/', (req, res, next) => {
-  const { sortBy, categoryId, userId } = req.query;
   return moviesController
-    .getMovies(sortBy, categoryId, userId)
+    .getMovies(req.query)
     .then((result) => res.json(result))
     .catch(next);
 });

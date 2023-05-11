@@ -45,12 +45,10 @@ const createMovie = async (body) => {
   };
 };
 
-const getMovies = async (
-  sortBy = 'rating',
-  categoryId = null,
-  userId = null,
-) => {
-  const query = knex('movies')
+const getMovies = async (queryParams) => {
+  const { sortBy, categoryId, userId } = queryParams;
+
+  let query = knex('movies')
     .leftJoin('reviews', 'reviews.movie_id', '=', 'movies.id')
     .leftJoin('categories', 'categories.id', '=', 'movies.category_id')
     .select(
@@ -75,22 +73,23 @@ const getMovies = async (
       ),
     )
     .groupBy('movies.id')
-    .orderByRaw(
-      `
-      CASE
-        WHEN ? = 'rating' THEN AVG(reviews.rating)
-        WHEN ? = 'recently_added' THEN movies.created_at
-        WHEN ? = 'price' THEN movies.price
-      END  ${sortBy === 'price' ? 'ASC' : 'DESC'}
-
-    `,
-      [sortBy, sortBy, sortBy],
-    )
     .modify((queryBuilder) => {
       if (categoryId) {
         queryBuilder.where('categories.id', '=', categoryId);
       }
     });
+
+  if (sortBy === 'rating') {
+    query = query.orderByRaw('AVG(reviews.rating) desc');
+  }
+
+  if (sortBy === 'recently_added') {
+    query = query.orderBy('movies.created_at', 'desc');
+  }
+
+  if (sortBy === 'price') {
+    query = query.orderBy('movies.price', 'asc');
+  }
 
   const results = await query;
 
