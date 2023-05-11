@@ -1,13 +1,11 @@
 import React from 'react';
 
-// import ViewCarousel1 from '../../components/ViewPage/ViewCarousel1';
-import ViewCarousel2 from '../../components/ViewPage/ViewCarousel2';
+import Carousel from '../../components/ViewPage/Carousel/Carousel';
 
 export default function ViewPage() {
   return (
     <div>
-      {/* <ViewCarousel1 /> */}
-      <ViewCarousel2 />
+      <Carousel />
     </div>
   );
 }
