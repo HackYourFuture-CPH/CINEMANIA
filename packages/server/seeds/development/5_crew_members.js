@@ -294,5 +294,124 @@ exports.seed = async function (knex) {
       image_location:
         'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/vWoZIOk7K8TSKu1IN90akswsWjZ.jpg',
     },
+    {
+      full_name: 'Matthew McConaughey',
+      birth_date: '1969-11-04',
+      image_location:
+        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/sY2mwpafcwqyYS1sOySu1MENDse.jpg',
+    },
+    {
+      full_name: 'Anne Hathaway',
+      birth_date: '1982-11-12',
+      image_location:
+        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/tLelKoPNiyJCSEtQTz1FGv4TLGc.jpg',
+    },
+    {
+      full_name: 'Jessica Chastain',
+      birth_date: '1977-03-24',
+      image_location:
+        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/lodMzLKSdrPcBry6TdoDsMN3Vge.jpg',
+    },
+    {
+      full_name: 'Bill Irwin',
+      birth_date: '1950-04-11',
+      image_location:
+        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/bAV5qsljgiHQkn3QluB5clVYC13.jpg',
+    },
+    {
+      full_name: 'Ellen Burstyn',
+      birth_date: '1932-12-07',
+      image_location:
+        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/57gu12UWYWtphrzlccJQfw8lORm.jpg',
+    },
+    {
+      full_name: 'Leonardo DiCaprio',
+      birth_date: '1974-11-11',
+      image_location:
+        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/wo2hJpn04vbtmh0B9utCFdsQhxM.jpg',
+    },
+    {
+      full_name: 'Kate Winslet',
+      birth_date: '1975-10-05',
+      image_location:
+        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/e3tdop3WhseRnn8KwMVLAV25Ybv.jpg',
+    },
+    {
+      full_name: 'Billy Zane',
+      birth_date: '1966-02-24',
+      image_location:
+        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/7CBwxqE00aZAAEBaRkapylgdi15.jpg',
+    },
+    {
+      full_name: 'Kathy Bates',
+      birth_date: '1948-06-28',
+      image_location:
+        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/3MsayDvY73uXGVbCFHyy1ABTacV.jpg',
+    },
+    {
+      full_name: 'Frances Fisher',
+      birth_date: '1952-05-11',
+      image_location:
+        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/tsyGcoXGRNM8KGLpLG3OuxAyxx2.jpg',
+    },
+    {
+      full_name: 'Gloria Stuart',
+      birth_date: '1910-07-04',
+      image_location:
+        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/9aG7UUX3PWIGGf1KRY5TsBSoNz9.jpg',
+    },
+    {
+      full_name: 'James Cameron',
+      birth_date: '1954-08-16',
+      image_location:
+        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/9NAZnTjBQ9WcXAQEzZpKy4vdQto.jpg',
+    },
+    {
+      full_name: 'Jodie Foster',
+      birth_date: '1962-11-19',
+      image_location:
+        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/8DAd9knKivHR4CCStxlNEQXzjIh.jpg',
+    },
+    {
+      full_name: 'Anthony Hopkins',
+      birth_date: '1937-12-31',
+      image_location:
+        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/9ukJS2QWTJ22HcwR1ktMmoJ6RSL.jpg',
+    },
+    {
+      full_name: 'Scott Glenn',
+      birth_date: '1939-01-26',
+      image_location:
+        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/t3t8UK98DnAPOZE8IGsEUCDjcjp.jpg',
+    },
+    {
+      full_name: 'Ted Levine',
+      birth_date: '1957-05-29',
+      image_location:
+        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/qRFq8y842T1uq51iQCwsEmQI3UT.jpg',
+    },
+    {
+      full_name: 'Anthony Heald',
+      birth_date: '1944-08-25',
+      image_location:
+        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/e0E6Z1Y0debr4mAHgj0HO7MYyXG.jpg',
+    },
+    {
+      full_name: 'Brooke Smith',
+      birth_date: '1967-05-22',
+      image_location:
+        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/A0D7CqSZ0rjlq83M4GMM4CcoUTA.jpg',
+    },
+    {
+      full_name: 'Jonathan Demme',
+      birth_date: '1944-02-22',
+      image_location:
+        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/w9Lw3xTEFQUYELkl9AH5i3p5OhJ.jpg',
+    },
+    {
+      full_name: 'Ted Tally',
+      birth_date: '1952-04-09',
+      image_location: '',
+    },
   ]);
 };
