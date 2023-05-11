@@ -5,10 +5,6 @@ const knex = require('../../config/db');
 const HttpError = require('../lib/utils/http-error');
 const moment = require('moment-timezone');
 
-const getMovies = async () => {
-  return knex('movies').select('*');
-};
-
 const getMovieByID = async (id) => {
   if (!id) {
     throw new HttpError('ID should be a number', 400);
@@ -49,7 +45,7 @@ const createMovie = async (body) => {
   };
 };
 
-const getMovieList = async (
+const getMovies = async (
   sortBy = 'rating',
   categoryId = null,
   userId = null,
@@ -110,5 +106,4 @@ module.exports = {
   editMovie,
   deleteMovie,
   createMovie,
-  getMovieList,
 };
