@@ -4,6 +4,7 @@ const router = express.Router();
 
 const movies = require('./movies.router');
 const categories = require('./categories.router');
+const reviews = require('./reviews.router');
 
 const swaggerJsDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
@@ -29,6 +30,7 @@ const swaggerDocument = swaggerJsDoc(swaggerOptions);
 router.use('/documentation', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 router.use('/movies', movies);
+router.use('/reviews', reviews);
 
 module.exports = router;
 router.use('/categories', categories);
