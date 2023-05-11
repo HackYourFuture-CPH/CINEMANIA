@@ -4,7 +4,7 @@ import './App.css';
 import { LandingPage } from './containers/LandingPage/LandingPage';
 import { PageNotFound } from './containers/PageNotFound/PageNotFound.Container';
 import { MovieDetails } from './containers/MovieDetails/MovieDetails';
-
+import { MovieListPage } from './containers/MovieListPage/MovieListPage';
 import { Navbar } from './components/Navbar/Navbar';
 
 // MUI THEME
@@ -20,6 +20,7 @@ function App() {
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="movies/:id" element={<MovieDetails />} />
+            <Route path="/movieList" element={<MovieListPage />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
         </Router>
