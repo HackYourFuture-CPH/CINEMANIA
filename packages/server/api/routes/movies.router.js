@@ -39,7 +39,7 @@ router.get('/:id/details', (req, res) => {
       res.status(500).json({ error: error.message });
       throw error;
     });
-  });
+});
 // add endpoint to retrieve movies by category
 router.get('/category/:categoryId', (req, res, next) => {
   const { categoryId } = req.params;
