@@ -25,6 +25,15 @@ router.get('/:id', (req, res, next) => {
     .catch(next);
 });
 
+// add endpoint to retrieve movies by category
+router.get('/category/:categoryId', (req, res, next) => {
+  const { categoryId } = req.params;
+  moviesController
+    .getMoviesByCategory(categoryId)
+    .then((result) => res.json(result))
+    .catch(next);
+});
+
 // post
 router.post('/', (req, res) => {
   moviesController
