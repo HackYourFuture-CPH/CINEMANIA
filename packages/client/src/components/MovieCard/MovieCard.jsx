@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Card, CardMedia, Typography, Rating, Box } from '@mui/material';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import useFavorites from './useFavorites'; // created a custom hook to manage favorites
 
@@ -45,24 +46,47 @@ export default function MovieCard(props) {
           position: 'relative',
         }}
       >
-        <FavoriteBorderIcon
-          sx={{
-            display: 'block',
-            position: 'absolute',
-            width: '1.9rem',
-            height: '1.75rem',
-            top: '2.25rem',
-            right: '1.96rem',
-            color: isFavorite ? '#FF0000' : '#FFFFFF',
-            padding: '1rem',
-            backgroundColor: '#000000CC',
-            zIndex: 1,
-            '&:hover': {
+        {isFavorite ? (
+          <FavoriteIcon
+            sx={{
+              display: 'block',
+              position: 'absolute',
+              width: '1.9rem',
+              height: '1.75rem',
+              top: '2.25rem',
+              right: '1.96rem',
               color: '#FF0000',
-            },
-          }}
-          onClick={() => toggleFavorite(props.movie)}
-        />
+              padding: '1rem',
+              backgroundColor: '#000000CC',
+              zIndex: 1,
+              '&:hover': {
+                color: '#FF0000',
+                cursor: 'pointer',
+              },
+            }}
+            onClick={() => toggleFavorite(props.movie)}
+          />
+        ) : (
+          <FavoriteBorderIcon
+            sx={{
+              display: 'block',
+              position: 'absolute',
+              width: '1.9rem',
+              height: '1.75rem',
+              top: '2.25rem',
+              right: '1.96rem',
+              color: '#FFFFFF',
+              padding: '1rem',
+              backgroundColor: '#000000CC',
+              zIndex: 1,
+              '&:hover': {
+                color: '#FF0000',
+                cursor: 'pointer',
+              },
+            }}
+            onClick={() => toggleFavorite(props.movie)}
+          />
+        )}
       </Box>
 
       <CardMedia
