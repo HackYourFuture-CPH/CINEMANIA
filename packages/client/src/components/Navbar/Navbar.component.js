@@ -12,7 +12,11 @@ const buttonStyles = {
 
 export const Navbar = () => {
   return (
-    <AppBar component="nav" width="100%" sx={{ bgcolor: 'mainGreen' }}>
+    <AppBar
+      component="nav"
+      width="100%"
+      sx={{ bgcolor: 'mainGreen', position: 'sticky', top: '0' }}
+    >
       <Box sx={{ padding: '0.6rem 8.75rem' }}>
         <Toolbar
           fontFamily="Inter"
