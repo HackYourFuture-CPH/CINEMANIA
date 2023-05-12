@@ -23,22 +23,6 @@ router.get('/:id', (req, res, next) => {
     .catch(next);
 });
 
-router.get('/:id/crew', (req, res) => {
-  moviesController
-    .getCrewOfMovieByID(req.params.id)
-    .then((result) => {
-      if (result.length === 0) {
-        res.status(404).send('No crew found for this movie');
-      } else {
-        res.json(result);
-      }
-    })
-    .catch((error) => {
-      req.status(500).json({ error: error.message });
-      throw error;
-    });
-});
-
 // post
 router.post('/', (req, res) => {
   moviesController
