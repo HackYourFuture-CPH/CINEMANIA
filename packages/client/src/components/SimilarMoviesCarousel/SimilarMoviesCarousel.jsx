@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container } from '@mui/material';
 
-const SimilarMoviesCarousel = () => {
+const SimilarMoviesCarousel = ({ movieID }) => {
   return (
     <Container
       sx={{
