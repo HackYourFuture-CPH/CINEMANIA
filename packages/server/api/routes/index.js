@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 
 const movies = require('./movies.router');
+const categories = require('./categories.router');
 const favorites = require('./favorites.router');
 
 const swaggerJsDoc = require('swagger-jsdoc');
@@ -32,3 +33,4 @@ router.use('/movies', movies);
 router.use('/favorites', favorites);
 
 module.exports = router;
+router.use('/categories', categories);
