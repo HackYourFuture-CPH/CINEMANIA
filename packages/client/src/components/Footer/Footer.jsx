@@ -35,6 +35,7 @@ const Footer = () => {
         marginTop: theme.spacing(8),
         padding: theme.spacing(0, 0),
         width: '100%',
+        bottom: 0,
       }}
     >
       <Container maxWidth="xl">
@@ -84,7 +85,7 @@ const Footer = () => {
                 variant="subtitle1"
                 component="a"
                 href="#"
-                style={linkStyle}
+                sx={linkStyle}
               >
                 {link}
               </Typography>
@@ -96,7 +97,7 @@ const Footer = () => {
           variant="body2"
           color="#777777"
           align="center"
-          style={{
+          sx={{
             marginTop: theme.spacing(4.626),
             marginBottom: theme.spacing(5.5),
             fontSize: '1.25rem',
