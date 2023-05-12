@@ -8,7 +8,7 @@ import {
   Button,
 } from '@mui/material';
 
-const TopCastDisplay = () => {
+const TopCastDisplay = ({ movieID }) => {
   return (
     <Container
       sx={{
@@ -31,7 +31,7 @@ const TopCastDisplay = () => {
           p: 1,
         }}
       >
-        Top Cast
+        {`Top Cast ${movieID}`}
       </Typography>
 
       <Stack direction="row" spacing={1}>
