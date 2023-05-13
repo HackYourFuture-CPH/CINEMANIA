@@ -3,6 +3,7 @@ import { blue } from '@mui/material/colors';
 import React, { useEffect, useState } from 'react';
 import { apiURL } from '../../apiURL';
 import FeaturedMovie from '../../components/FeaturedMovie/FeaturedMovie';
+import MovieCard from '../../components/MovieCard/MovieCard';
 
 export const LandingPage = () => {
   const [movies, setMovies] = useState([]);
@@ -16,21 +17,32 @@ export const LandingPage = () => {
     fetchMovies();
   }, []);
 
+  const movieCardStyles = {
+    width: '50%',
+    height: '50%',
+    overflow: 'auto',
+    display: 'flex',
+    justifyContent: 'center',
+    flexWrap: 'wrap',
+    position: 'absolute',
+  };
+
   return (
-    <div className="landing-page-container">
-      {movies.map((movie) => (
-        <Card sx={{ width: 550, margin: 10 }} variant="outlined" key={movie.id}>
-          <CardContent sx={{ margin: '20px', bgcolor: blue[100] }}>
-            <Chip
-              sx={{ fontSize: '1.2rem' }}
-              color="secondary"
-              label={movie.title}
-            />
-            <p>{movie.description}</p>
-          </CardContent>
-        </Card>
-      ))}
+    <div
+      className="landing-page-container"
+      style={{
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+      }}
+    >
       <FeaturedMovie />
+      <div style={movieCardStyles}>
+        {movies.map((movie) => (
+          <MovieCard movie={movie} key={movie.id} />
+        ))}
+      </div>
     </div>
   );
 };

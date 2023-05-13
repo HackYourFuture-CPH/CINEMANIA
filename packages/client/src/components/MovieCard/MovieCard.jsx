@@ -28,6 +28,31 @@ export default function MovieCard(props) {
   const [favorites, toggleFavorite] = useFavorites([]);
   const isFavorite = favorites.includes(props.movie);
 
+  const iconStyles = {
+    display: 'block',
+    position: 'absolute',
+    width: '1.9rem',
+    height: '1.75rem',
+    top: '2.25rem',
+    right: '1.96rem',
+    color: '#FF0000',
+    padding: '1rem',
+    backgroundColor: '#000000CC',
+    zIndex: 1,
+    '&:hover': {
+      color: '#FF0000',
+      cursor: 'pointer',
+    },
+  };
+
+  const commonStyles = {
+    position: 'relative',
+    fontFamily: 'Inter',
+    fontStyle: 'normal',
+    color: '#003C2D',
+    lineHeight: '1.43rem',
+  };
+
   return (
     <Card
       sx={{
@@ -48,42 +73,12 @@ export default function MovieCard(props) {
       >
         {isFavorite ? (
           <FavoriteIcon
-            sx={{
-              display: 'block',
-              position: 'absolute',
-              width: '1.9rem',
-              height: '1.75rem',
-              top: '2.25rem',
-              right: '1.96rem',
-              color: '#FF0000',
-              padding: '1rem',
-              backgroundColor: '#000000CC',
-              zIndex: 1,
-              '&:hover': {
-                color: '#FF0000',
-                cursor: 'pointer',
-              },
-            }}
+            sx={iconStyles}
             onClick={() => toggleFavorite(props.movie)}
           />
         ) : (
           <FavoriteBorderIcon
-            sx={{
-              display: 'block',
-              position: 'absolute',
-              width: '1.9rem',
-              height: '1.75rem',
-              top: '2.25rem',
-              right: '1.96rem',
-              color: '#FFFFFF',
-              padding: '1rem',
-              backgroundColor: '#000000CC',
-              zIndex: 1,
-              '&:hover': {
-                color: '#FF0000',
-                cursor: 'pointer',
-              },
-            }}
+            sx={iconStyles}
             onClick={() => toggleFavorite(props.movie)}
           />
         )}
@@ -92,9 +87,7 @@ export default function MovieCard(props) {
       <CardMedia
         component="img"
         sx={{
-          position: 'relative',
-          maxHeight: 'min-content',
-          width: '13.5rem',
+          ...commonStyles,
           left: 0,
           top: 0,
           paddingTop: '2.25rem',
@@ -105,17 +98,11 @@ export default function MovieCard(props) {
       />
       <Typography
         sx={{
-          position: 'relative',
-          maxHeight: 'min-content',
-          width: '13.45rem',
+          ...commonStyles,
           top: '1.5rem',
           left: '1.96rem',
-          fontFamily: 'Inter',
-          fontStyle: 'normal',
           fontWeight: 700,
           fontSize: '1.172rem',
-          fontHeight: '1.43rem',
-          color: '#003C2D',
         }}
         variant="h4"
       >
@@ -125,16 +112,11 @@ export default function MovieCard(props) {
       <Typography
         paragraph
         sx={{
-          position: 'relative',
-          minHeight: 'fit-content',
-          width: '13.43rem',
+          ...commonStyles,
           top: '2rem',
-          fontFamily: 'Inter',
           fontWeight: 400,
           left: '1.96rem',
           fontSize: '1.17rem',
-          color: '#003C2D',
-          lineHeight: '1.43rem',
         }}
       >
         {props.movie.description}
