@@ -88,7 +88,6 @@ export default function MovieCard({ movie }) {
           />
         )}
       </Box>
-
       <CardMedia
         component="img"
         sx={{
