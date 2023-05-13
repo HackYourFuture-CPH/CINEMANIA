@@ -8,25 +8,27 @@ const useStyles = makeStyles((theme) => ({
     minWidth: 120,
     position: 'absolute',
     right: 0,
-    color: '#00FFC2',
   },
   label: {
     color: '#00FFC2',
+    textDecoration: 'underline',
   },
   select: {
     color: '#00FFC2',
     '&:before': {
-      borderColor: '#00FFC2',
+      borderColor: 'transparent',
     },
     '&:after': {
-      borderColor: '#00FFC2',
+      borderColor: 'transparent',
     },
     '&:hover:not(.Mui-disabled):before': {
-      borderColor: '#00FFC2',
+      borderColor: 'transparent',
     },
   },
   icon: {
     fill: '#00FFC2',
+    border: 'none',
+    marginRight: theme.spacing(5),
   },
 }));
 
