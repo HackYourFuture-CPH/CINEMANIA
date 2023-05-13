@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { apiURL } from '../../apiURL';
 import {
   Container,
   Typography,
@@ -6,9 +7,33 @@ import {
   Stack,
   Box,
   Button,
+  CircularProgress,
 } from '@mui/material';
 
-const TopCastDisplay = () => {
+const TopCastDisplay = ({ movieID }) => {
+  const [castList, setCastList] = useState([]);
+  const [showFullCast, setShowFullCast] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchCastList = async () => {
+      setIsLoading(true);
+      try {
+        const response = await fetch(`${apiURL()}/crew/movie/${movieID}`);
+        const data = await response.json();
+        setCastList(data);
+      } catch (error) {
+        setIsLoading(false);
+      }
+      setIsLoading(false);
+    };
+    fetchCastList();
+  }, [movieID]);
+
+  const handleShowFullCast = () => {
+    setShowFullCast(!showFullCast);
+  };
+
   return (
     <Container
       sx={{
@@ -17,8 +42,8 @@ const TopCastDisplay = () => {
         position: 'absolute',
         right: 280,
         left: 0,
-        top: 1300,
-        mt: 15 /* To center the conatiner */,
+        top: 1200,
+        mt: 15,
       }}
     >
       <Typography
@@ -34,147 +59,78 @@ const TopCastDisplay = () => {
       >
         Top Cast
       </Typography>
-
-      <Stack direction="row" spacing={1}>
-        <Box sx={{ mx: 'auto', width: 219, p: 1, m: 1, textAlign: 'center' }}>
-          <Avatar
-            alt="James Cameron"
-            src="https://www.themoviedb.org/t/p/w90_and_h90_face/9NAZnTjBQ9WcXAQEzZpKy4vdQto.jpg"
-            sx={{ width: 219, height: 219, border: 1, borderColor: 'grey.500' }}
-            variant="circular"
-          />
-          <Typography
-            variant="caption"
-            sx={{
-              width: 219,
-              height: 30,
-              fontSize: 25,
-              fontWeight: 500,
-              color: '#FFFFFF',
-            }}
-          >
-            James Cameron
-          </Typography>
-        </Box>
-
-        <Box sx={{ mx: 'auto', width: 219, p: 1, m: 1, textAlign: 'center' }}>
-          <Avatar
-            alt="Leonardo DiCaprio"
-            src="https://www.themoviedb.org/t/p/w90_and_h90_face/wo2hJpn04vbtmh0B9utCFdsQhxM.jpg"
-            sx={{ width: 219, height: 219, border: 1, borderColor: 'grey.500' }}
-            variant="circular"
-          />
-          <Typography
-            variant="caption"
-            sx={{
-              width: 219,
-              height: 30,
-              fontSize: 25,
-              fontWeight: 500,
-              color: '#FFFFFF',
-            }}
-          >
-            Leonardo DiCaprio
-          </Typography>
-        </Box>
-        <Box sx={{ mx: 'auto', width: 219, p: 1, m: 1, textAlign: 'center' }}>
-          <Avatar
-            alt="Kate Winslet"
-            src="https://www.themoviedb.org/t/p/w90_and_h90_face/e3tdop3WhseRnn8KwMVLAV25Ybv.jpg"
-            sx={{ width: 219, height: 219, border: 1, borderColor: 'grey.500' }}
-            variant="circular"
-          />
-          <Typography
-            variant="caption"
-            sx={{
-              width: 219,
-              height: 30,
-              fontSize: 25,
-              fontWeight: 500,
-              color: '#FFFFFF',
-            }}
-          >
-            Kate Winslet
-          </Typography>
-        </Box>
-
-        <Box sx={{ mx: 'auto', width: 219, p: 1, m: 1, textAlign: 'center' }}>
-          <Avatar
-            alt="Gloria Stuart"
-            src="https://www.themoviedb.org/t/p/w90_and_h90_face/9aG7UUX3PWIGGf1KRY5TsBSoNz9.jpg"
-            sx={{ width: 219, height: 219, border: 1, borderColor: 'grey.500' }}
-            variant="circular"
-          />
-          <Typography
-            variant="caption"
-            sx={{
-              width: 219,
-              height: 30,
-              fontSize: 25,
-              fontWeight: 500,
-              color: '#FFFFFF',
-            }}
-          >
-            Gloria Stuart
-          </Typography>
-        </Box>
-
-        <Box sx={{ mx: 'auto', width: 219, p: 1, m: 1, textAlign: 'center' }}>
-          <Avatar
-            alt="Billy Zane"
-            src="https://www.themoviedb.org/t/p/w90_and_h90_face/7CBwxqE00aZAAEBaRkapylgdi15.jpg"
-            sx={{ width: 219, height: 219, border: 1, borderColor: 'grey.500' }}
-            variant="circular"
-          />
-          <Typography
-            variant="caption"
-            sx={{
-              width: 219,
-              height: 30,
-              fontSize: 25,
-              fontWeight: 500,
-              color: '#FFFFFF',
-            }}
-          >
-            Billy Zane
-          </Typography>
-        </Box>
-
-        <Box sx={{ mx: 'auto', width: 219, p: 1, m: 1, textAlign: 'center' }}>
-          <Avatar
-            alt="Kathy Bates"
-            src="https://www.themoviedb.org/t/p/w138_and_h175_face/3MsayDvY73uXGVbCFHyy1ABTacV.jpg"
-            sx={{ width: 219, height: 219, border: 1, borderColor: 'grey.500' }}
-            variant="circular"
-          />
-          <Typography
-            variant="caption"
-            sx={{
-              width: 219,
-              height: 30,
-              fontSize: 25,
-              fontWeight: 500,
-              color: '#FFFFFF',
-            }}
-          >
-            Kathy Bates
-          </Typography>
-        </Box>
-      </Stack>
-      <Button
-        sx={{
-          width: 200,
-          color: '#FFFFFF',
-          textDecoration: 'underline',
-          textUnderlineOffset: 10,
-          position: 'absolute',
-          left: 1240,
-          fontSize: 32,
-          fontWeight: 400,
-        }}
+      <Stack
+        direction="row"
+        spacing={1}
+        sx={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}
       >
-        Full Cast
-      </Button>
+        {castList
+          .slice(0, showFullCast ? castList.length : 6)
+          .map((castMember) => (
+            <Box
+              key={castMember.id}
+              sx={{
+                width: 150,
+                p: 1,
+                textAlign: 'center',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <Avatar
+                alt={`${castMember.full_name}`}
+                src={castMember.image_location}
+                sx={{
+                  width: 150,
+                  height: 150,
+                  border: 1,
+                  borderColor: 'grey.500',
+                }}
+                variant="circular"
+              />
+              <Typography
+                variant="caption"
+                sx={{
+                  width: 150,
+                  height: 30,
+                  fontSize: 25,
+                  margin: 5,
+                  fontWeight: 500,
+                  color: '#FFFFFF',
+                }}
+              >
+                {`${castMember.full_name}`}
+              </Typography>
+            </Box>
+          ))}
+      </Stack>
+      {isLoading ? (
+        <CircularProgress
+          sx={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+          }}
+        />
+      ) : (
+        <Button
+          onClick={handleShowFullCast}
+          sx={{
+            width: 200,
+            color: '#FFFFFF',
+            textDecoration: 'underline',
+            textUnderlineOffset: 10,
+            position: 'absolute',
+            left: '85%',
+            fontSize: 32,
+            fontWeight: 400,
+          }}
+        >
+          {showFullCast ? 'Show less' : 'Full Cast'}
+        </Button>
+      )}
     </Container>
   );
 };
