@@ -12,15 +12,17 @@ const CategoryButton = ({ label, categoryId }) => {
   return (
     <MuiButton
       sx={{
+        height: '3rem',
         fontWeight: 500,
-        fontSize: '13px',
+        fontSize: '16px',
         lineHeight: '10px',
         color: '#00FFC2',
         border: '2px solid #00FFC2',
         borderRadius: '50px',
-        padding: '12px 18px',
+        padding: '14px 18px',
         backgroundColor: '#003E2F',
         textTransform: 'none',
+        margin: '10px 6px',
         '&:hover': {
           backgroundColor: '#FFF',
         },

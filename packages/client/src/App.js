@@ -9,6 +9,7 @@ import { MovieDetails } from './containers/MovieDetails/MovieDetails';
 // MUI THEME
 import { ThemeProvider } from '@mui/material';
 import { theme } from './lib/theme';
+import { MovieListPage } from './containers/MovieListPage/MovieListPage';
 
 // Routes
 const router = createBrowserRouter([
@@ -23,6 +24,11 @@ const router = createBrowserRouter([
         path: '/movies/:id',
         element: <MovieDetails />,
       },
+      {
+        path: '/movies',
+        element: <MovieListPage />,
+      },
+
       {
         path: '*',
         element: <PageNotFound />,

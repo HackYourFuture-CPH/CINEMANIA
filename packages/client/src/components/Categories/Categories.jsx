@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import CategoryButton from './CategoryButton';
 import { apiURL } from '../../apiURL';
-import { useMovieList } from '../../context/movieListContext';
+import { Box } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 
-const Catagories = () => {
+const Categories = () => {
   const [categoriesList, setCategoriesList] = useState([]);
-  const { categoryId } = useMovieList();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const theme = useTheme();
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -34,7 +35,15 @@ const Catagories = () => {
   }
 
   return (
-    <div className="category-button-div">
+    <Box
+      sx={{
+        width: '60%',
+        [theme.breakpoints.down('sm')]: {
+          width: '100%',
+          marginBottom: '3rem',
+        },
+      }}
+    >
       {categoriesList.map((category) => (
         <CategoryButton
           label={category.name}
@@ -42,9 +51,8 @@ const Catagories = () => {
           key={category.id}
         />
       ))}
-      {categoryId && <div style={{ display: 'none' }}> {categoryId}</div>}
-    </div>
+    </Box>
   );
 };
 
-export default Catagories;
+export default Categories;
