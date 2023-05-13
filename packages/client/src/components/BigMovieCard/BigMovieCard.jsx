@@ -14,7 +14,7 @@ import RatingStars from '../RatingStars/RatingStars';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import FavoriteIcon from '@mui/icons-material/FavoriteBorder';
 
-const BigMovieCard = () => {
+const BigMovieCard = ({ currentMovie }) => {
   return (
     <Card
       sx={{
@@ -49,7 +49,7 @@ const BigMovieCard = () => {
             border: 1,
             borderColor: 'grey.500',
           }}
-          src="https://www.themoviedb.org/t/p/w300_and_h450_bestv2/9xjZS2rlVxm8SFx8kPC3aIGCOYQ.jpg"
+          src={currentMovie?.image_location}
           alt="Movie Poster"
         />
         <FavoriteIcon
