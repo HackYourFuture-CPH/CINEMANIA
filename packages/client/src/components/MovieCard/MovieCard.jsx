@@ -24,9 +24,9 @@ const BasicRating = () => {
   );
 };
 
-export default function MovieCard(props) {
+export default function MovieCard({ movie }) {
   const [favorites, toggleFavorite] = useFavorites([]);
-  const isFavorite = favorites.includes(props.movie);
+  const isFavorite = favorites.includes(movie);
 
   return (
     <Card
@@ -60,11 +60,11 @@ export default function MovieCard(props) {
               backgroundColor: '#000000CC',
               zIndex: 1,
               '&:hover': {
-                color: '#FF0000',
+                color: 'hoverRed',
                 cursor: 'pointer',
               },
             }}
-            onClick={() => toggleFavorite(props.movie)}
+            onClick={() => toggleFavorite(movie)}
           />
         ) : (
           <FavoriteBorderIcon
@@ -75,16 +75,16 @@ export default function MovieCard(props) {
               height: '1.75rem',
               top: '2.25rem',
               right: '1.96rem',
-              color: '#FFFFFF',
+              color: '#FF0000',
               padding: '1rem',
               backgroundColor: '#000000CC',
               zIndex: 1,
               '&:hover': {
-                color: '#FF0000',
+                color: 'hoverRed',
                 cursor: 'pointer',
               },
             }}
-            onClick={() => toggleFavorite(props.movie)}
+            onClick={() => toggleFavorite(movie)}
           />
         )}
       </Box>
@@ -100,8 +100,8 @@ export default function MovieCard(props) {
           paddingTop: '2.25rem',
           paddingLeft: '1.96rem',
         }}
-        image={props.movie.image_location}
-        alt={props.movie.title}
+        image={movie.image_location}
+        alt={movie.title}
       />
       <Typography
         sx={{
@@ -119,7 +119,7 @@ export default function MovieCard(props) {
         }}
         variant="h4"
       >
-        {props.movie.title}
+        {movie.title}
       </Typography>
 
       <Typography
@@ -137,7 +137,7 @@ export default function MovieCard(props) {
           lineHeight: '1.43rem',
         }}
       >
-        {props.movie.description}
+        {movie.description}
       </Typography>
       <BasicRating />
     </Card>
