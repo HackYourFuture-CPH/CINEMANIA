@@ -67,11 +67,15 @@ const BigMovieCard = ({ currentMovie }) => {
 
       <Box bgcolor="mainGreen" fontFamily="Inter" paddingLeft="50px">
         <CardContent sx={{ display: 'flex', flexDirection: 'column' }}>
-          <RatingStars sx={{ display: 'flex', justifyContent: 'flex-end' }} />
+          <RatingStars
+            sx={{ display: 'flex', justifyContent: 'flex-end' }}
+            averageRating={currentMovie?.rating ?? 0}
+            numberOfReviews={currentMovie?.number_of_ratings}
+          />
           <Typography
             sx={{ fontWeight: 700, fontSize: 40, width: 633, paddingTop: 10 }}
           >
-            Titanic
+            {currentMovie?.title}
           </Typography>
 
           <Stack direction="row" spacing={2} paddingTop={2} paddingBottom={4}>
@@ -86,20 +90,7 @@ const BigMovieCard = ({ currentMovie }) => {
                 color: '#003E2F',
               }}
             >
-              Drama
-            </Button>
-            <Button
-              sx={{
-                border: 1,
-                borderColor: '#000000',
-                width: 150,
-                borderRadius: '20px',
-                fontWeight: 500,
-                fontSize: 24,
-                color: '#003E2F',
-              }}
-            >
-              Romance
+              {currentMovie?.category_name}
             </Button>
           </Stack>
 
@@ -111,21 +102,16 @@ const BigMovieCard = ({ currentMovie }) => {
             sx={{ font: 'Inter', fontWeight: 700, fontSize: 28, width: 633 }}
           >
             <Box sx={{ fontWeight: 'light', m: 1 }}>
-              101-year-old Rose DeWitt Bukater tells the story of her life
-              aboard the Titanic, 84 years later. A young Rose boards the ship
-              with her mother and fiancé. Meanwhile, Jack Dawson and Fabrizio De
-              Rossi win third-class tickets aboard the ship. Rose tells the
-              whole story from Titanic’s departure through to its death – on its
-              first and last voyage – on April 15, 1912.
+              {currentMovie?.description}
             </Box>
             <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
               <Box sx={{ fontWeight: 'bold', m: 1, width: 120 }}>Director:</Box>
               <Box sx={{ fontWeight: 'light', m: 1, width: 400 }}>
-                James Cameron
+                {currentMovie?.director}
               </Box>
               <Box sx={{ fontWeight: 'bold', m: 1, width: 120 }}>Writer:</Box>
               <Box sx={{ fontWeight: 'light', m: 1, width: 400 }}>
-                James Cameron
+                {currentMovie?.writer}
               </Box>
             </Box>
           </Typography>

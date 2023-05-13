@@ -17,10 +17,14 @@ export default function RatingStars({ averageRating, numberOfReviews }) {
         name="half-rating"
         defaultValue={2.5}
         precision={0.5}
-        value={isNaN(averageRating) ? 0 : `Rating: ${Number(averageRating)}`}
+        value={isNaN(averageRating) ? 0 : `${Number(averageRating)}`}
       />
       <Typography component="legend">
-        {numberOfReviews ?? 'No rating given'}
+        {numberOfReviews
+          ? `${averageRating} based on ${numberOfReviews} review${
+              numberOfReviews === 1 ? '' : 's'
+            }`
+          : 'No rating given'}
       </Typography>
     </Box>
   );
