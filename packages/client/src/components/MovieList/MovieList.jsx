@@ -172,7 +172,7 @@ const MovieList = () => {
                 />
               </Button>
               <Button
-                href={`/movies/:${each.id}`}
+                href={`/movies/${each.id}`}
                 variant="contained"
                 sx={{
                   position: 'absolute',
