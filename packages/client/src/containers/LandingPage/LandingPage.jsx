@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { apiURL } from '../../apiURL';
+import React /* , { useEffect, useState } */ from 'react';
+/* import { apiURL } from '../../apiURL'; */ // Not Used
 import FeaturedMovie from '../../components/FeaturedMovie/FeaturedMovie';
 
 export const LandingPage = () => {
-  const [movies, setMovies] = useState([]);
+  /* const [movies, setMovies] = useState([]);
   useEffect(() => {
     async function fetchMovies() {
       const response = await fetch(`${apiURL()}/movies`);
@@ -12,7 +12,7 @@ export const LandingPage = () => {
     }
 
     fetchMovies();
-  }, []);
+  }, []); */ // Not used
 
   return (
     <div>
