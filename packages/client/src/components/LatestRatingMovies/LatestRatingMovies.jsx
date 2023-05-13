@@ -1,22 +1,36 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { apiURL } from '../../apiURL';
-import { Typography, Grid } from '@mui/material';
+import { Typography, Grid, Box } from '@mui/material';
 import MovieCard from '../MovieCard/MovieCard';
-import MovieCard2 from '../MovieCard/MovieCard2';
 
 export default function LatestRatingMovies() {
   const [movies, setMovies] = useState([]);
+
   useEffect(() => {
     async function fetchMovies() {
-      const response = await fetch(`${apiURL()}/movies`);
-      const examples = await response.json();
-      setMovies(examples);
+      try {
+        const response = await fetch(`${apiURL()}/movies`);
+        if (!response.ok) {
+          throw new Error('Failed to fetch movies with the latest rating');
+        }
+        const data = await response.json();
+        setMovies(data);
+      } catch (error) {
+        return error;
+      }
     }
     fetchMovies();
   }, []);
   return (
-    <>
+    <Box
+      sx={{
+        height: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+      }}
+    >
       <Typography
         sx={{
           height: '2.76rem',
@@ -34,9 +48,10 @@ export default function LatestRatingMovies() {
       <Grid
         sx={{
           width: '78rem',
-          maxHeight: 'fit-content',
+          maxHeight: 'min-content',
           marginLeft: '5rem',
-          // alignItems: 'center'
+          justifySelf: 'center',
+          alignItems: 'center',
         }}
         container
         direction="row"
@@ -44,14 +59,9 @@ export default function LatestRatingMovies() {
         gap={5}
       >
         {movies
-          .map((item) => (
-            <>
-              <MovieCard key={item.id} />
-              <MovieCard2 />
-            </>
-          ))
-          .splice(0, 4)}
+          .map((movie) => <MovieCard key={movie.id} movie={movie} />)
+          .splice(2, 8)}
       </Grid>
-    </>
+    </Box>
   );
 }
