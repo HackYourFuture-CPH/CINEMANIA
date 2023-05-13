@@ -17,6 +17,7 @@ const TopCastDisplay = () => {
         position: 'absolute',
         right: 280,
         left: 0,
+        top: 1300,
         mt: 15 /* To center the conatiner */,
       }}
     >
