@@ -23,7 +23,6 @@ router.get('/:id', (req, res, next) => {
     .catch(next);
 });
 
-
 router.get('/:id/details', (req, res) => {
   moviesController
     .getDetailsOfMovieByID(req.params.id)
@@ -47,7 +46,6 @@ router.get('/category/:categoryId', (req, res, next) => {
     .then((result) => res.json(result))
     .catch(next);
 });
-
 
 // post
 router.post('/', (req, res) => {

@@ -9,7 +9,6 @@ const crew = require('./crew.router');
 const categories = require('./categories.router');
 const favorites = require('./favorites.router');
 
-
 const swaggerJsDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 
@@ -38,7 +37,6 @@ router.use('/movies', movies);
 router.use('/crew', crew);
 
 router.use('/favorites', favorites);
-
 
 module.exports = router;
 router.use('/categories', categories);
