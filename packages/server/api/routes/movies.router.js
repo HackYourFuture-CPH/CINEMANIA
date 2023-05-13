@@ -9,8 +9,8 @@ const router = express.Router({ mergeParams: true });
 const moviesController = require('../controllers/movies.controller');
 // get /
 router.get('/', (req, res, next) => {
-  moviesController
-    .getMovies()
+  return moviesController
+    .getMovies(req.query)
     .then((result) => res.json(result))
     .catch(next);
 });
@@ -22,6 +22,32 @@ router.get('/:id', (req, res, next) => {
     .then((result) => res.json(result))
     .catch(next);
 });
+
+
+router.get('/:id/details', (req, res) => {
+  moviesController
+    .getDetailsOfMovieByID(req.params.id)
+    .then((result) => {
+      if (!result || result.length === 0) {
+        res.status(404).send('No movie details found for this id');
+      } else {
+        res.json(result);
+      }
+    })
+    .catch((error) => {
+      res.status(500).json({ error: error.message });
+      throw error;
+    });
+});
+// add endpoint to retrieve movies by category
+router.get('/category/:categoryId', (req, res, next) => {
+  const { categoryId } = req.params;
+  moviesController
+    .getMoviesByCategory(categoryId)
+    .then((result) => res.json(result))
+    .catch(next);
+});
+
 
 // post
 router.post('/', (req, res) => {
