@@ -8,7 +8,7 @@ import movies from './mock.json';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
-const SimilarMoviesCarousel = () => {
+const SimilarMoviesCarousel = ({ movieID }) => {
   const settings = {
     className: 'center',
     infinite: true,
@@ -30,6 +30,7 @@ const SimilarMoviesCarousel = () => {
         top: 2000,
       }}
     >
+      <h3 className="carousel-title">| SIMILAR MOVIES</h3>
       <div style={{ display: 'flex' }}>
         <IconButton onClick={() => slider?.current?.slickPrev()}>
           <ArrowBackIosIcon style={{ fill: '#00FFC2' }} fontSize="large" />

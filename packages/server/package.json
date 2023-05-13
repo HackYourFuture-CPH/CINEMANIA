@@ -16,14 +16,17 @@
     "cors": "^2.8.5",
     "debug": "~4.3.4",
     "dotenv": "^16.0.3",
+    "down": "^0.2.5",
     "express": "~4.18.2",
     "flatted": "^3.2.7",
     "knex": "^2.4.2",
+    "migrate": "^1.8.0",
     "moment-timezone": "^0.5.43",
     "morgan": "~1.10.0",
     "mysql2": "^3.2.4",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^4.6.2",
+    "up": "^1.0.2",
     "winston": "^3.8.2"
   },
   "devDependencies": {

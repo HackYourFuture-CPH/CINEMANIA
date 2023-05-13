@@ -1,6 +1,14 @@
 .view-carousel {
   height: 300px;
-  width: 1000px;
+  width: 999px;
+}
+.carousel-title {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 800;
+  font-size: 32px;
+  line-height: 39px;
+  color: #ffffff;
 }
 img {
   width: 330px;

@@ -12,7 +12,8 @@ exports.seed = async function (knex) {
       description:
         'When a beautiful stranger leads computer hacker Neo to a forbidding underworld, he discovers the shocking truth--the life he knows is the elaborate deception of an evil cyber-intelligence.',
       movie_year: 1999,
-      image_location: '',
+      image_location:
+        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg',
       price: 100,
     },
     {
@@ -21,7 +22,8 @@ exports.seed = async function (knex) {
       description:
         'Over the course of several years, two convicts form a friendship, seeking consolation and, eventually, redemption through basic compassion.',
       movie_year: 1994,
-      image_location: '',
+      image_location:
+        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg',
       price: 80,
     },
     {
@@ -123,36 +125,6 @@ exports.seed = async function (knex) {
       image_location:
         'https://www.themoviedb.org/t/p/w1280/z4XwvnDZSm40PCdg9vFJmo0W9ri.jpg',
       price: 120,
-    },
-    {
-      category_id: 8,
-      title: 'Interstellar',
-      description:
-        'The adventures of a group of explorers who make use of a newly discovered wormhole to surpass the limitations on human space travel and conquer the vast distances involved in an interstellar voyage.',
-      movie_year: 2014,
-      image_location:
-        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg',
-      price: 120,
-    },
-    {
-      category_id: 3,
-      title: 'Titanic',
-      description:
-        '101-year-old Rose DeWitt Bukater tells the story of her life aboard the Titanic, 84 years later. A young Rose boards the ship with her mother and fiancé. Meanwhile, Jack Dawson and Fabrizio De Rossi win third-class tickets aboard the ship.',
-      movie_year: 1997,
-      image_location:
-        'https://www.themoviedb.org/t/p/w1280/9xjZS2rlVxm8SFx8kPC3aIGCOYQ.jpg',
-      price: 100,
-    },
-    {
-      category_id: 2,
-      title: 'The Silence of the Lambs',
-      description:
-        "Clarice Starling is a top student at the FBI's training academy. Jack Crawford wants Clarice to interview Dr. Hannibal Lecter, a brilliant psychiatrist who is also a violent psychopath, serving life behind bars for various acts of murder and cannibalism.",
-      movie_year: 1991,
-      image_location:
-        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/uS9m8OBk1A8eM9I042bx8XXpqAq.jpg',
-      price: 180,
     },
   ]);
 };
