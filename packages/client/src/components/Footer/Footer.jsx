@@ -36,6 +36,7 @@ const Footer = () => {
         padding: theme.spacing(0, 0),
         width: '100%',
         bottom: 0,
+        position: 'absolute',
       }}
     >
       <Container maxWidth="xl">
