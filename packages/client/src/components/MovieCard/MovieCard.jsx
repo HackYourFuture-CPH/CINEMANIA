@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { Card, CardMedia, Typography, Rating, Box } from '@mui/material';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import useFavorites from './useFavorites'; // created a custom hook to manage favorites
 
 const BasicRating = () => {
   return (
@@ -22,7 +24,10 @@ const BasicRating = () => {
   );
 };
 
-export default function MovieCard() {
+export default function MovieCard(props) {
+  const [favorites, toggleFavorite] = useFavorites([]);
+  const isFavorite = favorites.includes(props.movie);
+
   return (
     <Card
       sx={{
@@ -41,20 +46,47 @@ export default function MovieCard() {
           position: 'relative',
         }}
       >
-        <FavoriteBorderIcon
-          sx={{
-            display: 'block',
-            position: 'absolute',
-            width: '1.9rem',
-            height: '1.75rem',
-            top: '2.25rem',
-            right: '1.96rem',
-            color: '#FFFFFF',
-            padding: '1rem',
-            backgroundColor: '#000000CC',
-            zIndex: 1,
-          }}
-        />
+        {isFavorite ? (
+          <FavoriteIcon
+            sx={{
+              display: 'block',
+              position: 'absolute',
+              width: '1.9rem',
+              height: '1.75rem',
+              top: '2.25rem',
+              right: '1.96rem',
+              color: '#FF0000',
+              padding: '1rem',
+              backgroundColor: '#000000CC',
+              zIndex: 1,
+              '&:hover': {
+                color: '#FF0000',
+                cursor: 'pointer',
+              },
+            }}
+            onClick={() => toggleFavorite(props.movie)}
+          />
+        ) : (
+          <FavoriteBorderIcon
+            sx={{
+              display: 'block',
+              position: 'absolute',
+              width: '1.9rem',
+              height: '1.75rem',
+              top: '2.25rem',
+              right: '1.96rem',
+              color: '#FFFFFF',
+              padding: '1rem',
+              backgroundColor: '#000000CC',
+              zIndex: 1,
+              '&:hover': {
+                color: '#FF0000',
+                cursor: 'pointer',
+              },
+            }}
+            onClick={() => toggleFavorite(props.movie)}
+          />
+        )}
       </Box>
 
       <CardMedia
@@ -68,8 +100,8 @@ export default function MovieCard() {
           paddingTop: '2.25rem',
           paddingLeft: '1.96rem',
         }}
-        image="https://cdn.images.express.co.uk/img/dynamic/36/590x/secondary/Ant-Man-and-the-Wasp-Quantumania-4730518.jpg?r=1683206802246"
-        alt="Quantumania"
+        image={props.movie.image_location}
+        alt={props.movie.title}
       />
       <Typography
         sx={{
@@ -87,7 +119,7 @@ export default function MovieCard() {
         }}
         variant="h4"
       >
-        Quantumania
+        {props.movie.title}
       </Typography>
 
       <Typography
@@ -105,8 +137,7 @@ export default function MovieCard() {
           lineHeight: '1.43rem',
         }}
       >
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do. Lorem
-        lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do.
+        {props.movie.description}
       </Typography>
       <BasicRating />
     </Card>
