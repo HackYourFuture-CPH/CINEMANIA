@@ -1,5 +1,3 @@
-import { Card, CardContent, Chip } from '@mui/material';
-import { blue } from '@mui/material/colors';
 import React, { useEffect, useState } from 'react';
 import { apiURL } from '../../apiURL';
 import FeaturedMovie from '../../components/FeaturedMovie/FeaturedMovie';
