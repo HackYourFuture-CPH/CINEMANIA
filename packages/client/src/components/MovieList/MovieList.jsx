@@ -1,30 +1,11 @@
-/**
- * @param { import("knex").Knex } knex
- * @returns { Promise<void> }
- */
-exports.seed = async function (knex) {
-  // Deletes ALL existing entries
-  await knex('movies').del();
-  await knex('movies').insert([
+import React from 'react';
+import { Grid, Typography, CardMedia, Box, Button } from '@mui/material';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+
+const MovieList = () => {
+  const dummyData = [
     {
-      category_id: 8,
-      title: 'The Matrix',
-      description:
-        'When a beautiful stranger leads computer hacker Neo to a forbidding underworld, he discovers the shocking truth--the life he knows is the elaborate deception of an evil cyber-intelligence.',
-      movie_year: 1999,
-      image_location: '',
-      price: 100,
-    },
-    {
-      category_id: 3,
-      title: 'The Shawshank Redemption',
-      description:
-        'Over the course of several years, two convicts form a friendship, seeking consolation and, eventually, redemption through basic compassion.',
-      movie_year: 1994,
-      image_location: '',
-      price: 80,
-    },
-    {
+      id: 1,
       category_id: 3,
       title: 'A Beautiful Mind',
       description:
@@ -35,6 +16,7 @@ exports.seed = async function (knex) {
       price: 90,
     },
     {
+      id: 2,
       category_id: 7,
       title: 'P.S. I Love You',
       description:
@@ -45,6 +27,7 @@ exports.seed = async function (knex) {
       price: 85,
     },
     {
+      id: 3,
       category_id: 6,
       title: 'Patch Adams',
       description:
@@ -55,6 +38,7 @@ exports.seed = async function (knex) {
       price: 95,
     },
     {
+      id: 4,
       category_id: 3,
       title: 'I Can Only Imagine',
       description:
@@ -65,6 +49,7 @@ exports.seed = async function (knex) {
       price: 80,
     },
     {
+      id: 5,
       category_id: 6,
       title: 'Father of the Bride Collection',
       description:
@@ -75,6 +60,7 @@ exports.seed = async function (knex) {
       price: 90,
     },
     {
+      id: 6,
       category_id: 1,
       title: 'Legend',
       description:
@@ -85,6 +71,7 @@ exports.seed = async function (knex) {
       price: 66,
     },
     {
+      id: 7,
       category_id: 4,
       title: 'Stuart Little',
       description:
@@ -95,6 +82,7 @@ exports.seed = async function (knex) {
       price: 100,
     },
     {
+      id: 8,
       category_id: 2,
       title: 'Gone Girl',
       description:
@@ -105,6 +93,7 @@ exports.seed = async function (knex) {
       price: 120,
     },
     {
+      id: 9,
       category_id: 5,
       title: 'The Exorcist',
       description:
@@ -115,6 +104,7 @@ exports.seed = async function (knex) {
       price: 666,
     },
     {
+      id: 10,
       category_id: 3,
       title: 'The Dark Knight',
       description:
@@ -124,35 +114,84 @@ exports.seed = async function (knex) {
         'https://www.themoviedb.org/t/p/w1280/z4XwvnDZSm40PCdg9vFJmo0W9ri.jpg',
       price: 120,
     },
-    {
-      category_id: 8,
-      title: 'Interstellar',
-      description:
-        'The adventures of a group of explorers who make use of a newly discovered wormhole to surpass the limitations on human space travel and conquer the vast distances involved in an interstellar voyage.',
-      movie_year: 2014,
-      image_location:
-        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg',
-      price: 120,
-    },
-    {
-      category_id: 3,
-      title: 'Titanic',
-      description:
-        '101-year-old Rose DeWitt Bukater tells the story of her life aboard the Titanic, 84 years later. A young Rose boards the ship with her mother and fiancé. Meanwhile, Jack Dawson and Fabrizio De Rossi win third-class tickets aboard the ship.',
-      movie_year: 1997,
-      image_location:
-        'https://www.themoviedb.org/t/p/w1280/9xjZS2rlVxm8SFx8kPC3aIGCOYQ.jpg',
-      price: 100,
-    },
-    {
-      category_id: 2,
-      title: 'The Silence of the Lambs',
-      description:
-        "Clarice Starling is a top student at the FBI's training academy. Jack Crawford wants Clarice to interview Dr. Hannibal Lecter, a brilliant psychiatrist who is also a violent psychopath, serving life behind bars for various acts of murder and cannibalism.",
-      movie_year: 1991,
-      image_location:
-        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/uS9m8OBk1A8eM9I042bx8XXpqAq.jpg',
-      price: 180,
-    },
-  ]);
+  ];
+  return (
+    <Box bgcolor="mainGreen" fontFamily="Inter" marginTop="150rem">
+      <Typography
+        sx={{
+          position: 'relative',
+          height: '1.87rem',
+          width: '17.81rem',
+          top: '1.56rem',
+          left: '35rem',
+          fontFamily: 'Inter',
+          fontStyle: 'normal',
+          fontWeight: 'bold',
+          fontSize: '1.56rem',
+          color: '#003C2D',
+        }}
+        variant="h1"
+      />
+      <Grid container spacing={2}>
+        {dummyData.map((each) => (
+          <Grid key={each.id} item md={4} xs={12} sm={4}>
+            <CardMedia
+              sx={{
+                position: 'relative',
+                height: '27.12rem',
+                width: '18rem',
+                left: '10%',
+                top: '40%',
+                paddingTop: '8rem',
+                marginBottom: '4rem',
+                paddingLeft: '2.62rem',
+              }}
+              image={`${each.image_location}`}
+              title="Image Title"
+            >
+              <Button
+                variant="text"
+                sx={{
+                  position: 'absolute',
+                  height: '1.75rem',
+                  top: '0',
+                  right: '0',
+                }}
+              >
+                <FavoriteBorderIcon
+                  sx={{
+                    display: 'block',
+                    position: 'absolute',
+                    width: '1.9rem',
+                    height: '1.75rem',
+                    right: '0',
+                    color: '#FFFFFF',
+                    backgroundColor: '#000000CC',
+                    zIndex: 1,
+                  }}
+                />
+              </Button>
+              <Button
+                href={`/movies/${each.id}`}
+                variant="contained"
+                sx={{
+                  position: 'absolute',
+                  background:
+                    'linear-gradient(166.18deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 98.81%), #00FFC2',
+                  boxShadow: '20px 40px 70px rgba(0, 0, 0, 0.25)',
+                  bottom: '1%',
+                  marginLeft: '4.00rem',
+                  height: '1rem',
+                  fontSize: '10px',
+                }}
+              >
+                See Details
+              </Button>
+            </CardMedia>
+          </Grid>
+        ))}
+      </Grid>
+    </Box>
+  );
 };
+export default MovieList;
