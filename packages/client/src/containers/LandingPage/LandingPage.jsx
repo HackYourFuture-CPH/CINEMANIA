@@ -3,6 +3,7 @@ import { blue } from '@mui/material/colors';
 import React, { useEffect, useState } from 'react';
 import { apiURL } from '../../apiURL';
 import FeaturedMovie from '../../components/FeaturedMovie/FeaturedMovie';
+import LatestRatingMovies from '../../components/LatestRatingMovies/LatestRatingMovies';
 
 export const LandingPage = () => {
   const [movies, setMovies] = useState([]);
@@ -31,6 +32,7 @@ export const LandingPage = () => {
         </Card>
       ))}
       <FeaturedMovie />
+      <LatestRatingMovies />
     </div>
   );
 };

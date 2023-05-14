@@ -8,6 +8,7 @@ const buttonStyles = {
   color: '#FFFFFF',
   fontSize: '1.1rem',
   fontWeight: '400',
+  '&:hover': { color: 'mainGreen' },
 };
 
 export const Navbar = () => {
@@ -33,6 +34,7 @@ export const Navbar = () => {
                 color: 'black',
                 borderRight: '2px solid #000000',
                 paddingRight: '.5rem',
+                '&:hover': { color: 'hoverRed' },
               }}
             />
           </MenuItem>
@@ -54,6 +56,7 @@ export const Navbar = () => {
                 height: '1.75rem',
                 color: '#000000',
                 marginRight: '1.25rem',
+                '&:hover': { color: 'hoverRed' },
               }}
             />
             <FavoriteBorderIcon
@@ -62,6 +65,7 @@ export const Navbar = () => {
                 height: '1.75rem',
                 color: '#000000',
                 marginLeft: '1.25rem',
+                '&:hover': { color: 'hoverRed' },
               }}
             />
           </MenuItem>

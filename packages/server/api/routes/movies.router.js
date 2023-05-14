@@ -9,13 +9,11 @@ const router = express.Router({ mergeParams: true });
 const moviesController = require('../controllers/movies.controller');
 // get /
 router.get('/', (req, res, next) => {
-  moviesController
-    .getMovies()
+  return moviesController
+    .getMovies(req.query)
     .then((result) => res.json(result))
     .catch(next);
 });
-// GET /featured-movie
-router.get('/featured', moviesController.getFeaturedMovie);
 
 // get /:id
 router.get('/:id', (req, res, next) => {

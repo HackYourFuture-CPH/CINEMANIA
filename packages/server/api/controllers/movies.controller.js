@@ -1,10 +1,9 @@
+/* TODO: This is an example controller to illustrate a server side controller.
+Can be deleted as soon as the first real controller is added. */
+
 const knex = require('../../config/db');
 const HttpError = require('../lib/utils/http-error');
 const moment = require('moment-timezone');
-
-const getMovies = async () => {
-  return knex('movies').select('*');
-};
 
 const getMovieByID = async (id) => {
   if (!id) {
@@ -105,8 +104,15 @@ const createMovie = async (body) => {
   };
 };
 
-const getMovieList = (sortBy = 'rating', categoryId = null) => {
-  return knex('movies')
+const getMovies = async (queryParams) => {
+  const {
+    sortBy = 'rating',
+    categoryId = null,
+    userId = null,
+    title = null,
+  } = queryParams;
+
+  const query = knex('movies')
     .leftJoin('reviews', 'reviews.movie_id', '=', 'movies.id')
     .leftJoin('categories', 'categories.id', '=', 'movies.category_id')
     .select(
@@ -117,24 +123,48 @@ const getMovieList = (sortBy = 'rating', categoryId = null) => {
       'movies.image_location',
       'movies.created_at',
       'movies.price',
+      'movies.category_id',
       knex.raw('AVG(reviews.rating) as average_rating'),
+      knex.raw(
+        `
+        IF(EXISTS(
+          SELECT 1 FROM favorites
+          WHERE favorites.movie_id = movies.id
+          AND favorites.user_id = ?
+        ), 1, 0) as is_favorite
+      `,
+        [userId],
+      ),
     )
     .groupBy('movies.id')
-    .orderByRaw(
-      `
-      CASE
-        WHEN ? = 'rating' THEN AVG(reviews.rating)
-        WHEN ? = 'recently_added' THEN movies.created_at
-        WHEN ? = 'price' THEN movies.price ASC
-      END 
-    `,
-      [sortBy, sortBy, sortBy],
-    )
     .modify((queryBuilder) => {
       if (categoryId) {
         queryBuilder.where('categories.id', '=', categoryId);
       }
+
+      if (sortBy === 'rating') {
+        queryBuilder.orderByRaw('AVG(reviews.rating) desc');
+      }
+
+      if (sortBy === 'recently_added') {
+        queryBuilder.orderBy('movies.created_at', 'desc');
+      }
+
+      if (sortBy === 'price') {
+        queryBuilder.orderBy('movies.price', 'asc');
+      }
+
+      if (title) {
+        queryBuilder.where('movies.title', 'like', `%${title}%`);
+      }
     });
+
+  const results = await query;
+
+  return results.map((result) => ({
+    ...result,
+    is_favorite: result.is_favorite === 1,
+  }));
 };
 
 const getFeaturedMovie = async (req, res) => {
@@ -167,6 +197,5 @@ module.exports = {
   createMovie,
   getDetailsOfMovieByID,
   getMoviesByCategory,
-  getMovieList,
   getFeaturedMovie,
 };
