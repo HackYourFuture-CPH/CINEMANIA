@@ -8,6 +8,8 @@ import movies from './mock.json';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
+// const a = 1;
+// console.log(a);
 const SimilarMoviesCarousel = () => {
   // const { SimilarMovies, setSimilarMovies } = useState([]);
   // useEffect(
@@ -28,6 +30,7 @@ const SimilarMoviesCarousel = () => {
   //   },
   //   [setSimilarMovies],
   // );
+
   const settings = {
     className: 'center',
     infinite: true,
