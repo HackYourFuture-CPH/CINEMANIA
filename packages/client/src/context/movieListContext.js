@@ -14,14 +14,14 @@ export const MovieListProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [sortBy, setSortBy] = useState('rating');
-  const [categoryId, setCategoryId] = useState(null);
+  const [selectedCategoryId, setSelectedCategoryId] = useState(null);
 
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        let url = `${apiURL()}/movies/list?sortBy=${sortBy}`;
-        if (categoryId) {
-          url += `?categoryId=${categoryId}`;
+        let url = `${apiURL()}/movies?sortBy=${sortBy}`;
+        if (selectedCategoryId) {
+          url += `&categoryId=${selectedCategoryId}`;
         }
         const response = await fetch(url);
         const data = await response.json();
@@ -34,7 +34,7 @@ export const MovieListProvider = ({ children }) => {
     };
 
     fetchMovies();
-  }, [sortBy, categoryId]);
+  }, [sortBy, selectedCategoryId]);
 
   const contextValue = useMemo(
     () => ({
@@ -43,10 +43,18 @@ export const MovieListProvider = ({ children }) => {
       error,
       sortBy,
       setSortBy,
-      categoryId,
-      setCategoryId,
+      selectedCategoryId,
+      setSelectedCategoryId,
     }),
-    [movies, isLoading, error, sortBy, setSortBy, categoryId, setCategoryId],
+    [
+      movies,
+      isLoading,
+      error,
+      sortBy,
+      setSortBy,
+      selectedCategoryId,
+      setSelectedCategoryId,
+    ],
   );
 
   return (
