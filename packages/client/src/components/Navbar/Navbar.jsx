@@ -18,7 +18,7 @@ export const Navbar = () => {
           <IconMenu>
             <NavIcon>
               <PersonIcon
-                sx={{ borderRight: '2px solid #000000', paddingRight: '2p' }}
+                sx={{ borderRight: '2px solid #000000' }}
               />
             </NavIcon>
           </IconMenu>
