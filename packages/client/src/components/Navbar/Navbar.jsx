@@ -65,7 +65,7 @@ const StyledAppBar = styled(AppBar)`
   background-color: ${(props) => props.theme.palette.mainGreen};
   position: sticky;
   top: 0;
-  font-family: 'Inter';
+  font-family: 'Inter', sans-serif;
 `;
 
 const NavIcon = styled.button`
