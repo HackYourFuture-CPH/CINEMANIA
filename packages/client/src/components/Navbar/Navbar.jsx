@@ -17,9 +17,7 @@ export const Navbar = () => {
         >
           <IconMenu>
             <NavIcon>
-              <PersonIcon
-                sx={{ borderRight: '2px solid #000000' }}
-              />
+              <PersonIcon sx={{ borderRight: '2px solid #000000' }} />
             </NavIcon>
           </IconMenu>
           <Grid item xs={12} align="center">
@@ -91,7 +89,9 @@ const IconMenu = styled(MenuItem)`
 `;
 
 const NavButton = styled(Button)`
-   color: white;
-  font-size: .9rem;
-  &:hover {  color: ${(props) => props.theme.palette.hoverRed}; 
+  color: white;
+  font-size: 0.9rem;
+  &:hover {
+    color: ${(props) => props.theme.palette.hoverRed};
+  }
 `;
