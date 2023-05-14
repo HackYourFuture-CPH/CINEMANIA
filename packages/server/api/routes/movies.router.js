@@ -15,6 +15,9 @@ router.get('/', (req, res, next) => {
     .catch(next);
 });
 
+// GET /featured-movie
+router.get('/featured', moviesController.getFeaturedMovie);
+
 // get /:id
 router.get('/:id', (req, res, next) => {
   moviesController
