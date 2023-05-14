@@ -1,29 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, IconButton } from '@mui/material';
 import './Carousel.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
-import movies from './mock.json';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { apiURL } from '../../apiURL';
 
-const SimilarMoviesCarousel = ({ categoryID }) => {
-  // const { SimilarMovies, setSimilarMovies } = useState([]);
-  // useEffect(
-  //   () => {
-  //         fetch(`${apiURL()}/movies/category/${categoryID}`)
-  //           .then((res) => res.json())
-  //           .then((data) => {
-  //             setSimilarMovies(data);
-  //           });
-  //       })
-  //       .catch((error) => {
-  //         throw error.message;
-  //       });
-  //   },
-  //   [categoryID]
-  // );
+const SimilarMoviesCarousel = ({ categoryID, movieID }) => {
+  const [SimilarMovies, setSimilarMovies] = useState([]);
+  useEffect(() => {
+    (async () => {
+      const response = await fetch(`${apiURL()}/movies/category/${categoryID}`);
+      const data = await response.json();
+      if (data) {
+        setSimilarMovies(data);
+      }
+    })();
+  }, [categoryID]);
+
   const settings = {
     className: 'center',
     infinite: true,
@@ -52,9 +48,9 @@ const SimilarMoviesCarousel = ({ categoryID }) => {
         </IconButton>
         <div className="view-carousel">
           <Slider {...settings} ref={slider}>
-            {movies.map((item) => (
+            {SimilarMovies?.map((item) => (
               <div key={item.description} className="box">
-                <a href="https://github.com/HackYourFuture-CPH/CINEMANIA">
+                <a href={`/movies/${item.id}`}>
                   <img src={item.image_location} alt={item.title} />
                 </a>
               </div>
