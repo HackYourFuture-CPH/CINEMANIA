@@ -8,7 +8,26 @@ import movies from './mock.json';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
-const SimilarMoviesCarousel = ({ movieID }) => {
+const SimilarMoviesCarousel = () => {
+  // const { SimilarMovies, setSimilarMovies } = useState([]);
+  // useEffect(
+  //   (id) => {
+  //     fetch(`/api/movies/id=${id}`)
+  //       .then((res) => res.json())
+  //       .then((movie) => {
+  //         setSimilarMovies(movie);
+  //         fetch(`/api/movies/category/categoryId=${movie.category_id}`)
+  //           .then((res) => res.json())
+  //           .then((data) => {
+  //             setSimilarMovies(data);
+  //           });
+  //       })
+  //       .catch((error) => {
+  //         throw error.message;
+  //       });
+  //   },
+  //   [setSimilarMovies],
+  // );
   const settings = {
     className: 'center',
     infinite: true,
@@ -39,7 +58,9 @@ const SimilarMoviesCarousel = ({ movieID }) => {
           <Slider {...settings} ref={slider}>
             {movies.map((item) => (
               <div key={item.description} className="box">
-                <img src={item.image_location} alt={item.title} />
+                <a href="https://github.com/HackYourFuture-CPH/CINEMANIA">
+                  <img src={item.image_location} alt={item.title} />
+                </a>
               </div>
             ))}
           </Slider>
