@@ -5,7 +5,6 @@ const getLatestRatedMovies = async () => {
     .select(
       'movies.image_location',
       'movies.title',
-      'movies.image_location',
       'reviews.rating',
       'reviews.review_text',
       'reviews.created_at',
