@@ -1,5 +1,5 @@
 import Masonry from '@mui/lab/Masonry';
-import { Box, Grid, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { apiURL } from '../../apiURL';
