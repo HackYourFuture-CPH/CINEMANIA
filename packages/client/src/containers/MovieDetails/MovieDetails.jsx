@@ -1,28 +1,27 @@
-import { Container } from '@mui/material';
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { apiURL } from '../../apiURL';
+import React from 'react';
+// import './MovieDetails.Style.css';
+import { Box } from '@mui/material';
 import BigMovieCard from '../../components/BigMovieCard/BigMovieCard';
-import SimilarMoviesCarousel from '../../components/SimilarMoviesCarousel/SimilarMoviesCarousel';
 import TopCastDisplay from '../../components/TopCastDisplay/TopCastDisplay';
+import SimilarMoviesCarousel from '../../components/SimilarMoviesCarousel/SimilarMoviesCarousel';
+import { useParams } from 'react-router-dom';
 
 export const MovieDetails = () => {
   const movieID = useParams().id;
-  const [currentMovie, setCurrentMovie] = useState(undefined);
-  useEffect(() => {
-    (async () => {
-      const response = await fetch(`${apiURL()}/movies/${movieID}/details`);
-      const movie = await response.json();
-      if (movie) {
-        setCurrentMovie(movie);
-      }
-    })();
-  }, [movieID]);
+
   return (
-    <Container>
-      <BigMovieCard currentMovie={currentMovie} />
+    <Box
+      sx={{
+        pt: '3rem',
+        pb: '3rem',
+        display: 'flex',
+        flexDirection: 'column',
+      }}
+      maxWidth="xl"
+    >
+      <BigMovieCard movieID={movieID} />
       <TopCastDisplay movieID={movieID} />
-      <SimilarMoviesCarousel categoryID={currentMovie?.categoryID ?? 0} />
-    </Container>
+      <SimilarMoviesCarousel movieID={movieID} />
+    </Box>
   );
 };

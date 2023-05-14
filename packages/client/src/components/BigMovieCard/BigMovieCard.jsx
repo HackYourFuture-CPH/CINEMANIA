@@ -14,7 +14,7 @@ import RatingStars from '../RatingStars/RatingStars';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import FavoriteIcon from '@mui/icons-material/FavoriteBorder';
 
-const BigMovieCard = ({ currentMovie }) => {
+const BigMovieCard = () => {
   return (
     <Card
       sx={{
@@ -27,9 +27,9 @@ const BigMovieCard = ({ currentMovie }) => {
         height: 962,
         paddingTop: 5,
         paddingBottom: 5,
-        position: 'absolute',
-        left: 260,
-        top: 260,
+        // position: 'absolute',
+        // left: 260,
+        // top: 260,
       }}
     >
       <Box
@@ -49,7 +49,7 @@ const BigMovieCard = ({ currentMovie }) => {
             border: 1,
             borderColor: 'grey.500',
           }}
-          src={currentMovie?.image_location}
+          src="https://www.themoviedb.org/t/p/w300_and_h450_bestv2/9xjZS2rlVxm8SFx8kPC3aIGCOYQ.jpg"
           alt="Movie Poster"
         />
         <FavoriteIcon
@@ -67,15 +67,11 @@ const BigMovieCard = ({ currentMovie }) => {
 
       <Box bgcolor="mainGreen" fontFamily="Inter" paddingLeft="50px">
         <CardContent sx={{ display: 'flex', flexDirection: 'column' }}>
-          <RatingStars
-            sx={{ display: 'flex', justifyContent: 'flex-end' }}
-            averageRating={currentMovie?.rating ?? 0}
-            numberOfReviews={currentMovie?.number_of_ratings}
-          />
+          <RatingStars sx={{ display: 'flex', justifyContent: 'flex-end' }} />
           <Typography
             sx={{ fontWeight: 700, fontSize: 40, width: 633, paddingTop: 10 }}
           >
-            {currentMovie?.title}
+            Titanic
           </Typography>
 
           <Stack direction="row" spacing={2} paddingTop={2} paddingBottom={4}>
@@ -90,7 +86,20 @@ const BigMovieCard = ({ currentMovie }) => {
                 color: '#003E2F',
               }}
             >
-              {currentMovie?.category_name}
+              Drama
+            </Button>
+            <Button
+              sx={{
+                border: 1,
+                borderColor: '#000000',
+                width: 150,
+                borderRadius: '20px',
+                fontWeight: 500,
+                fontSize: 24,
+                color: '#003E2F',
+              }}
+            >
+              Romance
             </Button>
           </Stack>
 
@@ -102,16 +111,21 @@ const BigMovieCard = ({ currentMovie }) => {
             sx={{ font: 'Inter', fontWeight: 700, fontSize: 28, width: 633 }}
           >
             <Box sx={{ fontWeight: 'light', m: 1 }}>
-              {currentMovie?.description}
+              101-year-old Rose DeWitt Bukater tells the story of her life
+              aboard the Titanic, 84 years later. A young Rose boards the ship
+              with her mother and fiancé. Meanwhile, Jack Dawson and Fabrizio De
+              Rossi win third-class tickets aboard the ship. Rose tells the
+              whole story from Titanic’s departure through to its death – on its
+              first and last voyage – on April 15, 1912.
             </Box>
             <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
               <Box sx={{ fontWeight: 'bold', m: 1, width: 120 }}>Director:</Box>
               <Box sx={{ fontWeight: 'light', m: 1, width: 400 }}>
-                {currentMovie?.director}
+                James Cameron
               </Box>
               <Box sx={{ fontWeight: 'bold', m: 1, width: 120 }}>Writer:</Box>
               <Box sx={{ fontWeight: 'light', m: 1, width: 400 }}>
-                {currentMovie?.writer}
+                James Cameron
               </Box>
             </Box>
           </Typography>

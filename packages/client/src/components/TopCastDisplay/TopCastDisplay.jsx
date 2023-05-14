@@ -35,26 +35,29 @@ const TopCastDisplay = ({ movieID }) => {
   };
 
   return (
-    <Container
+    <Box
+      alignItems="center"
       sx={{
-        maxWidth: 'xl',
-        disableGutters: true,
-        position: 'absolute',
-        right: 280,
-        left: 0,
-        top: 1200,
-        mt: 15,
+        paddingLeft: 5,
+        paddingRight: 5,
+        // maxWidth: 'xl',
+        // disableGutters: true,
+        // position: 'absolute',
+        // right: 280,
+        // left: 0,
+        // top: 1200,
+        // mt: 15,
       }}
+      maxWidth="xl"
     >
       <Typography
         variant="overline"
         sx={{
           height: 30,
           fontSize: 32,
-          fontWeight: 800,
           color: '#FFFFFF',
-          borderLeft: 4,
-          p: 1,
+          paddingLeft: 3,
+          borderLeft: 7,
         }}
       >
         Top Cast
@@ -70,7 +73,7 @@ const TopCastDisplay = ({ movieID }) => {
             <Box
               key={castMember.id}
               sx={{
-                width: 150,
+                width: 219,
                 p: 1,
                 textAlign: 'center',
                 display: 'flex',
@@ -83,8 +86,8 @@ const TopCastDisplay = ({ movieID }) => {
                 alt={`${castMember.full_name}`}
                 src={castMember.image_location}
                 sx={{
-                  width: 150,
-                  height: 150,
+                  width: 219,
+                  height: 219,
                   border: 1,
                   borderColor: 'grey.500',
                 }}
@@ -118,20 +121,20 @@ const TopCastDisplay = ({ movieID }) => {
         <Button
           onClick={handleShowFullCast}
           sx={{
-            width: 200,
+            width: 300,
             color: '#FFFFFF',
             textDecoration: 'underline',
             textUnderlineOffset: 10,
-            position: 'absolute',
             left: '85%',
             fontSize: 32,
             fontWeight: 400,
+            paddingRight: 12,
           }}
         >
           {showFullCast ? 'Show less' : 'Full Cast'}
         </Button>
       )}
-    </Container>
+    </Box>
   );
 };
 
