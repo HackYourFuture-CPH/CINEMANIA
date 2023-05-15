@@ -1,35 +1,35 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Container, IconButton } from '@mui/material';
 import './Carousel.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import fallBackMovies from '../../assets/fallBackMovies.json';
+// import fallBackMovies from '../../assets/fallBackMovies.json';
 import Slider from 'react-slick';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { apiURL } from '../../apiURL';
+// import { apiURL } from '../../apiURL';
 
-const SimilarMoviesCarousel = ({ categoryID }) => {
-  const [similarMovies, setSimilarMovies] = useState(fallBackMovies);
-  useEffect(() => {
-    (async () => {
-      if (categoryID) {
-        try {
-          const response = await fetch(
-            `${apiURL()}/movies/category/${categoryID}`,
-          );
-          if (response.ok) {
-            const data = await response.json();
-            if (data) {
-              setSimilarMovies(data);
-            }
-          }
-        } catch (error) {
-          throw new Error(error);
-        }
-      }
-    })();
-  }, [categoryID]);
+const RoundCarousel = ({ carouselData }) => {
+  // const [similarMovies, setSimilarMovies] = useState(fallBackMovies);
+  // useEffect(() => {
+  //   (async () => {
+  //     if (categoryID) {
+  //       try {
+  //         const response = await fetch(
+  //           `${apiURL()}/movies/category/${categoryID}`,
+  //         );
+  //         if (response.ok) {
+  //           const data = await response.json();
+  //           if (data) {
+  //             setSimilarMovies(data);
+  //           }
+  //         }
+  //       } catch (error) {
+  //         throw new Error(error);
+  //       }
+  //     }
+  //   })();
+  // }, [categoryID]);
 
   const settings = {
     className: 'center',
@@ -59,7 +59,7 @@ const SimilarMoviesCarousel = ({ categoryID }) => {
         </IconButton>
         <div className="view-carousel">
           <Slider {...settings} ref={slider}>
-            {similarMovies?.map((item) => (
+            {carouselData?.map((item) => (
               <div key={item.description} className="box">
                 <a href={`/movies/${item.id}`}>
                   <img src={item.image_location} alt={item.title} />
@@ -76,4 +76,4 @@ const SimilarMoviesCarousel = ({ categoryID }) => {
   );
 };
 
-export default SimilarMoviesCarousel;
+export default RoundCarousel;

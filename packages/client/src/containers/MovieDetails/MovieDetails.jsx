@@ -6,7 +6,7 @@ import BigMovieCard from '../../components/BigMovieCard/BigMovieCard';
 
 import TopCastDisplay from '../../components/TopCastDisplay/TopCastDisplay';
 import fallBackMovies from '../../assets/fallBackMovies.json';
-import SimilarMoviesCarousel from '../../components/SimilarMoviesCarousel/SimilarMoviesCarousel';
+import GetSimilarMovies from '../CarouselWrapper/SimilarMovies';
 
 export const MovieDetails = () => {
   const movieID = useParams().id;
@@ -27,7 +27,7 @@ export const MovieDetails = () => {
     <Container>
       <BigMovieCard currentMovie={currentMovie} />
       <TopCastDisplay movieID={currentMovie?.id} />
-      <SimilarMoviesCarousel categoryID={currentMovie?.category_id} />
+      <GetSimilarMovies categoryID={currentMovie?.category_id} />
     </Container>
   );
 };
