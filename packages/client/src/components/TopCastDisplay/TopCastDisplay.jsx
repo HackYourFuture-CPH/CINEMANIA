@@ -33,7 +33,7 @@ const TopCastDisplay = ({ movieID }) => {
   }, [movieID]);
 
   const handleShowFullCast = () => {
-    setShowFullCast(!showFullCast);
+    setShowFullCast(() => !showFullCast);
   };
 
   return (
