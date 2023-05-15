@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { apiURL } from '../../apiURL';
 import {
-  Container,
-  Typography,
   Avatar,
-  Stack,
   Box,
   Button,
   CircularProgress,
+  Container,
+  Stack,
+  Typography,
 } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { apiURL } from '../../apiURL';
 
-const TopCastDisplay = ({ movieID }) => {
+export const TopCastDisplay = ({ movieID }) => {
   const [castList, setCastList] = useState([]);
   const [showFullCast, setShowFullCast] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -136,5 +136,3 @@ const TopCastDisplay = ({ movieID }) => {
     </Container>
   );
 };
-
-export default TopCastDisplay;

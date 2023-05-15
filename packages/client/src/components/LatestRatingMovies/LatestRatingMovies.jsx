@@ -1,10 +1,11 @@
+import Masonry from '@mui/lab/Masonry';
+import { Box, Typography } from '@mui/material';
 import * as React from 'react';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { apiURL } from '../../apiURL';
-import { Typography, Grid, Box } from '@mui/material';
-import MovieCard from '../MovieCard/MovieCard';
+import { MovieCard } from '../MovieCard/MovieCard';
 
-export default function LatestRatingMovies() {
+export const LatestRatingMovies = () => {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
@@ -45,23 +46,17 @@ export default function LatestRatingMovies() {
       >
         LATEST RATINGS
       </Typography>
-      <Grid
+      <Masonry
+        columns={4}
+        spacing={5}
         sx={{
           width: '78rem',
-          maxHeight: 'min-content',
-          marginLeft: '5rem',
-          justifySelf: 'center',
-          alignItems: 'center',
         }}
-        container
-        direction="row"
-        cols={4}
-        gap={5}
       >
         {movies
           .map((movie) => <MovieCard key={movie.id} movie={movie} />)
           .splice(2, 8)}
-      </Grid>
+      </Masonry>
     </Box>
   );
-}
+};

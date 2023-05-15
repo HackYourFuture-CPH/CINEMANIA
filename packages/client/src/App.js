@@ -1,10 +1,10 @@
 import React from 'react';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { Layout } from './containers/Layout/Layout';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { LandingPage } from './containers/LandingPage/LandingPage';
-import { PageNotFound } from './containers/PageNotFound/PageNotFound.Container';
+import { Layout } from './containers/Layout/Layout';
 import { MovieDetails } from './containers/MovieDetails/MovieDetails';
 import { MovieListPage } from './containers/MovieListPage/MovieListPage';
+import { PageNotFound } from './containers/PageNotFound/PageNotFound.Container';
 
 // MUI THEME
 import { ThemeProvider } from '@mui/material';
@@ -36,12 +36,10 @@ const router = createBrowserRouter([
   },
 ]);
 
-function App() {
+export const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <RouterProvider router={router} />
     </ThemeProvider>
   );
-}
-
-export default App;
+};

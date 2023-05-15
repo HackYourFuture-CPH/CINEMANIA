@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { Container, IconButton } from '@mui/material';
-import './Carousel.css';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-import fallBackMovies from '../../assets/fallBackMovies.json';
-import Slider from 'react-slick';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { Container, IconButton } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick-theme.css';
+import 'slick-carousel/slick/slick.css';
 import { apiURL } from '../../apiURL';
+import fallBackMovies from '../../assets/fallBackMovies.json';
+import './Carousel.css';
 
-const SimilarMoviesCarousel = ({ categoryID }) => {
+export const SimilarMoviesCarousel = ({ categoryID }) => {
   const [similarMovies, setSimilarMovies] = useState(fallBackMovies);
   useEffect(() => {
     (async () => {
@@ -75,5 +75,3 @@ const SimilarMoviesCarousel = ({ categoryID }) => {
     </Container>
   );
 };
-
-export default SimilarMoviesCarousel;
