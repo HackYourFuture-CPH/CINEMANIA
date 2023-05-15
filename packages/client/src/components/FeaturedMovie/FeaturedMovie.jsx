@@ -29,11 +29,18 @@ export const FeaturedMovie = () => {
   }
 
   return (
-    <>
+    <Box
+      sx={{
+        background:
+          'linear-gradient(to right bottom, #000000, #003c2d, #00ffc2)',
+        zIndex: '-100',
+        position: 'relative',
+      }}
+    >
       <Section>
         <Box sx={centerElement}>
           <Box
-            style={{
+            sx={{
               background:
                 'linear-gradient(180deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 51.56%)',
               borderRadius: '24.688rem',
@@ -45,7 +52,7 @@ export const FeaturedMovie = () => {
                 width: '104.5rem',
                 height: '49.375rem',
                 borderRadius: '24.688rem',
-                zIndex: '-1000',
+                zIndex: '-100',
                 position: 'relative',
               }}
               alt={featuredMovie.title}
@@ -58,6 +65,7 @@ export const FeaturedMovie = () => {
               fontFamily: 'Inter',
               color: '#fff',
               top: '3.75rem',
+              zIndex: '3000',
             }}
           >
             <Typography
@@ -100,7 +108,7 @@ export const FeaturedMovie = () => {
           Placeholder for carousel new arrival and most popular
         </h1>
       </Section>
-    </>
+    </Box>
   );
 };
 
