@@ -3,7 +3,7 @@ import { Box, Typography } from '@mui/material';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { apiURL } from '../../apiURL';
-import MovieCard from '../MovieCard/MovieCard';
+import { MovieCard } from '../MovieCard/MovieCard';
 
 export const LatestRatingMovies = () => {
   const [movies, setMovies] = useState([]);
