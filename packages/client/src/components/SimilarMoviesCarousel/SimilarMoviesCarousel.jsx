@@ -3,19 +3,30 @@ import { Container, IconButton } from '@mui/material';
 import './Carousel.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import fallBackMovie from './mock.json';
 import Slider from 'react-slick';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { apiURL } from '../../apiURL';
 
-const SimilarMoviesCarousel = ({ categoryID, movieID }) => {
-  const [SimilarMovies, setSimilarMovies] = useState([]);
+const SimilarMoviesCarousel = ({ categoryID }) => {
+  const [similarMovies, setSimilarMovies] = useState(fallBackMovie);
   useEffect(() => {
     (async () => {
-      const response = await fetch(`${apiURL()}/movies/category/${categoryID}`);
-      const data = await response.json();
-      if (data) {
-        setSimilarMovies(data);
+      if (categoryID) {
+        try {
+          const response = await fetch(
+            `${apiURL()}/movies/category/${categoryID}`,
+          );
+          if (response.ok) {
+            const data = await response.json();
+            if (data) {
+              setSimilarMovies(data);
+            }
+          }
+        } catch (error) {
+          throw new Error(error);
+        }
       }
     })();
   }, [categoryID]);
@@ -48,7 +59,7 @@ const SimilarMoviesCarousel = ({ categoryID, movieID }) => {
         </IconButton>
         <div className="view-carousel">
           <Slider {...settings} ref={slider}>
-            {SimilarMovies?.map((item) => (
+            {similarMovies?.map((item) => (
               <div key={item.description} className="box">
                 <a href={`/movies/${item.id}`}>
                   <img src={item.image_location} alt={item.title} />
