@@ -1,9 +1,9 @@
-import React from 'react';
 import { Grid } from '@mui/material';
-import MovieCard from './MovieCard';
+import React from 'react';
 import { useMovieList } from '../../context/movieListContext';
+import { MovieCard } from './MovieCard';
 
-const MovieList = () => {
+export const MovieList = () => {
   const { movies = [] } = useMovieList();
   return (
     <Grid
@@ -19,5 +19,3 @@ const MovieList = () => {
     </Grid>
   );
 };
-
-export default MovieList;
