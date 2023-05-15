@@ -1,6 +1,27 @@
 import { Box, Container, Divider, Grid, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import React from 'react';
+import styled from '@emotion/styled';
+
+const StyledBox = styled(Box)`
+  margin-top: ${(props) => props.theme.spacing(8)};
+  padding: ${(props) => props.theme.spacing(0, 0)};
+  width: 100%;
+  bottom: 0;
+`;
+
+const StyledTypography = styled(Typography)`
+  color: #ffffff;
+  font-family: Inter;
+  font-size: 1.5rem;
+  line-height: 1.813rem;
+  font-style: normal;
+  font-weight: 400;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+`;
 
 export const Footer = () => {
   const theme = useTheme();
@@ -15,29 +36,8 @@ export const Footer = () => {
     'Manage preferences',
   ];
 
-  const linkStyle = {
-    color: '#FFFFFF',
-    fontFamily: 'Inter',
-    fontSize: '1.5rem',
-    lineHeight: '1.813rem',
-    fontStyle: 'normal',
-    fontWeight: '400',
-    textDecoration: 'none',
-    '&:hover': {
-      textDecoration: 'underline',
-    },
-  };
-
   return (
-    <Box
-      sx={{
-        backgroundColor: '#1E1E1E',
-        marginTop: theme.spacing(8),
-        padding: theme.spacing(0, 0),
-        width: '100%',
-        bottom: 0,
-      }}
-    >
+    <StyledBox>
       <Container maxWidth="xl">
         <Grid item xs={12} align="center">
           <Box>
@@ -81,14 +81,9 @@ export const Footer = () => {
         >
           {footerLinks.map((link) => (
             <Grid item key={link}>
-              <Typography
-                variant="subtitle1"
-                component="a"
-                href="#"
-                sx={linkStyle}
-              >
+              <StyledTypography variant="subtitle1" component="a" href="#">
                 {link}
-              </Typography>
+              </StyledTypography>
             </Grid>
           ))}
         </Grid>
@@ -107,6 +102,6 @@ export const Footer = () => {
           © {new Date().getFullYear()} Cinemania | All rights reserved.
         </Typography>
       </Container>
-    </Box>
+    </StyledBox>
   );
 };
