@@ -29,88 +29,48 @@ export const FeaturedMovie = () => {
   }
 
   return (
-    <Box
-      sx={{
-        background:
-          'linear-gradient(to right bottom, #000000, #003c2d, #00ffc2)',
-        zIndex: '-100',
-        position: 'relative',
-      }}
-    >
+    <Container>
       <Section>
-        <Box sx={centerElement}>
-          <Box
-            sx={{
-              background:
-                'linear-gradient(180deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 51.56%)',
-              borderRadius: '24.688rem',
-            }}
-          >
-            <Box
+        <CenteredBox>
+          <ImageShawdow>
+            <Image
               component="img"
-              sx={{
-                width: '104.5rem',
-                height: '49.375rem',
-                borderRadius: '24.688rem',
-                zIndex: '-100',
-                position: 'relative',
-              }}
               alt={featuredMovie.title}
               src={featuredMovie.image_location}
             />
-          </Box>
-          <Box
-            sx={{
-              ...centerElement,
-              fontFamily: 'Inter',
-              color: '#fff',
-              top: '3.75rem',
-              zIndex: '3000',
-            }}
-          >
-            <Typography
-              component="div"
-              sx={{
-                fontSize: '4.5rem',
-                fontWeight: 300,
-                lineHeight: '5.446rem',
-              }}
-            >
+          </ImageShawdow>
+          <TitleWrapper>
+            <StyledTypography component="div">
               Ready for {featuredMovie.title}?
-            </Typography>
-            <Box sx={{ display: 'flex', alignItems: 'center', mt: '1rem' }}>
+            </StyledTypography>
+            <TrailerWrapper>
               <IconButton
                 sx={{ backgroundColor: '#00FFC2' }}
                 aria-label="play/pause"
               >
                 <PlayArrowIcon sx={{ width: '2rem', height: '2rem' }} />
               </IconButton>
-              <Typography
-                component="div"
-                sx={{
-                  width: '11.938rem',
-                  height: 'fit-content',
-                  ml: 1,
-                  fontWeight: 500,
-                  fontSize: '1.5rem',
-                  lineHeight: '1.816rem',
-                  textDecorationLine: 'underline',
-                }}
-              >
+              <StyledTypographyLink component="div">
                 Watch the trailer
-              </Typography>
-            </Box>
-          </Box>
-        </Box>
+              </StyledTypographyLink>
+            </TrailerWrapper>
+          </TitleWrapper>
+        </CenteredBox>
       </Section>
       <Section>
         <h1 style={{ fontSize: '3rem' }}>
           Placeholder for carousel new arrival and most popular
         </h1>
       </Section>
-    </Box>
+    </Container>
   );
 };
+
+const Container = styled(Box)`
+  background: linear-gradient(to right bottom, #000000, #003c2d, #00ffc2);
+  z-index: -100;
+  position: relative;
+`;
 
 const Section = styled.section`
   height: 95vh;
@@ -120,9 +80,59 @@ const Section = styled.section`
   align-items: center;
 `;
 
-const centerElement = {
-  position: 'absolute',
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-};
+const Image = styled(Box)`
+  width: 104.5rem;
+  height: 49.375rem;
+  border-radius: 24.688rem;
+  z-index: -100;
+  position: relative;
+`;
+
+const ImageShawdow = styled(Box)`
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.8) 0%,
+    rgba(0, 0, 0, 0) 51.56%
+  );
+  border-radius: 24.688rem;
+`;
+
+const TitleWrapper = styled(Box)`
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Inter';
+  color: #fff;
+  top: 3.75rem;
+  z-index: 3000;
+`;
+
+const StyledTypography = styled(Typography)`
+  font-size: 4.5rem;
+  font-weight: 300;
+  line-height: 5.446rem;
+`;
+
+const StyledTypographyLink = styled(Typography)`
+  width: 11.938rem;
+  height: fit-content;
+  margin-left: 1rem;
+  font-weight: 500;
+  font-size: 1.5rem;
+  line-height: 1.816rem;
+  text-decoration-line: underline;
+`;
+
+const TrailerWrapper = styled(Box)`
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+`;
+
+const CenteredBox = styled(Box)`
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
