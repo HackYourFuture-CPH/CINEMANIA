@@ -2,6 +2,7 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import { Box, IconButton, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { apiURL } from '../../apiURL';
+import styled from '@emotion/styled';
 
 export const FeaturedMovie = () => {
   const [featuredMovie, setFeaturedMovie] = useState(null);
@@ -28,76 +29,92 @@ export const FeaturedMovie = () => {
   }
 
   return (
-    <Box
-      sx={{
-        position: 'absolute',
-        display: 'flex',
-        top: '14.875rem',
-        left: '9.25rem',
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
-    >
-      <Box
-        component="img"
-        sx={{
-          width: '104.5rem',
-          height: '49.375rem',
-          borderRadius: '24.688rem',
-          // objectFit: 'scale-down', can be used to scale down the horizontal images to fit the container but it doesn't work as
-          // expected since around image is empty space
-          background:
-            'linear-gradient(180deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 51.56%)})',
-        }}
-        alt={featuredMovie.title}
-        src={featuredMovie.image_location}
-      />
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          position: 'absolute',
-          fontFamily: 'Inter',
-          fontStyle: 'normal',
-          textAlign: 'center',
-          color: '#fff',
-          top: '3.75rem',
-        }}
-      >
-        <Typography
-          component="div"
-          sx={{
-            fontSize: '4.5rem',
-            fontWeight: 300,
-            lineHeight: '5.446rem',
-          }}
-        >
-          Ready for {featuredMovie.title}?
-        </Typography>
-        <Box sx={{ display: 'flex', alignItems: 'center', mt: 1 }}>
-          <IconButton
-            sx={{ backgroundColor: '#00FFC2' }}
-            aria-label="play/pause"
-          >
-            <PlayArrowIcon sx={{ width: '2.761rem', height: '2.761rem' }} />
-          </IconButton>
-          <Typography
-            component="div"
-            sx={{
-              width: '11.938rem',
-              height: 'fit-content',
-              ml: 1,
-              fontWeight: 500,
-              fontSize: '1.5rem',
-              lineHeight: '1.816rem',
-              textDecorationLine: 'underline',
+    <>
+      <Section>
+        <Box sx={centerElement}>
+          <Box
+            style={{
+              background:
+                'linear-gradient(180deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 51.56%)',
+              borderRadius: '24.688rem',
             }}
           >
-            Watch the trailer
-          </Typography>
+            <Box
+              component="img"
+              sx={{
+                width: '104.5rem',
+                height: '49.375rem',
+                borderRadius: '24.688rem',
+                zIndex: '-1000',
+                position: 'relative',
+              }}
+              alt={featuredMovie.title}
+              src={featuredMovie.image_location}
+            />
+          </Box>
+          <Box
+            sx={{
+              ...centerElement,
+              fontFamily: 'Inter',
+              color: '#fff',
+              top: '3.75rem',
+            }}
+          >
+            <Typography
+              component="div"
+              sx={{
+                fontSize: '4.5rem',
+                fontWeight: 300,
+                lineHeight: '5.446rem',
+              }}
+            >
+              Ready for {featuredMovie.title}?
+            </Typography>
+            <Box sx={{ display: 'flex', alignItems: 'center', mt: '1rem' }}>
+              <IconButton
+                sx={{ backgroundColor: '#00FFC2' }}
+                aria-label="play/pause"
+              >
+                <PlayArrowIcon sx={{ width: '2rem', height: '2rem' }} />
+              </IconButton>
+              <Typography
+                component="div"
+                sx={{
+                  width: '11.938rem',
+                  height: 'fit-content',
+                  ml: 1,
+                  fontWeight: 500,
+                  fontSize: '1.5rem',
+                  lineHeight: '1.816rem',
+                  textDecorationLine: 'underline',
+                }}
+              >
+                Watch the trailer
+              </Typography>
+            </Box>
+          </Box>
         </Box>
-      </Box>
-    </Box>
+      </Section>
+      <Section>
+        <h1 style={{ fontSize: '3rem' }}>
+          Placeholder for carousel new arrival and most popular
+        </h1>
+      </Section>
+    </>
   );
+};
+
+const Section = styled.section`
+  height: 95vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const centerElement = {
+  position: 'absolute',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
 };
