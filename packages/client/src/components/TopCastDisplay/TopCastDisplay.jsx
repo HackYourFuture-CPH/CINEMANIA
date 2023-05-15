@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { apiURL } from '../../apiURL';
 import {
-  Container,
   Typography,
   Avatar,
   Stack,
@@ -22,10 +21,10 @@ const TopCastDisplay = ({ movieID }) => {
         const response = await fetch(`${apiURL()}/crew/movie/${movieID}`);
         const data = await response.json();
         setCastList(data);
+        setIsLoading(false);
       } catch (error) {
         setIsLoading(false);
       }
-      setIsLoading(false);
     };
     fetchCastList();
   }, [movieID]);
@@ -40,13 +39,6 @@ const TopCastDisplay = ({ movieID }) => {
       sx={{
         paddingLeft: 5,
         paddingRight: 5,
-        // maxWidth: 'xl',
-        // disableGutters: true,
-        // position: 'absolute',
-        // right: 280,
-        // left: 0,
-        // top: 1200,
-        // mt: 15,
       }}
       maxWidth="xl"
     >
@@ -110,13 +102,24 @@ const TopCastDisplay = ({ movieID }) => {
           ))}
       </Stack>
       {isLoading ? (
-        <CircularProgress
+        <Box
           sx={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '100%',
+            top: 0,
+            left: 0,
+            zIndex: 9999,
+            width: '100%',
           }}
-        />
+        >
+          <CircularProgress
+            sx={{
+              color: '#FFFFFF',
+            }}
+          />
+        </Box>
       ) : (
         <Button
           onClick={handleShowFullCast}
