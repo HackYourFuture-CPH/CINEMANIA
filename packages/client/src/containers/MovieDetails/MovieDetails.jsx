@@ -10,13 +10,15 @@ export const MovieDetails = () => {
   const movieID = useParams().id;
   const [currentMovie, setCurrentMovie] = useState(undefined);
   useEffect(() => {
-    (async () => {
-      const response = await fetch(`${apiURL()}/movies/${movieID}/details`);
-      const movie = await response.json();
-      if (movie) {
-        setCurrentMovie(movie);
-      }
-    })();
+    if (movieID) {
+      (async () => {
+        const response = await fetch(`${apiURL()}/movies/${movieID}/details`);
+        const movie = await response.json();
+        if (movie) {
+          setCurrentMovie(movie);
+        }
+      })();
+    }
   }, [movieID]);
   if (!currentMovie) return;
   return (
