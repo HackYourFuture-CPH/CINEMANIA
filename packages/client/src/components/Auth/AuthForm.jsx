@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React, { useState } from 'react';
 import { Typography, Container } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
