@@ -1,8 +1,8 @@
-import React from 'react';
-import { useTheme } from '@mui/material/styles';
 import { Box, Container, Divider, Grid, Typography } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+import React from 'react';
 
-const Footer = () => {
+export const Footer = () => {
   const theme = useTheme();
 
   const footerLinks = [
@@ -110,4 +110,3 @@ const Footer = () => {
     </Box>
   );
 };
-export default Footer;

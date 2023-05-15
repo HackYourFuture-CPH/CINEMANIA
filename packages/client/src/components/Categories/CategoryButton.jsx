@@ -1,8 +1,8 @@
-import React from 'react';
 import { Button as MuiButton } from '@mui/material';
+import React from 'react';
 import { useMovieList } from '../../context/movieListContext';
 
-const CategoryButton = ({ label, categoryId }) => {
+export const CategoryButton = ({ label, categoryId }) => {
   const { selectedCategoryId, setSelectedCategoryId } = useMovieList();
 
   const handleClick = () => {
@@ -40,5 +40,3 @@ const CategoryButton = ({ label, categoryId }) => {
     </MuiButton>
   );
 };
-
-export default CategoryButton;

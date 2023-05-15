@@ -1,7 +1,7 @@
-import React from 'react';
 import { Container } from '@mui/material';
+import React from 'react';
 
-const SimilarMoviesCarousel = ({ movieID }) => {
+export const SimilarMoviesCarousel = ({ movieID }) => {
   return (
     <Container
       sx={{
@@ -17,5 +17,3 @@ const SimilarMoviesCarousel = ({ movieID }) => {
     </Container>
   );
 };
-
-export default SimilarMoviesCarousel;
