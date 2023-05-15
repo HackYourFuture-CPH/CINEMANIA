@@ -1,8 +1,8 @@
-import * as React from 'react';
-import { Card, CardMedia, Typography, Rating, Box } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import useFavorites from './useFavorites'; // created a custom hook to manage favorites
+import { Box, Card, CardMedia, Rating, Typography } from '@mui/material';
+import * as React from 'react';
+import { useFavorites } from './useFavorites'; // created a custom hook to manage favorites
 
 const BasicRating = () => {
   return (
@@ -24,7 +24,7 @@ const BasicRating = () => {
   );
 };
 
-export default function MovieCard({ movie }) {
+export const MovieCard = ({ movie }) => {
   const [favorites, toggleFavorite] = useFavorites([]);
   const isFavorite = favorites.includes(movie);
 
@@ -141,4 +141,4 @@ export default function MovieCard({ movie }) {
       <BasicRating />
     </Card>
   );
-}
+};

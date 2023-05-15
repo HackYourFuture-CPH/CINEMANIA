@@ -1,10 +1,10 @@
-import React from 'react';
-import { MovieListProvider } from '../../context/movieListContext';
-import Categories from '../../components/Categories/Categories';
-import { SearchBar } from '../../components/SearchBar/SearchBar';
 import { Box, Container } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import MovieList from '../../components/MovieList/MovieList';
+import React from 'react';
+import { Categories } from '../../components/Categories/Categories';
+import { MovieList } from '../../components/MovieList/MovieList';
+import { SearchBar } from '../../components/SearchBar/SearchBar';
+import { MovieListProvider } from '../../context/movieListContext';
 
 export const MovieListPage = () => {
   const theme = useTheme();

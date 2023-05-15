@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { Box, IconButton, Typography } from '@mui/material';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import { Box, IconButton, Typography } from '@mui/material';
+import React, { useEffect, useState } from 'react';
 import { apiURL } from '../../apiURL';
 
-export default function FeaturedMovie() {
+export const FeaturedMovie = () => {
   const [featuredMovie, setFeaturedMovie] = useState(null);
 
   useEffect(() => {
@@ -100,4 +100,4 @@ export default function FeaturedMovie() {
       </Box>
     </Box>
   );
-}
+};

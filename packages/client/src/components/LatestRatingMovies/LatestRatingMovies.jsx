@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { apiURL } from '../../apiURL';
 import MovieCard from '../MovieCard/MovieCard';
 
-export default function LatestRatingMovies() {
+export const LatestRatingMovies = () => {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
@@ -59,4 +59,4 @@ export default function LatestRatingMovies() {
       </Masonry>
     </Box>
   );
-}
+};

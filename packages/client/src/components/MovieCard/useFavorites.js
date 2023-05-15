@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const useFavorites = (initialFavorites = []) => {
+export const useFavorites = (initialFavorites = []) => {
   const [favorites, setFavorites] = useState(initialFavorites);
 
   const toggleFavorite = (item) => {
@@ -13,5 +13,3 @@ const useFavorites = (initialFavorites = []) => {
 
   return [favorites, toggleFavorite];
 };
-
-export default useFavorites;
