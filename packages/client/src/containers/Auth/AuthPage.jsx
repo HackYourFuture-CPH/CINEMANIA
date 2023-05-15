@@ -28,7 +28,7 @@ export const AuthPage = () => {
 
   return (
     <div>
-      <AuthForm isSignIn={true} />
+      <AuthForm />
     </div>
   );
 };
