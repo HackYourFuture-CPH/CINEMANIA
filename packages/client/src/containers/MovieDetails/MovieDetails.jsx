@@ -19,7 +19,13 @@ export const MovieDetails = () => {
     })();
   }, [movieID]);
   return (
-    <Container>
+    <Container
+      sx={{
+        mt: '3rem',
+        mb: '3rem',
+      }}
+      maxWidth="xl"
+    >
       <BigMovieCard currentMovie={currentMovie} />
       <TopCastDisplay movieID={movieID} />
       <SimilarMoviesCarousel categoryID={currentMovie?.categoryID ?? 0} />

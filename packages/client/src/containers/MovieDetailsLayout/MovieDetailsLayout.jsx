@@ -8,6 +8,7 @@ export function MovieDetailsLayout({ children }) {
     flexDirection: 'column',
     aligntems: 'center',
     justifyContent: 'center',
+    padding: 0,
   };
 
   return (
