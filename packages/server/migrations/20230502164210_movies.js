@@ -8,7 +8,7 @@ exports.up = function (knex) {
     table.integer('category_id').unsigned();
     table.foreign('category_id').references('id').inTable('categories');
     table.string('title').notNullable();
-    table.string('description').notNullable();
+    table.string('description', 500).notNullable();
     table.integer('movie_year').unsigned();
     table.string('image_location');
     table.decimal('price').notNullable();
