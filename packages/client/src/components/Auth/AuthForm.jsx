@@ -58,17 +58,20 @@ export const AuthForm = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
         <Button type="submit">{isRegistered ? 'Log In' : 'Sign Up'}</Button>
+
         <Typography>
-          Not a member?
-          <Link onClick={() => setIsRegistered(false)}> Signup</Link>
+          {!isRegistered ? 'Already a member?' : 'Not a member?'}
+          <Link onClick={() => setIsRegistered(!isRegistered)}>
+            {!isRegistered ? ' Login' : ' Signup'}
+          </Link>
         </Typography>
-        {/* TODO: Add Login link if it's on the sign up */}
       </Form>
     </Container>
   );
 };
 
 const Form = styled.form`
+  font-family: 'Inter', sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -112,7 +115,7 @@ const Button = styled.button`
   border-radius: 0.5rem;
   border: none;
   padding: 0.5rem 2rem;
-  font-family: 'Inter', sans-serif;
+
   font-weight: bold;
   font-size: 1.1rem;
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
