@@ -23,6 +23,8 @@ export const MovieDetails = () => {
       sx={{
         mt: '3rem',
         mb: '3rem',
+        display: 'flex',
+        flexDirection: 'column',
       }}
       maxWidth="xl"
     >
