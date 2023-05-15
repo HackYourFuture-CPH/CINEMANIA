@@ -3,14 +3,14 @@ import { Container, IconButton } from '@mui/material';
 import './Carousel.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import fallBackMovie from './mock.json';
+import fallBackMovies from './mock.json';
 import Slider from 'react-slick';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { apiURL } from '../../apiURL';
 
 const SimilarMoviesCarousel = ({ categoryID }) => {
-  const [similarMovies, setSimilarMovies] = useState(fallBackMovie);
+  const [similarMovies, setSimilarMovies] = useState(fallBackMovies);
   useEffect(() => {
     (async () => {
       if (categoryID) {
