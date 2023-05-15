@@ -45,12 +45,14 @@ export const AuthForm = () => {
       </Typography>
       <Form onSubmit={handleSubmit}>
         <InputField
+          required
           type="email"
           placeholder="enter email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
         <InputField
+          required
           type="password"
           placeholder="enter password"
           value={password}
