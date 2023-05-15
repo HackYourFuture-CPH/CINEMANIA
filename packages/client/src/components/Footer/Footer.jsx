@@ -1,31 +1,9 @@
-import { Box, Container, Divider, Grid, Typography } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
 import React from 'react';
+import { Box, Container, Divider, Grid, Typography } from '@mui/material';
+
 import styled from '@emotion/styled';
 
-const StyledBox = styled(Box)`
-  margin-top: ${(props) => props.theme.spacing(8)};
-  padding: ${(props) => props.theme.spacing(0, 0)};
-  width: 100%;
-  bottom: 0;
-`;
-
-const StyledTypography = styled(Typography)`
-  color: #ffffff;
-  font-family: Inter;
-  font-size: 1.5rem;
-  line-height: 1.813rem;
-  font-style: normal;
-  font-weight: 400;
-  text-decoration: none;
-  &:hover {
-    text-decoration: underline;
-  }
-`;
-
 export const Footer = () => {
-  const theme = useTheme();
-
   const footerLinks = [
     'Privacy policy',
     'Cookies policy',
@@ -36,49 +14,73 @@ export const Footer = () => {
     'Manage preferences',
   ];
 
+  const StyledBox = styled(Box)`
+    margin-top: 4;
+    padding: 0, 0;
+    width: 100%;
+    bottom: 0;
+  `;
+
+  const StyledTypography = styled(Typography)`
+    color: #ffffff;
+    font-family: Inter, Arial, Helvetica, sans-serif;
+    font-size: 1.5rem;
+    line-height: 1.75rem;
+    font-style: normal;
+    font-weight: 400;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  `;
+
+  const StyledDivider = styled(Divider)`
+    margin-top: 2.25rem;
+    margin-bottom: 2.25rem;
+    padding: 0;
+    margin-right: 0;
+    margin-left: 0;
+    border: 1px solid #ffffff;
+    width: 100%;
+    transform: rotate(180deg);
+  `;
+
+  const StyledGrid = styled(Grid)`
+    display: flex;
+    flex: none;
+    order: 4;
+    flex-grow: 0;
+    flex-wrap: wrap;
+    gap: 2;
+    justify-content: space-between;
+    padding: 0;
+  `;
+
+  const StyledTypographyCopyRight = styled(Typography)`
+    color: #777777;
+    font-family: Inter, Arial, Helvetica, sans-serif;
+    font-size: 1.25rem;
+    line-height: 1.5rem;
+    margin-top: 2.25rem;
+    margin-bottom: 2.75rem;
+    text-align: center;
+  `;
+
   return (
     <StyledBox>
       <Container maxWidth="xl">
         <Grid item xs={12} align="center">
-          <Box>
-            <img
-              src="https://i.ibb.co/WtvfPNV/image.png"
-              alt="footer logo"
-              border="0"
-              width="300"
-              height="80"
-            />
-          </Box>
+          <img
+            src="https://i.ibb.co/WtvfPNV/image.png"
+            alt="footer logo"
+            border="0"
+            width="300"
+            height="80"
+          />
         </Grid>
-        <Divider
-          variant="middle"
-          color="#FFFFFF"
-          width="100%"
-          border="1px solid #FFFFFF"
-          transform="rotate(180deg)"
-          sx={{
-            marginTop: theme.spacing(4.626),
-            marginBottom: theme.spacing(4.626),
-            padding: 0,
-            mr: 0,
-            ml: 0,
-          }}
-        />
+        <StyledDivider />
 
-        <Grid
-          container
-          maxWidth="xl"
-          sx={{
-            display: 'flex',
-            flex: 'none',
-            order: 4,
-            flexGrow: 0,
-            flexWrap: 'wrap',
-            gap: 2,
-            justifyContent: 'space-between',
-            padding: 0,
-          }}
-        >
+        <StyledGrid container maxWidth="xl">
           {footerLinks.map((link) => (
             <Grid item key={link}>
               <StyledTypography variant="subtitle1" component="a" href="#">
@@ -86,21 +88,10 @@ export const Footer = () => {
               </StyledTypography>
             </Grid>
           ))}
-        </Grid>
-        <Typography
-          fontFamily="Inter"
-          variant="body2"
-          color="#777777"
-          align="center"
-          sx={{
-            marginTop: theme.spacing(4.626),
-            marginBottom: theme.spacing(5.5),
-            fontSize: '1.25rem',
-            lineHeight: '1.5rem',
-          }}
-        >
+        </StyledGrid>
+        <StyledTypographyCopyRight>
           © {new Date().getFullYear()} Cinemania | All rights reserved.
-        </Typography>
+        </StyledTypographyCopyRight>
       </Container>
     </StyledBox>
   );
