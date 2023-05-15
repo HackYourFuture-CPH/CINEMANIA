@@ -1,91 +1,97 @@
 import React from 'react';
+import styled from '@emotion/styled';
 import { AppBar, Box, Button, Grid, MenuItem, Toolbar } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import PersonIcon from '@mui/icons-material/Person';
 
-const buttonStyles = {
-  color: '#FFFFFF',
-  fontSize: '1.1rem',
-  fontWeight: '400',
-  '&:hover': { color: 'mainGreen' },
-};
-
 export const Navbar = () => {
   return (
-    <AppBar
-      component="nav"
-      width="100%"
-      sx={{ bgcolor: 'mainGreen', position: 'sticky', top: '0' }}
-    >
-      <Box sx={{ padding: '0.6rem 8.75rem' }}>
+    <StyledAppBar>
+      <Box>
         <Toolbar
-          fontFamily="Inter"
           sx={{
-            height: '6rem',
+            height: '4rem',
             justifyContent: 'space-between',
           }}
         >
-          <MenuItem>
-            <PersonIcon
-              sx={{
-                width: '2rem',
-                height: '2rem',
-                color: 'black',
-                borderRight: '2px solid #000000',
-                paddingRight: '.5rem',
-                '&:hover': { color: 'hoverRed' },
-              }}
-            />
-          </MenuItem>
+          <IconMenu>
+            <NavIcon>
+              <PersonIcon sx={{ borderRight: '2px solid #000000' }} />
+            </NavIcon>
+          </IconMenu>
           <Grid item xs={12} align="center">
             <Box>
               <img
                 src="https://i.ibb.co/7JGHhKm/image.png"
-                alt="nav bar logo"
-                border="0"
-                width="286"
-                height="98"
+                alt="logo"
+                width="250"
+                height="68"
               />
             </Box>
           </Grid>
-          <MenuItem>
-            <ShoppingCartIcon
-              sx={{
-                width: '1.75rem',
-                height: '1.75rem',
-                color: '#000000',
-                marginRight: '1.25rem',
-                '&:hover': { color: 'hoverRed' },
-              }}
-            />
-            <FavoriteBorderIcon
-              sx={{
-                width: '1.9rem',
-                height: '1.75rem',
-                color: '#000000',
-                marginLeft: '1.25rem',
-                '&:hover': { color: 'hoverRed' },
-              }}
-            />
-          </MenuItem>
+          <IconMenu>
+            <NavIcon>
+              <ShoppingCartIcon />
+            </NavIcon>
+            <NavIcon>
+              <FavoriteBorderIcon />
+            </NavIcon>
+          </IconMenu>
         </Toolbar>
       </Box>
       <Grid
         sx={{
           display: 'flex',
-          height: '4.75rem',
+          height: '2.75rem',
           justifyContent: 'center',
           alignItems: 'center',
           background: '#000000',
           gap: '8rem',
         }}
       >
-        <Button sx={buttonStyles}>CATEGORIES</Button>
-        <Button sx={buttonStyles}>THE TOP 100</Button>
-        <Button sx={buttonStyles}>ABOUT</Button>
-        <Button sx={buttonStyles}>CONTACT US</Button>
+        <NavButton>CATEGORIES</NavButton>
+        <NavButton>THE TOP 100</NavButton>
+        <NavButton>ABOUT</NavButton>
+        <NavButton>CONTACT US</NavButton>
       </Grid>
-    </AppBar>
+    </StyledAppBar>
   );
 };
+
+const StyledAppBar = styled(AppBar)`
+  background-color: ${(props) => props.theme.palette.mainGreen};
+  position: sticky;
+  top: 0;
+  font-family: 'Inter', sans-serif;
+`;
+
+const NavIcon = styled.button`
+  background-color: transparent;
+  color: 'black';
+  cursor: pointer;
+  border: none;
+  width: '2rem';
+  height: '2rem';
+  border-right: '2px solid #000000';
+  padding-right: '.5rem';
+  outline: none;
+  &:hover {
+    color: ${(props) => props.theme.palette.hoverRed};
+  }
+`;
+
+const IconMenu = styled(MenuItem)`
+  box-shadow: none;
+  &:hover {
+    background-color: transparent;
+  }
+`;
+
+const NavButton = styled(Button)`
+  color: white;
+  font-size: 0.9rem;
+  &:hover {
+    color: ${(props) => props.theme.palette.hoverRed};
+  }
+`;
