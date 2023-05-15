@@ -1,9 +1,19 @@
-import React from 'react';
 import styled from '@emotion/styled';
-import { AppBar, Box, Button, Grid, MenuItem, Toolbar } from '@mui/material';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import PersonIcon from '@mui/icons-material/Person';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import {
+  AppBar,
+  Box,
+  Button,
+  Grid,
+  Link,
+  MenuItem,
+  Toolbar,
+} from '@mui/material';
+import React from 'react';
+
+const NavLink = (props) => <Link underline="none" color="inherit" {...props} />;
 
 export const Navbar = () => {
   return (
@@ -22,12 +32,14 @@ export const Navbar = () => {
           </IconMenu>
           <Grid item xs={12} align="center">
             <Box>
-              <img
-                src="https://i.ibb.co/7JGHhKm/image.png"
-                alt="logo"
-                width="250"
-                height="68"
-              />
+              <NavLink href="/">
+                <img
+                  src="https://i.ibb.co/7JGHhKm/image.png"
+                  alt="logo"
+                  width="250"
+                  height="68"
+                />
+              </NavLink>
             </Box>
           </Grid>
           <IconMenu>
@@ -50,10 +62,18 @@ export const Navbar = () => {
           gap: '8rem',
         }}
       >
-        <NavButton>CATEGORIES</NavButton>
-        <NavButton>THE TOP 100</NavButton>
-        <NavButton>ABOUT</NavButton>
-        <NavButton>CONTACT US</NavButton>
+        <NavButton>
+          <NavLink href="/movies">CATEGORIES</NavLink>
+        </NavButton>
+        <NavButton>
+          <NavLink href="/top100">THE TOP 100</NavLink>
+        </NavButton>
+        <NavButton>
+          <NavLink href="/about">ABOUT</NavLink>
+        </NavButton>
+        <NavButton>
+          <NavLink href="/contact-us">CONTACT US</NavLink>
+        </NavButton>
       </Grid>
     </StyledAppBar>
   );
