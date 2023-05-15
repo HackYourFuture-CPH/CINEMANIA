@@ -1,7 +1,0 @@
-/* This CSS is temporary and will be removed when background is finalized */
-body {
-  font-family: 'Inter';
-  background: #00ffc2;
-  background-image: linear-gradient(-50deg, #000000, #003c2d, #00ffc2);
-  height: 2400px;
-}

@@ -1,12 +1,10 @@
-import { Card, CardContent, Chip } from '@mui/material';
-import { blue } from '@mui/material/colors';
-import React, { useEffect, useState } from 'react';
-import { apiURL } from '../../apiURL';
+import React /* , { useEffect, useState } */ from 'react';
+/* import { apiURL } from '../../apiURL'; */ // Not Used
 import FeaturedMovie from '../../components/FeaturedMovie/FeaturedMovie';
 import LatestRatingMovies from '../../components/LatestRatingMovies/LatestRatingMovies';
 
 export const LandingPage = () => {
-  const [movies, setMovies] = useState([]);
+  /* const [movies, setMovies] = useState([]);
   useEffect(() => {
     async function fetchMovies() {
       const response = await fetch(`${apiURL()}/movies`);
@@ -15,22 +13,10 @@ export const LandingPage = () => {
     }
 
     fetchMovies();
-  }, []);
+  }, []); */ // Not used
 
   return (
-    <div className="landing-page-container">
-      {movies.map((movie) => (
-        <Card sx={{ width: 550, margin: 10 }} variant="outlined" key={movie.id}>
-          <CardContent sx={{ margin: '20px', bgcolor: blue[100] }}>
-            <Chip
-              sx={{ fontSize: '1.2rem' }}
-              color="secondary"
-              label={movie.title}
-            />
-            <p>{movie.description}</p>
-          </CardContent>
-        </Card>
-      ))}
+    <div>
       <FeaturedMovie />
       <LatestRatingMovies />
     </div>
