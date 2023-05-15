@@ -27,10 +27,10 @@ export function MovieCard({ movie }) {
     display: flex;
     flex-direction: column;
     max-height: min-content;
-    width: 17.43rem;
+    width: 17.5rem;
     left: 6rem;
     background: linear-gradient(
-      166.18deg,
+      166deg,
       rgba(0, 0, 0, 0.4) 0%,
       rgba(0, 0, 0, 0) 98.81%
     );
@@ -40,10 +40,10 @@ export function MovieCard({ movie }) {
   const sharedIconStyles = `
   display: block;
   position: absolute;
-  width: 1.9rem;
+  width: 2rem;
   height: 1.75rem;
   top: 2.25rem;
-  right: 1.5rem;
+  right: 1.75rem;
   color: #ff0000;
   padding: 1rem;
   background-color: #000000cc;
@@ -68,49 +68,38 @@ export function MovieCard({ movie }) {
     left: 0;
     top: 0;
     padding-top: 2.25rem;
-    padding-left: 1.96rem;
+    padding-left: 2rem;
   `;
 
   const StyledTypographyTitle = styled(Typography)`
     position: relative;
     max-height: min-content;
-    width: 13.45rem;
+    width: 13.5rem;
     top: 1.5rem;
-    left: 1.96rem;
+    left: 2rem;
     font-family: Inter;
     font-style: normal;
     font-weight: 700;
-    font-size: 1.172rem;
-    line-height: 1.43rem;
+    font-size: 1.25rem;
+    line-height: 1.5rem;
     color: #003c2d;
   `;
 
   const StyledTypographyDescription = styled(Typography)`
     position: relative;
     min-height: fit-content;
-    width: 13.43rem;
+    width: 13.5rem;
     top: 2rem;
     font-family: Inter;
     font-weight: 400;
-    left: 1.96rem;
-    font-size: 1.17rem;
+    left: 2rem;
+    font-size: 1.25rem;
     color: #003c2d;
-    line-height: 1.43rem;
+    line-height: 1.5rem;
   `;
 
   return (
-    <StyledCard
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        maxHeight: 'min-content',
-        width: '17.43rem',
-        left: '6rem',
-        background:
-          'linear-gradient(166.18deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 98.81%), #00FFC2',
-        boxShadow: '20px 40px 70px rgba(0, 0, 0, 0.25)',
-      }}
-    >
+    <StyledCard>
       <Box
         sx={{
           position: 'relative',
@@ -124,15 +113,6 @@ export function MovieCard({ movie }) {
       </Box>
       <StyledCardMedia
         component="img"
-        sx={{
-          position: 'relative',
-          maxHeight: 'min-content',
-          width: '13.5rem',
-          left: 0,
-          top: 0,
-          paddingTop: '2.25rem',
-          paddingLeft: '1.96rem',
-        }}
         image={movie.image_location}
         alt={movie.title}
       />
