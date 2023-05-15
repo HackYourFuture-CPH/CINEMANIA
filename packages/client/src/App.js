@@ -1,15 +1,14 @@
 import React from 'react';
-import './App.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Layout } from './containers/Layout/Layout';
 import { LandingPage } from './containers/LandingPage/LandingPage';
 import { PageNotFound } from './containers/PageNotFound/PageNotFound.Container';
 import { MovieDetails } from './containers/MovieDetails/MovieDetails';
+import { MovieListPage } from './containers/MovieListPage/MovieListPage';
 
 // MUI THEME
 import { ThemeProvider } from '@mui/material';
 import { theme } from './lib/theme';
-import { MovieListPage } from './containers/MovieListPage/MovieListPage';
 
 // Routes
 const router = createBrowserRouter([

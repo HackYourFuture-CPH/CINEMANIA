@@ -8,7 +8,7 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { apiURL } from '../../apiURL';
 
-const SimilarMoviesCarousel = ({ categoryID, movieID }) => {
+const SimilarMoviesCarousel = ({ categoryID }) => {
   const [SimilarMovies, setSimilarMovies] = useState([]);
   useEffect(() => {
     (async () => {
