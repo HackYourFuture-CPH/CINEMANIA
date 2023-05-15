@@ -3,7 +3,7 @@ import { Container, IconButton } from '@mui/material';
 import './Carousel.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import fallBackMovies from './mock.json';
+import fallBackMovies from '../../assets/fallBackMovies.json';
 import Slider from 'react-slick';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';

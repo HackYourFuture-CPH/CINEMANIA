@@ -5,10 +5,11 @@ import { apiURL } from '../../apiURL';
 import BigMovieCard from '../../components/BigMovieCard/BigMovieCard';
 import SimilarMoviesCarousel from '../../components/SimilarMoviesCarousel/SimilarMoviesCarousel';
 import TopCastDisplay from '../../components/TopCastDisplay/TopCastDisplay';
+import fallBackMovies from '../../assets/fallBackMovies.json';
 
 export const MovieDetails = () => {
   const movieID = useParams().id;
-  const [currentMovie, setCurrentMovie] = useState(undefined);
+  const [currentMovie, setCurrentMovie] = useState(fallBackMovies[0]);
   useEffect(() => {
     if (movieID) {
       (async () => {
