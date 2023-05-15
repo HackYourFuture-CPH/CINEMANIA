@@ -1,10 +1,10 @@
-import * as React from 'react';
-import { CardMedia, Typography, Box, Grid } from '@mui/material';
-import { Link } from 'react-router-dom';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import { Box, CardMedia, Grid, Typography } from '@mui/material';
+import * as React from 'react';
+import { Link } from 'react-router-dom';
 
-const MovieCard = ({ movie }) => {
+export const MovieCard = ({ movie }) => {
   return (
     <Grid item xs={12} sm={6} md={4} key={movie.id}>
       <Box sx={{ position: 'relative' }}>
@@ -81,5 +81,3 @@ const MovieCard = ({ movie }) => {
     </Grid>
   );
 };
-
-export default MovieCard;

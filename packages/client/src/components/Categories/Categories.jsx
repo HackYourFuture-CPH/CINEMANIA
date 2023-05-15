@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import CategoryButton from './CategoryButton';
-import { apiURL } from '../../apiURL';
 import { Box } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
+import React, { useEffect, useState } from 'react';
+import { apiURL } from '../../apiURL';
+import { CategoryButton } from './CategoryButton';
 
-const Categories = () => {
+export const Categories = () => {
   const [categoriesList, setCategoriesList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -54,5 +54,3 @@ const Categories = () => {
     </Box>
   );
 };
-
-export default Categories;

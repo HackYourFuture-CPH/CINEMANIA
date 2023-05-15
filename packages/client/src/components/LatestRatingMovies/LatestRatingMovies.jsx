@@ -1,10 +1,10 @@
+import { Box, Grid, Typography } from '@mui/material';
 import * as React from 'react';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { apiURL } from '../../apiURL';
-import { Typography, Grid, Box } from '@mui/material';
-import MovieCard from '../MovieCard/MovieCard';
+import { MovieCard } from '../MovieCard/MovieCard';
 
-export default function LatestRatingMovies() {
+export const LatestRatingMovies = () => {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
@@ -64,4 +64,4 @@ export default function LatestRatingMovies() {
       </Grid>
     </Box>
   );
-}
+};
