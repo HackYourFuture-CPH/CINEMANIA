@@ -71,31 +71,28 @@ export function MovieCard({ movie }) {
     padding-left: 2rem;
   `;
 
-  const StyledTypographyTitle = styled(Typography)`
-    position: relative;
+  const sharedTypographyStyles = `
+ position: relative;
     max-height: min-content;
     width: 13.5rem;
-    top: 1.5rem;
     left: 2rem;
-    font-family: Inter;
+    font-family: Inter, Arial, Helvetica, sans-serif;
     font-style: normal;
-    font-weight: 700;
     font-size: 1.25rem;
     line-height: 1.5rem;
     color: #003c2d;
   `;
 
+  const StyledTypographyTitle = styled(Typography)`
+    ${sharedTypographyStyles}
+    top: 1.5rem;
+    font-weight: 700;
+  `;
+
   const StyledTypographyDescription = styled(Typography)`
-    position: relative;
-    min-height: fit-content;
-    width: 13.5rem;
+    ${sharedTypographyStyles}
     top: 2rem;
-    font-family: Inter;
     font-weight: 400;
-    left: 2rem;
-    font-size: 1.25rem;
-    color: #003c2d;
-    line-height: 1.5rem;
   `;
 
   return (
@@ -118,7 +115,10 @@ export function MovieCard({ movie }) {
       />
       <StyledTypographyTitle>{movie.title}</StyledTypographyTitle>
 
-      <StyledTypographyDescription paragraph>
+      <StyledTypographyDescription
+        paragraph
+        sx={{ top: '2rem', fontWeight: 400 }}
+      >
         {movie.description}
       </StyledTypographyDescription>
       <BasicRating />
