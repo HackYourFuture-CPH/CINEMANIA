@@ -5,6 +5,7 @@ import { apiURL } from '../../apiURL';
 import { BigMovieCard } from '../../components/BigMovieCard/BigMovieCard';
 import { SimilarMoviesCarousel } from '../../components/SimilarMoviesCarousel/SimilarMoviesCarousel';
 import { TopCastDisplay } from '../../components/TopCastDisplay/TopCastDisplay';
+import { MovieReviews } from '../../components/MovieReviews/MovieReviews';
 
 export const MovieDetails = () => {
   const movieID = useParams().id;
@@ -31,6 +32,7 @@ export const MovieDetails = () => {
       <BigMovieCard currentMovie={currentMovie} />
       <TopCastDisplay movieID={movieID} />
       <SimilarMoviesCarousel categoryID={currentMovie?.categoryID ?? 0} />
+      <MovieReviews />
     </Container>
   );
 };
