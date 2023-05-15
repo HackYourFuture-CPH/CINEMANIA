@@ -1,9 +1,9 @@
-import React from 'react';
+import Box from '@mui/material/Box';
 import Rating from '@mui/material/Rating';
 import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
+import React from 'react';
 
-export default function RatingStars({ averageRating, numberOfReviews }) {
+export const RatingStars = ({ averageRating, numberOfReviews }) => {
   return (
     <Box
       sx={{
@@ -28,4 +28,4 @@ export default function RatingStars({ averageRating, numberOfReviews }) {
       </Typography>
     </Box>
   );
-}
+};

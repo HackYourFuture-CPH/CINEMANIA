@@ -1,20 +1,20 @@
-import React from 'react';
 import {
-  Card,
-  CardMedia,
-  CardContent,
-  Typography,
   Box,
-  Divider,
   Button,
+  Card,
+  CardContent,
+  CardMedia,
+  Divider,
   Stack,
+  Typography,
 } from '@mui/material';
+import React from 'react';
 
-import RatingStars from '../RatingStars/RatingStars';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import FavoriteIcon from '@mui/icons-material/FavoriteBorder';
+import { RatingStars } from '../RatingStars/RatingStars';
 
-const BigMovieCard = ({ currentMovie }) => {
+export const BigMovieCard = ({ currentMovie }) => {
   return (
     <Card
       sx={{
@@ -139,5 +139,3 @@ const BigMovieCard = ({ currentMovie }) => {
     </Card>
   );
 };
-
-export default BigMovieCard;
