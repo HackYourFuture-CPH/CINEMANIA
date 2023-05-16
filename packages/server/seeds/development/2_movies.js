@@ -233,7 +233,7 @@ exports.seed = async function (knex) {
         "Schindler's List is a 1993 American epic historical drama film directed and produced by Steven Spielberg. The story follows Oskar Schindler, a German industrialist who saved the lives of more than a thousand Jewish refugees during the Holocaust by employing them in his factories. The film is based on the novel Schindler's Ark by Australian novelist Thomas Keneally.",
       movie_year: 1993,
       image_location:
-        'https://www.themoviedb.org/t/p/w1280/yPisjyLweCl1tbgwgtzBCNCBle.jpg',
+        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/sF1U4EUQS8YHUYjNl3pMGNIQyr0.jpg',
       price: 150,
     },
     {
@@ -253,7 +253,7 @@ exports.seed = async function (knex) {
         'Pulp Fiction is a stylized and quintessential film about the intertwining lives of two mob hitmen, a boxer, a gangster’s wife, and a pair of diner bandits. The movie is known for its nonlinear narrative structure and the iconic dance scene by Uma Thurman and John Travolta. With its unique blend of dark humor, violence, and pop culture references, Pulp Fiction is widely regarded as one of the greatest films ever made.',
       movie_year: 1994,
       image_location:
-        'https://www.themoviedb.org/t/p/w1280/dM2w364MScsjFf8pfMbaWUcWrR.jpg',
+        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/d5iIlFn5s0ImszYzBPb8JPIfbXD.jpg',
       price: 150,
     },
     {
@@ -263,7 +263,7 @@ exports.seed = async function (knex) {
         "Luke Skywalker, a spirited farm boy, joins rebel forces to save Princess Leia from the evil Darth Vader, and the galaxy from the Empire's planet-destroying Death Star.",
       movie_year: 1977,
       image_location:
-        'https://www.themoviedb.org/t/p/w1280/4iJfYYoQzZcONB9hNzg0J0wWyPH.jpg',
+        'https://cdn.shopify.com/s/files/1/0043/8144/2141/products/IS_2a24ef2e-f8ca-4a2f-92bb-b0bf773e1f88.jpg?v=1645837528',
       price: 120,
     },
     {
@@ -273,7 +273,7 @@ exports.seed = async function (knex) {
         'After the rebels have been brutally overpowered by the Empire on their newly established base, Luke Skywalker takes advanced Jedi training with Master Yoda, while his friends are pursued by Darth Vader as part of his plan to capture Luke.',
       movie_year: 1980,
       image_location:
-        'https://www.themoviedb.org/t/p/w1280/2GQGTXFgWgUoJQLCYvL9oKonR3n.jpg',
+        'https://cdn.shopify.com/s/files/1/1057/4964/products/The-Empire-Strikes-Back-Vintage-Movie-Poster-Original-1-Sheet-27x41_5edbbf9a-5882-40b3-a69f-473a36bb4f8a.jpg?v=1666926044',
       price: 120,
     },
 
@@ -284,7 +284,7 @@ exports.seed = async function (knex) {
         "Luke Skywalker attempts to bring his father back to the light side of the Force, while Han Solo and Princess Leia race to save the rebel alliance from the Empire's world-destroying battle-station, the Death Star.",
       movie_year: 1983,
       image_location:
-        'https://www.themoviedb.org/t/p/w1280/8qJFvU0QVXkF2b4F7ZbTtOwtd3O.jpg',
+        'https://m.media-amazon.com/images/I/7193hhHCbhL._AC_UF894,1000_QL80_.jpg',
       price: 120,
     },
 
@@ -295,7 +295,7 @@ exports.seed = async function (knex) {
         'Two Jedi Knights escape a hostile blockade to find allies and come across a young boy who may bring balance to the Force, but the long dormant Sith resurface to claim their old glory.',
       movie_year: 1999,
       image_location:
-        'https://www.themoviedb.org/t/p/w1280/n8V09dDc02KsSN6Q4hC2BX6hN8X.jpg',
+        'https://i.pinimg.com/originals/18/c3/73/18c3738c652715f727d88282f7e4e44b.jpg',
       price: 120,
     },
 
@@ -306,7 +306,7 @@ exports.seed = async function (knex) {
         'Ten years after initially meeting, Anakin Skywalker shares a forbidden romance with Padmé Amidala, while Obi-Wan Kenobi investigates an assassination attempt on the senator and discovers a secret clone army crafted for the Jedi.',
       movie_year: 2002,
       image_location:
-        'https://www.themoviedb.org/t/p/w1280/2vcNFtrZXNwIcBgH5e2xXCmVR8t.jpg',
+        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/6FfCtAuVAW8XJjZ7eWeLibRLWTw.jpg',
       price: 120,
     },
     {
@@ -315,8 +315,7 @@ exports.seed = async function (knex) {
       description:
         "The Clone Wars rage on, and the rift between Anakin Skywalker and Obi-Wan Kenobi widens with the former's growing obsession with power. Anakin becomes the Sith Lord Darth Vader, while Palpatine, the evil Sith Lord, rises to power to become the Emperor, enforcing his brutal rule over the galaxy.",
       movie_year: 2005,
-      image_location:
-        'https://www.themoviedb.org/t/p/w1280/tgr5Pdy7ehZYBqBkN2K7Q02xgOb.jpg',
+      image_location: 'https://i.imgur.com/rHqbeLh.jpg',
       price: 150,
     },
     {
@@ -376,7 +375,7 @@ exports.seed = async function (knex) {
         'Two astronomers go on a media tour to warn humankind of a comet that will destroy planet Earth.',
       movie_year: 2021,
       image_location:
-        'https://www.themoviedb.org/t/p/w1280/xjyvkgY0hhsXVbcUdObP3B6OgZW.jpg',
+        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/th4E1yqsE8DGpAseLiUrI60Hf8V.jpg',
       price: 120,
     },
     {
@@ -386,7 +385,7 @@ exports.seed = async function (knex) {
         'Neo is back and has to figure out why he has returned to the Matrix, as well as the truth about his reality.',
       movie_year: 2021,
       image_location:
-        'https://www.themoviedb.org/t/p/w1280/6G9zwgCZsyrN8oUHPu7hfR0N8LC.jpg',
+        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/8c4a8kE7PizaGQQnditMmI1xbRp.jpg',
       price: 150,
     },
     {
@@ -396,7 +395,7 @@ exports.seed = async function (knex) {
         'Peter Parker teams up with his counterparts from two different universes to stop a dangerous threat.',
       movie_year: 2021,
       image_location:
-        'https://www.themoviedb.org/t/p/w1280/1lF1nZV1xXx9rN4H41S6mLzoJ3V.jpg',
+        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/uJYYizSuA9Y3DCs0qS4qWvHfZg4.jpg',
       price: 200,
     },
     {
@@ -406,7 +405,7 @@ exports.seed = async function (knex) {
         'A young woman who is the only hearing member of her family dreams of becoming a singer.',
       movie_year: 2021,
       image_location:
-        'https://www.themoviedb.org/t/p/w1280/jmH1Lb5R2NcB6vv7DjsOQh2Fy6R.jpg',
+        'https://m.media-amazon.com/images/M/MV5BYzkyNzNiMDItMGU1Yy00NmEyLWE4N2ItMjkzMDZmMmVhNDU4XkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg',
       price: 90,
     },
     {
