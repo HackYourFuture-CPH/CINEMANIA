@@ -3,34 +3,11 @@ import { Container, IconButton } from '@mui/material';
 import './Carousel.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-// import fallBackMovies from '../../assets/fallBackMovies.json';
 import Slider from 'react-slick';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-// import { apiURL } from '../../apiURL';
 
 const RoundCarousel = ({ carouselData }) => {
-  // const [similarMovies, setSimilarMovies] = useState(fallBackMovies);
-  // useEffect(() => {
-  //   (async () => {
-  //     if (categoryID) {
-  //       try {
-  //         const response = await fetch(
-  //           `${apiURL()}/movies/category/${categoryID}`,
-  //         );
-  //         if (response.ok) {
-  //           const data = await response.json();
-  //           if (data) {
-  //             setSimilarMovies(data);
-  //           }
-  //         }
-  //       } catch (error) {
-  //         throw new Error(error);
-  //       }
-  //     }
-  //   })();
-  // }, [categoryID]);
-
   const settings = {
     className: 'center',
     infinite: true,
