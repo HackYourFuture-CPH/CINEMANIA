@@ -48,7 +48,6 @@ const StyledMovieGrid = styled(Box)`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: linear-gradient(to right bottom, #003c2d, #00ffc2, #000000);
 `;
 
 const LatestRating = styled(Typography)`
