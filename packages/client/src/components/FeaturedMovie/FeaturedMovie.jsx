@@ -29,7 +29,7 @@ export const FeaturedMovie = () => {
   }
 
   return (
-    <Container>
+    <>
       <Section>
         <CenteredBox>
           <ImageShawdow>
@@ -62,15 +62,9 @@ export const FeaturedMovie = () => {
           Placeholder for carousel new arrival and most popular
         </h1>
       </Section>
-    </Container>
+    </>
   );
 };
-
-const Container = styled(Box)`
-  background: linear-gradient(to right bottom, #000000, #003c2d, #00ffc2);
-  z-index: -100;
-  position: relative;
-`;
 
 const Section = styled.section`
   height: 95vh;
@@ -105,7 +99,6 @@ const TitleWrapper = styled(Box)`
   font-family: 'Inter';
   color: #fff;
   top: 3.75rem;
-  z-index: 3000;
 `;
 
 const StyledTypography = styled(Typography)`
