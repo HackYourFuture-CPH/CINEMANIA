@@ -10,22 +10,27 @@ exports.seed = async function (knex) {
     {
       full_name: 'Ada Lovelace',
       email: 'ada.lovelace@example.com',
+      uid: '12',
     },
     {
       full_name: 'Grace Hopper',
       email: 'grace.hopper@example.com',
+      uid: '523',
     },
     {
       full_name: 'Alan Turing',
       email: 'alan.turing@example.com',
+      uid: '123543d',
     },
     {
       full_name: 'Vint Cerf',
       email: 'vint.cerf@example.com',
+      uid: 'dhjdhd1',
     },
     {
       full_name: 'Tim Berners-Lee',
       email: 'tim.berners.lee@example.com',
+      uid: '1bchbwjdee',
     },
   ]);
   await knex('tokens').insert([
