@@ -55,9 +55,11 @@ export const BigMovieCard = ({ currentMovie }) => {
             sx={{
               color: 'white',
               backgroundColor: 'black',
-
+              position: 'absolute',
               width: 30.52,
               height: 28,
+              top: 20,
+              right: 20,
             }}
           />
         </Box>
