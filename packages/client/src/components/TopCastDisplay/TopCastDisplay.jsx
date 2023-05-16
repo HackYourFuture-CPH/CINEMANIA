@@ -18,12 +18,14 @@ export const TopCastDisplay = ({ movieID }) => {
   useEffect(() => {
     const fetchCastList = async () => {
       setIsLoading(true);
-      try {
-        const response = await fetch(`${apiURL()}/crew/movie/${movieID}`);
-        const data = await response.json();
-        setCastList(data);
-      } catch (error) {
-        setIsLoading(false);
+      if (movieID) {
+        try {
+          const response = await fetch(`${apiURL()}/crew/movie/${movieID}`);
+          const data = await response.json();
+          setCastList(data);
+        } catch (error) {
+          setIsLoading(false);
+        }
       }
       setIsLoading(false);
     };
@@ -31,7 +33,7 @@ export const TopCastDisplay = ({ movieID }) => {
   }, [movieID]);
 
   const handleShowFullCast = () => {
-    setShowFullCast(!showFullCast);
+    setShowFullCast((previousFullCastState) => !previousFullCastState);
   };
 
   return (
