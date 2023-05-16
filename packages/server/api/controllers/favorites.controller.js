@@ -4,7 +4,7 @@ const knex = require('../../config/db');
 const getFavoriteMovie = async (userID) => {
   return knex('movies')
     .select('*')
-    .join('favorites', 'favorites.user_id', '=', 'movies.id')
+    .join('favorites', 'favorites.movie_id', '=', 'movies.id')
     .where({ user_id: userID });
 };
 
