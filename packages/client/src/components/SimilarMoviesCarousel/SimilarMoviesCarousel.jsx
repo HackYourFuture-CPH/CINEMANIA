@@ -62,7 +62,11 @@ export const SimilarMoviesCarousel = ({ categoryID }) => {
             {similarMovies?.map((item) => (
               <div key={item.description} className="box">
                 <a href={`/movies/${item.id}`}>
-                  <img src={item.image_location} alt={item.title} />
+                  <img
+                    className="carousel-img"
+                    src={item.image_location}
+                    alt={item.title}
+                  />
                 </a>
               </div>
             ))}
