@@ -113,11 +113,14 @@ const getMovies = async (queryParams) => {
     categoryId = null,
     userId = null,
     title = null,
+    pageNumber = 1,
+    pageSize = 30,
   } = queryParams;
 
-  const query = knex('movies')
+  const offset = (pageNumber - 1) * pageSize;
+
+  const moviesQuery = knex('movies')
     .leftJoin('reviews', 'reviews.movie_id', '=', 'movies.id')
-    .leftJoin('categories', 'categories.id', '=', 'movies.category_id')
     .select(
       'movies.id',
       'movies.title',
@@ -143,7 +146,7 @@ const getMovies = async (queryParams) => {
     .groupBy('movies.id')
     .modify((queryBuilder) => {
       if (categoryId) {
-        queryBuilder.where('categories.id', '=', categoryId);
+        queryBuilder.where('movies.category_id', '=', categoryId);
       }
 
       if (sortBy === 'rating') {
@@ -161,14 +164,45 @@ const getMovies = async (queryParams) => {
       if (title) {
         queryBuilder.where('movies.title', 'like', `%${title}%`);
       }
+
+      queryBuilder.limit(pageSize).offset(offset);
     });
 
-  const results = await query;
+  const countQuery = knex('movies')
+    .modify((queryBuilder) => {
+      if (categoryId) {
+        queryBuilder.where('movies.category_id', '=', categoryId);
+      }
 
-  return results.map((result) => ({
-    ...result,
-    is_favorite: result.is_favorite === 1,
+      if (title) {
+        queryBuilder.where('movies.title', 'like', `%${title}%`);
+      }
+    })
+    .count('movies.id as totalMovies');
+
+  const [movies, [{ totalMovies }]] = await Promise.all([
+    moviesQuery,
+    countQuery,
+  ]);
+
+  const totalPages = Math.ceil(totalMovies / pageSize);
+
+  const pagination = {
+    pageNumber,
+    pageSize,
+    totalMovies,
+    totalPages,
+  };
+
+  const formattedMovies = movies.map((movie) => ({
+    ...movie,
+    is_favorite: movie.is_favorite === 1,
   }));
+
+  return {
+    pagination,
+    movies: formattedMovies,
+  };
 };
 
 const getFeaturedMovie = async (req, res) => {
