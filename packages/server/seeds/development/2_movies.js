@@ -13,7 +13,7 @@ exports.seed = async function (knex) {
         'When a beautiful stranger leads computer hacker Neo to a forbidding underworld, he discovers the shocking truth--the life he knows is the elaborate deception of an evil cyber-intelligence.',
       movie_year: 1999,
       image_location:
-        'https://www.themoviedb.org/t/p/w1280/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg',
+        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg',
       price: 100,
     },
     {
@@ -23,7 +23,7 @@ exports.seed = async function (knex) {
         'Over the course of several years, two convicts form a friendship, seeking consolation and, eventually, redemption through basic compassion.',
       movie_year: 1994,
       image_location:
-        'https://www.themoviedb.org/t/p/w1280/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg',
+        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg',
       price: 80,
     },
     {
