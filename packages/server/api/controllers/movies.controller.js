@@ -22,6 +22,7 @@ const getMoviesByCategory = async (categoryId) => {
         'm.description',
         'm.movie_year',
         'm.image_location',
+        'm.backdropURL',
         'm.price',
         'm.created_at',
       )
@@ -53,6 +54,7 @@ const getDetailsOfMovieByID = async (id) => {
         'm.description',
         'm.movie_year',
         'm.image_location',
+        'm.backdropURL',
         'm.category_id',
         knex.raw('ROUND(AVG(r.rating),1) as rating'),
         knex.raw('COUNT(DISTINCT r.user_id) as number_of_ratings'),
@@ -122,6 +124,7 @@ const getMovies = async (queryParams) => {
       'movies.description',
       'movies.movie_year',
       'movies.image_location',
+      'movies.backdropURL',
       'movies.created_at',
       'movies.price',
       'movies.category_id',
@@ -181,6 +184,7 @@ const getFeaturedMovie = async (req, res) => {
       title: lastMovie.title,
       description: lastMovie.description,
       image_location: lastMovie.image_location,
+      backdropURL: lastMovie.backdropURL,
       movie_year: lastMovie.movie_year,
       price: lastMovie.price,
     };

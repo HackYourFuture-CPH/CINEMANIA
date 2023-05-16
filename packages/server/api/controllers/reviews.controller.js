@@ -4,6 +4,7 @@ const getLatestRatedMovies = async () => {
   return knex('reviews')
     .select(
       'movies.image_location',
+      'movies.backdropURL',
       'movies.title',
       'reviews.rating',
       'reviews.review_text',
