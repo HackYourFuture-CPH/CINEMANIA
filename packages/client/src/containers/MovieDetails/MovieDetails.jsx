@@ -4,8 +4,9 @@ import { useParams } from 'react-router-dom';
 import { apiURL } from '../../apiURL';
 import fallBackMovies from '../../assets/fallBackMovies.json';
 import { BigMovieCard } from '../../components/BigMovieCard/BigMovieCard';
-import { SimilarMoviesCarousel } from '../../components/SimilarMoviesCarousel/SimilarMoviesCarousel';
+
 import { TopCastDisplay } from '../../components/TopCastDisplay/TopCastDisplay';
+import { SimilarMovies } from '../CarouselWrapper/SimilarMovies';
 
 export const MovieDetails = () => {
   const movieID = useParams().id;
@@ -26,7 +27,7 @@ export const MovieDetails = () => {
     <Container>
       <BigMovieCard currentMovie={currentMovie} />
       <TopCastDisplay movieID={currentMovie?.id} />
-      <SimilarMoviesCarousel categoryID={currentMovie?.category_id} />
+      <SimilarMovies categoryID={currentMovie?.category_id} />
     </Container>
   );
 };
