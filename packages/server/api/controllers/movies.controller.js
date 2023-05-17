@@ -117,7 +117,6 @@ const getMovies = async (queryParams) => {
 
   const query = knex('movies')
     .leftJoin('reviews', 'reviews.movie_id', '=', 'movies.id')
-    .leftJoin('categories', 'categories.id', '=', 'movies.category_id')
     .select(
       'movies.id',
       'movies.title',
@@ -128,7 +127,7 @@ const getMovies = async (queryParams) => {
       'movies.created_at',
       'movies.price',
       'movies.category_id',
-      knex.raw('AVG(reviews.rating) as average_rating'),
+      knex.raw('AVG(IFNULL(reviews.rating, 0)) as  average_rating'),
       knex.raw(
         `
         IF(EXISTS(
@@ -143,11 +142,11 @@ const getMovies = async (queryParams) => {
     .groupBy('movies.id')
     .modify((queryBuilder) => {
       if (categoryId) {
-        queryBuilder.where('categories.id', '=', categoryId);
+        queryBuilder.where('movies.category_id', '=', categoryId);
       }
 
       if (sortBy === 'rating') {
-        queryBuilder.orderByRaw('AVG(reviews.rating) desc');
+        queryBuilder.orderBy('average_rating', 'desc');
       }
 
       if (sortBy === 'recently_added') {
