@@ -26,7 +26,7 @@ const BasicRating = () => {
 
 export const MovieCard = ({ movie }) => {
   const [favorites, toggleFavorite] = useFavorites([]);
-  const isFavorite = favorites.includes(movie);
+  const isFavorite = favorites.find((item) => item.id === movie.id);
 
   return (
     <Card
