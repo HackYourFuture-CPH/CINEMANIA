@@ -8,7 +8,7 @@ export const MostPoppular = () => {
   useEffect(() => {
     const getPopularMovies = async () => {
       try {
-        const response = await fetch(`${apiURL()}/movies`);
+        const response = await fetch(`${apiURL()}/views/most-popular`);
         const data = await response.json();
         setPopularMovies(data.slice(1, 12));
       } catch (error) {
