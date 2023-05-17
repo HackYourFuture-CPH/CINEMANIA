@@ -38,7 +38,6 @@ const router = createBrowserRouter([
         path: '/movies',
         element: <MovieListPage />,
       },
-
       {
         path: '*',
         element: <PageNotFound />,
