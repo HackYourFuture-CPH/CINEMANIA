@@ -115,7 +115,7 @@ const getMovies = async (queryParams) => {
     title = null,
     pageNumber = 1,
     pageSize = 30,
-    isFavoritePage = false,
+    isFavoritePage = 'false',
   } = queryParams;
 
   const offset = (pageNumber - 1) * pageSize;
@@ -166,7 +166,7 @@ const getMovies = async (queryParams) => {
         queryBuilder.where('movies.title', 'like', `%${title}%`);
       }
 
-      if (isFavoritePage) {
+      if (isFavoritePage === 'true') {
         queryBuilder
           .join('favorites', 'favorites.movie_id', '=', 'movies.id')
           .where('favorites.user_id', '=', userId);
