@@ -6,11 +6,11 @@ import { MovieList } from '../../components/MovieList/MovieList';
 import { SearchBar } from '../../components/SearchBar/SearchBar';
 import { MovieListProvider } from '../../context/movieListContext';
 
-export const MovieListPage = () => {
+export const Favorites = () => {
   const theme = useTheme();
 
   return (
-    <MovieListProvider isFavoritePage={false}>
+    <MovieListProvider isFavoritePage={true}>
       <Container
         sx={{
           pt: '3rem',

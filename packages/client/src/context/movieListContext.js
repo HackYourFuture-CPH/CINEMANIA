@@ -9,7 +9,7 @@ import { apiURL } from '../apiURL';
 
 const MovieListContext = createContext();
 
-export const MovieListProvider = ({ children }) => {
+export const MovieListProvider = ({ isFavoritePage, children }) => {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -19,7 +19,7 @@ export const MovieListProvider = ({ children }) => {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        let url = `${apiURL()}/movies?sortBy=${sortBy}`;
+        let url = `${apiURL()}/movies?sortBy=${sortBy}&isFavoritePage=${isFavoritePage}&userId=${1}`;
         if (selectedCategoryId) {
           url += `&categoryId=${selectedCategoryId}`;
         }
@@ -34,7 +34,7 @@ export const MovieListProvider = ({ children }) => {
     };
 
     fetchMovies();
-  }, [sortBy, selectedCategoryId]);
+  }, [sortBy, selectedCategoryId, isFavoritePage]);
 
   const contextValue = useMemo(
     () => ({
