@@ -22,13 +22,13 @@ export const BigMovieCard = ({ currentMovie }) => {
         sx={{
           bgcolor: 'mainGreen',
           display: 'flex',
+          flexDirection: 'row',
           justifyContent: 'center',
           alignItems: 'center',
-          border: 1,
+
           width: '100%',
-          height: 962,
-          paddingTop: 5,
-          paddingBottom: 5,
+
+          padding: '5rem',
         }}
       >
         <Box
@@ -41,10 +41,10 @@ export const BigMovieCard = ({ currentMovie }) => {
           <CardMedia
             component="img"
             sx={{
-              width: 501,
-              height: 751,
+              width: '30rem',
+
               p: 2,
-              bgcolor: '#FFFFFF',
+              bgcolor: 'white',
               border: 1,
               borderColor: 'grey.500',
             }}
@@ -58,8 +58,8 @@ export const BigMovieCard = ({ currentMovie }) => {
               position: 'absolute',
               width: 30.52,
               height: 28,
-              top: 130,
-              left: 640,
+              top: 20,
+              right: 20,
             }}
           />
         </Box>

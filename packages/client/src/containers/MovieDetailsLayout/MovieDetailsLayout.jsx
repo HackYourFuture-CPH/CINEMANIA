@@ -6,7 +6,7 @@ export function MovieDetailsLayout({ children }) {
     marginTop: '3rem',
     display: 'flex',
     flexDirection: 'column',
-    aligntems: 'center',
+    alignItems: 'center',
     justifyContent: 'center',
     padding: 0,
   };

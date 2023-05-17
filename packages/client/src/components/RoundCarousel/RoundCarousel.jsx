@@ -1,11 +1,14 @@
 import React from 'react';
-import { Box, Container, IconButton, Typography, Link } from '@mui/material';
+import { Box, IconButton, Typography, Link } from '@mui/material';
 import './Carousel.css';
+
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+
+import { MovieDetailsLayout } from '../../containers/MovieDetailsLayout/MovieDetailsLayout';
 
 const RoundCarousel = ({ carouselData }) => {
   const settings = {
@@ -45,7 +48,7 @@ const RoundCarousel = ({ carouselData }) => {
   };
   const slider = React.useRef(null);
   return (
-    <Container>
+    <MovieDetailsLayout>
       <Typography
         variant="overline"
         sx={{
@@ -106,7 +109,7 @@ const RoundCarousel = ({ carouselData }) => {
           />
         </IconButton>
       </Box>
-    </Container>
+    </MovieDetailsLayout>
   );
 };
 
