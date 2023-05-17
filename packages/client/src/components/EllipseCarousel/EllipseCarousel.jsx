@@ -1,77 +1,46 @@
-import React, { useEffect, useState } from 'react';
-import { Box, IconButton, Typography } from '@mui/material';
+import React from 'react';
+import { Box, IconButton, Typography, Container } from '@mui/material';
 import Slider from 'react-slick';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { apiURL } from '../../apiURL';
 import styled from '@emotion/styled';
 
-export const EllipseCarousel = () => {
-  const [popularMovies, setPopularMovies] = useState([]);
+export const EllipseCarousel = ({ popularMovies }) => {
   const slider = React.useRef(null);
-
-  useEffect(() => {
-    const getPopularMovies = async () => {
-      try {
-        const response = await fetch(`${apiURL()}/movies`);
-        const data = await response.json();
-        setPopularMovies(data.slice(1, 12));
-      } catch (error) {
-        return error;
-      }
-    };
-    getPopularMovies();
-  }, []);
+  const settings = {
+    className: 'center',
+    infinite: true,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    swipeToSlide: true,
+    arrows: false,
+  };
 
   return (
-    <Section>
-      <Container>
-        <MostPopularText>MOST POPPULAR</MostPopularText>
-        <CarouselWrapper>
-          <IconButton onClick={() => slider?.current?.slickPrev()}>
-            <LeftArrow />
-          </IconButton>
-          <SliderWrapper>
-            <Slider {...settings} ref={slider}>
-              {popularMovies?.map((movie) => (
-                <Box key={movie.id}>
-                  <CarouselImg src={movie.image_location} alt={movie.title} />
-                </Box>
-              ))}
-            </Slider>
-          </SliderWrapper>
-          <IconButton onClick={() => slider?.current?.slickNext()}>
-            <RightArrow />
-          </IconButton>
-        </CarouselWrapper>
-      </Container>
-    </Section>
+    <Container maxWidth="false">
+      <Box display="flex" justifyContent="flex-start">
+        <MostPopularText>MOST POPULAR</MostPopularText>
+      </Box>
+      <CarouselWrapper>
+        <IconButton onClick={() => slider?.current?.slickPrev()}>
+          <LeftArrow />
+        </IconButton>
+        <SliderWrapper>
+          <Slider {...settings} ref={slider}>
+            {popularMovies?.map((movie) => (
+              <Box key={movie.id}>
+                <CarouselImg src={movie.image_location} alt={movie.title} />
+              </Box>
+            ))}
+          </Slider>
+        </SliderWrapper>
+        <IconButton onClick={() => slider?.current?.slickNext()}>
+          <RightArrow />
+        </IconButton>
+      </CarouselWrapper>
+    </Container>
   );
 };
-
-const settings = {
-  className: 'center',
-  infinite: true,
-  centerPadding: '60px',
-  slidesToShow: 3,
-  slidesToScroll: 1,
-  swipeToSlide: true,
-  arrows: false,
-};
-
-const Section = styled.section`
-  height: 95vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
-const Container = styled(Box)`
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-`;
 
 const MostPopularText = styled(Typography)`
   color: white;
@@ -80,12 +49,12 @@ const MostPopularText = styled(Typography)`
   font-family: Inter, sans-serif;
   border-left: 0.3rem solid #ffffff;
   padding-left: 0.8rem;
-  margin-left: 5rem;
-  margin-bottom: 1.5rem;
+  margin: 0 0 1.5rem 10rem;
 `;
 
 const CarouselWrapper = styled(Box)`
   display: flex;
+  justify-content: center;
 `;
 
 const RightArrow = styled(ArrowForwardIosIcon)`
@@ -102,16 +71,16 @@ const LeftArrow = styled(ArrowBackIosIcon)`
 
 const CarouselImg = styled.img`
   width: 95%;
-  height: 280px;
-  border-radius: 130px;
+  height: 17.5rem;
+  border-radius: 8rem;
+  margin: auto auto;
   &:hover {
     transform: scale(1.02);
-    cursor: pointer;  
-};
+    cursor: pointer;
   }
 `;
 
 const SliderWrapper = styled.div`
-  height: 300px;
-  width: 1700px;
+  height: 18.75rem;
+  width: 106rem;
 `;
