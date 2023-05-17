@@ -1,16 +1,16 @@
-import { Box, Container } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import React from 'react';
-import { Categories } from '../../components/Categories/Categories';
-import { MovieList } from '../../components/MovieList/MovieList';
-import { SearchBar } from '../../components/SearchBar/SearchBar';
 import { MovieListProvider } from '../../context/movieListContext';
+import { Box, Container } from '@mui/material';
+import { Categories } from '../Categories/Categories';
+import { SearchBar } from '../SearchBar/SearchBar';
+import { MovieList } from './MovieList';
+import React from 'react';
 
-export const Favorites = () => {
+export const MovieOverview = ({ isFavoritePage }) => {
   const theme = useTheme();
 
   return (
-    <MovieListProvider isFavoritePage={true}>
+    <MovieListProvider isFavoritePage={isFavoritePage}>
       <Container
         sx={{
           pt: '3rem',

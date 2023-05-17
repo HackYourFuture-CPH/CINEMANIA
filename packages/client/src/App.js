@@ -11,7 +11,7 @@ import { AuthPage } from './containers/Auth/AuthPage';
 // MUI THEME
 import { ThemeProvider } from '@mui/material';
 import { theme } from './lib/theme';
-import { Favorites } from './containers/FavoritePage/Favorites';
+import { FavoritesPage } from './containers/FavoritesPage/FavoritesPage';
 
 // Routes
 const router = createBrowserRouter([
@@ -36,7 +36,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/favorites',
-        element: <Favorites />,
+        element: <FavoritesPage />,
       },
       {
         path: '*',

@@ -1,6 +1,6 @@
 import React from 'react';
 import { MovieOverview } from '../../components/MovieOverview/MovieOverview';
 
-export const MovieListPage = () => {
-  return <MovieOverview isFavoritePage={false} />;
+export const FavoritesPage = () => {
+  return <MovieOverview isFavoritePage={true} />;
 };
