@@ -1,10 +1,17 @@
-import { Grid } from '@mui/material';
 import React from 'react';
-import { useMovieList } from '../../context/movieListContext';
+import { Grid } from '@mui/material';
 import { MovieCard } from './MovieCard';
+import { useMoviesAndCategoriesContext } from '../../context/FetchCategoriesAndMovies';
 
 export const MovieList = () => {
-  const { movies = [] } = useMovieList();
+  const { state } = useMoviesAndCategoriesContext();
+  if (state.movieLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (state.movieFetchError) {
+    return <div>Error: {state.movieFetchError.message}</div>;
+  }
   return (
     <Grid
       container
@@ -13,9 +20,13 @@ export const MovieList = () => {
         marginBottom: '3rem',
       }}
     >
-      {movies.map((movie) => (
-        <MovieCard key={movie.id} movie={movie} />
-      ))}
+      {state.moviesData.movies && state.moviesData.movies.length > 0 ? (
+        state.moviesData.movies.map((movie) => (
+          <MovieCard key={movie.id} movie={movie} />
+        ))
+      ) : (
+        <h1> Sorry! No movies found</h1>
+      )}
     </Grid>
   );
 };

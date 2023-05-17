@@ -1,20 +1,13 @@
-import { Button as MuiButton } from '@mui/material';
 import React from 'react';
-import { useMovieList } from '../../context/movieListContext';
+import { Button as MuiButton } from '@mui/material';
 
-export const CategoryButton = ({ label, categoryId }) => {
-  const { selectedCategoryId, setSelectedCategoryId } = useMovieList();
-
-  const handleClick = () => {
-    if (isActive) {
-      setSelectedCategoryId(null);
-    } else {
-      setSelectedCategoryId(categoryId);
-    }
-  };
-
-  const isActive = selectedCategoryId === categoryId;
-
+export const CategoryButton = ({
+  label,
+  categoryId,
+  handleOnClick,
+  selectedCategoryId,
+}) => {
+  const isActive = categoryId === selectedCategoryId;
   return (
     <MuiButton
       sx={{
@@ -34,7 +27,7 @@ export const CategoryButton = ({ label, categoryId }) => {
         },
       }}
       type="button"
-      onClick={handleClick}
+      onClick={handleOnClick}
     >
       {label}
     </MuiButton>
