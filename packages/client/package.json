@@ -41,6 +41,7 @@
     ]
   },
   "devDependencies": {
+    "husky": "7",
     "webpack": "^5.81.0"
   }
 }

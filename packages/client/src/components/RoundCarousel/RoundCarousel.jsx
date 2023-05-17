@@ -18,7 +18,7 @@ const RoundCarousel = ({ carouselData }) => {
     arrows: false,
     responsive: [
       {
-        breakpoint: 1024,
+        breakpoint: 1440,
         settings: {
           slidesToShow: 3,
           slidesToScroll: 1,
@@ -27,7 +27,7 @@ const RoundCarousel = ({ carouselData }) => {
         },
       },
       {
-        breakpoint: 600,
+        breakpoint: 800,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 1,
@@ -35,7 +35,7 @@ const RoundCarousel = ({ carouselData }) => {
         },
       },
       {
-        breakpoint: 480,
+        breakpoint: 600,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
@@ -67,9 +67,9 @@ const RoundCarousel = ({ carouselData }) => {
         }}
       >
         <IconButton onClick={() => slider?.current?.slickPrev()}>
-          <ArrowBackIosIcon sx={{ fill: '#00FFC2', fontSize: 40 }} />
+          <ArrowBackIosIcon sx={{ fill: '#00FFC2', fontSize: '90%' }} />
         </IconButton>
-        <Box sx={{ height: '100%', width: '100%' }}>
+        <Box sx={{ height: '90%', width: '90%' }}>
           <Slider {...settings} ref={slider}>
             {carouselData?.map((item) => (
               <Box
@@ -77,7 +77,6 @@ const RoundCarousel = ({ carouselData }) => {
                 sx={{
                   height: 200,
                   borderRadius: '120px',
-                  // bgcolor: 'red',
                   overflow: 'hidden',
                   position: 'relative',
                 }}
@@ -86,7 +85,7 @@ const RoundCarousel = ({ carouselData }) => {
                   <Box
                     component="img"
                     sx={{
-                      width: 400,
+                      width: 450,
                       boxShadow: 5,
                       position: 'absolute',
                       top: -170,
@@ -101,9 +100,7 @@ const RoundCarousel = ({ carouselData }) => {
           </Slider>
         </Box>
         <IconButton onClick={() => slider?.current?.slickNext()}>
-          <ArrowForwardIosIcon
-            style={{ fill: '#00FFC2', fontSize: 40, mb: 20 }}
-          />
+          <ArrowForwardIosIcon style={{ fill: '#00FFC2', fontSize: '90%' }} />
         </IconButton>
       </Box>
     </Container>
