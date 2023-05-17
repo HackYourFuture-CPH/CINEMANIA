@@ -38,7 +38,7 @@ export const handleRemoveFavorite = async (
   userId,
 ) => {
   try {
-    const response = await fetch(`${apiURL()}/favorites/${movieId}/${userId}`, {
+    await fetch(`${apiURL()}/favorites/${movieId}/${userId}`, {
       method: 'DELETE',
       headers: {
         'Content-type': 'application/json',
