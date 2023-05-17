@@ -25,7 +25,7 @@ export const MovieListProvider = ({ children }) => {
         }
         const response = await fetch(url);
         const data = await response.json();
-        setMovies(data);
+        setMovies(data.movies);
         setIsLoading(false);
       } catch (err) {
         setError(err);
