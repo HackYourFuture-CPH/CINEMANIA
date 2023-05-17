@@ -1,14 +1,14 @@
 import { apiURL } from '../../apiURL';
 
 export const handleAddFavorite = async (
-  movieID,
+  movieId,
   item,
   favorites,
   setFavorites,
   userId,
 ) => {
   const body = {
-    movie_id: movieID,
+    movie_id: movieId,
     user_id: userId,
   };
 
@@ -44,10 +44,6 @@ export const handleRemoveFavorite = async (
         'Content-type': 'application/json',
       },
     });
-
-    if (!response.ok) {
-      throw new Error('Failed to remove favorite movie');
-    }
 
     const updatedFavorites = favorites.filter((movie) => movie.id !== item.id);
     setFavorites(updatedFavorites);
