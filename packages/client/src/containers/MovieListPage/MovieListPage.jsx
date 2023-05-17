@@ -15,6 +15,13 @@ export const MovieListPage = () => {
         sx={{
           pt: '3rem',
           pb: '3rem',
+          [theme.breakpoints.up('sm')]: {
+            paddingLeft: '6rem',
+            paddingRight: '7rem',
+          },
+          backgroundImage:
+            'linear-gradient(to right, #000000 0%, #003c2d 50%), linear-gradient(to bottom right, #003c2d 50%, #00ffc2 100%)',
+          backgroundSize: 'cover',
         }}
         maxWidth="xl"
       >
