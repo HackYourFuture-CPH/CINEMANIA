@@ -5,7 +5,7 @@ import { apiURL } from '../../apiURL';
 import styled from '@emotion/styled';
 
 export const FeaturedMovie = () => {
-  const [featuredMovie, setFeaturedMovie] = useState(null);
+  const [featuredMovie, setFeaturedMovie] = useState([]);
 
   useEffect(() => {
     async function fetchMovies() {
@@ -15,16 +15,21 @@ export const FeaturedMovie = () => {
           throw new Error('Failed to fetch featured movie');
         }
         const data = await response.json();
-        setFeaturedMovie(data);
+
+        const randomFeaturedMovie =
+          data[Math.floor(Math.random() * data.length)];
+        setFeaturedMovie(randomFeaturedMovie);
       } catch (error) {
         return null;
       }
     }
 
     fetchMovies();
+    const interval = setInterval(fetchMovies, 30000);
+    return () => clearInterval(interval);
   }, []);
 
-  if (!featuredMovie) {
+  if (featuredMovie.length === 0) {
     return <h4>..Loading</h4>;
   }
 
@@ -36,7 +41,7 @@ export const FeaturedMovie = () => {
             <Image
               component="img"
               alt={featuredMovie.title}
-              src={featuredMovie.image_location}
+              src={featuredMovie.backdrop_URL}
             />
           </ImageShawdow>
           <TitleWrapper>
