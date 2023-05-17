@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import PersonIcon from '@mui/icons-material/Person';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { useNavigate } from 'react-router-dom';
 import {
   AppBar,
   Box,
@@ -16,6 +17,7 @@ import React from 'react';
 const NavLink = (props) => <Link underline="none" color="inherit" {...props} />;
 
 export const Navbar = () => {
+  const navigate = useNavigate();
   return (
     <StyledAppBar>
       <Box>
@@ -47,7 +49,11 @@ export const Navbar = () => {
               <ShoppingCartIcon />
             </NavIcon>
             <NavIcon>
-              <FavoriteBorderIcon />
+              <FavoriteBorderIcon
+                onClick={() => {
+                  navigate('/favorites');
+                }}
+              />
             </NavIcon>
           </IconMenu>
         </Toolbar>
