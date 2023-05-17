@@ -1,14 +1,14 @@
 import React from 'react';
 import { Box, IconButton, Typography, Link, Container } from '@mui/material';
-import './Carousel.css';
-
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import styled from '@emotion/styled';
 
 const RoundCarousel = ({ carouselData }) => {
+  const slider = React.useRef(null);
   const settings = {
     className: 'center',
     infinite: true,
@@ -44,54 +44,22 @@ const RoundCarousel = ({ carouselData }) => {
       },
     ],
   };
-  const slider = React.useRef(null);
+
   return (
     <Container>
-      <Typography
-        variant="overline"
-        sx={{
-          height: 30,
-          fontSize: 32,
-          fontWeight: 800,
-          color: '#FFFFFF',
-          borderLeft: 4,
-          p: 1,
-        }}
-      >
-        SIMILAR MOVIES
-      </Typography>
+      <Title>SIMILAR MOVIES</Title>
 
-      <Box
-        sx={{
-          display: 'flex',
-          p: 2,
-        }}
-      >
+      <CarouselWrapper>
         <IconButton onClick={() => slider?.current?.slickPrev()}>
-          <ArrowBackIosIcon sx={{ fill: '#00FFC2', fontSize: '90%' }} />
+          <LeftArrow />
         </IconButton>
-        <Box sx={{ height: '90%', width: '90%' }}>
+        <SliderWrapper>
           <Slider {...settings} ref={slider}>
             {carouselData?.map((item) => (
-              <Box
-                key={item.description}
-                sx={{
-                  height: 200,
-                  borderRadius: '120px',
-                  overflow: 'hidden',
-                  position: 'relative',
-                }}
-              >
+              <Box key={item.id}>
                 <Link href={`/movies/${item.id}`} underline="none">
-                  <Box
+                  <CarouselImg
                     component="img"
-                    sx={{
-                      width: 450,
-                      boxShadow: 5,
-                      position: 'absolute',
-                      top: -170,
-                      left: -10,
-                    }}
                     src={item.image_location}
                     alt={item.title}
                   />
@@ -99,13 +67,55 @@ const RoundCarousel = ({ carouselData }) => {
               </Box>
             ))}
           </Slider>
-        </Box>
+        </SliderWrapper>
         <IconButton onClick={() => slider?.current?.slickNext()}>
-          <ArrowForwardIosIcon style={{ fill: '#00FFC2', fontSize: '90%' }} />
+          <RightArrow />
         </IconButton>
-      </Box>
+      </CarouselWrapper>
     </Container>
   );
 };
 
 export { RoundCarousel };
+const Title = styled(Typography)`
+  color: white;
+  font-size: 2rem;
+  font-weight: 700;
+  font-family: Inter, sans-serif;
+  border-left: 0.3rem solid #ffffff;
+  padding-left: 0.9rem;
+  margin: 0 0 1.5rem 0;
+`;
+
+const CarouselWrapper = styled(Box)`
+  display: flex;
+  justify-content: center;
+`;
+
+const SliderWrapper = styled(Box)`
+  height: 90%;
+  width: 95%;
+`;
+
+const RightArrow = styled(ArrowForwardIosIcon)`
+  color: #00ffc2;
+  font-size: 2.5rem;
+  font-weight: bolder;
+`;
+
+const LeftArrow = styled(ArrowBackIosIcon)`
+  color: #00ffc2;
+  font-size: 2.5rem;
+  font-weight: bolder;
+`;
+
+const CarouselImg = styled.img`
+  width: 98%;
+  height: 17.5rem;
+  border-radius: 8rem;
+  margin: auto auto;
+  &:hover {
+    transform: scale(1.02);
+    cursor: pointer;
+  }
+`;
