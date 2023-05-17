@@ -17,7 +17,7 @@ export const LatestRatingMovies = () => {
           throw new Error('Failed to fetch movies with the latest rating');
         }
         const data = await response.json();
-        setMovies(data);
+        setMovies(data.movies);
       } catch (error) {
         return error;
       }
