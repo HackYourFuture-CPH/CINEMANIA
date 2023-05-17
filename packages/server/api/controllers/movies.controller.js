@@ -214,13 +214,13 @@ const getMovies = async (queryParams) => {
 
 const getFeaturedMovie = async (req, res) => {
   try {
-    const lastMovie = await knex('movies')
+    const lastMovies = await knex('movies')
       .orderBy('movie_year', 'desc')
-      .first();
-    if (!lastMovie) {
+      .limit(5);
+    if (lastMovies.length === 0) {
       throw new HttpError('No movies found in the database');
     }
-    const featuredMovie = {
+    const featuredMovie = lastMovies.map((lastMovie) => ({
       category_id: lastMovie.category_id,
       title: lastMovie.title,
       description: lastMovie.description,
@@ -228,7 +228,7 @@ const getFeaturedMovie = async (req, res) => {
       backdrop_URL: lastMovie.backdrop_URL,
       movie_year: lastMovie.movie_year,
       price: lastMovie.price,
-    };
+    }));
     res.json(featuredMovie);
   } catch (error) {
     res.status(500).json({ error: error.message });
