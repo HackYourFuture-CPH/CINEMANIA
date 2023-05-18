@@ -11,6 +11,7 @@ exports.up = function (knex) {
     table.string('description', 500).notNullable();
     table.integer('movie_year').unsigned();
     table.string('image_location');
+    table.string('backdrop_URL');
     table.decimal('price').notNullable();
     table.datetime('created_at', { precision: 6 }).defaultTo(knex.fn.now(6));
   });

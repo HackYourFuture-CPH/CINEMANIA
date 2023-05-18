@@ -11,6 +11,7 @@ import { AuthPage } from './containers/Auth/AuthPage';
 // MUI THEME
 import { ThemeProvider } from '@mui/material';
 import { theme } from './lib/theme';
+import { FavoritesListPage } from './containers/FavoritesListPage/FavoritesListPage';
 
 // Routes
 const router = createBrowserRouter([
@@ -30,10 +31,13 @@ const router = createBrowserRouter([
         element: <MovieDetails />,
       },
       {
+        path: '/favorites',
+        element: <FavoritesListPage />,
+      },
+      {
         path: '/movies',
         element: <MovieListPage />,
       },
-
       {
         path: '*',
         element: <PageNotFound />,

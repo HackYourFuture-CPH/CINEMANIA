@@ -4,6 +4,7 @@ import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { apiURL } from '../../apiURL';
 import { MovieCard } from '../MovieCard/MovieCard';
+import styled from '@emotion/styled';
 
 export const LatestRatingMovies = () => {
   const [movies, setMovies] = useState([]);
@@ -16,36 +17,17 @@ export const LatestRatingMovies = () => {
           throw new Error('Failed to fetch movies with the latest rating');
         }
         const data = await response.json();
-        setMovies(data);
+        setMovies(data.movies);
       } catch (error) {
         return error;
       }
     }
     fetchMovies();
   }, []);
+
   return (
-    <Box
-      sx={{
-        height: '100vh',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-      }}
-    >
-      <Typography
-        sx={{
-          height: '2.76rem',
-          fontSize: '2.25rem',
-          fontWeight: 700,
-          color: '#FFFFFF',
-          textAlign: 'center',
-          marginBottom: '3rem',
-          marginTop: '3rem',
-          fontFamily: 'Inter',
-        }}
-      >
-        LATEST RATINGS
-      </Typography>
+    <StyledMovieGrid>
+      <LatestRating>LATEST RATINGS</LatestRating>
       <Masonry
         columns={4}
         spacing={5}
@@ -57,6 +39,24 @@ export const LatestRatingMovies = () => {
           .map((movie) => <MovieCard key={movie.id} movie={movie} />)
           .splice(2, 8)}
       </Masonry>
-    </Box>
+    </StyledMovieGrid>
   );
 };
+
+const StyledMovieGrid = styled(Box)`
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const LatestRating = styled(Typography)`
+  height: 2.76rem;
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-align: center;
+  margin-bottom: 3rem;
+  margin-top: 3rem;
+  font-family: Inter;
+`;

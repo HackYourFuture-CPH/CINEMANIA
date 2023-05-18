@@ -8,6 +8,7 @@ exports.up = function (knex) {
       table.increments();
       table.string('full_name').notNullable();
       table.string('email').notNullable().unique();
+      table.string('uid').notNullable().unique();
       table.datetime('created_at', { precision: 6 }).defaultTo(knex.fn.now(6));
     })
     .createTable('tokens', (table) => {

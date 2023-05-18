@@ -22,6 +22,7 @@ const getMoviesByCategory = async (categoryId) => {
         'm.description',
         'm.movie_year',
         'm.image_location',
+        'm.backdrop_URL',
         'm.price',
         'm.created_at',
       )
@@ -53,6 +54,7 @@ const getDetailsOfMovieByID = async (id) => {
         'm.description',
         'm.movie_year',
         'm.image_location',
+        'm.backdrop_URL',
         'm.category_id',
         knex.raw('ROUND(AVG(r.rating),1) as rating'),
         knex.raw('COUNT(DISTINCT r.user_id) as number_of_ratings'),
@@ -111,21 +113,26 @@ const getMovies = async (queryParams) => {
     categoryId = null,
     userId = null,
     title = null,
+    pageNumber = 1,
+    pageSize = 30,
+    isFavoritePage = 'false',
   } = queryParams;
 
-  const query = knex('movies')
+  const offset = (pageNumber - 1) * pageSize;
+
+  const moviesQuery = knex('movies')
     .leftJoin('reviews', 'reviews.movie_id', '=', 'movies.id')
-    .leftJoin('categories', 'categories.id', '=', 'movies.category_id')
     .select(
       'movies.id',
       'movies.title',
       'movies.description',
       'movies.movie_year',
       'movies.image_location',
+      'movies.backdrop_URL',
       'movies.created_at',
       'movies.price',
       'movies.category_id',
-      knex.raw('AVG(reviews.rating) as average_rating'),
+      knex.raw('AVG(IFNULL(reviews.rating, 0)) as  average_rating'),
       knex.raw(
         `
         IF(EXISTS(
@@ -140,11 +147,11 @@ const getMovies = async (queryParams) => {
     .groupBy('movies.id')
     .modify((queryBuilder) => {
       if (categoryId) {
-        queryBuilder.where('categories.id', '=', categoryId);
+        queryBuilder.where('movies.category_id', '=', categoryId);
       }
 
       if (sortBy === 'rating') {
-        queryBuilder.orderByRaw('AVG(reviews.rating) desc');
+        queryBuilder.orderBy('average_rating', 'desc');
       }
 
       if (sortBy === 'recently_added') {
@@ -158,32 +165,70 @@ const getMovies = async (queryParams) => {
       if (title) {
         queryBuilder.where('movies.title', 'like', `%${title}%`);
       }
+
+      if (isFavoritePage === 'true') {
+        queryBuilder
+          .join('favorites', 'favorites.movie_id', '=', 'movies.id')
+          .where('favorites.user_id', '=', userId);
+      }
+
+      queryBuilder.limit(pageSize).offset(offset);
     });
 
-  const results = await query;
+  const countQuery = knex('movies')
+    .modify((queryBuilder) => {
+      if (categoryId) {
+        queryBuilder.where('movies.category_id', '=', categoryId);
+      }
 
-  return results.map((result) => ({
-    ...result,
-    is_favorite: result.is_favorite === 1,
+      if (title) {
+        queryBuilder.where('movies.title', 'like', `%${title}%`);
+      }
+    })
+    .count('movies.id as totalMovies');
+
+  const [movies, [{ totalMovies }]] = await Promise.all([
+    moviesQuery,
+    countQuery,
+  ]);
+
+  const totalPages = Math.ceil(totalMovies / pageSize);
+
+  const pagination = {
+    pageNumber,
+    pageSize,
+    totalMovies,
+    totalPages,
+  };
+
+  const formattedMovies = movies.map((movie) => ({
+    ...movie,
+    is_favorite: movie.is_favorite === 1,
   }));
+
+  return {
+    pagination,
+    movies: formattedMovies,
+  };
 };
 
 const getFeaturedMovie = async (req, res) => {
   try {
-    const lastMovie = await knex('movies')
+    const lastMovies = await knex('movies')
       .orderBy('movie_year', 'desc')
-      .first();
-    if (!lastMovie) {
+      .limit(5);
+    if (lastMovies.length === 0) {
       throw new HttpError('No movies found in the database');
     }
-    const featuredMovie = {
+    const featuredMovie = lastMovies.map((lastMovie) => ({
       category_id: lastMovie.category_id,
       title: lastMovie.title,
       description: lastMovie.description,
       image_location: lastMovie.image_location,
+      backdrop_URL: lastMovie.backdrop_URL,
       movie_year: lastMovie.movie_year,
       price: lastMovie.price,
-    };
+    }));
     res.json(featuredMovie);
   } catch (error) {
     res.status(500).json({ error: error.message });
