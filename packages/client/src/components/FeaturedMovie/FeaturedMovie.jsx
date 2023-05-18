@@ -36,13 +36,13 @@ export const FeaturedMovie = () => {
   return (
     <Section>
       <CenteredBox>
-        <ImageShawdow>
+        <ImageShadow>
           <Image
             component="img"
             alt={featuredMovie.title}
             src={featuredMovie.backdrop_URL}
           />
-        </ImageShawdow>
+        </ImageShadow>
         <TitleWrapper>
           <StyledTypography component="div">
             Ready for {featuredMovie.title}?
@@ -81,7 +81,7 @@ const Image = styled(Box)`
   position: relative;
 `;
 
-const ImageShawdow = styled(Box)`
+const ImageShadow = styled(Box)`
   background: linear-gradient(
     180deg,
     rgba(0, 0, 0, 0.8) 0%,
