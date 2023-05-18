@@ -32,13 +32,8 @@ export const BigMovieCard = ({ currentMovie }) => {
     flex-grow: 1;
   `;
 
-  const StyledBoldTypography = styled(Typography)`
-    font-family: 'Inter';
-    font-style: normal;
+  const StyledBoldTypography = styled(StyledTypography)`
     font-weight: 700;
-    font-size: 1.313rem; /* 21px  or 1.75rem */
-    line-height: 1.563rem;
-    width: 6rem;
   `;
 
   const MyButton = styled(Button)({
@@ -61,7 +56,8 @@ export const BigMovieCard = ({ currentMovie }) => {
           justifyContent: 'space-between',
           alignItems: 'center',
           width: '100%',
-          padding: '6rem',
+          boxSizing: 'border-box',
+          padding: '3rem',
         }}
       >
         <Box
