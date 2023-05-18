@@ -4,9 +4,7 @@ import { useParams } from 'react-router-dom';
 import { apiURL } from '../../apiURL';
 import fallBackMovies from '../../assets/fallBackMovies.json';
 import { BigMovieCard } from '../../components/BigMovieCard/BigMovieCard';
-
 import { TopCastDisplay } from '../../components/TopCastDisplay/TopCastDisplay';
-
 import { SimilarMovies } from '../CarouselWrapper/SimilarMovies';
 import { ReviewsDisplay } from '../../components/ReviewsDisplay/ReviewsDisplay';
 
