@@ -14,27 +14,37 @@ export const MovieListProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [sortBy, setSortBy] = useState('rating');
+  const [pageNumber, setPageNumber] = useState(1);
+  const [prevPage, setPrevPage] = useState(0);
+  const [wasLastList, setWasLastList] = useState(false);
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
 
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        let url = `${apiURL()}/movies?sortBy=${sortBy}`;
+        // let url = `${apiURL()}/movies?sortBy=${sortBy}`;
+        let url = `${apiURL()}/movies?pageNumber=${pageNumber}&pageSize=${10}&sortBy=${sortBy}`;
         if (selectedCategoryId) {
           url += `&categoryId=${selectedCategoryId}`;
         }
         const response = await fetch(url);
         const data = await response.json();
+        if (!data.movies.length) {
+          setWasLastList(true);
+          return;
+        }
         setMovies(data.movies);
         setIsLoading(false);
+        setPrevPage(pageNumber);
       } catch (err) {
         setError(err);
         setIsLoading(false);
       }
     };
-
-    fetchMovies();
-  }, [sortBy, selectedCategoryId]);
+    if (!wasLastList && prevPage !== pageNumber) {
+      fetchMovies();
+    }
+  }, [sortBy, selectedCategoryId, pageNumber, wasLastList, prevPage]);
 
   const contextValue = useMemo(
     () => ({
@@ -45,6 +55,8 @@ export const MovieListProvider = ({ children }) => {
       setSortBy,
       selectedCategoryId,
       setSelectedCategoryId,
+      pageNumber,
+      setPageNumber,
     }),
     [
       movies,
@@ -54,6 +66,8 @@ export const MovieListProvider = ({ children }) => {
       setSortBy,
       selectedCategoryId,
       setSelectedCategoryId,
+      pageNumber,
+      setPageNumber,
     ],
   );
 
