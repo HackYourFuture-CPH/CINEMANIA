@@ -29,11 +29,11 @@ export const BigMovieCard = ({ currentMovie }) => {
     font-weight: 400;
     font-size: 1.313rem; /* 21px  or 1.75rem */
     line-height: 1.563rem;
-    flex-grow: 1;
   `;
 
   const StyledBoldTypography = styled(StyledTypography)`
     font-weight: 700;
+    width: 6rem;
   `;
 
   const MyButton = styled(Button)({
@@ -125,7 +125,7 @@ export const BigMovieCard = ({ currentMovie }) => {
                 width: '39.5rem',
               }}
             >
-              <StyledTypography sx={{ mb: 2.5 }}>
+              <StyledTypography sx={{ mb: 2.5, flexGrow: 1 }}>
                 {currentMovie?.description}
               </StyledTypography>
               <StyledBoldTypography>Director: </StyledBoldTypography>
