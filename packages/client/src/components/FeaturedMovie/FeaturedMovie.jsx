@@ -93,6 +93,7 @@ const ImageShadow = styled(Box)`
 const TitleWrapper = styled(Box)`
   position: absolute;
   display: flex;
+  text-align: center;
   flex-direction: column;
   align-items: center;
   font-family: 'Inter';
