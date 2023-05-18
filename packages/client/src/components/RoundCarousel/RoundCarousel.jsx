@@ -1,11 +1,14 @@
 import React from 'react';
-import { Container, IconButton } from '@mui/material';
+import { IconButton } from '@mui/material';
 import './Carousel.css';
+
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+
+import { MovieDetailsLayout } from '../../containers/MovieDetailsLayout/MovieDetailsLayout';
 
 const RoundCarousel = ({ carouselData }) => {
   const settings = {
@@ -19,15 +22,7 @@ const RoundCarousel = ({ carouselData }) => {
   };
   const slider = React.useRef(null);
   return (
-    <Container
-      sx={{
-        width: 1518,
-        height: 300,
-        disableGutters: true,
-        position: 'absolute',
-        top: 2000,
-      }}
-    >
+    <MovieDetailsLayout>
       <h3 className="carousel-title">| SIMILAR MOVIES</h3>
       <div style={{ display: 'flex' }}>
         <IconButton onClick={() => slider?.current?.slickPrev()}>
@@ -52,7 +47,7 @@ const RoundCarousel = ({ carouselData }) => {
           <ArrowForwardIosIcon style={{ fill: '#00FFC2' }} fontSize="large" />
         </IconButton>
       </div>
-    </Container>
+    </MovieDetailsLayout>
   );
 };
 

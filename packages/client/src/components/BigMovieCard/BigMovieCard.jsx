@@ -5,137 +5,148 @@ import {
   CardContent,
   CardMedia,
   Divider,
-  Stack,
   Typography,
 } from '@mui/material';
 import React from 'react';
 
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import FavoriteIcon from '@mui/icons-material/FavoriteBorder';
 import { RatingStars } from '../RatingStars/RatingStars';
+import { MovieDetailsLayout } from '../../containers/MovieDetailsLayout/MovieDetailsLayout';
+import styled from '@emotion/styled';
 
 export const BigMovieCard = ({ currentMovie }) => {
+  const MovieTitle = styled(Typography)`
+    font-weight: 700;
+    width: '39.5rem';
+    padding-top: '0.625rem';
+  `;
+
+  const StyledTypography = styled(Typography)`
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.313rem; /* 21px  or 1.75rem */
+    line-height: 1.563rem;
+  `;
+
+  const StyledBoldTypography = styled(StyledTypography)`
+    font-weight: 700;
+    width: 6rem;
+  `;
+
+  const MyButton = styled(Button)({
+    height: '3.125rem',
+    fontWeight: 500,
+    fontSize: '1.125rem' /* 18px */,
+    lineHeight: '1.375rem' /* 22px */,
+    border: '1px solid #000000',
+    color: '#000000',
+    borderRadius: '1.25rem',
+  });
+
   return (
-    <Card
-      sx={{
-        bgcolor: 'mainGreen',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        border: 1,
-        width: 1518,
-        height: 962,
-        paddingTop: 5,
-        paddingBottom: 5,
-        position: 'absolute',
-        left: 260,
-        top: 260,
-      }}
-    >
-      <Box
+    <MovieDetailsLayout>
+      <Card
         sx={{
+          bgcolor: 'mainGreen',
           display: 'flex',
-          justifyContent: 'center',
+          flexDirection: 'row',
+          justifyContent: 'space-between',
           alignItems: 'center',
+          width: '100%',
+          padding: '6rem',
         }}
       >
-        <CardMedia
-          component="img"
+        <Box
           sx={{
-            width: 501,
-            height: 751,
-            p: 2,
-            bgcolor: '#FFFFFF',
-            border: 1,
-            borderColor: 'grey.500',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
           }}
-          src={currentMovie?.image_location}
-          alt="Movie Poster"
-        />
-        <FavoriteIcon
-          sx={{
-            color: 'white',
-            backgroundColor: 'black',
-            position: 'absolute',
-            width: 30.52,
-            height: 28,
-            top: 130,
-            left: 640,
-          }}
-        />
-      </Box>
-
-      <Box bgcolor="mainGreen" fontFamily="Inter" paddingLeft="50px">
-        <CardContent sx={{ display: 'flex', flexDirection: 'column' }}>
-          <RatingStars
-            sx={{ display: 'flex', justifyContent: 'flex-end' }}
-            averageRating={currentMovie?.rating ?? 0}
-            numberOfReviews={currentMovie?.number_of_ratings}
+        >
+          <CardMedia
+            component="img"
+            sx={{
+              width: '23.766rem',
+              heigth: '35.20rem',
+              padding: '1rem',
+              bgcolor: 'white',
+              border: 1,
+              borderColor: 'grey.500',
+            }}
+            src={currentMovie?.image_location}
+            alt="Movie Poster"
           />
-          <Typography
-            sx={{ fontWeight: 700, fontSize: 40, width: 633, paddingTop: 10 }}
-          >
-            {currentMovie?.title}
-          </Typography>
+        </Box>
 
-          <Stack direction="row" spacing={2} paddingTop={2} paddingBottom={4}>
-            <Button
+        <Box bgcolor="mainGreen" fontFamily="Inter">
+          <CardContent
+            sx={{ display: 'flex', flexDirection: 'column', flexGrow: 1 }}
+          >
+            <RatingStars
+              sx={{ display: 'flex', justifyContent: 'flex-end' }}
+              averageRating={currentMovie?.rating ?? 0}
+              numberOfReviews={currentMovie?.number_of_ratings}
+            />
+            <MovieTitle
               sx={{
-                border: 1,
-                borderColor: '#000000',
-                width: 150,
-                borderRadius: '20px',
-                fontWeight: 500,
-                fontSize: 24,
-                color: '#003E2F',
+                fontWeight: 700,
+                fontSize: 40,
+                width: '39.5rem',
+                paddingTop: 10,
               }}
             >
+              {currentMovie?.title}
+            </MovieTitle>
+
+            <MyButton
+              variant="outlined"
+              sx={{
+                width: '9.375rem',
+                margin: '1.5rem 0',
+              }}
+              startIcon={<AddShoppingCartIcon />}
+            >
               {currentMovie?.category_name}
-            </Button>
-          </Stack>
+            </MyButton>
 
-          <Divider
-            variant="middle"
-            sx={{ border: 1, borderColor: '#000000' }}
-          />
-          <Typography
-            sx={{ font: 'Inter', fontWeight: 700, fontSize: 28, width: 633 }}
-          >
-            <Box sx={{ fontWeight: 'light', m: 1 }}>
-              {currentMovie?.description}
-            </Box>
-            <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
-              <Box sx={{ fontWeight: 'bold', m: 1, width: 120 }}>Director:</Box>
-              <Box sx={{ fontWeight: 'light', m: 1, width: 400 }}>
+            <Divider
+              variant="middle"
+              sx={{ border: 1, borderColor: '#000000', marginBottom: '1rem' }}
+            />
+
+            <Box
+              sx={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                width: '39.5rem',
+              }}
+            >
+              <StyledTypography sx={{ mb: 2.5, flexGrow: 1 }}>
+                {currentMovie?.description}
+              </StyledTypography>
+              <StyledBoldTypography>Director: </StyledBoldTypography>
+              <StyledTypography flexGrow={1} width="28.125rem">
                 {currentMovie?.director}
-              </Box>
-              <Box sx={{ fontWeight: 'bold', m: 1, width: 120 }}>Writer:</Box>
-              <Box sx={{ fontWeight: 'light', m: 1, width: 400 }}>
-                {currentMovie?.writer}
-              </Box>
+              </StyledTypography>
+              <StyledBoldTypography>Writer: </StyledBoldTypography>
+              <StyledTypography>{currentMovie?.writer}</StyledTypography>
             </Box>
-          </Typography>
 
-          <Button
-            variant="outlined"
-            sx={{
-              border: 1,
-              borderColor: '#000000',
-              borderRadius: '20px',
-              marginTop: 10,
-              width: 250,
-              fontWeight: 500,
-              fontSize: 24,
-              color: '#003E2F',
-              display: 'flex',
-              alignSelf: 'flex-end',
-            }}
-            startIcon={<AddShoppingCartIcon />}
-          >
-            Add to Cart
-          </Button>
-        </CardContent>
-      </Box>
-    </Card>
+            <MyButton
+              variant="outlined"
+              sx={{
+                marginTop: 10,
+                width: '12.5rem',
+                alignSelf: 'flex-end',
+              }}
+              startIcon={<AddShoppingCartIcon />}
+            >
+              Add to Cart
+            </MyButton>
+          </CardContent>
+        </Box>
+      </Card>
+    </MovieDetailsLayout>
   );
 };

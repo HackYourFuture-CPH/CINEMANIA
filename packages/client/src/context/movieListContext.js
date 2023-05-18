@@ -19,7 +19,7 @@ export const MovieListProvider = ({ isFavoritePage, children }) => {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        let url = `${apiURL()}/movies?sortBy=${sortBy}&isFavoritePage=${isFavoritePage}&userId=${3}`;
+        let url = `${apiURL()}/movies?sortBy=${sortBy}&isFavoritePage=${isFavoritePage}&userId=${1}`;
         if (selectedCategoryId) {
           url += `&categoryId=${selectedCategoryId}`;
         }
