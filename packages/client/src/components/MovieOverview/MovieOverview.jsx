@@ -3,6 +3,7 @@ import { MovieListProvider } from '../../context/movieListContext';
 import { Box, Container } from '@mui/material';
 import { Categories } from '../Categories/Categories';
 import { SearchBar } from '../SearchBar/SearchBar';
+import { CustomSelect } from '../Select/CustomSelect';
 import { MovieList } from './MovieList';
 import React from 'react';
 
@@ -39,7 +40,21 @@ export const MovieOverview = ({ isFavouritePage }) => {
           }}
         >
           <Categories />
-          <SearchBar />
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'flex-end',
+              flexDirection: 'column',
+              [theme.breakpoints.down('sm')]: {
+                width: '100%',
+                alignItems: 'flex-start',
+                marginBottom: '3rem',
+              },
+            }}
+          >
+            <SearchBar />
+            <CustomSelect />
+          </Box>
         </Box>
         <MovieList />
       </Container>

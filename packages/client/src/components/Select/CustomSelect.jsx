@@ -1,7 +1,9 @@
 import React from 'react';
 import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import { useMovieList } from '../../context/movieListContext';
 
-const CustomSelect = ({ onChange, sortBy }) => {
+const CustomSelect = () => {
+  const { sortBy, setSortBy } = useMovieList();
   return (
     <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
       <FormControl variant="standard" sx={{ m: 1, minWidth: 85 }}>
@@ -14,8 +16,10 @@ const CustomSelect = ({ onChange, sortBy }) => {
         <Select
           labelId="sort-by-label"
           id="sort-by-select"
-          name="sortBy"
-          onChange={onChange}
+          value={sortBy}
+          onChange={(e) => {
+            setSortBy(e.target.value);
+          }}
           label="Sort by"
           sx={{
             color: '#00FFC2',
