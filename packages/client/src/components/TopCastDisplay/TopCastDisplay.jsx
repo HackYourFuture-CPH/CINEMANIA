@@ -9,6 +9,7 @@ import {
 import React, { useEffect, useState } from 'react';
 import { apiURL } from '../../apiURL';
 import { MovieDetailsLayout } from '../../containers/MovieDetailsLayout/MovieDetailsLayout';
+import styled from '@emotion/styled';
 
 export const TopCastDisplay = ({ movieID }) => {
   const [castList, setCastList] = useState([]);
@@ -38,20 +39,7 @@ export const TopCastDisplay = ({ movieID }) => {
 
   return (
     <MovieDetailsLayout>
-      <Typography
-        variant="overline"
-        sx={{
-          height: 30,
-          fontSize: 32,
-          fontWeight: 800,
-          color: '#FFFFFF',
-          borderLeft: 4,
-          p: 1,
-          alignSelf: 'flex-start',
-        }}
-      >
-        Top Cast
-      </Typography>
+      <Title>TOP CAST</Title>
       <Stack
         direction="row"
         spacing={1}
@@ -126,3 +114,13 @@ export const TopCastDisplay = ({ movieID }) => {
     </MovieDetailsLayout>
   );
 };
+const Title = styled(Typography)`
+  color: white;
+  font-size: 2rem;
+  font-weight: 700;
+  font-family: Inter, sans-serif;
+  border-left: 0.3rem solid #ffffff;
+  padding-left: 0.9rem;
+  margin: 0 0 1.5rem 0;
+  align-self: flex-start;
+`;

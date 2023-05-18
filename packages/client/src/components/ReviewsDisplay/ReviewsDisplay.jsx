@@ -41,7 +41,7 @@ export function ReviewsDisplay() {
               color: '#FFFFFF',
             }}
           >
-            Reviews
+            REVIEWS
           </Typography>
           <Box
             sx={{

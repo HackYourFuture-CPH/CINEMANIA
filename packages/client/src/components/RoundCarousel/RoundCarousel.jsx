@@ -85,6 +85,7 @@ const Title = styled(Typography)`
   border-left: 0.3rem solid #ffffff;
   padding-left: 0.9rem;
   margin: 0 0 1.5rem 0;
+  align-self: flex-start;
 `;
 
 const CarouselWrapper = styled(Box)`
