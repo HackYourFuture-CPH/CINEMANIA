@@ -60,7 +60,7 @@ const RoundCarousel = ({ carouselData }) => {
                 <Link href={`/movies/${item.id}`} underline="none">
                   <CarouselImg
                     component="img"
-                    src={item.image_location}
+                    src={item.backdrop_URL}
                     alt={item.title}
                   />
                 </Link>
@@ -110,6 +110,8 @@ const LeftArrow = styled(ArrowBackIosIcon)`
 `;
 
 const CarouselImg = styled.img`
+  object-fit: cover;
+  object-position: 0 10%;
   width: 98%;
   height: 17.5rem;
   border-radius: 8rem;
