@@ -37,13 +37,12 @@ export const FeaturedMovie = () => {
     <>
       <Section>
         <CenteredBox>
-          <ImageShawdow>
-            <Image
-              component="img"
-              alt={featuredMovie.title}
-              src={featuredMovie.backdrop_URL}
-            />
-          </ImageShawdow>
+          <Image
+            component="img"
+            alt={featuredMovie.title}
+            src={featuredMovie.backdrop_URL}
+          />
+
           <TitleWrapper>
             <StyledTypography component="div">
               Ready for {featuredMovie.title}?
@@ -80,20 +79,12 @@ const Section = styled.section`
 `;
 
 const Image = styled(Box)`
-  width: 104.5rem;
-  height: 49.375rem;
-  border-radius: 24.688rem;
+  width: 70%;
+  height: 70%;
+  padding-bottom: 4rem;
+  border-radius: 25rem;
   z-index: -100;
   position: relative;
-`;
-
-const ImageShawdow = styled(Box)`
-  background: linear-gradient(
-    180deg,
-    rgba(0, 0, 0, 0.8) 0%,
-    rgba(0, 0, 0, 0) 51.56%
-  );
-  border-radius: 24.688rem;
 `;
 
 const TitleWrapper = styled(Box)`
@@ -107,7 +98,9 @@ const TitleWrapper = styled(Box)`
 `;
 
 const StyledTypography = styled(Typography)`
-  font-size: 4.5rem;
+  font-size: 2rem;
+  width: 100%;
+  text-align: center;
   font-weight: 300;
   line-height: 5.446rem;
 `;
@@ -131,6 +124,7 @@ const TrailerWrapper = styled(Box)`
 const CenteredBox = styled(Box)`
   position: absolute;
   display: flex;
+  width: 100%;
   flex-direction: column;
   align-items: center;
 `;

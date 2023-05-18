@@ -82,5 +82,5 @@ const CarouselImg = styled.img`
 
 const SliderWrapper = styled.div`
   height: 18.75rem;
-  width: 106rem;
+  width: 95%;
 `;
