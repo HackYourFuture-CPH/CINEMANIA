@@ -18,7 +18,7 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 export function ReviewsDisplay() {
   return (
-    <List sx={{ width: '80%', position: 'absolute', top: 1750 }}>
+    <List>
       <Box
         sx={{
           display: 'flex',

@@ -37,8 +37,9 @@ export const MovieDetails = () => {
     >
       <BigMovieCard currentMovie={currentMovie} />
       <TopCastDisplay movieID={currentMovie?.id} />
-      <ReviewsDisplay />
+
       <SimilarMovies categoryID={currentMovie?.category_id} />
+      <ReviewsDisplay />
     </Container>
   );
 };
