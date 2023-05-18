@@ -12,7 +12,7 @@ export const MostPoppular = () => {
         const data = await response.json();
         setPopularMovies(data.slice(1, 12));
       } catch (error) {
-        return error;
+        throw new Error(error);
       }
     };
     getPopularMovies();
