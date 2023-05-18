@@ -26,7 +26,7 @@ export const handleAddFavorite = async (
       setFavorites([...favorites, item]);
     }
   } catch (error) {
-    return error;
+    throw new Error(error);
   }
 };
 
@@ -48,6 +48,6 @@ export const handleRemoveFavorite = async (
     const updatedFavorites = favorites.filter((movie) => movie.id !== item.id);
     setFavorites(updatedFavorites);
   } catch (error) {
-    return error;
+    throw new Error(error);
   }
 };
