@@ -113,6 +113,7 @@ const getMovies = async (queryParams) => {
     categoryId = null,
     userId = null,
     title = null,
+    isClickedSame = null,
     pageNumber = 1,
     pageSize = 30,
     isFavoritePage = 'false',
@@ -151,15 +152,24 @@ const getMovies = async (queryParams) => {
       }
 
       if (sortBy === 'rating') {
-        queryBuilder.orderBy('average_rating', 'desc');
+        queryBuilder.orderBy(
+          'average_rating',
+          `${isClickedSame ? 'asc' : 'desc'}`,
+        );
       }
 
       if (sortBy === 'recently_added') {
-        queryBuilder.orderBy('movies.created_at', 'desc');
+        queryBuilder.orderBy(
+          'movies.created_at',
+          `${isClickedSame ? 'asc' : 'desc'}`,
+        );
       }
 
       if (sortBy === 'price') {
-        queryBuilder.orderBy('movies.price', 'asc');
+        queryBuilder.orderBy(
+          'movies.price',
+          `${isClickedSame ? 'desc' : 'asc'}`,
+        );
       }
 
       if (title) {
