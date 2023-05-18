@@ -6,6 +6,7 @@ import React, {
   useState,
 } from 'react';
 import { apiURL } from '../apiURL';
+import { useDebounce } from '../hooks/useDebounce';
 
 const MovieListContext = createContext();
 
@@ -14,14 +15,19 @@ export const MovieListProvider = ({ isFavoritePage, children }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [sortBy, setSortBy] = useState('rating');
+  const [searchText, setSearchText] = useState('');
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
+  const debouncedSearch = useDebounce(searchText, 1000);
 
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        let url = `${apiURL()}/movies?sortBy=${sortBy}&isFavoritePage=${isFavoritePage}&userId=${3}`;
+        let url = `${apiURL()}/movies?sortBy=${sortBy}&isFavoritePage=${isFavoritePage}&userId=${1}`;
         if (selectedCategoryId) {
           url += `&categoryId=${selectedCategoryId}`;
+        }
+        if (debouncedSearch) {
+          url += `&title=${debouncedSearch}`;
         }
         const response = await fetch(url);
         const data = await response.json();
@@ -34,7 +40,7 @@ export const MovieListProvider = ({ isFavoritePage, children }) => {
     };
 
     fetchMovies();
-  }, [sortBy, selectedCategoryId, isFavoritePage]);
+  }, [sortBy, debouncedSearch, selectedCategoryId, isFavoritePage]);
 
   const contextValue = useMemo(
     () => ({
@@ -45,6 +51,8 @@ export const MovieListProvider = ({ isFavoritePage, children }) => {
       setSortBy,
       selectedCategoryId,
       setSelectedCategoryId,
+      searchText,
+      setSearchText,
     }),
     [
       movies,
@@ -54,6 +62,8 @@ export const MovieListProvider = ({ isFavoritePage, children }) => {
       setSortBy,
       selectedCategoryId,
       setSelectedCategoryId,
+      searchText,
+      setSearchText,
     ],
   );
 
