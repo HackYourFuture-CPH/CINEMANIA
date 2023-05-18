@@ -30,6 +30,7 @@ export const MovieDetails = () => {
         mb: '3rem',
         display: 'flex',
         flexDirection: 'column',
+        gap: '15rem',
       }}
       maxWidth="xl"
     >

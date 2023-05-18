@@ -3,7 +3,6 @@ import {
   Box,
   Button,
   CircularProgress,
-  Container,
   Stack,
   Typography,
 } from '@mui/material';
@@ -39,92 +38,91 @@ export const TopCastDisplay = ({ movieID }) => {
 
   return (
     <MovieDetailsLayout>
-      <Container>
-        <Typography
-          variant="overline"
-          sx={{
-            height: 30,
-            fontSize: 32,
-            fontWeight: 800,
-            color: '#FFFFFF',
-            borderLeft: 4,
-            p: 1,
-          }}
-        >
-          Top Cast
-        </Typography>
-        <Stack
-          direction="row"
-          spacing={1}
-          sx={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}
-        >
-          {castList
-            .slice(0, showFullCast ? castList.length : 6)
-            .map((castMember) => (
-              <Box
-                key={castMember.id}
+      <Typography
+        variant="overline"
+        sx={{
+          height: 30,
+          fontSize: 32,
+          fontWeight: 800,
+          color: '#FFFFFF',
+          borderLeft: 4,
+          p: 1,
+          alignSelf: 'flex-start',
+        }}
+      >
+        Top Cast
+      </Typography>
+      <Stack
+        direction="row"
+        spacing={1}
+        sx={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}
+      >
+        {castList
+          .slice(0, showFullCast ? castList.length : 6)
+          .map((castMember) => (
+            <Box
+              key={castMember.id}
+              sx={{
+                width: 200,
+                p: 1,
+                textAlign: 'center',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <Avatar
+                alt={`${castMember.full_name}`}
+                src={castMember.image_location}
                 sx={{
                   width: 200,
-                  p: 1,
-                  textAlign: 'center',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'center',
-                  alignItems: 'center',
+                  height: 200,
+                  border: 1,
+                  borderColor: 'grey.500',
+                }}
+                variant="circular"
+              />
+              <Typography
+                variant="caption"
+                sx={{
+                  width: 200,
+                  height: 30,
+                  fontSize: 25,
+                  margin: 5,
+                  fontWeight: 500,
+                  color: '#FFFFFF',
                 }}
               >
-                <Avatar
-                  alt={`${castMember.full_name}`}
-                  src={castMember.image_location}
-                  sx={{
-                    width: 200,
-                    height: 200,
-                    border: 1,
-                    borderColor: 'grey.500',
-                  }}
-                  variant="circular"
-                />
-                <Typography
-                  variant="caption"
-                  sx={{
-                    width: 200,
-                    height: 30,
-                    fontSize: 25,
-                    margin: 5,
-                    fontWeight: 500,
-                    color: '#FFFFFF',
-                  }}
-                >
-                  {`${castMember.full_name}`}
-                </Typography>
-              </Box>
-            ))}
-        </Stack>
-        {isLoading ? (
-          <CircularProgress
-            sx={{
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-            }}
-          />
-        ) : (
-          <Button
-            onClick={handleShowFullCast}
-            sx={{
-              width: 200,
-              color: '#FFFFFF',
-              textDecoration: 'underline',
-              textUnderlineOffset: 10,
-              left: '85%',
-              fontSize: 32,
-              fontWeight: 400,
-            }}
-          >
-            {showFullCast ? 'Show less' : 'Full Cast'}
-          </Button>
-        )}
-      </Container>
+                {`${castMember.full_name}`}
+              </Typography>
+            </Box>
+          ))}
+      </Stack>
+      {isLoading ? (
+        <CircularProgress
+          sx={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+          }}
+        />
+      ) : (
+        <Button
+          onClick={handleShowFullCast}
+          sx={{
+            width: 200,
+            color: '#FFFFFF',
+            textDecoration: 'underline',
+            textUnderlineOffset: 10,
+            alignSelf: 'flex-end',
+            fontSize: 32,
+            fontWeight: 400,
+          }}
+        >
+          {showFullCast ? 'Show less' : 'Full Cast'}
+        </Button>
+      )}
     </MovieDetailsLayout>
   );
 };
