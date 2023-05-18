@@ -64,7 +64,7 @@ export const TopCastDisplay = ({ movieID }) => {
               <Box
                 key={castMember.id}
                 sx={{
-                  width: 150,
+                  width: 200,
                   p: 1,
                   textAlign: 'center',
                   display: 'flex',
@@ -77,8 +77,8 @@ export const TopCastDisplay = ({ movieID }) => {
                   alt={`${castMember.full_name}`}
                   src={castMember.image_location}
                   sx={{
-                    width: 150,
-                    height: 150,
+                    width: 200,
+                    height: 200,
                     border: 1,
                     borderColor: 'grey.500',
                   }}
@@ -87,7 +87,7 @@ export const TopCastDisplay = ({ movieID }) => {
                 <Typography
                   variant="caption"
                   sx={{
-                    width: 150,
+                    width: 200,
                     height: 30,
                     fontSize: 25,
                     margin: 5,
