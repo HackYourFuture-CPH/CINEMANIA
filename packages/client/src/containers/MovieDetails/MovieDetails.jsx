@@ -8,6 +8,7 @@ import { BigMovieCard } from '../../components/BigMovieCard/BigMovieCard';
 import { TopCastDisplay } from '../../components/TopCastDisplay/TopCastDisplay';
 
 import { SimilarMovies } from '../CarouselWrapper/SimilarMovies';
+import { ReviewsDisplay } from '../../components/ReviewsDisplay/ReviewsDisplay';
 
 export const MovieDetails = () => {
   const movieID = useParams().id;
@@ -36,6 +37,7 @@ export const MovieDetails = () => {
     >
       <BigMovieCard currentMovie={currentMovie} />
       <TopCastDisplay movieID={currentMovie?.id} />
+      <ReviewsDisplay />
       <SimilarMovies categoryID={currentMovie?.category_id} />
     </Container>
   );
