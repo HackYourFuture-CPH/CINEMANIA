@@ -15,7 +15,7 @@ import {
   signInWithGoogle,
   registerWithEmailAndPassword,
   logout,
-} from './firebase';
+} from '../firebase';
 import { query, collection, getDocs, where } from 'firebase/firestore';
 
 export const UserContext = createContext();
@@ -68,10 +68,3 @@ export function useUserContext() {
   }
   return value;
 }
-
-UserProvider.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]).isRequired,
-};

@@ -7,7 +7,7 @@ import { MovieListPage } from './containers/MovieListPage/MovieListPage';
 import { PageNotFound } from './containers/PageNotFound/PageNotFound.Container';
 
 import { AuthPage } from './containers/Auth/AuthPage';
-
+import { UserProvider } from './context/userContext';
 // MUI THEME
 import { ThemeProvider } from '@mui/material';
 import { theme } from './lib/theme';
@@ -48,8 +48,10 @@ const router = createBrowserRouter([
 
 export const App = () => {
   return (
-    <ThemeProvider theme={theme}>
-      <RouterProvider router={router} />
-    </ThemeProvider>
+    <UserProvider>
+      <ThemeProvider theme={theme}>
+        <RouterProvider router={router} />
+      </ThemeProvider>
+    </UserProvider>
   );
 };

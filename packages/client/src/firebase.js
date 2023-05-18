@@ -18,7 +18,7 @@ import {
 } from 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_FIREBASE_KEY,
+  apiKey: 'AIzaSyATxbdsfY-VzYBIyLFRQxsO48TuFfZB518',
   authDomain: 'cinemania-a26e9.firebaseapp.com',
   projectId: 'cinemania-a26e9',
   storageBucket: 'cinemania-a26e9.appspot.com',
