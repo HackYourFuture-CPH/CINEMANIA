@@ -112,6 +112,8 @@ const LeftArrow = styled(ArrowBackIosIcon)`
 const CarouselImg = styled.img`
   width: 98%;
   height: 17.5rem;
+  object-fit: cover;
+  object-position: 0 10%;
   border-radius: 8rem;
   margin: auto auto;
   &:hover {
