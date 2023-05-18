@@ -60,7 +60,7 @@ const RoundCarousel = ({ carouselData }) => {
                 <Link href={`/movies/${item.id}`} underline="none">
                   <CarouselImg
                     component="img"
-                    src={item.image_location}
+                    src={item.backdrop_URL}
                     alt={item.title}
                   />
                 </Link>
@@ -113,7 +113,7 @@ const CarouselImg = styled.img`
   width: 98%;
   height: 17.5rem;
   object-fit: cover;
-  object-position: 0 10%;
+  object-position: 20% 0;
   border-radius: 8rem;
   margin: auto auto;
   &:hover {
