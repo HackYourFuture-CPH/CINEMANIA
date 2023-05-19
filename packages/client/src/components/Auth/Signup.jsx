@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { Typography, Container } from '@mui/material';
-import { Link, useNavigate } from 'react-router-dom';
-import { useUserContext } from '../../context/UserContext';
 import styled from '@emotion/styled';
+import { Container, Typography } from '@mui/material';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { apiURL } from '../../apiURL';
+import { useUserContext } from '../../context/UserContext';
 
 export const Signup = () => {
   const [fullName, setFullName] = useState('');
@@ -30,9 +30,6 @@ export const Signup = () => {
           uid: userCredentials.user.uid,
         }),
       });
-      // eslint-disable-next-line no-console
-      console.log(userCredentials.user.uid);
-      // eslint-disable-next-line no-console
 
       // TODO: Display a modal
       navigate('/auth');
