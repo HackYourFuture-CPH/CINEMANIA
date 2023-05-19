@@ -1,46 +1,33 @@
 import React, { useState } from 'react';
 import { Typography, Container } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
-import { auth } from '../../firebase';
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from 'firebase/auth';
+import { useUserContext } from '../../context/userContext';
 import styled from '@emotion/styled';
 
 export const AuthForm = () => {
-  const [email, setEmail] = useState(null);
-  const [password, setPassword] = useState(null);
-  const [isRegistered, setIsRegistered] = useState(true);
-
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const { signIn } = useUserContext();
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (isRegistered) {
-      signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          setIsRegistered(true);
-        })
-        .catch((err) => {
-          setIsRegistered(false);
-        });
-    } else {
-      createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          navigate('/auth');
-        })
-        .catch((err) => {
-          navigate('*');
-        });
+    setError('');
+    try {
+      await signIn(email, password);
+      // TODO: Display a modal
+      navigate('/account');
+    } catch (err) {
+      // TODO: Display a modal
+      setError(err.message);
     }
   };
 
   return (
     <Container maxWidth="xs" sx={{ marginY: '2rem' }}>
       <Typography variant="h3" textAlign="center" color="white">
-        {isRegistered ? 'Login' : 'Create Account'}
+        Login
       </Typography>
       <Form onSubmit={handleSubmit}>
         <InputField
@@ -57,13 +44,11 @@ export const AuthForm = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <Button type="submit">{isRegistered ? 'Log In' : 'Sign Up'}</Button>
+        <Button type="submit">Log In</Button>
 
         <Typography>
-          {!isRegistered ? 'Already a member?' : 'Not a member?'}
-          <Link onClick={() => setIsRegistered(!isRegistered)}>
-            {!isRegistered ? ' Login' : ' Signup'}
-          </Link>
+          Not a member?
+          <Link href="/signup">Signup</Link>
         </Typography>
       </Form>
     </Container>

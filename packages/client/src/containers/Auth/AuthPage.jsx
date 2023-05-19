@@ -23,10 +23,6 @@ export const AuthPage = () => {
     };
   }, []);
 
-  if (authUser) {
-    return navigate('/');
-  }
-
   return (
     <Section>
       <AuthForm />

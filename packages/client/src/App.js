@@ -12,6 +12,7 @@ import { AuthPage } from './containers/Auth/AuthPage';
 import { ThemeProvider } from '@mui/material';
 import { theme } from './lib/theme';
 import { FavoritesListPage } from './containers/FavoritesListPage/FavoritesListPage';
+import { UserProvider } from './context/userContext';
 
 // Routes
 const router = createBrowserRouter([
@@ -48,8 +49,10 @@ const router = createBrowserRouter([
 
 export const App = () => {
   return (
-    <ThemeProvider theme={theme}>
-      <RouterProvider router={router} />
-    </ThemeProvider>
+    <UserProvider>
+      <ThemeProvider theme={theme}>
+        <RouterProvider router={router} />
+      </ThemeProvider>
+    </UserProvider>
   );
 };
