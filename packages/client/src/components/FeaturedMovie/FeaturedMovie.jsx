@@ -34,45 +34,39 @@ export const FeaturedMovie = () => {
   }
 
   return (
-    <>
-      <Section>
-        <CenteredBox>
-          <ImageShawdow>
-            <Image
-              component="img"
-              alt={featuredMovie.title}
-              src={featuredMovie.backdrop_URL}
-            />
-          </ImageShawdow>
-          <TitleWrapper>
-            <StyledTypography component="div">
-              Ready for {featuredMovie.title}?
-            </StyledTypography>
-            <TrailerWrapper>
-              <IconButton
-                sx={{ backgroundColor: '#00FFC2' }}
-                aria-label="play/pause"
-              >
-                <PlayArrowIcon sx={{ width: '2rem', height: '2rem' }} />
-              </IconButton>
-              <StyledTypographyLink component="div">
-                Watch the trailer
-              </StyledTypographyLink>
-            </TrailerWrapper>
-          </TitleWrapper>
-        </CenteredBox>
-      </Section>
-      <Section>
-        <h1 style={{ fontSize: '3rem' }}>
-          Placeholder for carousel new arrival and most popular
-        </h1>
-      </Section>
-    </>
+    <Section>
+      <CenteredBox>
+        <ImageShadow>
+          <Image
+            component="img"
+            alt={featuredMovie.title}
+            src={featuredMovie.backdrop_URL}
+          />
+        </ImageShadow>
+        <TitleWrapper>
+          <StyledTypography component="div">
+            Ready for {featuredMovie.title}?
+          </StyledTypography>
+          <TrailerWrapper>
+            <IconButton
+              sx={{ backgroundColor: '#00FFC2' }}
+              aria-label="play/pause"
+            >
+              <PlayArrowIcon sx={{ width: '2rem', height: '2rem' }} />
+            </IconButton>
+            <StyledTypographyLink component="div">
+              Watch the trailer
+            </StyledTypographyLink>
+          </TrailerWrapper>
+        </TitleWrapper>
+      </CenteredBox>
+    </Section>
   );
 };
 
 const Section = styled.section`
-  height: 95vh;
+  top: 15rem;
+  height: 85vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -80,45 +74,47 @@ const Section = styled.section`
 `;
 
 const Image = styled(Box)`
-  width: 104.5rem;
-  height: 49.375rem;
-  border-radius: 24.688rem;
+  width: 78.375rem;
+  height: 37.031rem;
+  border-radius: 18.5rem;
   z-index: -100;
   position: relative;
 `;
 
-const ImageShawdow = styled(Box)`
+const ImageShadow = styled(Box)`
   background: linear-gradient(
     180deg,
     rgba(0, 0, 0, 0.8) 0%,
     rgba(0, 0, 0, 0) 51.56%
   );
-  border-radius: 24.688rem;
+  border-radius: 18.5rem;
 `;
 
 const TitleWrapper = styled(Box)`
   position: absolute;
   display: flex;
+  text-align: center;
   flex-direction: column;
   align-items: center;
   font-family: 'Inter';
-  color: #fff;
-  top: 3.75rem;
+  color: #ffffff;
+  top: 2.8rem;
 `;
 
 const StyledTypography = styled(Typography)`
-  font-size: 4.5rem;
+  font-size: 3.375rem;
   font-weight: 300;
-  line-height: 5.446rem;
+  line-height: 4.08rem;
+  max-width: 61rem;
 `;
 
 const StyledTypographyLink = styled(Typography)`
-  width: 11.938rem;
-  height: fit-content;
+  width: 8.94rem;
+  height: 1.375rem;
   margin-left: 1rem;
   font-weight: 500;
-  font-size: 1.5rem;
-  line-height: 1.816rem;
+  font-size: 1.125rem;
+  line-height: 1.375rem;
   text-decoration-line: underline;
 `;
 

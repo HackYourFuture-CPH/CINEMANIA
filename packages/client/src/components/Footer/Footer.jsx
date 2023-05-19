@@ -15,10 +15,11 @@ export const Footer = () => {
   ];
 
   const StyledBox = styled(Box)`
-    margin-top: 4;
-    padding: 0, 0;
+    margin-top: auto;
     width: 100%;
+    left: 0;
     bottom: 0;
+    right: 0;
   `;
 
   const StyledTypography = styled(Typography)`

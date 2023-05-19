@@ -2,7 +2,7 @@ import React /* , { useEffect, useState } */ from 'react';
 /* import { apiURL } from '../../apiURL'; */ // Not Used
 import { FeaturedMovie } from '../../components/FeaturedMovie/FeaturedMovie';
 import { LatestRatingMovies } from '../../components/LatestRatingMovies/LatestRatingMovies';
-import { MostPoppular } from '../CarouselWrapper/MostPopular';
+import { MostPopular } from '../CarouselWrapper/MostPopular';
 import { NewArrivals } from '../../components/NewArrivals/NewArrivals';
 
 export const LandingPage = () => {
@@ -10,7 +10,7 @@ export const LandingPage = () => {
     <div>
       <FeaturedMovie />
       <NewArrivals />
-      <MostPoppular />
+      <MostPopular />
       <LatestRatingMovies />
     </div>
   );
