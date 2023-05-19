@@ -39,7 +39,7 @@ export function MovieCard({ movie }) {
         paragraph
         sx={{ top: '2rem', fontWeight: 400 }}
       >
-        {movie.description}
+        {movie.review_text}
       </StyledTypographyDescription>
       <BasicRating />
     </StyledCard>

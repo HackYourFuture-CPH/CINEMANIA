@@ -12,12 +12,12 @@ export const LatestRatingMovies = () => {
   useEffect(() => {
     async function fetchMovies() {
       try {
-        const response = await fetch(`${apiURL()}/movies`);
+        const response = await fetch(`${apiURL()}/reviews/rating/latest`);
         if (!response.ok) {
           throw new Error('Failed to fetch movies with the latest rating');
         }
         const data = await response.json();
-        setMovies(data.movies);
+        setMovies(data);
       } catch (error) {
         return error;
       }
@@ -35,9 +35,9 @@ export const LatestRatingMovies = () => {
           width: '78rem',
         }}
       >
-        {movies
-          .map((movie) => <MovieCard key={movie.id} movie={movie} />)
-          .splice(2, 8)}
+        {movies.map((movie) => (
+          <MovieCard key={Math.random().toString(15).slice(2)} movie={movie} />
+        ))}
       </Masonry>
     </StyledMovieGrid>
   );

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { apiURL } from '../../apiURL';
 import { handleAddFavorite, handleRemoveFavorite } from './handlerFavorite';
 
-export const useFavorites = (initialFavorites = []) => {
+export const useFavorites = (movies, initialFavorites = []) => {
   const [favorites, setFavorites] = useState(initialFavorites);
   const userId = 1; // placeholder userId
 
@@ -24,7 +24,7 @@ export const useFavorites = (initialFavorites = []) => {
     return () => {
       abortController.abort();
     };
-  }, []);
+  }, []); // [movies]
 
   const toggleFavorite = (item) => {
     const foundMovie = favorites.find((movie) => movie.id === item.id);
