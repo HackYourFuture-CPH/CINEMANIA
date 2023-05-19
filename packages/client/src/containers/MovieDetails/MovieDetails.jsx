@@ -24,16 +24,7 @@ export const MovieDetails = () => {
   }, [movieID]);
   if (!currentMovie) return;
   return (
-    <Container
-      sx={{
-        mt: '3rem',
-        mb: '3rem',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '15rem',
-      }}
-      maxWidth="xl"
-    >
+    <Container minWidth="xs" maxWidth="xl">
       <BigMovieCard currentMovie={currentMovie} />
       <TopCastDisplay movieID={currentMovie?.id} />
 

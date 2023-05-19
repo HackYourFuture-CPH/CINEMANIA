@@ -51,6 +51,7 @@ export const BigMovieCard = ({ currentMovie }) => {
           bgcolor: 'mainGreen',
           display: 'flex',
           flexDirection: 'row',
+          flexWrap: 'wrap',
           justifyContent: 'space-between',
           alignItems: 'center',
           width: '100%',
