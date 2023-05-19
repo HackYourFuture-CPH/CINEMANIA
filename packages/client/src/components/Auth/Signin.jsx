@@ -19,11 +19,14 @@ export const Signin = () => {
       // TODO: Display a modal
       navigate('/auth');
     } catch (err) {
-      // TODO: Display a modal
       // error
       setError(err.message);
     }
   };
+  if (error) {
+    // TODO: Display a modal
+    return <div>Error</div>;
+  }
 
   return (
     <Container maxWidth="xs" sx={{ marginY: '2rem' }}>

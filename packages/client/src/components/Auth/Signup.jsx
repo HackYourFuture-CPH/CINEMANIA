@@ -40,6 +40,11 @@ export const Signup = () => {
     }
   };
 
+  if (error) {
+    // TODO: Display a modal
+    return <div>Error</div>;
+  }
+
   return (
     <Container maxWidth="xs" sx={{ marginY: '2rem' }}>
       <Typography variant="h3" textAlign="center" color="white">
