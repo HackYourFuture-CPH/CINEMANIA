@@ -1,0 +1,193 @@
+import React, { useRef } from 'react';
+import Slider from 'react-slick';
+import { Box, IconButton, Typography, Link, Container } from '@mui/material';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import styled from '@emotion/styled';
+import { useNewArrivals } from './useNewArrivals';
+import './styles.css';
+
+const settings = {
+  className: 'center-slide',
+  centerMode: true,
+  infinite: true,
+  centerPadding: '370px',
+  slidesToShow: 1,
+  swipeToSlide: true,
+  slidesToScroll: 1,
+  dots: true,
+  arrows: false,
+  autoplay: false,
+  speed: 500,
+  autoplaySpeed: 3000,
+  cssEase: 'linear',
+};
+
+export function NewArrivals() {
+  const [newArrivals] = useNewArrivals();
+  const sliderRef = useRef();
+
+  const handleSliderPrev = () => {
+    sliderRef.current?.slickPrev();
+  };
+
+  const handleSliderNext = () => {
+    sliderRef.current?.slickNext();
+  };
+
+  return (
+    <MainContainer maxWidth="false" className="MAIN-CONTAINER">
+      <Box display="flex" justifyContent="flex-start">
+        <MostPopularText>NEW ARRIVALS</MostPopularText>
+      </Box>
+      <CarouselWrapper className="CAROUSEL-WRAPPER">
+        <IconButton onClick={handleSliderPrev}>
+          <LeftArrow />
+        </IconButton>
+        <SliderWrapper className="SLIDER-WRAPPER">
+          <SliderMain {...settings} ref={sliderRef} className="SLIDER">
+            {newArrivals?.map((movie) => (
+              <MainSlideBox key={movie.id} className="MAIN-SLIDE-BOX">
+                <SlideBox className="CURRENT-SLIDE">
+                  <CarouselImg
+                    component="img"
+                    src={movie.image_location}
+                    alt={movie.title}
+                  />
+                  <TextBox>
+                    <TitleTypography variant="h4" component="div">
+                      {movie.title}
+                    </TitleTypography>
+                    <DescriptionTypography variant="h5">
+                      {movie.description}
+                    </DescriptionTypography>
+                    <StyledLink
+                      href="#"
+                      color="inherit"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.preventDefault()}
+                    >
+                      Read more...
+                    </StyledLink>
+                  </TextBox>
+                </SlideBox>
+              </MainSlideBox>
+            ))}
+          </SliderMain>
+        </SliderWrapper>
+        <IconButton onClick={handleSliderNext}>
+          <RightArrow />
+        </IconButton>
+      </CarouselWrapper>
+    </MainContainer>
+  );
+}
+
+const MainContainer = styled(Container)`
+  margin: 0 0 30rem 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+`;
+
+const MainSlideBox = styled(Box)``;
+
+const MostPopularText = styled(Typography)`
+  color: white;
+  font-size: 2rem;
+  font-weight: 700;
+  font-family: Inter, sans-serif;
+  border-left: 0.3rem solid #ffffff;
+  padding-left: 0.8rem;
+  margin: 0 0 1.5rem 10rem;
+`;
+
+const CarouselWrapper = styled(Box)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 120rem;
+`;
+
+const RightArrow = styled(ArrowForwardIosIcon)`
+  color: #00ffc2;
+  font-size: 2.5rem;
+  font-weight: bolder;
+  position: absolute;
+  right: 0;
+`;
+
+const LeftArrow = styled(ArrowBackIosIcon)`
+  color: #00ffc2;
+  font-size: 2.5rem;
+  font-weight: bolder;
+  position: absolute;
+  left: 0;
+`;
+
+const CarouselImg = styled(Box)`
+  width: 20rem;
+  height: 29rem;
+  margin: 0 0 0 4.75rem;
+`;
+
+const SliderWrapper = styled.div`
+  height: 37.75rem;
+  width: 120rem;
+`;
+
+const SlideBox = styled(Box)`
+  width: 62.5rem;
+  height: 33.125rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  margin: 0 1rem;
+  background: linear-gradient(
+      110.45deg,
+      rgba(0, 60, 45, 0.5) 0%,
+      rgba(0, 0, 0, 0) 84.43%
+    ),
+    #00ffc2;
+  &:hover {
+    transform: scale(1.02);
+    cursor: pointer;
+  }
+`;
+
+const TextBox = styled(Box)`
+  color: black;
+  width: 100%;
+  height: 26.25rem;
+  margin: 0 3.5rem 0 3.75rem;
+`;
+
+const TitleTypography = styled(Typography)`
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 48px;
+  margin-bottom: 20px;
+`;
+
+const DescriptionTypography = styled(Typography)`
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 36px;
+  margin-bottom: 20px;
+`;
+
+const StyledLink = styled(Link)`
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 36px;
+  text-decoration: none;
+  margin-top: 20px;
+`;
+
+const SliderMain = styled(Slider)`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+`;
