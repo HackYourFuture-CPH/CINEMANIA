@@ -3,6 +3,7 @@ import { Typography, Container } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import { useUserContext } from '../../context/UserContext';
 import styled from '@emotion/styled';
+import { apiURL } from '../../apiURL';
 
 export const Signup = () => {
   const [fullName, setFullName] = useState('');
@@ -16,9 +17,25 @@ export const Signup = () => {
     e.preventDefault();
     setError('');
     try {
-      await createUser(email, password);
+      const userCredentials = await createUser(email, password);
+
+      await fetch(`${apiURL()}/users`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          full_name: fullName,
+          email,
+          uid: userCredentials.user.uid,
+        }),
+      });
+      // eslint-disable-next-line no-console
+      console.log(userCredentials.user.uid);
+      // eslint-disable-next-line no-console
+
       // TODO: Display a modal
-      navigate('/account');
+      navigate('/auth');
     } catch (err) {
       // TODO: Display a modal
       setError(err.message);
@@ -33,8 +50,8 @@ export const Signup = () => {
       <Form onSubmit={handleSubmit}>
         <InputField
           required
-          type="email"
-          placeholder="enter email"
+          type="text"
+          placeholder="enter name"
           value={fullName}
           onChange={(e) => setFullName(e.target.value)}
         />
@@ -52,7 +69,7 @@ export const Signup = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <Button type="submit">Log In</Button>
+        <Button type="submit">Create</Button>
 
         <Typography>
           Already a member?
