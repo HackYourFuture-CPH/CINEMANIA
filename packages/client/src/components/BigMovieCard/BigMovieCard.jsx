@@ -16,24 +16,23 @@ import { MovieDetailsLayout } from '../../containers/MovieDetailsLayout/MovieDet
 import styled from '@emotion/styled';
 
 export const BigMovieCard = ({ currentMovie }) => {
-  const MovieTitle = styled(Typography)`
-    font-weight: 700;
-    font-weight: 2.5rem;
-    width: '39.5rem';
-    padding-top: '0.625rem';
-  `;
-
   const StyledTypography = styled(Typography)`
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
-    font-size: 1.313rem; /* 21px  or 1.75rem */
-    line-height: 1.563rem;
+    font-size: 1.75rem; /* 28px */
+    line-height: 2.125rem; /* 34px */
+    backhround-color: 'red';
   `;
-
   const StyledBoldTypography = styled(StyledTypography)`
     font-weight: 700;
-    width: 6rem;
+    width: 8rem;
+  `;
+  const MovieTitle = styled(StyledBoldTypography)`
+    width: '39.5rem';
+    padding-top: '0.625rem';
+    font-size: 2.5rem;
+    line-height: 3rem; /* 48px */
   `;
 
   const MyButton = styled(Button)({
@@ -51,104 +50,91 @@ export const BigMovieCard = ({ currentMovie }) => {
       <Card
         sx={{
           bgcolor: 'mainGreen',
+          boxSizing: 'border-box',
           display: 'flex',
           flexDirection: 'row',
           justifyContent: 'space-between',
           alignItems: 'center',
-          width: '100%',
-          boxSizing: 'border-box',
-          padding: '3rem',
+          maxWidth: 1518,
+          width: '100%' /* 1518px */,
+          padding: '6rem 7.5rem',
+          gap: '5rem',
         }}
       >
-        <Box
+        <CardMedia
+          component="img"
+          sx={{
+            width: '31.40%' /* 507px */,
+            heigth: '46.50%' /* 751px */,
+            padding: '2%' /* 32px */,
+            bgcolor: 'white',
+            border: 1,
+            borderColor: 'grey.500',
+            display: 'flex',
+            flexShrink: 1,
+          }}
+          src={currentMovie?.image_location}
+          alt="Movie Poster"
+        />
+        <CardContent
           sx={{
             display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
+            flexDirection: 'column',
+            flexWrap: 'wrap',
+            width: '39.5rem',
+            flexGrow: '1.25',
           }}
         >
-          <CardMedia
-            component="img"
-            sx={{
-              width: '23.766rem',
-              heigth: '35.20rem',
-              padding: '1rem',
-              bgcolor: 'white',
-              border: 1,
-              borderColor: 'grey.500',
-            }}
-            src={currentMovie?.image_location}
-            alt="Movie Poster"
+          <RatingStars
+            sx={{ display: 'flex', justifyContent: 'flex-end' }}
+            averageRating={currentMovie?.rating ?? 0}
+            numberOfReviews={currentMovie?.number_of_ratings}
           />
-        </Box>
 
-        <Box bgcolor="mainGreen" fontFamily="Inter">
-          <CardContent
-            sx={{ display: 'flex', flexDirection: 'column', flexGrow: 1 }}
+          <MovieTitle
+            sx={{
+              paddingTop: '0.625rem',
+            }}
           >
-            <RatingStars
-              sx={{ display: 'flex', justifyContent: 'flex-end' }}
-              averageRating={currentMovie?.rating ?? 0}
-              numberOfReviews={currentMovie?.number_of_ratings}
-            />
-            <MovieTitle
-              sx={{
-                fontWeight: 700,
-                fontSize: 40,
-                width: '39.5rem',
-                paddingTop: 10,
-              }}
-            >
-              {currentMovie?.title}
-            </MovieTitle>
+            {currentMovie?.title}
+          </MovieTitle>
 
-            <MyButton
-              variant="outlined"
-              sx={{
-                width: '9.375rem',
-                margin: '1.5rem 0',
-              }}
-              startIcon={<AddShoppingCartIcon />}
-            >
-              {currentMovie?.category_name}
-            </MyButton>
+          <MyButton
+            variant="outlined"
+            sx={{
+              width: '9.375rem',
+              margin: '1.5rem 0',
+            }}
+          >
+            {currentMovie?.category_name}
+          </MyButton>
 
-            <Divider
-              variant="middle"
-              sx={{ border: 1, borderColor: '#000000', marginBottom: '1rem' }}
-            />
+          <Divider
+            variant="middle"
+            sx={{ border: 1, borderColor: '#000000', marginBottom: '1rem' }}
+          />
 
-            <Box
-              sx={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                width: '39.5rem',
-              }}
-            >
-              <StyledTypography sx={{ mb: 2.5, flexGrow: 1 }}>
-                {currentMovie?.description}
-              </StyledTypography>
-              <StyledBoldTypography>Director: </StyledBoldTypography>
-              <StyledTypography flexGrow={1} width="28.125rem">
-                {currentMovie?.director}
-              </StyledTypography>
-              <StyledBoldTypography>Writer: </StyledBoldTypography>
-              <StyledTypography>{currentMovie?.writer}</StyledTypography>
-            </Box>
+          <StyledTypography>{currentMovie?.description}</StyledTypography>
+          <StyledBoldTypography>Director: </StyledBoldTypography>
+          <StyledTypography>{currentMovie?.director}</StyledTypography>
+          <StyledBoldTypography>Writer: </StyledBoldTypography>
+          <StyledTypography>{currentMovie?.writer}</StyledTypography>
 
-            <MyButton
-              variant="outlined"
-              sx={{
-                marginTop: 10,
-                width: '12.5rem',
-                alignSelf: 'flex-end',
-              }}
-              startIcon={<AddShoppingCartIcon />}
-            >
-              Add to Cart
-            </MyButton>
-          </CardContent>
-        </Box>
+          <MyButton
+            variant="outlined"
+            onClick={() => {
+              alert('Added to Shopping Cart');
+            }}
+            sx={{
+              marginTop: '0.625rem',
+              width: '12.5rem',
+              alignSelf: 'flex-end',
+            }}
+            startIcon={<AddShoppingCartIcon />}
+          >
+            Add to Cart
+          </MyButton>
+        </CardContent>
       </Card>
     </MovieDetailsLayout>
   );
