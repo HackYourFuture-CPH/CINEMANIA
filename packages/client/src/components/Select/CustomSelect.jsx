@@ -3,10 +3,10 @@ import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import { useMovieList } from '../../context/movieListContext';
 
 const CustomSelect = () => {
-  const { sortBy, setSortBy, isClickedSame, setIsClickedSame } = useMovieList();
+  const { sortBy, setSortBy, setIsClickedSame } = useMovieList();
   const handleMenuItemClick = (e) => {
     e.target.id === sortBy
-      ? setIsClickedSame(!isClickedSame)
+      ? setIsClickedSame((prevState) => !prevState)
       : setIsClickedSame(false);
   };
   return (
