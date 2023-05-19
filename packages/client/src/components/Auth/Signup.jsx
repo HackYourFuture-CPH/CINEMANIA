@@ -34,6 +34,7 @@ export const Signup = () => {
       // TODO: Display a modal
       navigate('/auth');
     } catch (err) {
+      // error
       // TODO: Display a modal
       setError(err.message);
     }

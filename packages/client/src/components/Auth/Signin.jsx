@@ -20,6 +20,7 @@ export const Signin = () => {
       navigate('/auth');
     } catch (err) {
       // TODO: Display a modal
+      // error
       setError(err.message);
     }
   };
