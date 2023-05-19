@@ -3,13 +3,13 @@ import React from 'react';
 import { useMovieList } from '../../context/movieListContext';
 
 export const CategoryButton = ({ label, categoryId }) => {
-  const { selectedCategoryId, filterByCategory } = useMovieList();
+  const { selectedCategoryId, onFilterByCategory } = useMovieList();
 
   const handleClick = () => {
     if (isActive) {
-      filterByCategory(null);
+      onFilterByCategory(null);
     } else {
-      filterByCategory(categoryId);
+      onFilterByCategory(categoryId);
     }
   };
 
