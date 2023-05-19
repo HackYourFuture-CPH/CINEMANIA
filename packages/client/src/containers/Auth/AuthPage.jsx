@@ -3,7 +3,8 @@ import styled from '@emotion/styled';
 import { auth } from '../../firebase';
 import { onAuthStateChanged } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
-import { AuthForm } from '../../components/Auth/AuthForm';
+import { Signin } from '../../components/Auth/Signin';
+import { Account } from '../../components/Auth/Account';
 
 export const AuthPage = () => {
   const [authUser, setAuthUser] = useState(null);
@@ -23,11 +24,7 @@ export const AuthPage = () => {
     };
   }, []);
 
-  return (
-    <Section>
-      <AuthForm />
-    </Section>
-  );
+  return <Section>{authUser ? <Account /> : <Signin />}</Section>;
 };
 
 // ToDO: Remove after we create a global Styled Section

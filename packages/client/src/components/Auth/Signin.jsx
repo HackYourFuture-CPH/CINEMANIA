@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Typography, Container } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
-import { useUserContext } from '../../context/userContext';
+import { useUserContext } from '../../context/UserContext';
 import styled from '@emotion/styled';
 
-export const AuthForm = () => {
+export const Signin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');

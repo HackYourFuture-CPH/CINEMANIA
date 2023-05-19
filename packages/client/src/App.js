@@ -7,12 +7,12 @@ import { MovieListPage } from './containers/MovieListPage/MovieListPage';
 import { PageNotFound } from './containers/PageNotFound/PageNotFound.Container';
 
 import { AuthPage } from './containers/Auth/AuthPage';
+import { UserProvider } from './context/UserContext';
 
 // MUI THEME
 import { ThemeProvider } from '@mui/material';
 import { theme } from './lib/theme';
 import { FavoritesListPage } from './containers/FavoritesListPage/FavoritesListPage';
-import { UserProvider } from './context/userContext';
 
 // Routes
 const router = createBrowserRouter([

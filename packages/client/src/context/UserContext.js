@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  useMemo,
+} from 'react';
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -27,6 +33,7 @@ export const UserProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      // eslint-disable-next-line no-console
       console.log(currentUser);
       setUser(currentUser);
     });
@@ -35,8 +42,13 @@ export const UserProvider = ({ children }) => {
     };
   }, []);
 
+  const userContextValue = useMemo(
+    () => ({ createUser, user, logOut, signIn }),
+    [user],
+  );
+
   return (
-    <UserContext.Provider value={{ createUser, user, logOut, signIn }}>
+    <UserContext.Provider value={userContextValue}>
       {children}
     </UserContext.Provider>
   );
