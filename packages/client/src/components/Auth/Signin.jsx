@@ -48,7 +48,7 @@ export const Signin = () => {
 
         <Typography>
           Not a member?
-          <Link href="/signup">Signup</Link>
+          <Link to="/signup">Signup</Link>
         </Typography>
       </Form>
     </Container>

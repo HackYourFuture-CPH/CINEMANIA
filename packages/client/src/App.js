@@ -7,6 +7,7 @@ import { MovieListPage } from './containers/MovieListPage/MovieListPage';
 import { PageNotFound } from './containers/PageNotFound/PageNotFound.Container';
 
 import { AuthPage } from './containers/Auth/AuthPage';
+import { Signup } from './components/Auth/Signup';
 import { UserProvider } from './context/UserContext';
 
 // MUI THEME
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: '/auth',
         element: <AuthPage />,
+      },
+      {
+        path: '/signup',
+        element: <Signup />,
       },
       {
         path: '/movies/:id',
