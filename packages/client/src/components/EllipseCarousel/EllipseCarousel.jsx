@@ -23,9 +23,9 @@ export const EllipseCarousel = ({ popularMovies }) => {
         <MostPopularText>MOST POPULAR</MostPopularText>
       </Box>
       <CarouselWrapper>
-        <IconButton onClick={() => slider?.current?.slickPrev()}>
+        <IconBtn onClick={() => slider?.current?.slickPrev()}>
           <LeftArrow />
-        </IconButton>
+        </IconBtn>
         <SliderWrapper>
           <Slider {...settings} ref={slider}>
             {popularMovies?.map((movie) => (
@@ -37,9 +37,9 @@ export const EllipseCarousel = ({ popularMovies }) => {
             ))}
           </Slider>
         </SliderWrapper>
-        <IconButton onClick={() => slider?.current?.slickNext()}>
+        <IconBtn onClick={() => slider?.current?.slickNext()}>
           <RightArrow />
-        </IconButton>
+        </IconBtn>
       </CarouselWrapper>
     </Container>
   );
@@ -61,6 +61,12 @@ const CarouselWrapper = styled(Box)`
   justify-content: center;
 `;
 
+const IconBtn = styled(IconButton)`
+  box-shadow: none;
+  &:hover {
+    background-color: transparent;
+  }
+`;
 const RightArrow = styled(ArrowForwardIosIcon)`
   color: #00ffc2;
   font-size: 2rem;
