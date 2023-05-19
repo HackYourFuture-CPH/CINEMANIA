@@ -7,6 +7,7 @@ import React, {
   useState,
 } from 'react';
 import { apiURL } from '../apiURL';
+import { useDebounce } from '../hooks/useDebounce';
 
 const MovieListContext = createContext();
 
@@ -20,6 +21,14 @@ export const MovieListProvider = ({ isFavoritePage, children }) => {
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [hasNextPage, setHasNextPage] = useState(false);
+  const debouncedSearchText = useDebounce(searchText, 1000);
+
+  useEffect(() => {
+    if (debouncedSearchText === searchText) {
+      setCurrentPage(1);
+      setMovies([]);
+    }
+  }, [debouncedSearchText, searchText]);
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -28,8 +37,8 @@ export const MovieListProvider = ({ isFavoritePage, children }) => {
         if (selectedCategoryId) {
           url += `&categoryId=${selectedCategoryId}`;
         }
-        if (searchText) {
-          url += `&title=${searchText}`;
+        if (debouncedSearchText) {
+          url += `&title=${debouncedSearchText}`;
         }
         if (isClickedSame) {
           url += `&isClickedSame=${isClickedSame}`;
@@ -48,7 +57,7 @@ export const MovieListProvider = ({ isFavoritePage, children }) => {
     fetchMovies();
   }, [
     sortBy,
-    searchText,
+    debouncedSearchText,
     selectedCategoryId,
     isFavoritePage,
     isClickedSame,
@@ -83,8 +92,6 @@ export const MovieListProvider = ({ isFavoritePage, children }) => {
   }, []);
 
   const onSearch = useCallback((value) => {
-    setCurrentPage(1);
-    setMovies([]);
     setSearchText(value);
   }, []);
 
