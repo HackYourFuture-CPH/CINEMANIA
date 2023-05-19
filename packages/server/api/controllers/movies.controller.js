@@ -256,7 +256,7 @@ const getNewArrivals = async (req, res) => {
     }
 
     const latestMovies = newArrivals.map((latestMovie) => ({
-      movie_id: latestMovie.movie_id,
+      movie_id: latestMovie.id,
       category_id: latestMovie.category_id,
       category_name: latestMovie.category_name,
       title: latestMovie.title,

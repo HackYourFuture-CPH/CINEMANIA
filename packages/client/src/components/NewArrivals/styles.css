@@ -32,7 +32,7 @@ button.ul {
 }
 
 /* giving 3D effect */
-.slick-active > div > div > div {
+.slick-active > div > a > div {
   height: 37.75rem;
   align-items: center;
 }

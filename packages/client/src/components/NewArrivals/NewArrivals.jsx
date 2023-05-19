@@ -54,9 +54,10 @@ export function NewArrivals() {
         <SliderWrapper className="SLIDER-WRAPPER">
           <SliderMain {...settings} ref={sliderRef} className="SLIDER">
             {newArrivals?.map((movie) => (
-              <MainSlideBox
-                key={`slide-${movie.id}`}
-                className="MAIN-SLIDE-BOX"
+              <StyledLink
+                rel="noopener noreferrer"
+                key={`slide-${movie.movie_id}`}
+                href={`/movies/${movie.movie_id}`}
               >
                 <SlideBox className="CURRENT-SLIDE">
                   <CarouselImg
@@ -71,20 +72,16 @@ export function NewArrivals() {
                     <DescriptionTypography variant="h5">
                       {movie.description}
                     </DescriptionTypography>
-                    <StyledLink
-                      href="#"
-                      color="inherit"
-                      rel="noopener noreferrer"
-                      onClick={(e) => e.preventDefault()}
+                    <DescriptionTypography>Read more...</DescriptionTypography>
+                    <MyButton
+                      key={`button-${movie.movie_id}`}
+                      variant="outlined"
                     >
-                      Read more...
-                    </StyledLink>
-                    <MyButton key={`button-${movie.id}`} variant="outlined">
                       {movie.category_name}
                     </MyButton>
                   </TextBox>
                 </SlideBox>
-              </MainSlideBox>
+              </StyledLink>
             ))}
           </SliderMain>
         </SliderWrapper>
@@ -97,13 +94,11 @@ export function NewArrivals() {
 }
 
 const MainContainer = styled(Container)`
-  margin: 0 0 30rem 0;
+  margin: 0 0 12.5rem 0;
   padding: 0;
   height: 100%;
   width: 100%;
 `;
-
-const MainSlideBox = styled(Box)``;
 
 const MostPopularText = styled(Typography)`
   color: white;
@@ -191,12 +186,7 @@ const DescriptionTypography = styled(Typography)`
 `;
 
 const StyledLink = styled(Link)`
-  font-weight: 400;
-  font-size: 30px;
-  line-height: 36px;
   text-decoration: none;
-  margin-top: 20px;
-  margin-bottom: 20px;
 `;
 
 const SliderMain = styled(Slider)`
