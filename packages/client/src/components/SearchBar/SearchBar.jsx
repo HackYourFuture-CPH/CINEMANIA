@@ -4,7 +4,7 @@ import React from 'react';
 import { useMovieList } from '../../context/movieListContext';
 
 export const SearchBar = () => {
-  const { searchText, setSearchText } = useMovieList();
+  const { searchText, onSearch } = useMovieList();
 
   return (
     <TextField
@@ -19,7 +19,7 @@ export const SearchBar = () => {
       placeholder="Search..."
       value={searchText}
       onChange={(e) => {
-        setSearchText(e.target.value);
+        onSearch(e.target.value);
       }}
       InputProps={{
         endAdornment: (
