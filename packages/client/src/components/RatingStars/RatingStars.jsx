@@ -3,7 +3,7 @@ import Rating from '@mui/material/Rating';
 import Typography from '@mui/material/Typography';
 import React from 'react';
 
-export const RatingStars = ({ averageRating, numberOfReviews }) => {
+export const RatingStars = ({ averageRating, numberOfReviews, color }) => {
   return (
     <Box
       sx={{
@@ -18,6 +18,7 @@ export const RatingStars = ({ averageRating, numberOfReviews }) => {
         defaultValue={2.5}
         precision={0.5}
         value={isNaN(averageRating) ? 0 : `${Number(averageRating)}`}
+        sx={{ color }}
       />
       <Typography component="legend">
         {numberOfReviews
