@@ -1,6 +1,13 @@
 import React, { useRef } from 'react';
 import Slider from 'react-slick';
-import { Box, IconButton, Typography, Link, Container } from '@mui/material';
+import {
+  Box,
+  Button,
+  IconButton,
+  Typography,
+  Link,
+  Container,
+} from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import styled from '@emotion/styled';
@@ -47,7 +54,10 @@ export function NewArrivals() {
         <SliderWrapper className="SLIDER-WRAPPER">
           <SliderMain {...settings} ref={sliderRef} className="SLIDER">
             {newArrivals?.map((movie) => (
-              <MainSlideBox key={movie.id} className="MAIN-SLIDE-BOX">
+              <MainSlideBox
+                key={`slide-${movie.id}`}
+                className="MAIN-SLIDE-BOX"
+              >
                 <SlideBox className="CURRENT-SLIDE">
                   <CarouselImg
                     component="img"
@@ -69,6 +79,9 @@ export function NewArrivals() {
                     >
                       Read more...
                     </StyledLink>
+                    <MyButton key={`button-${movie.id}`} variant="outlined">
+                      {movie.category_name}
+                    </MyButton>
                   </TextBox>
                 </SlideBox>
               </MainSlideBox>
@@ -106,7 +119,6 @@ const CarouselWrapper = styled(Box)`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 120rem;
 `;
 
 const RightArrow = styled(ArrowForwardIosIcon)`
@@ -133,11 +145,10 @@ const CarouselImg = styled(Box)`
 
 const SliderWrapper = styled.div`
   height: 37.75rem;
-  width: 120rem;
+  width: 117rem;
 `;
 
 const SlideBox = styled(Box)`
-  width: 62.5rem;
   height: 33.125rem;
   display: flex;
   flex-direction: row;
@@ -161,6 +172,8 @@ const TextBox = styled(Box)`
   width: 100%;
   height: 26.25rem;
   margin: 0 3.5rem 0 3.75rem;
+  display: flex;
+  flex-direction: column;
 `;
 
 const TitleTypography = styled(Typography)`
@@ -183,6 +196,7 @@ const StyledLink = styled(Link)`
   line-height: 36px;
   text-decoration: none;
   margin-top: 20px;
+  margin-bottom: 20px;
 `;
 
 const SliderMain = styled(Slider)`
@@ -190,4 +204,18 @@ const SliderMain = styled(Slider)`
   height: 100%;
   display: flex;
   flex-direction: column;
+`;
+
+const MyButton = styled(Button)`
+  width: max-content;
+  height: max-content;
+  border: 1px solid #003e2f;
+  border-radius: 25rem;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+  color: #003e2f;
+  padding: 1rem 1.5rem;
 `;

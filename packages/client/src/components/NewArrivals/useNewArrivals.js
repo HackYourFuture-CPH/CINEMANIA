@@ -7,7 +7,7 @@ export const useNewArrivals = () => {
   React.useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const response = await fetch(`${apiURL()}/movies`);
+        const response = await fetch(`${apiURL()}/movies/latest`);
         if (!response.ok) {
           throw new Error('Failed to fetch movies with the latest rating');
         }
@@ -22,5 +22,5 @@ export const useNewArrivals = () => {
     fetchMovies();
   }, []);
 
-  return [movies.slice(-5), setMovies];
+  return [movies];
 };

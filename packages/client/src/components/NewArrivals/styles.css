@@ -12,19 +12,15 @@ ul.slick-dots {
   border-radius: 25px;
   background-color: #003e2f;
 }
-
-/* trying to remove button  */
-button.slick-dots {
-  display: none;
-  color: tomato;
-}
 .slick-dots li.slick-active {
   background-color: #00ffc2;
 }
 
-/* .slick-dots > li > button {
+/* trying to remove button  */
+
+.slick-dots > li > button {
   display: none;
-} */
+}
 
 .slick-dots li button:before {
   content: '';
@@ -37,8 +33,8 @@ button.ul {
 
 /* giving 3D effect */
 .slick-active > div > div > div {
-  width: 70.875rem;
   height: 37.75rem;
+  align-items: center;
 }
 
 div.slick-track {

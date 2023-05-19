@@ -235,6 +235,42 @@ const getFeaturedMovie = async (req, res) => {
   }
 };
 
+const getNewArrivals = async (req, res) => {
+  try {
+    const newArrivals = await knex('movies')
+      .join('categories', 'movies.category_id', 'categories.id')
+      .orderBy('movies.movie_year', 'desc')
+      .limit(5)
+      .select(
+        'movies.id',
+        'movies.category_id',
+        'categories.name as category_name',
+        'movies.title',
+        'movies.description',
+        'movies.image_location',
+        'movies.movie_year',
+      );
+
+    if (newArrivals.length === 0) {
+      throw new HttpError('No movies found in the database');
+    }
+
+    const latestMovies = newArrivals.map((latestMovie) => ({
+      movie_id: latestMovie.movie_id,
+      category_id: latestMovie.category_id,
+      category_name: latestMovie.category_name,
+      title: latestMovie.title,
+      description: latestMovie.description,
+      image_location: latestMovie.image_location,
+      movie_year: latestMovie.movie_year,
+    }));
+
+    res.json({ movies: latestMovies });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 module.exports = {
   getMovies,
   getMovieByID,
@@ -244,4 +280,5 @@ module.exports = {
   getDetailsOfMovieByID,
   getMoviesByCategory,
   getFeaturedMovie,
+  getNewArrivals,
 };
