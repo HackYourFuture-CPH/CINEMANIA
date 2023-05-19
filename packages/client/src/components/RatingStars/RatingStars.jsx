@@ -7,13 +7,13 @@ export const RatingStars = ({ averageRating, numberOfReviews }) => {
   return (
     <Box
       sx={{
-        width: 200,
         display: 'flex',
         flexDirection: 'column',
         alignSelf: 'flex-end',
       }}
     >
       <Rating
+        sx={{ width: '12.38%' }}
         name="half-rating"
         defaultValue={2.5}
         precision={0.5}
