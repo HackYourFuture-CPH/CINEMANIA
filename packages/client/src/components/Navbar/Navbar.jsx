@@ -12,12 +12,19 @@ import {
   Toolbar,
 } from '@mui/material';
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
-const NavLink = (props) => <Link underline="none" color="inherit" {...props} />;
+const NavLink = (props) => {
+  const { pathname } = useLocation();
+  const isActive = pathname === props.href;
+  const linkColor = isActive ? 'red' : 'inherit';
+  return <Link underline="none" color={linkColor} {...props} />;
+};
 
 export const Navbar = () => {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+
   return (
     <StyledAppBar>
       <Box>
@@ -28,7 +35,7 @@ export const Navbar = () => {
           }}
         >
           <IconMenu>
-            <NavIcon>
+            <NavIcon isActive={pathname === '/auth'}>
               <PersonIcon
                 onClick={() => {
                   navigate('/auth');
@@ -50,10 +57,14 @@ export const Navbar = () => {
             </Box>
           </Grid>
           <IconMenu>
-            <NavIcon>
-              <ShoppingCartIcon />
+            <NavIcon isActive={pathname === '/shopping'}>
+              <ShoppingCartIcon
+                onClick={() => {
+                  navigate('/shopping');
+                }}
+              />
             </NavIcon>
-            <NavIcon>
+            <NavIcon isActive={pathname === '/favorites'}>
               <FavoriteBorderIcon
                 onClick={() => {
                   navigate('/favorites');
@@ -99,7 +110,7 @@ const StyledAppBar = styled(AppBar)`
 
 const NavIcon = styled.button`
   background-color: transparent;
-  color: 'black';
+  color: ${(props) => (props.isActive ? 'red' : 'black')};
   cursor: pointer;
   border: none;
   width: '2rem';
