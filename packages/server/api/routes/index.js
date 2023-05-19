@@ -10,6 +10,7 @@ const categories = require('./categories.router');
 const reviews = require('./reviews.router');
 const favorites = require('./favorites.router');
 const users = require('./users.router');
+const eachReview = require('./eachReview.router');
 const swaggerJsDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 
@@ -37,8 +38,7 @@ router.use('/movies', movies);
 router.use('/reviews', reviews);
 router.use('/views', views);
 router.use('/crew', crew);
-
 router.use('/favorites', favorites);
-
+router.use('/eachReview', eachReview);
 module.exports = router;
 router.use('/categories', categories);
