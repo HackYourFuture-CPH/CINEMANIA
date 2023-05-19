@@ -1,7 +1,14 @@
 import React from 'react';
 import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import { useMovieList } from '../../context/movieListContext';
 
-const CustomSelect = ({ onChange, sortBy }) => {
+const CustomSelect = () => {
+  const { sortBy, setSortBy, setIsClickedSame } = useMovieList();
+  const handleMenuItemClick = (e) => {
+    e.target.id === sortBy
+      ? setIsClickedSame((prevState) => !prevState)
+      : setIsClickedSame(false);
+  };
   return (
     <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
       <FormControl variant="standard" sx={{ m: 1, minWidth: 85 }}>
@@ -14,8 +21,10 @@ const CustomSelect = ({ onChange, sortBy }) => {
         <Select
           labelId="sort-by-label"
           id="sort-by-select"
-          name="sortBy"
-          onChange={onChange}
+          value={sortBy}
+          onChange={(e) => {
+            setSortBy(e.target.value);
+          }}
           label="Sort by"
           sx={{
             color: '#00FFC2',
@@ -28,9 +37,19 @@ const CustomSelect = ({ onChange, sortBy }) => {
             },
           }}
         >
-          <MenuItem value="rating">Rating</MenuItem>
-          <MenuItem value="recently_added">Recently added</MenuItem>
-          <MenuItem value="price">Price</MenuItem>
+          <MenuItem id="rating" value="rating" onClick={handleMenuItemClick}>
+            Rating
+          </MenuItem>
+          <MenuItem
+            id="recently_added"
+            value="recently_added"
+            onClick={handleMenuItemClick}
+          >
+            Recently added
+          </MenuItem>
+          <MenuItem id="price" value="price" onClick={handleMenuItemClick}>
+            Price
+          </MenuItem>
         </Select>
       </FormControl>
     </div>

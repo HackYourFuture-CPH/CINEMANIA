@@ -1,7 +1,7 @@
 const knex = require('../../config/db');
 
 // POST
-const createUser = async ({ body }) => {
+const createUser = async (body) => {
   try {
     const existingUser = await knex('users')
       .where('uid', body.uid)

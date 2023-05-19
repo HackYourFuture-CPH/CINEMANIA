@@ -18,7 +18,6 @@ import styled from '@emotion/styled';
 export const BigMovieCard = ({ currentMovie }) => {
   const MovieTitle = styled(Typography)`
     font-weight: 700;
-    font-weight: 2.5rem;
     width: '39.5rem';
     padding-top: '0.625rem';
   `;
@@ -56,8 +55,7 @@ export const BigMovieCard = ({ currentMovie }) => {
           justifyContent: 'space-between',
           alignItems: 'center',
           width: '100%',
-          boxSizing: 'border-box',
-          padding: '3rem',
+          padding: '6rem',
         }}
       >
         <Box

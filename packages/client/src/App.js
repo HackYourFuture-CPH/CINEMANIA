@@ -7,6 +7,8 @@ import { MovieListPage } from './containers/MovieListPage/MovieListPage';
 import { PageNotFound } from './containers/PageNotFound/PageNotFound.Container';
 
 import { AuthPage } from './containers/Auth/AuthPage';
+import { Signup } from './components/Auth/Signup';
+import { UserProvider } from './context/UserContext';
 
 // MUI THEME
 import { ThemeProvider } from '@mui/material';
@@ -27,6 +29,10 @@ const router = createBrowserRouter([
         element: <AuthPage />,
       },
       {
+        path: '/signup',
+        element: <Signup />,
+      },
+      {
         path: '/movies/:id',
         element: <MovieDetails />,
       },
@@ -38,7 +44,6 @@ const router = createBrowserRouter([
         path: '/movies',
         element: <MovieListPage />,
       },
-
       {
         path: '*',
         element: <PageNotFound />,
@@ -49,8 +54,10 @@ const router = createBrowserRouter([
 
 export const App = () => {
   return (
-    <ThemeProvider theme={theme}>
-      <RouterProvider router={router} />
-    </ThemeProvider>
+    <UserProvider>
+      <ThemeProvider theme={theme}>
+        <RouterProvider router={router} />
+      </ThemeProvider>
+    </UserProvider>
   );
 };

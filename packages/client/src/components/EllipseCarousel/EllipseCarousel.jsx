@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Box, IconButton, Typography, Container } from '@mui/material';
 import Slider from 'react-slick';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
@@ -22,21 +23,23 @@ export const EllipseCarousel = ({ popularMovies }) => {
         <MostPopularText>MOST POPULAR</MostPopularText>
       </Box>
       <CarouselWrapper>
-        <IconButton onClick={() => slider?.current?.slickPrev()}>
+        <IconBtn onClick={() => slider?.current?.slickPrev()}>
           <LeftArrow />
-        </IconButton>
+        </IconBtn>
         <SliderWrapper>
           <Slider {...settings} ref={slider}>
             {popularMovies?.map((movie) => (
               <Box key={movie.id}>
-                <CarouselImg src={movie.image_location} alt={movie.title} />
+                <Link to={`/movies/${movie.id}`}>
+                  <CarouselImg src={movie.backdrop_URL} alt={movie.title} />
+                </Link>
               </Box>
             ))}
           </Slider>
         </SliderWrapper>
-        <IconButton onClick={() => slider?.current?.slickNext()}>
+        <IconBtn onClick={() => slider?.current?.slickNext()}>
           <RightArrow />
-        </IconButton>
+        </IconBtn>
       </CarouselWrapper>
     </Container>
   );
@@ -44,12 +47,13 @@ export const EllipseCarousel = ({ popularMovies }) => {
 
 const MostPopularText = styled(Typography)`
   color: white;
-  font-size: 2rem;
-  font-weight: 700;
+  font-size: 1.5rem;
+  font-weight: 800;
   font-family: Inter, sans-serif;
   border-left: 0.3rem solid #ffffff;
   padding-left: 0.8rem;
-  margin: 0 0 1.5rem 10rem;
+  margin: 0 0 1.5rem 6rem;
+  line-height: 1.8rem;
 `;
 
 const CarouselWrapper = styled(Box)`
@@ -57,22 +61,28 @@ const CarouselWrapper = styled(Box)`
   justify-content: center;
 `;
 
+const IconBtn = styled(IconButton)`
+  box-shadow: none;
+  &:hover {
+    background-color: transparent;
+  }
+`;
 const RightArrow = styled(ArrowForwardIosIcon)`
   color: #00ffc2;
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: bolder;
 `;
 
 const LeftArrow = styled(ArrowBackIosIcon)`
   color: #00ffc2;
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: bolder;
 `;
 
 const CarouselImg = styled.img`
-  width: 95%;
-  height: 17.5rem;
-  border-radius: 8rem;
+  width: 25.75rem;
+  height: 14rem;
+  border-radius: 7rem;
   margin: auto auto;
   &:hover {
     transform: scale(1.02);
@@ -81,6 +91,6 @@ const CarouselImg = styled.img`
 `;
 
 const SliderWrapper = styled.div`
-  height: 18.75rem;
-  width: 106rem;
+  height: 15rem;
+  width: 80rem;
 `;
