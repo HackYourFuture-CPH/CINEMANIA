@@ -7,14 +7,21 @@ import {
   Divider,
   Typography,
 } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { RatingStars } from '../RatingStars/RatingStars';
 import { MovieDetailsLayout } from '../../containers/MovieDetailsLayout/MovieDetailsLayout';
 import styled from '@emotion/styled';
+import { ReviewDialog } from '../ReviewDialog/ReviewDialog';
 
 export const BigMovieCard = ({ currentMovie }) => {
+  const [open, setOpen] = useState(false);
+
+  function handleOpenReview(event, value) {
+    setOpen((status) => !status);
+  }
+
   const MovieTitle = styled(Typography)`
     font-weight: 700;
     width: '39.5rem';
@@ -86,9 +93,17 @@ export const BigMovieCard = ({ currentMovie }) => {
             sx={{ display: 'flex', flexDirection: 'column', flexGrow: 1 }}
           >
             <RatingStars
-              sx={{ display: 'flex', justifyContent: 'flex-end' }}
-              averageRating={currentMovie?.rating ?? 0}
+              rating={currentMovie?.rating ?? 0}
               numberOfReviews={currentMovie?.number_of_ratings}
+              handleOpenReview={(event, value) =>
+                handleOpenReview(event, value)
+              }
+            />
+            <ReviewDialog
+              initialState={open}
+              handleClose={(event, value) =>
+                handleOpenReview(new Event('Review submitted'), value)
+              }
             />
             <MovieTitle
               sx={{

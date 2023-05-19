@@ -5,6 +5,7 @@ export const theme = createTheme({
     mainGreen: '#00FFC2',
     hoverRed: '#FF4000',
     white: '#FFFFFF',
+    backgroundDark: '#003c2d',
   },
   typography: {
     fontFamily: "'Inter', sans-serif",
