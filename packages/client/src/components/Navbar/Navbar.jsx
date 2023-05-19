@@ -2,7 +2,6 @@ import styled from '@emotion/styled';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import PersonIcon from '@mui/icons-material/Person';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import { useNavigate } from 'react-router-dom';
 import {
   AppBar,
   Box,
@@ -13,6 +12,7 @@ import {
   Toolbar,
 } from '@mui/material';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const NavLink = (props) => <Link underline="none" color="inherit" {...props} />;
 
@@ -29,7 +29,12 @@ export const Navbar = () => {
         >
           <IconMenu>
             <NavIcon>
-              <PersonIcon sx={{ borderRight: '2px solid #000000' }} />
+              <PersonIcon
+                onClick={() => {
+                  navigate('/auth');
+                }}
+                sx={{ borderRight: '2px solid #000000' }}
+              />
             </NavIcon>
           </IconMenu>
           <Grid item xs={12} align="center">
