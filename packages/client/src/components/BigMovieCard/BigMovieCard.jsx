@@ -10,7 +10,6 @@ import {
 import React from 'react';
 
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-
 import { RatingStars } from '../RatingStars/RatingStars';
 import { MovieDetailsLayout } from '../../containers/MovieDetailsLayout/MovieDetailsLayout';
 import styled from '@emotion/styled';
@@ -18,7 +17,6 @@ import styled from '@emotion/styled';
 export const BigMovieCard = ({ currentMovie }) => {
   const MovieTitle = styled(Typography)`
     font-weight: 700;
-    font-weight: 2.5rem;
     width: '39.5rem';
     padding-top: '0.625rem';
   `;

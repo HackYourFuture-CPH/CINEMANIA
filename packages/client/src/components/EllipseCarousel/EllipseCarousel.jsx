@@ -29,7 +29,7 @@ export const EllipseCarousel = ({ popularMovies }) => {
           <Slider {...settings} ref={slider}>
             {popularMovies?.map((movie) => (
               <Box key={movie.id}>
-                <CarouselImg src={movie.image_location} alt={movie.title} />
+                <CarouselImg src={movie.backdrop_URL} alt={movie.title} />
               </Box>
             ))}
           </Slider>
