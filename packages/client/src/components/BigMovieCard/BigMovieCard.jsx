@@ -25,7 +25,6 @@ export const BigMovieCard = ({ currentMovie }) => {
     font-weight: 400;
     font-size: 1.75rem; /* 28px */
     line-height: 2.125rem; /* 34px */
-    backhround-color: 'red';
   `;
   const StyledBoldTypography = styled(StyledTypography)`
     font-weight: 700;
@@ -46,6 +45,7 @@ export const BigMovieCard = ({ currentMovie }) => {
     border: '1px solid #000000',
     color: '#000000',
     borderRadius: '1.25rem',
+    margin: '2.5rem 0',
   });
 
   return (
@@ -146,9 +146,13 @@ export const BigMovieCard = ({ currentMovie }) => {
               flexWrap: 'wrap',
             }}
           >
-            <StyledTypography>{currentMovie?.description}</StyledTypography>
+            <StyledTypography sx={{ margin: '1.5rem 0' }}>
+              {currentMovie?.description}
+            </StyledTypography>
             <StyledBoldTypography>Director: </StyledBoldTypography>
-            <StyledTypography>{currentMovie?.director}</StyledTypography>
+            <StyledTypography sx={{ width: '30rem' }}>
+              {currentMovie?.director}
+            </StyledTypography>
             <StyledBoldTypography>Writer: </StyledBoldTypography>
             <StyledTypography>{currentMovie?.writer}</StyledTypography>
           </Box>
@@ -159,7 +163,7 @@ export const BigMovieCard = ({ currentMovie }) => {
               alert('Added to Shopping Cart');
             }}
             sx={{
-              marginTop: '0.625rem',
+              marginTop: '1rem',
               width: '12.5rem',
               alignSelf: 'flex-end',
             }}
