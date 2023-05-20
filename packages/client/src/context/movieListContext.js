@@ -19,39 +19,59 @@ export const MovieListProvider = ({ isFavoritePage, children }) => {
   const [searchText, setSearchText] = useState('');
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
   const debouncedSearch = useDebounce(searchText, 1000);
+  const [pageNumber, setPageNumber] = useState(1);
+  const [prevPage, setPrevPage] = useState(0);
+  const [wasLastList, setWasLastList] = useState(false);
+  const [query, setQuery] = useState(false);
 
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        let url = `${apiURL()}/movies?sortBy=${sortBy}&isFavoritePage=${isFavoritePage}&userId=${1}`;
+        let url = `${apiURL()}/movies?pageNumber=${pageNumber}&pageSize=${30}&sortBy=${sortBy}&isFavoritePage=${isFavoritePage}&userId=${1}`;
+        setQuery(true);
         if (selectedCategoryId) {
+          setPageNumber(1);
           url += `&categoryId=${selectedCategoryId}`;
+          setQuery(true);
         }
         if (debouncedSearch) {
+          setPageNumber(1);
           url += `&title=${debouncedSearch}`;
+          setQuery(true);
         }
         if (isClickedSame) {
           url += `&isClickedSame=${isClickedSame}`;
+          setPageNumber(1);
+          setQuery(true);
         }
         const response = await fetch(url);
         const data = await response.json();
+        if (!data.movies.length) {
+          setWasLastList(true);
+          return;
+        }
         setMovies(data.movies);
         setIsLoading(false);
+        setPrevPage(pageNumber);
       } catch (err) {
         setError(err);
         setIsLoading(false);
       }
     };
-
-    fetchMovies();
+    if (prevPage !== pageNumber || query) {
+      fetchMovies();
+    }
   }, [
     sortBy,
     debouncedSearch,
     selectedCategoryId,
     isFavoritePage,
     isClickedSame,
+    pageNumber,
+    wasLastList,
+    prevPage,
+    query,
   ]);
-
   const contextValue = useMemo(
     () => ({
       movies,
@@ -65,6 +85,8 @@ export const MovieListProvider = ({ isFavoritePage, children }) => {
       setSearchText,
       isClickedSame,
       setIsClickedSame,
+      pageNumber,
+      setPageNumber,
     }),
     [
       movies,
@@ -78,6 +100,8 @@ export const MovieListProvider = ({ isFavoritePage, children }) => {
       setSearchText,
       isClickedSame,
       setIsClickedSame,
+      pageNumber,
+      setPageNumber,
     ],
   );
 
