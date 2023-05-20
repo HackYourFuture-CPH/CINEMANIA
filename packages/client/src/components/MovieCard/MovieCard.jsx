@@ -32,12 +32,12 @@ export function MovieCard({ movie, favorites, toggleFavorite }) {
         alt={movie.title}
       />
       <StyledTypographyTitle>{movie.title}</StyledTypographyTitle>
-      <StyledTypographyDescription
+      <StyledTypographyReviewText
         paragraph
         sx={{ top: '2rem', fontWeight: 400 }}
       >
-        {movie.description}
-      </StyledTypographyDescription>
+        {movie.review_text}
+      </StyledTypographyReviewText>
       <BasicRating />
     </StyledCard>
   );
@@ -123,7 +123,7 @@ const StyledTypographyTitle = styled(Typography)`
   font-weight: 700;
 `;
 
-const StyledTypographyDescription = styled(Typography)`
+const StyledTypographyReviewText = styled(Typography)`
   ${sharedTypographyStyles}
   top: 2rem;
   font-weight: 400;
