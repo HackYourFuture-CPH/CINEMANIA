@@ -108,7 +108,6 @@ export const BigMovieCard = ({ currentMovie }) => {
                 width: '9.375rem',
                 margin: '1.5rem 0',
               }}
-              startIcon={<AddShoppingCartIcon />}
             >
               {currentMovie?.category_name}
             </MyButton>
