@@ -10,7 +10,6 @@ import {
 import React from 'react';
 
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-
 import { RatingStars } from '../RatingStars/RatingStars';
 import { MovieDetailsLayout } from '../../containers/MovieDetailsLayout/MovieDetailsLayout';
 import styled from '@emotion/styled';

@@ -2,11 +2,11 @@ const express = require('express');
 
 const router = express.Router({ mergeParams: true });
 // controllers
-const userReviewController = require('../controllers/userReview.controller');
+const uidreviewController = require('../controllers/uidreview.controller');
 
-router.get('/:movieID/:userID', (req, res) => {
-  userReviewController
-    .getReviewsByMovieIdUserId(req.params.movieID, req.params.userID)
+router.get('/:id/:uid', (req, res) => {
+  uidreviewController
+    .getReviewByUid(req.params.id, req.params.uid)
     .then((result) => {
       if (result.length === 0) {
         res.status(404).send("User doesn't have reviews for this movie");
