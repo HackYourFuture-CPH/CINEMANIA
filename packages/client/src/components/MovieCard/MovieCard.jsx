@@ -3,14 +3,12 @@ import { Card, CardMedia, Typography, Rating, Box } from '@mui/material';
 import styled from '@emotion/styled';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import { useFavorites } from './useFavorites'; // created a custom hook to manage favorites
 
 const BasicRating = () => {
   return <StyledRating name="read-only" value={4} readOnly />;
 };
 
-export function MovieCard({ movie }) {
-  const [favorites, toggleFavorite] = useFavorites([]);
+export function MovieCard({ movie, favorites, toggleFavorite }) {
   const isFavorite = favorites.find(
     (favoriteMovie) => favoriteMovie.id === movie.id,
   );
@@ -23,9 +21,13 @@ export function MovieCard({ movie }) {
         }}
       >
         {isFavorite ? (
-          <StyledFavoriteIcon onClick={() => toggleFavorite(movie)} />
+          <StyledFavoriteIcon
+            onClick={() => toggleFavorite(movie, isFavorite)}
+          />
         ) : (
-          <StyledFavoriteBorderIcon onClick={() => toggleFavorite(movie)} />
+          <StyledFavoriteBorderIcon
+            onClick={() => toggleFavorite(movie, isFavorite)}
+          />
         )}
       </Box>
       <StyledCardMedia
@@ -34,7 +36,6 @@ export function MovieCard({ movie }) {
         alt={movie.title}
       />
       <StyledTypographyTitle>{movie.title}</StyledTypographyTitle>
-
       <StyledTypographyDescription
         paragraph
         sx={{ top: '2rem', fontWeight: 400 }}
