@@ -14,6 +14,7 @@ import { RatingStars } from '../RatingStars/RatingStars';
 import { MovieDetailsLayout } from '../../containers/MovieDetailsLayout/MovieDetailsLayout';
 import styled from '@emotion/styled';
 import { ReviewDialog } from '../ReviewDialog/ReviewDialog';
+import { useUserContext } from '../../context/UserContext';
 
 export const BigMovieCard = ({ currentMovie }) => {
   const [open, setOpen] = useState(false);
@@ -21,6 +22,7 @@ export const BigMovieCard = ({ currentMovie }) => {
   function handleOpenReview(event, value) {
     setOpen((status) => !status);
   }
+  const { user } = useUserContext();
 
   const MovieTitle = styled(Typography)`
     font-weight: 700;
@@ -92,12 +94,22 @@ export const BigMovieCard = ({ currentMovie }) => {
           <CardContent
             sx={{ display: 'flex', flexDirection: 'column', flexGrow: 1 }}
           >
+            {user ? (
+              <RatingStars
+                rating={currentMovie?.rating ?? 0}
+                numberOfReviews={currentMovie?.number_of_ratings}
+                handleOpenReview={(event, value) =>
+                  handleOpenReview(event, value)
+                }
+                clickable={true}
+              />
+            ) : (
+              ''
+            )}
             <RatingStars
               rating={currentMovie?.rating ?? 0}
               numberOfReviews={currentMovie?.number_of_ratings}
-              handleOpenReview={(event, value) =>
-                handleOpenReview(event, value)
-              }
+              clickable={false}
             />
             <ReviewDialog
               initialState={open}

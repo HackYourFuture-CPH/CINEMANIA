@@ -9,7 +9,14 @@ export const RatingStars = ({
   numberOfReviews,
   color,
   handleOpenReview,
+  clickable,
 }) => {
+  // eslint-disable-next-line no-console
+  console.log(
+    '%cRatingStars.jsx line:14 clickable',
+    'color: #007acc;',
+    clickable,
+  );
   return (
     <StarsRatingWrapper>
       <Rating
@@ -19,6 +26,7 @@ export const RatingStars = ({
         value={isNaN(rating) ? 0 : `${Number(rating)}`}
         sx={{ color }}
         onChange={handleOpenReview ? (e, v) => handleOpenReview(e, v) : null}
+        readOnly={!clickable}
       />
       <Typography component="legend">
         {numberOfReviews
