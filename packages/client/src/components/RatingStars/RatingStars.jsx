@@ -12,18 +12,17 @@ export const RatingStars = ({
   return (
     <Box
       sx={{
-        width: 200,
         display: 'flex',
         flexDirection: 'column',
         alignSelf: 'flex-end',
       }}
     >
       <Rating
+        sx={{ width: '12.38%', color }}
         name="half-rating"
         defaultValue={2.5}
         precision={0.5}
         value={isNaN(averageRating) ? 0 : `${Number(averageRating)}`}
-        sx={{ color }}
       />
       {ratingText && (
         <Typography component="legend">
