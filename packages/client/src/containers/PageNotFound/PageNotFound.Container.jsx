@@ -13,7 +13,8 @@ export const PageNotFound = () => {
 };
 
 const Section = styled.section`
-  height: 100vh;
+  height: 100%;
+  margin-top: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
