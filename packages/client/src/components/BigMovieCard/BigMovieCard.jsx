@@ -43,6 +43,10 @@ export const BigMovieCard = ({ currentMovie }) => {
     line-height: 3rem; /* 48px */
   `;
 
+  const TextDivider = styled(Box)`
+    display: flex;
+    flex-direction: row;
+  `;
   const MyButton = styled(Button)({
     height: '3.125rem',
     fontWeight: 500,
@@ -168,15 +172,20 @@ export const BigMovieCard = ({ currentMovie }) => {
             sx={{
               display: 'flex',
               flexWrap: 'wrap',
+              gap: '1rem',
             }}
           >
             <StyledTypography sx={{ margin: '1.5rem 0' }}>
               {currentMovie?.description}
             </StyledTypography>
-            <StyledBoldTypography>Director: </StyledBoldTypography>
-            <StyledTypography>{currentMovie?.director}</StyledTypography>
-            <StyledBoldTypography>Writer: </StyledBoldTypography>
-            <StyledTypography>{currentMovie?.writer}</StyledTypography>
+            <TextDivider>
+              <StyledBoldTypography>Director: </StyledBoldTypography>
+              <StyledTypography>{currentMovie?.director}</StyledTypography>
+            </TextDivider>
+            <TextDivider>
+              <StyledBoldTypography> Writer: </StyledBoldTypography>
+              <StyledTypography>{currentMovie?.writer}</StyledTypography>
+            </TextDivider>
           </Box>
 
           <MyButton
