@@ -10,7 +10,6 @@ import React, { useEffect, useState } from 'react';
 import { apiURL } from '../../apiURL';
 import { MovieDetailsLayout } from '../../containers/MovieDetailsLayout/MovieDetailsLayout';
 import styled from '@emotion/styled';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 export const TopCastDisplay = ({ movieID }) => {
   const [castList, setCastList] = useState([]);
