@@ -17,7 +17,7 @@ export const useFavorites = (initialFavorites = []) => {
         const data = await response.json();
         setFavorites(data);
       } catch (error) {
-        throw new Error(error);
+        return error;
       }
     };
     getFavoriteMovies();
@@ -26,8 +26,10 @@ export const useFavorites = (initialFavorites = []) => {
     };
   }, []);
 
-  const toggleFavorite = (item, isFavorites) => {
-    if (isFavorites) {
+  const toggleFavorite = (item) => {
+    const foundMovie = favorites.find((movie) => movie.id === item.id);
+
+    if (foundMovie) {
       handleRemoveFavorite(item.id, item, favorites, setFavorites, userId);
     } else {
       handleAddFavorite(item.id, item, favorites, setFavorites, userId);
