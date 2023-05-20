@@ -59,27 +59,27 @@ export const BigMovieCard = ({ currentMovie }) => {
       <Card
         sx={{
           bgcolor: 'mainGreen',
-          boxSizing: 'border-box',
+
           display: 'flex',
-          flexDirection: 'row',
-          flexWrap: 'wrap',
-          justifyContent: 'space-between',
+          flexFlow: 'row wrap',
           alignItems: 'center',
-          maxWidth: 1518,
-          width: '100%' /* 1518px */,
-          padding: '6rem 7.5rem',
-          gap: '5rem',
+          justifyContent: 'center',
+          padding: '3rem',
+          gap: '3rem',
         }}
       >
         <Box
           sx={{
-            width: '31.40%',
-            heigth: '46.50%',
             padding: '1%',
             bgcolor: 'white',
             display: 'flex',
             flexDirection: 'column',
-            flexShrink: 1,
+
+            justifyContent: 'center',
+
+            position: 'relative',
+            alignItems: 'center',
+            flex: '1 1 300px',
           }}
         >
           <CardMedia
@@ -87,6 +87,8 @@ export const BigMovieCard = ({ currentMovie }) => {
             sx={{
               border: 1,
               borderColor: 'grey.500',
+              alignSelf: 'flex-start',
+              minWidth: '150px',
             }}
             src={currentMovie?.image_location}
             alt="Movie Poster"
@@ -96,14 +98,12 @@ export const BigMovieCard = ({ currentMovie }) => {
               color: 'white',
               backgroundColor: 'black',
               position: 'absolute',
+              top: '1rem',
+              right: '1rem',
               width: '2rem',
               height: '2rem',
               padding: '0.5rem',
               zIndex: 1,
-              display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'flex-start',
-              alignSelf: 'flex-end',
             }}
           />
         </Box>
@@ -112,10 +112,8 @@ export const BigMovieCard = ({ currentMovie }) => {
           sx={{
             display: 'flex',
             flexDirection: 'column',
-            flexWrap: 'wrap',
-            width: '39.5rem',
-            flexGrow: '1.25',
-            paddingLeft: '3.125rem',
+            flex: '1 1 500px',
+            alignSelf: 'flex-end',
           }}
         >
           {user ? (
@@ -154,8 +152,8 @@ export const BigMovieCard = ({ currentMovie }) => {
           <MyButton
             variant="outlined"
             sx={{
-              width: '9.375rem',
               margin: '1.5rem 0',
+              alignSelf: 'flex-start',
             }}
           >
             {currentMovie?.category_name}
@@ -176,9 +174,7 @@ export const BigMovieCard = ({ currentMovie }) => {
               {currentMovie?.description}
             </StyledTypography>
             <StyledBoldTypography>Director: </StyledBoldTypography>
-            <StyledTypography sx={{ width: '30rem' }}>
-              {currentMovie?.director}
-            </StyledTypography>
+            <StyledTypography>{currentMovie?.director}</StyledTypography>
             <StyledBoldTypography>Writer: </StyledBoldTypography>
             <StyledTypography>{currentMovie?.writer}</StyledTypography>
           </Box>
@@ -191,7 +187,7 @@ export const BigMovieCard = ({ currentMovie }) => {
             }}
             sx={{
               marginTop: '1rem',
-              width: '12.5rem',
+
               alignSelf: 'flex-end',
             }}
             startIcon={<AddShoppingCartIcon />}
