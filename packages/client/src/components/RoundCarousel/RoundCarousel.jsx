@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, IconButton, Typography, Link, Container } from '@mui/material';
+import { Box, IconButton, Typography, Link } from '@mui/material';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
@@ -46,7 +46,7 @@ const RoundCarousel = ({ carouselData }) => {
   };
 
   return (
-    <Container>
+    <>
       <Title>SIMILAR MOVIES</Title>
 
       <CarouselWrapper maxWidth="xl">
@@ -72,7 +72,7 @@ const RoundCarousel = ({ carouselData }) => {
           <RightArrow />
         </IconButton>
       </CarouselWrapper>
-    </Container>
+    </>
   );
 };
 

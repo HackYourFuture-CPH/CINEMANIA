@@ -5,36 +5,35 @@ import React from 'react';
 import styled from '@emotion/styled';
 
 export const RatingStars = ({
-  rating,
+  averageRating,
   numberOfReviews,
   color,
-  handleOpenReview,
-  clickable,
+  ratingText,
 }) => {
-  // eslint-disable-next-line no-console
-  console.log(
-    '%cRatingStars.jsx line:14 clickable',
-    'color: #007acc;',
-    clickable,
-  );
   return (
-    <StarsRatingWrapper>
+    <StarsRatingWrapper
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignSelf: 'flex-end',
+      }}
+    >
       <Rating
+        sx={{ width: '12.38%', color }}
         name="half-rating"
         defaultValue={2.5}
         precision={0.5}
-        value={isNaN(rating) ? 0 : `${Number(rating)}`}
-        sx={{ color }}
-        onChange={handleOpenReview ? (e, v) => handleOpenReview(e, v) : null}
-        readOnly={!clickable}
+        value={isNaN(averageRating) ? 0 : `${Number(averageRating)}`}
       />
-      <Typography component="legend">
-        {numberOfReviews
-          ? `${rating} based on ${numberOfReviews} review${
-              numberOfReviews === 1 ? '' : 's'
-            }`
-          : 'No rating given'}
-      </Typography>
+      {ratingText && (
+        <Typography component="legend">
+          {numberOfReviews
+            ? `${averageRating} based on ${numberOfReviews} review${
+                numberOfReviews === 1 ? '' : 's'
+              }`
+            : 'No rating given'}
+        </Typography>
+      )}
     </StarsRatingWrapper>
   );
 };

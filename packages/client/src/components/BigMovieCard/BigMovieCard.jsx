@@ -10,6 +10,7 @@ import {
 import React, { useState } from 'react';
 
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import FavoriteIcon from '@mui/icons-material/FavoriteBorder';
 import { RatingStars } from '../RatingStars/RatingStars';
 import { MovieDetailsLayout } from '../../containers/MovieDetailsLayout/MovieDetailsLayout';
 import styled from '@emotion/styled';
@@ -24,23 +25,22 @@ export const BigMovieCard = ({ currentMovie }) => {
   }
   const { user } = useUserContext();
 
-  const MovieTitle = styled(Typography)`
-    font-weight: 700;
-    width: '39.5rem';
-    padding-top: '0.625rem';
-  `;
-
   const StyledTypography = styled(Typography)`
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
-    font-size: 1.313rem; /* 21px  or 1.75rem */
-    line-height: 1.563rem;
+    font-size: 1.75rem; /* 28px */
+    line-height: 2.125rem; /* 34px */
   `;
-
   const StyledBoldTypography = styled(StyledTypography)`
     font-weight: 700;
-    width: 6rem;
+    width: 8rem;
+  `;
+  const MovieTitle = styled(StyledBoldTypography)`
+    width: 39.5rem;
+    margin: 5rem 0 0 0;
+    font-size: 2.5rem;
+    line-height: 3rem; /* 48px */
   `;
 
   const MyButton = styled(Button)({
@@ -51,6 +51,7 @@ export const BigMovieCard = ({ currentMovie }) => {
     border: '1px solid #000000',
     color: '#000000',
     borderRadius: '1.25rem',
+    margin: '2.5rem 0',
   });
 
   return (
@@ -58,123 +59,146 @@ export const BigMovieCard = ({ currentMovie }) => {
       <Card
         sx={{
           bgcolor: 'mainGreen',
+          boxSizing: 'border-box',
           display: 'flex',
           flexDirection: 'row',
           flexWrap: 'wrap',
           justifyContent: 'space-between',
           alignItems: 'center',
-          width: '100%',
-          boxSizing: 'border-box',
-          padding: '3rem',
+          maxWidth: 1518,
+          width: '100%' /* 1518px */,
+          padding: '6rem 7.5rem',
+          gap: '5rem',
         }}
       >
         <Box
           sx={{
+            width: '31.40%',
+            heigth: '46.50%',
+            padding: '1%',
+            bgcolor: 'white',
             display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
+            flexDirection: 'column',
+            flexShrink: 1,
           }}
         >
           <CardMedia
             component="img"
             sx={{
-              width: '23.766rem',
-              heigth: '35.20rem',
-              padding: '1rem',
-              bgcolor: 'white',
               border: 1,
               borderColor: 'grey.500',
             }}
             src={currentMovie?.image_location}
             alt="Movie Poster"
           />
+          <FavoriteIcon
+            sx={{
+              color: 'white',
+              backgroundColor: 'black',
+              position: 'absolute',
+              width: '2rem',
+              height: '2rem',
+              padding: '0.5rem',
+              zIndex: 1,
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'flex-start',
+              alignSelf: 'flex-end',
+            }}
+          />
         </Box>
 
-        <Box bgcolor="mainGreen" fontFamily="Inter">
-          <CardContent
-            sx={{ display: 'flex', flexDirection: 'column', flexGrow: 1 }}
-          >
-            {user ? (
-              <RatingStars
-                rating={currentMovie?.rating ?? 0}
-                numberOfReviews={currentMovie?.number_of_ratings}
-                handleOpenReview={(event, value) =>
-                  handleOpenReview(event, value)
-                }
-                clickable={true}
-              />
-            ) : (
-              ''
-            )}
+        <CardContent
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            flexWrap: 'wrap',
+            width: '39.5rem',
+            flexGrow: '1.25',
+            paddingLeft: '3.125rem',
+          }}
+        >
+          {user ? (
             <RatingStars
               rating={currentMovie?.rating ?? 0}
               numberOfReviews={currentMovie?.number_of_ratings}
-              clickable={false}
-            />
-            <ReviewDialog
-              initialState={open}
-              handleClose={(event, value) =>
-                handleOpenReview(new Event('Review submitted'), value)
+              handleOpenReview={(event, value) =>
+                handleOpenReview(event, value)
               }
+              clickable={true}
+              ratingText={true}
             />
-            <MovieTitle
-              sx={{
-                fontWeight: 700,
-                fontSize: 40,
-                width: '39.5rem',
-                paddingTop: 10,
-              }}
-            >
-              {currentMovie?.title}
-            </MovieTitle>
+          ) : (
+            ''
+          )}
+          <RatingStars
+            rating={currentMovie?.rating ?? 0}
+            numberOfReviews={currentMovie?.number_of_ratings}
+            clickable={false}
+            ratingText={true}
+          />
+          <ReviewDialog
+            initialState={open}
+            handleClose={(event, value) =>
+              handleOpenReview(new Event('Review submitted'), value)
+            }
+          />
+          <MovieTitle
+            sx={{
+              paddingTop: '0.625rem',
+            }}
+          >
+            {currentMovie?.title}
+          </MovieTitle>
 
-            <MyButton
-              variant="outlined"
-              sx={{
-                width: '9.375rem',
-                margin: '1.5rem 0',
-              }}
-              startIcon={<AddShoppingCartIcon />}
-            >
-              {currentMovie?.category_name}
-            </MyButton>
+          <MyButton
+            variant="outlined"
+            sx={{
+              width: '9.375rem',
+              margin: '1.5rem 0',
+            }}
+          >
+            {currentMovie?.category_name}
+          </MyButton>
 
-            <Divider
-              variant="middle"
-              sx={{ border: 1, borderColor: '#000000', marginBottom: '1rem' }}
-            />
+          <Divider
+            variant="middle"
+            sx={{ border: 1, borderColor: '#000000', marginBottom: '1rem' }}
+          />
 
-            <Box
-              sx={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                width: '39.5rem',
-              }}
-            >
-              <StyledTypography sx={{ mb: 2.5, flexGrow: 1 }}>
-                {currentMovie?.description}
-              </StyledTypography>
-              <StyledBoldTypography>Director: </StyledBoldTypography>
-              <StyledTypography flexGrow={1} width="28.125rem">
-                {currentMovie?.director}
-              </StyledTypography>
-              <StyledBoldTypography>Writer: </StyledBoldTypography>
-              <StyledTypography>{currentMovie?.writer}</StyledTypography>
-            </Box>
+          <Box
+            sx={{
+              display: 'flex',
+              flexWrap: 'wrap',
+            }}
+          >
+            <StyledTypography sx={{ margin: '1.5rem 0' }}>
+              {currentMovie?.description}
+            </StyledTypography>
+            <StyledBoldTypography>Director: </StyledBoldTypography>
+            <StyledTypography sx={{ width: '30rem' }}>
+              {currentMovie?.director}
+            </StyledTypography>
+            <StyledBoldTypography>Writer: </StyledBoldTypography>
+            <StyledTypography>{currentMovie?.writer}</StyledTypography>
+          </Box>
 
-            <MyButton
-              variant="outlined"
-              sx={{
-                marginTop: 10,
-                width: '12.5rem',
-                alignSelf: 'flex-end',
-              }}
-              startIcon={<AddShoppingCartIcon />}
-            >
-              Add to Cart
-            </MyButton>
-          </CardContent>
-        </Box>
+          <MyButton
+            variant="outlined"
+            onClick={() => {
+              // eslint-disable-next-line no-alert
+              alert('Added to Shopping Cart');
+            }}
+            sx={{
+              marginTop: '1rem',
+              width: '12.5rem',
+              alignSelf: 'flex-end',
+            }}
+            startIcon={<AddShoppingCartIcon />}
+          >
+            Add to Cart
+          </MyButton>
+        </CardContent>
       </Card>
     </MovieDetailsLayout>
   );

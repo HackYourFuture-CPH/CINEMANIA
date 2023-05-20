@@ -37,6 +37,47 @@ export const TopCastDisplay = ({ movieID }) => {
     setShowFullCast((previousFullCastState) => !previousFullCastState);
   };
 
+  const StyledTypography = styled(Typography)`
+    font-family: 'Inter';
+    color: #ffffff;
+  `;
+
+  const Title = styled(StyledTypography)`
+    font-size: 2rem;
+    font-weight: 700;
+    border-left: 0.3rem solid #ffffff;
+    padding-left: 0.9rem;
+    margin: 0 0 1.5rem 0;
+    align-self: flex-start;
+  `;
+
+  const StyledCastTitle = styled(Title)`
+    font-weight: 500;
+    font-size: 1.56rem;
+    width: 12.5rem;
+    height: 1.875rem;
+    margin: 0.5rem 0 3rem 0;
+    border: none;
+  `;
+
+  const StyledAvatar = styled(Avatar)`
+  width: 13.68rem;
+  height: 13.68rem;    
+  border: 1,
+  color: 'grey.500',
+  `;
+
+  const MyButton = styled(Button)({
+    width: '12.5rem',
+    color: '#00FFC2',
+    textDecoration: 'underline',
+    textUnderlineOffset: 10,
+    alignSelf: 'flex-end',
+    fontSize: 32,
+    fontWeight: 400,
+    marginTop: 2,
+  });
+
   return (
     <MovieDetailsLayout>
       <Title>TOP CAST</Title>
@@ -51,39 +92,23 @@ export const TopCastDisplay = ({ movieID }) => {
             <Box
               key={castMember.id}
               sx={{
-                width: 200,
+                width: '13.75rem',
                 p: 1,
                 textAlign: 'center',
                 display: 'flex',
                 flexDirection: 'column',
-                justifyContent: 'center',
+                justifyContent: 'space-between  ',
                 alignItems: 'center',
               }}
             >
-              <Avatar
+              <StyledAvatar
                 alt={`${castMember.full_name}`}
                 src={castMember.image_location}
-                sx={{
-                  width: 200,
-                  height: 200,
-                  border: 1,
-                  borderColor: 'grey.500',
-                }}
                 variant="circular"
               />
-              <Typography
-                variant="caption"
-                sx={{
-                  width: 200,
-                  height: 30,
-                  fontSize: 25,
-                  margin: 5,
-                  fontWeight: 500,
-                  color: '#FFFFFF',
-                }}
-              >
+              <StyledCastTitle variant="caption">
                 {`${castMember.full_name}`}
-              </Typography>
+              </StyledCastTitle>
             </Box>
           ))}
       </Stack>
@@ -96,31 +121,10 @@ export const TopCastDisplay = ({ movieID }) => {
           }}
         />
       ) : (
-        <Button
-          onClick={handleShowFullCast}
-          sx={{
-            width: 200,
-            color: '#FFFFFF',
-            textDecoration: 'underline',
-            textUnderlineOffset: 10,
-            alignSelf: 'flex-end',
-            fontSize: 32,
-            fontWeight: 400,
-          }}
-        >
+        <MyButton onClick={handleShowFullCast}>
           {showFullCast ? 'Show less' : 'Full Cast'}
-        </Button>
+        </MyButton>
       )}
     </MovieDetailsLayout>
   );
 };
-const Title = styled(Typography)`
-  color: white;
-  font-size: 2rem;
-  font-weight: 700;
-  font-family: Inter, sans-serif;
-  border-left: 0.3rem solid #ffffff;
-  padding-left: 0.9rem;
-  margin: 0 0 1.5rem 0;
-  align-self: flex-start;
-`;
