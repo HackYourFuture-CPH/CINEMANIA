@@ -4,7 +4,13 @@ import Typography from '@mui/material/Typography';
 import React from 'react';
 import styled from '@emotion/styled';
 
-export const RatingStars = ({ rating, numberOfReviews, color, ratingText }) => {
+export const RatingStars = ({
+  rating,
+  numberOfReviews,
+  color,
+  ratingText,
+  handleOpenReview,
+}) => {
   return (
     <StarsRatingWrapper
       sx={{
@@ -19,6 +25,7 @@ export const RatingStars = ({ rating, numberOfReviews, color, ratingText }) => {
         defaultValue={2.5}
         precision={0.5}
         value={isNaN(rating) ? 0 : `${Number(rating)}`}
+        onChange={(e, v) => handleOpenReview(e, v)}
       />
       {ratingText && (
         <Typography component="legend">

@@ -26,7 +26,7 @@ export function ReviewDialog({ initialState, handleClose }) {
         <DialogContentText sx={{ color: 'mainGreen' }}>
           Please, write your review of the movie
         </DialogContentText>
-        <TextField
+        <ReviewContentText
           autoFocus
           margin="dense"
           id="name"
@@ -41,11 +41,7 @@ export function ReviewDialog({ initialState, handleClose }) {
               textTransform: 'capitalize',
             },
           }}
-          inputProps={{
-            sx: {
-              color: 'mainGreen',
-            },
-          }}
+          InputProps={{ sx: { color: 'mainGreen' } }}
         />
       </ReviewContent>
       <DialogActions
@@ -71,4 +67,9 @@ const ReviewContent = styled(DialogContent)`
   display: flex;
   flex-flow: column wrap;
   gap: 2rem;
+`;
+const ReviewContentText = styled(TextField)`
+  & .input {
+    color: 'mainGreen';
+  }
 `;
