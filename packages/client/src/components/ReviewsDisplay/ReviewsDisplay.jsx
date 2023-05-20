@@ -65,6 +65,7 @@ export function ReviewsDisplay() {
               averageRating={3.5}
               numberOfReviews={5}
               color="#00FFC2"
+              ratingText={false}
             />
             <Typography
               sx={{
