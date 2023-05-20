@@ -10,15 +10,12 @@ import {
 import React from 'react';
 
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-// import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/FavoriteBorder';
 import { RatingStars } from '../RatingStars/RatingStars';
 import { MovieDetailsLayout } from '../../containers/MovieDetailsLayout/MovieDetailsLayout';
 import styled from '@emotion/styled';
 
 export const BigMovieCard = ({ currentMovie }) => {
-  const MyCard = styled(Card)``;
-
   const StyledTypography = styled(Typography)`
     font-family: 'Inter';
     font-style: normal;
