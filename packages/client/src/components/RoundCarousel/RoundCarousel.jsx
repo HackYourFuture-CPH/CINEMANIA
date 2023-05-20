@@ -46,7 +46,7 @@ const RoundCarousel = ({ carouselData }) => {
   };
 
   return (
-    <Container>
+    <>
       <Title>SIMILAR MOVIES</Title>
 
       <CarouselWrapper maxWidth="xl">
@@ -72,7 +72,7 @@ const RoundCarousel = ({ carouselData }) => {
           <RightArrow />
         </IconButton>
       </CarouselWrapper>
-    </Container>
+    </>
   );
 };
 
