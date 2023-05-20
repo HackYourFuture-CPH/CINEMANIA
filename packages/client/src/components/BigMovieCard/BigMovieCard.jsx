@@ -28,8 +28,8 @@ export const BigMovieCard = ({ currentMovie }) => {
     width: 8rem;
   `;
   const MovieTitle = styled(StyledBoldTypography)`
-    width: '39.5rem';
-    padding-top: '0.625rem';
+    width: 39.5rem;
+    margin: 5rem 0 0 0;
     font-size: 2.5rem;
     line-height: 3rem; /* 48px */
   `;
