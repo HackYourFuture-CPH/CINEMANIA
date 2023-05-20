@@ -10,12 +10,15 @@ import {
 import React from 'react';
 
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-
+// import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/FavoriteBorder';
 import { RatingStars } from '../RatingStars/RatingStars';
 import { MovieDetailsLayout } from '../../containers/MovieDetailsLayout/MovieDetailsLayout';
 import styled from '@emotion/styled';
 
 export const BigMovieCard = ({ currentMovie }) => {
+  const MyCard = styled(Card)``;
+
   const StyledTypography = styled(Typography)`
     font-family: 'Inter';
     font-style: normal;
@@ -61,21 +64,43 @@ export const BigMovieCard = ({ currentMovie }) => {
           gap: '5rem',
         }}
       >
-        <CardMedia
-          component="img"
+        <Box
           sx={{
-            width: '31.40%' /* 507px */,
-            heigth: '46.50%' /* 751px */,
-            padding: '2%' /* 32px */,
+            width: '31.40%',
+            heigth: '46.50%',
+            padding: '1%',
             bgcolor: 'white',
-            border: 1,
-            borderColor: 'grey.500',
             display: 'flex',
+            flexDirection: 'column',
             flexShrink: 1,
           }}
-          src={currentMovie?.image_location}
-          alt="Movie Poster"
-        />
+        >
+          <CardMedia
+            component="img"
+            sx={{
+              border: 1,
+              borderColor: 'grey.500',
+            }}
+            src={currentMovie?.image_location}
+            alt="Movie Poster"
+          />
+          <FavoriteIcon
+            sx={{
+              color: 'white',
+              backgroundColor: 'black',
+              position: 'absolute',
+              width: '2rem',
+              height: '2rem',
+              padding: '0.5rem',
+              zIndex: 1,
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'flex-start',
+              alignSelf: 'flex-end',
+            }}
+          />
+        </Box>
+
         <CardContent
           sx={{
             display: 'flex',
@@ -83,6 +108,7 @@ export const BigMovieCard = ({ currentMovie }) => {
             flexWrap: 'wrap',
             width: '39.5rem',
             flexGrow: '1.25',
+            paddingLeft: '3.125rem',
           }}
         >
           <RatingStars
@@ -114,11 +140,18 @@ export const BigMovieCard = ({ currentMovie }) => {
             sx={{ border: 1, borderColor: '#000000', marginBottom: '1rem' }}
           />
 
-          <StyledTypography>{currentMovie?.description}</StyledTypography>
-          <StyledBoldTypography>Director: </StyledBoldTypography>
-          <StyledTypography>{currentMovie?.director}</StyledTypography>
-          <StyledBoldTypography>Writer: </StyledBoldTypography>
-          <StyledTypography>{currentMovie?.writer}</StyledTypography>
+          <Box
+            sx={{
+              display: 'flex',
+              flexWrap: 'wrap',
+            }}
+          >
+            <StyledTypography>{currentMovie?.description}</StyledTypography>
+            <StyledBoldTypography>Director: </StyledBoldTypography>
+            <StyledTypography>{currentMovie?.director}</StyledTypography>
+            <StyledBoldTypography>Writer: </StyledBoldTypography>
+            <StyledTypography>{currentMovie?.writer}</StyledTypography>
+          </Box>
 
           <MyButton
             variant="outlined"
