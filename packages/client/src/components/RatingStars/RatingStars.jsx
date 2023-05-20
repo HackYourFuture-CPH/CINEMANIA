@@ -3,7 +3,12 @@ import Rating from '@mui/material/Rating';
 import Typography from '@mui/material/Typography';
 import React from 'react';
 
-export const RatingStars = ({ averageRating, numberOfReviews, color }) => {
+export const RatingStars = ({
+  averageRating,
+  numberOfReviews,
+  color,
+  ratingText,
+}) => {
   return (
     <Box
       sx={{
@@ -20,13 +25,15 @@ export const RatingStars = ({ averageRating, numberOfReviews, color }) => {
         value={isNaN(averageRating) ? 0 : `${Number(averageRating)}`}
         sx={{ color }}
       />
-      <Typography component="legend">
-        {numberOfReviews
-          ? `${averageRating} based on ${numberOfReviews} review${
-              numberOfReviews === 1 ? '' : 's'
-            }`
-          : 'No rating given'}
-      </Typography>
+      {ratingText && (
+        <Typography component="legend">
+          {numberOfReviews
+            ? `${averageRating} based on ${numberOfReviews} review${
+                numberOfReviews === 1 ? '' : 's'
+              }`
+            : 'No rating given'}
+        </Typography>
+      )}
     </Box>
   );
 };

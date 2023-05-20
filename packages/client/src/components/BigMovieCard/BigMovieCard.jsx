@@ -89,6 +89,7 @@ export const BigMovieCard = ({ currentMovie }) => {
               sx={{ display: 'flex', justifyContent: 'flex-end' }}
               averageRating={currentMovie?.rating ?? 0}
               numberOfReviews={currentMovie?.number_of_ratings}
+              ratingText={true}
             />
             <MovieTitle
               sx={{
