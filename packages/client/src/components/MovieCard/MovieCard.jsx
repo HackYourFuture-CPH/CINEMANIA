@@ -4,8 +4,8 @@ import styled from '@emotion/styled';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
-const BasicRating = () => {
-  return <StyledRating name="read-only" value={4} readOnly />;
+const BasicRating = ({ rating }) => {
+  return <StyledRating name="read-only" value={rating} readOnly />;
 };
 
 export function MovieCard({ movie, favorites, toggleFavorite }) {
@@ -38,7 +38,7 @@ export function MovieCard({ movie, favorites, toggleFavorite }) {
       >
         {movie.review_text}
       </StyledTypographyReviewText>
-      <BasicRating />
+      <BasicRating rating={movie.rating} />
     </StyledCard>
   );
 }
