@@ -3,6 +3,7 @@ import { useTheme } from '@mui/material/styles';
 import React, { useEffect, useState } from 'react';
 import { apiURL } from '../../apiURL';
 import { CategoryButton } from './CategoryButton';
+import { Loader } from '../Loader/Loader';
 
 export const Categories = () => {
   const [categoriesList, setCategoriesList] = useState([]);
@@ -27,7 +28,7 @@ export const Categories = () => {
   }, []);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
 
   if (error) {

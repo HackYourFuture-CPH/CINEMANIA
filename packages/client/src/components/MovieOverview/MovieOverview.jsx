@@ -1,11 +1,12 @@
 import { useTheme } from '@mui/material/styles';
 import { MovieListProvider } from '../../context/movieListContext';
-import { Box, Container } from '@mui/material';
+import { Box, Container, Typography } from '@mui/material';
 import { Categories } from '../Categories/Categories';
 import { SearchBar } from '../SearchBar/SearchBar';
 import { CustomSelect } from '../Select/CustomSelect';
 import { MovieList } from './MovieList';
 import React from 'react';
+import styled from '@emotion/styled';
 
 export const MovieOverview = ({ isFavouritePage }) => {
   const theme = useTheme();
@@ -23,6 +24,7 @@ export const MovieOverview = ({ isFavouritePage }) => {
         }}
         maxWidth="xl"
       >
+        {isFavouritePage && <StyledTitle>FAVORITES </StyledTitle>}
         <Box
           sx={{
             width: '100%',
@@ -58,3 +60,13 @@ export const MovieOverview = ({ isFavouritePage }) => {
     </MovieListProvider>
   );
 };
+
+const StyledTitle = styled(Typography)`
+  height: 2.76rem;
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-align: start;
+  margin-bottom: 3rem;
+  margin-top: 3rem;
+`;
