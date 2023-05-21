@@ -25,4 +25,15 @@ router.get('/rating/latest', (req, res) => {
     });
 });
 
+router.delete('/:id', (req, res) => {
+  reviewsController.deleteReview(req.params.id, req).then((result) => {
+    // If result is equal to 0, then that means the movie id does not exist
+    if (result === 0) {
+      res.status(404).send('The review ID you provided does not exist.');
+    } else {
+      res.json({ success: true });
+    }
+  });
+});
+
 module.exports = router;
