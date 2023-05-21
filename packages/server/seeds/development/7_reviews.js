@@ -113,7 +113,7 @@ exports.seed = async function (knex) {
         "Stuart Little is a charming family film that brings the beloved mouse to life in an endearing way. While the plot may be simple, the film's lovable characters, sweet humor, and positive messages make it an enjoyable choice for a cozy movie night.",
     },
     {
-      movie_id: 10,
+      movie_id: 16,
       user_id: 5,
       rating: 5,
       review_text:
@@ -127,7 +127,7 @@ exports.seed = async function (knex) {
         "Interstellar is a breathtaking sci-fi epic that combines stunning visuals, an emotionally charged story, and thought-provoking concepts about time and space. Christopher Nolan's visionary direction and Hans Zimmer's mesmerizing score create an immersive cinematic experience.",
     },
     {
-      movie_id: 12,
+      movie_id: 11,
       user_id: 2,
       rating: 4,
       review_text:
@@ -154,7 +154,6 @@ exports.seed = async function (knex) {
       review_text:
         "The Silence of the Lambs is a chilling psychological thriller that has stood the test of time. With Anthony Hopkins' unforgettable performance as Hannibal Lecter and Jodie Foster's portrayal of Clarice Starling, the film delivers intense suspense and a gripping cat-and-mouse game.",
     },
-
     {
       movie_id: 16,
       user_id: 1,
@@ -163,7 +162,7 @@ exports.seed = async function (knex) {
         "The Godfather: Part II is a cinematic masterpiece that delves deeper into the Corleone family's saga. With outstanding performances, a gripping storyline, and Francis Ford Coppola's masterful direction, this film is a must-watch for any fan of the crime genre.",
     },
     {
-      movie_id: 17,
+      movie_id: 16,
       user_id: 2,
       rating: 5,
       review_text:
@@ -191,7 +190,7 @@ exports.seed = async function (knex) {
         "Schindler's List is a hauntingly powerful film that portrays the atrocities of the Holocaust with unflinching honesty. Steven Spielberg's direction, the remarkable performances, and the film's emotional impact make it a must-see for anyone interested in history and the resilience of the human spirit.",
     },
     {
-      movie_id: 21,
+      movie_id: 20,
       user_id: 1,
       rating: 4,
       review_text:
@@ -338,7 +337,7 @@ exports.seed = async function (knex) {
         'Star Wars Episode I: The Phantom Menace is a visually stunning and action-packed entry in the Star Wars saga. While it has its criticisms, such as the divisive character of Jar Jar Binks, the film introduces memorable characters and lays the foundation for the epic story to come.',
     },
     {
-      movie_id: 43,
+      movie_id: 20,
       user_id: 2,
       rating: 5,
       review_text:
@@ -526,7 +525,6 @@ exports.seed = async function (knex) {
       review_text:
         "The Chronicles of Narnia: The Lion, the Witch and the Wardrobe brings C.S. Lewis' beloved fantasy world to life with its enchanting visuals and endearing characters. While the film may not fully capture the depth of the source material, it offers an enjoyable adventure that appeals to both children and adults, sparking the imagination and igniting a sense of wonder.",
     },
-
     {
       movie_id: 70,
       user_id: 1,
@@ -758,7 +756,6 @@ exports.seed = async function (knex) {
       review_text:
         'A dark and gripping superhero film that transcends the genre. The intense performances, complex themes, and visually stunning action sequences make it a modern masterpiece.',
     },
-
     {
       movie_id: 29,
       user_id: 3,
@@ -871,13 +868,13 @@ exports.seed = async function (knex) {
       review_text:
         'A hilarious comedy that will have you laughing from start to finish. The talented cast and clever jokes make it a perfect choice for a fun movie night.',
     },
-    {
-      movie_id: 43,
-      user_id: 1,
-      rating: 5,
-      review_text:
-        'A visually stunning film with breathtaking cinematography. The captivating story and remarkable performances make it an immersive cinematic experience.',
-    },
+    // {
+    //   movie_id: 43,
+    //   user_id: 1,
+    //   rating: 5,
+    //   review_text:
+    //     'A visually stunning film with breathtaking cinematography. The captivating story and remarkable performances make it an immersive cinematic experience.',
+    // },
     {
       movie_id: 28,
       user_id: 2,
@@ -899,7 +896,6 @@ exports.seed = async function (knex) {
       review_text:
         'A mesmerizing and visually stunning film that pushes the boundaries of storytelling. The innovative approach and powerful imagery create an unforgettable cinematic experience.',
     },
-
     {
       movie_id: 3,
       user_id: 2,
@@ -1040,7 +1036,6 @@ exports.seed = async function (knex) {
       review_text:
         'This movie was a complete waste of time. The plot was confusing and poorly developed. The acting was mediocre at best, and the dialogue was cringe-worthy. I would strongly advise against watching it.',
     },
-
     {
       movie_id: 3,
       user_id: 4,
