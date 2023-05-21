@@ -97,10 +97,7 @@ const deleteReview = async (ReviewID) => {
 module.exports = {
   getLatestRatedMovies,
   getReviewsOfMovieByID,
-
   getReviewByIdUid,
-
   editReview,
   deleteReview,
-
 };
