@@ -57,6 +57,7 @@ export const Signup = () => {
             type="text"
             placeholder="enter name"
             value={fullName}
+            minLength="6"
             onChange={(e) => setFullName(e.target.value)}
           />
           <InputField
@@ -71,6 +72,9 @@ export const Signup = () => {
             type="password"
             placeholder="enter password"
             value={password}
+            minLength="6"
+            pattern="^(?=.*\d)(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]).{6,}$"
+            title="Password must have at least 6 characters, including 1 digit and 1 symbol"
             onChange={(e) => setPassword(e.target.value)}
           />
           <Button type="submit">Create</Button>
