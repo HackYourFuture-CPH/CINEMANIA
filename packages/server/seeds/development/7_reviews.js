@@ -868,13 +868,13 @@ exports.seed = async function (knex) {
       review_text:
         'A hilarious comedy that will have you laughing from start to finish. The talented cast and clever jokes make it a perfect choice for a fun movie night.',
     },
-    // {
-    //   movie_id: 43,
-    //   user_id: 1,
-    //   rating: 5,
-    //   review_text:
-    //     'A visually stunning film with breathtaking cinematography. The captivating story and remarkable performances make it an immersive cinematic experience.',
-    // },
+    {
+      movie_id: 43,
+      user_id: 1,
+      rating: 5,
+      review_text:
+        'A visually stunning film with breathtaking cinematography. The captivating story and remarkable performances make it an immersive cinematic experience.',
+    },
     {
       movie_id: 28,
       user_id: 2,
