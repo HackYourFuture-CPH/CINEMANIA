@@ -11,7 +11,7 @@ const CustomSelect = () => {
   };
   return (
     <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-      <FormControl variant="standard" sx={{ m: 1 }}>
+      <FormControl variant="standard" sx={{ m: 1, minWidth: 85 }}>
         <InputLabel
           id="sort-by-label"
           style={{ color: '#00FFC2', borderBottom: '1px solid #00FFC2' }}

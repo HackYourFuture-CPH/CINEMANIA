@@ -11,7 +11,7 @@ export function MovieDetailsLayout({ children }) {
     width: '100%',
     padding: 0,
     gap: '2rem',
-    margin: 0,
+    margin: '3rem 0',
   };
 
   return (
