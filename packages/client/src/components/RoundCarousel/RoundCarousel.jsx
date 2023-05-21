@@ -1,5 +1,7 @@
 import React from 'react';
-import { Box, IconButton, Typography, Link, Container } from '@mui/material';
+
+import { Box, IconButton, Typography, Link } from '@mui/material';
+
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
@@ -46,10 +48,11 @@ const RoundCarousel = ({ carouselData }) => {
   };
 
   return (
-    <Container>
+
       <Title>SIMILAR MOVIES</Title>
 
-      <CarouselWrapper>
+      <CarouselWrapper maxWidth="xl">
+
         <IconButton onClick={() => slider?.current?.slickPrev()}>
           <LeftArrow />
         </IconButton>
@@ -72,7 +75,7 @@ const RoundCarousel = ({ carouselData }) => {
           <RightArrow />
         </IconButton>
       </CarouselWrapper>
-    </Container>
+
   );
 };
 
@@ -85,6 +88,9 @@ const Title = styled(Typography)`
   border-left: 0.3rem solid #ffffff;
   padding-left: 0.9rem;
   margin: 0 0 1.5rem 0;
+
+  align-self: flex-start;
+
 `;
 
 const CarouselWrapper = styled(Box)`

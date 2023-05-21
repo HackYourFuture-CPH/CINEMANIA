@@ -4,6 +4,7 @@ const HttpError = require('../lib/utils/http-error');
 const getLatestRatedMovies = async () => {
   return knex('reviews')
     .select(
+      'movies.id',
       'movies.image_location',
       'movies.backdrop_URL',
       'movies.title',
