@@ -76,7 +76,7 @@ export const Signup = () => {
 
         <Typography>
           Already a member?
-          <Link to="/auth">Login</Link>
+          <Link to="/auth"> Login</Link>
         </Typography>
       </Form>
     </Container>

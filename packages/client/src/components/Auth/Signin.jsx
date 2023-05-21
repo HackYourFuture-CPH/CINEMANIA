@@ -52,7 +52,7 @@ export const Signin = () => {
 
         <Typography>
           Not a member?
-          <Link to="/signup">Signup</Link>
+          <Link to="/signup"> Signup</Link>
         </Typography>
       </Form>
     </Container>
