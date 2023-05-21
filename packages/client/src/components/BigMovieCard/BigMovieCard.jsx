@@ -7,24 +7,15 @@ import {
   Divider,
   Typography,
 } from '@mui/material';
-import React, { useState } from 'react';
+import React from 'react';
 
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import FavoriteIcon from '@mui/icons-material/FavoriteBorder';
 import { RatingStars } from '../RatingStars/RatingStars';
 import { MovieDetailsLayout } from '../../containers/MovieDetailsLayout/MovieDetailsLayout';
 import styled from '@emotion/styled';
-import { ReviewDialog } from '../ReviewDialog/ReviewDialog';
-import { useUserContext } from '../../context/UserContext';
 
 export const BigMovieCard = ({ currentMovie }) => {
-  const [open, setOpen] = useState(false);
-
-  function handleOpenReview(event, value) {
-    setOpen((status) => !status);
-  }
-  const { user } = useUserContext();
-
   const StyledTypography = styled(Typography)`
     font-family: 'Inter';
     font-style: normal;
@@ -120,31 +111,14 @@ export const BigMovieCard = ({ currentMovie }) => {
             alignSelf: 'flex-end',
           }}
         >
-          {user ? (
-            <RatingStars
-              rating={currentMovie?.rating ?? 0}
-              numberOfReviews={currentMovie?.number_of_ratings}
-              handleOpenReview={(event, value) =>
-                handleOpenReview(event, value)
-              }
-              clickable={true}
-              ratingText={true}
-            />
-          ) : (
-            ''
-          )}
           <RatingStars
             rating={currentMovie?.rating ?? 0}
             numberOfReviews={currentMovie?.number_of_ratings}
             clickable={false}
             ratingText={true}
+            alignSelf="flex-end"
           />
-          <ReviewDialog
-            initialState={open}
-            handleClose={(event, value) =>
-              handleOpenReview(new Event('Review submitted'), value)
-            }
-          />
+
           <MovieTitle
             sx={{
               paddingTop: '0.625rem',
