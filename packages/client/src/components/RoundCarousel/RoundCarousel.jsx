@@ -90,11 +90,11 @@ const Title = styled(Typography)`
 
 const CarouselWrapper = styled(Box)`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  width: 95%;
 `;
 
 const SliderWrapper = styled(Box)`
-  height: 90%;
   width: 95%;
 `;
 
@@ -111,7 +111,8 @@ const LeftArrow = styled(ArrowBackIosIcon)`
 `;
 
 const CarouselImg = styled.img`
-  height: 17.5rem;
+  height: 13rem;
+  width: 95%;
   object-fit: cover;
   object-position: 20% 0;
   border-radius: 8rem;
