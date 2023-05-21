@@ -22,7 +22,7 @@ import styled from '@emotion/styled';
 
 export function ReviewsDisplay() {
   return (
-    <>
+   
     <MovieDetailsLayout>
       <List>
 
@@ -233,7 +233,7 @@ export function ReviewsDisplay() {
         </Box>
       </List>
     </MovieDetailsLayout>
-</>
+
   );
 }
 
