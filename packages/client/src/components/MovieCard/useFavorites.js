@@ -17,7 +17,7 @@ export const useFavorites = (initialFavorites = []) => {
         const data = await response.json();
         setFavorites(data);
       } catch (error) {
-        throw new Error(error);
+        return error.name === 'this is an aborted error';
       }
     };
 

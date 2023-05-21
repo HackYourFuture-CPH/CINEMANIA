@@ -6,7 +6,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { Link } from 'react-router-dom';
 
 const BasicRating = ({ rating }) => {
-  return <StyledRating name="read-only" value={rating} readOnly />;
+  return <StyledRating name="read-only" value={Number(rating)} readOnly />;
 };
 
 export function MovieCard({ movie, favorites, toggleFavorite }) {
