@@ -1,9 +1,11 @@
 const knex = require('../../config/db');
 const HttpError = require('../lib/utils/http-error');
+const moment = require('moment-timezone');
 
 const getLatestRatedMovies = async () => {
   return knex('reviews')
     .select(
+      'movies.id',
       'movies.image_location',
       'movies.backdrop_URL',
       'movies.title',
@@ -38,7 +40,24 @@ const getReviewsOfMovieByID = async (id) => {
   }
 };
 
+const editReview = async (ReviewID, updateReview) => {
+  if (!ReviewID) {
+    throw new HttpError('review ID should be a number', 400);
+  }
+
+  return knex('reviews').where({ id: ReviewID }).update({
+    review_text: updateReview.review_text,
+    created_at: moment().format(),
+  });
+};
+
+const deleteReview = async (ReviewID) => {
+  return knex('reviews').where({ id: ReviewID }).del();
+};
+
 module.exports = {
   getLatestRatedMovies,
   getReviewsOfMovieByID,
+  editReview,
+  deleteReview,
 };
