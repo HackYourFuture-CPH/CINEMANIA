@@ -57,7 +57,12 @@ export const BigMovieCard = ({ currentMovie }) => {
     borderRadius: '1.25rem',
     margin: '2.5rem 0',
   });
-
+  // eslint-disable-next-line no-console
+  console.log(
+    '%cBigMovieCard.jsx line:60 currentMovie.rating',
+    'color: #007acc;',
+    currentMovie,
+  );
   return (
     <MovieDetailsLayout>
       <Card
@@ -122,23 +127,26 @@ export const BigMovieCard = ({ currentMovie }) => {
         >
           {user ? (
             <RatingStars
-              rating={currentMovie?.rating ?? 0}
-              numberOfReviews={currentMovie?.number_of_ratings}
               handleOpenReview={(event, value) =>
                 handleOpenReview(event, value)
               }
               clickable={true}
-              ratingText={true}
+              ratingText={`Your rating is ${user.uid}`}
               alignSelf="flex-end"
             />
           ) : (
             ''
           )}
           <RatingStars
-            rating={currentMovie?.rating ?? 0}
-            numberOfReviews={currentMovie?.number_of_ratings}
             clickable={false}
-            ratingText={true}
+            ratingText={
+              currentMovie.rating
+                ? `${currentMovie.rating} based on ${
+                    currentMovie.number_of_ratings
+                  } review${currentMovie.number_of_ratings === 1 ? '' : 's'}`
+                : 'No rating given'
+            }
+            rating={currentMovie.rating}
             alignSelf="flex-end"
           />
           <ReviewDialog

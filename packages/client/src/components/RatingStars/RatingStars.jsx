@@ -6,7 +6,6 @@ import styled from '@emotion/styled';
 
 export const RatingStars = ({
   rating,
-  numberOfReviews,
   color,
   ratingText,
   handleOpenReview,
@@ -31,15 +30,7 @@ export const RatingStars = ({
         value={isNaN(rating) ? 0 : `${Number(rating)}`}
         onChange={(e, v) => handleOpenReview(e, v)}
       />
-      {ratingText && (
-        <Typography component="legend">
-          {numberOfReviews
-            ? `${rating} based on ${numberOfReviews} review${
-                numberOfReviews === 1 ? '' : 's'
-              }`
-            : 'No rating given'}
-        </Typography>
-      )}
+      {ratingText && <Typography component="legend">{ratingText}</Typography>}
     </StarsRatingWrapper>
   );
 };
