@@ -1,11 +1,13 @@
 import React from 'react';
-import { Box, IconButton, Typography, Link } from '@mui/material';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-import Slider from 'react-slick';
+
+import { Box, IconButton, Link, Typography } from '@mui/material';
+
+import styled from '@emotion/styled';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import styled from '@emotion/styled';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick-theme.css';
+import 'slick-carousel/slick/slick.css';
 
 const RoundCarousel = ({ carouselData }) => {
   const slider = React.useRef(null);
@@ -85,6 +87,7 @@ const Title = styled(Typography)`
   border-left: 0.3rem solid #ffffff;
   padding-left: 0.9rem;
   margin: 0 0 1.5rem 0;
+
   align-self: flex-start;
 `;
 
@@ -111,7 +114,6 @@ const LeftArrow = styled(ArrowBackIosIcon)`
 `;
 
 const CarouselImg = styled.img`
-  width: 98%;
   height: 17.5rem;
   object-fit: cover;
   object-position: 20% 0;
