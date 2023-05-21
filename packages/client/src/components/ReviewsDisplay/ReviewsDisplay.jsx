@@ -50,7 +50,7 @@ export function ReviewsDisplay() {
 
         <HeaderBox>
           <StyledTypography>REVIEWS</StyledTypography>
-
+</HeaderBox>
           <Box
             sx={{
               display: 'flex',
