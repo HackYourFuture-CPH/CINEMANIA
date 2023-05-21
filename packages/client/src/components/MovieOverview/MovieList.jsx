@@ -42,9 +42,11 @@ export const MovieList = () => {
           <MovieCard key={movie.id} movie={movie} />
         ))}
       </Grid>
-      <div ref={sentryRef}>
-        <Loader />
-      </div>
+      {(isLoading || hasNextPage) && (
+        <div ref={sentryRef}>
+          <Loader />
+        </div>
+      )}
     </>
   );
 };
