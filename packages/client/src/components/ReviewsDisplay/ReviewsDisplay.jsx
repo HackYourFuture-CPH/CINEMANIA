@@ -48,9 +48,6 @@ export function ReviewsDisplay() {
             Reviews
           </Typography>
 
-        <HeaderBox>
-          <StyledTypography>REVIEWS</StyledTypography>
-</HeaderBox>
           <Box
             sx={{
               display: 'flex',
