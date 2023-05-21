@@ -2,15 +2,17 @@ import Box from '@mui/material/Box';
 import Rating from '@mui/material/Rating';
 import Typography from '@mui/material/Typography';
 import React from 'react';
+import styled from '@emotion/styled';
 
 export const RatingStars = ({
-  averageRating,
+  rating,
   numberOfReviews,
   color,
   ratingText,
+  handleOpenReview,
 }) => {
   return (
-    <Box
+    <StarsRatingWrapper
       sx={{
         display: 'flex',
         flexDirection: 'column',
@@ -22,17 +24,22 @@ export const RatingStars = ({
         name="half-rating"
         defaultValue={2.5}
         precision={0.5}
-        value={isNaN(averageRating) ? 0 : `${Number(averageRating)}`}
+        value={isNaN(rating) ? 0 : `${Number(rating)}`}
+        onChange={(e, v) => handleOpenReview(e, v)}
       />
       {ratingText && (
         <Typography component="legend">
           {numberOfReviews
-            ? `${averageRating} based on ${numberOfReviews} review${
+            ? `${rating} based on ${numberOfReviews} review${
                 numberOfReviews === 1 ? '' : 's'
               }`
             : 'No rating given'}
         </Typography>
       )}
-    </Box>
+    </StarsRatingWrapper>
   );
 };
+
+const StarsRatingWrapper = styled(Box)`
+  align-self: flex-end;
+`;
