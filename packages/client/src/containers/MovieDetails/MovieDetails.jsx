@@ -24,7 +24,7 @@ export const MovieDetails = () => {
   }, [movieID]);
   if (!currentMovie) return;
   return (
-    <Container minWidth="xs" maxWidth="xl">
+    <Container maxWidth="xl" sx={{ gap: '3rem' }}>
       <BigMovieCard currentMovie={currentMovie} />
       <TopCastDisplay movieID={currentMovie?.id} />
 
