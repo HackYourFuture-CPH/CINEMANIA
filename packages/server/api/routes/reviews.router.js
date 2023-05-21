@@ -25,7 +25,6 @@ router.get('/rating/latest', (req, res) => {
     });
 });
 
-
 router.get('/:id/uid/:uid', (req, res) => {
   reviewsController
     .getReviewByIdUid(req.params.id, req.params.uid)
@@ -62,6 +61,5 @@ router.delete('/:id', (req, res) => {
     }
   });
 });
-
 
 module.exports = router;
