@@ -3,9 +3,10 @@ import { Card, CardMedia, Typography, Rating, Box } from '@mui/material';
 import styled from '@emotion/styled';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import { Link } from 'react-router-dom';
 
 const BasicRating = ({ rating }) => {
-  return <StyledRating name="read-only" value={rating} readOnly />;
+  return <StyledRating name="read-only" value={Number(rating)} readOnly />;
 };
 
 export function MovieCard({ movie, favorites, toggleFavorite }) {
@@ -26,18 +27,20 @@ export function MovieCard({ movie, favorites, toggleFavorite }) {
           />
         )}
       </Box>
-      <StyledCardMedia
-        component="img"
-        image={movie.image_location}
-        alt={movie.title}
-      />
-      <StyledTypographyTitle>{movie.title}</StyledTypographyTitle>
-      <StyledTypographyReviewText
-        paragraph
-        sx={{ top: '2rem', fontWeight: 400 }}
-      >
-        {movie.review_text}
-      </StyledTypographyReviewText>
+      <StyledLink to={`/movies/${movie.id}`}>
+        <StyledCardMedia
+          component="img"
+          image={movie.image_location}
+          alt={movie.title}
+        />
+        <StyledTypographyTitle>{movie.title}</StyledTypographyTitle>
+        <StyledTypographyReviewText
+          paragraph
+          sx={{ top: '2rem', fontWeight: 400 }}
+        >
+          {movie.review_text}
+        </StyledTypographyReviewText>
+      </StyledLink>
       <BasicRating rating={movie.rating} />
     </StyledCard>
   );
@@ -127,4 +130,8 @@ const StyledTypographyReviewText = styled(Typography)`
   ${sharedTypographyStyles}
   top: 2rem;
   font-weight: 400;
+`;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
 `;

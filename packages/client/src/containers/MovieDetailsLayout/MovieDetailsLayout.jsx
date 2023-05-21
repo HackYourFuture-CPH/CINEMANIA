@@ -8,11 +8,14 @@ export function MovieDetailsLayout({ children }) {
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
+    width: '100%',
     padding: 0,
+    gap: '2rem',
+    margin: '3rem 0',
   };
 
   return (
-    <Container style={LayoutContainerStyle} maxWidth="lg">
+    <Container style={LayoutContainerStyle} maxWidth="xl">
       {children}
     </Container>
   );

@@ -30,7 +30,9 @@ export const Navbar = () => {
       <Box>
         <Toolbar
           sx={{
-            height: '4rem',
+            margin: 'auto',
+            width: '90%',
+            height: '5.5rem',
             justifyContent: 'space-between',
           }}
         >
@@ -50,8 +52,8 @@ export const Navbar = () => {
                 <img
                   src="https://i.ibb.co/7JGHhKm/image.png"
                   alt="logo"
-                  width="250"
-                  height="68"
+                  width="300"
+                  height="100"
                 />
               </NavLink>
             </Box>

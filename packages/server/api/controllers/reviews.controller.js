@@ -1,5 +1,6 @@
 const knex = require('../../config/db');
 const HttpError = require('../lib/utils/http-error');
+const moment = require('moment-timezone');
 
 const getLatestRatedMovies = async () => {
   return knex('reviews')
@@ -39,7 +40,62 @@ const getReviewsOfMovieByID = async (id) => {
   }
 };
 
+const getReviewByIdUid = async (id, uid) => {
+  if (isNaN(id)) {
+    throw new HttpError('Movie ID should be a number', 400);
+  }
+  if (!uid) {
+    throw new HttpError("The user hasn't logged in", 400);
+  }
+  try {
+    const userReview = knex('reviews as r')
+      .select(
+        'm.title',
+        'm.description',
+        'u.full_name',
+        'u.uid',
+        'r.rating',
+        'r.review_text',
+        'r.created_at',
+      )
+      .join('movies as m', 'm.id', '=', 'r.movie_id')
+      .join('users as u', 'u.id', '=', 'r.user_id')
+      .where('m.id', id)
+      .where('u.uid', uid)
+      .orderBy('r.created_at', 'desc')
+      .limit(9);
+    if (userReview.length === 0) {
+      return {
+        message: `No reviews created by user for the movie`,
+      };
+    }
+    return userReview;
+  } catch (error) {
+    return {
+      status: 500,
+      message: error.message,
+    };
+  }
+};
+const editReview = async (ReviewID, updateReview) => {
+  if (!ReviewID) {
+    throw new HttpError('review ID should be a number', 400);
+  }
+
+  return knex('reviews').where({ id: ReviewID }).update({
+    review_text: updateReview.review_text,
+    created_at: moment().format(),
+  });
+};
+
+const deleteReview = async (ReviewID) => {
+  return knex('reviews').where({ id: ReviewID }).del();
+};
+
 module.exports = {
   getLatestRatedMovies,
   getReviewsOfMovieByID,
+  getReviewByIdUid,
+  editReview,
+  deleteReview,
 };
