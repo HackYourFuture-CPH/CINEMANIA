@@ -31,6 +31,8 @@ export const Navbar = () => {
         <Toolbar
           sx={{
             height: '4rem',
+            margin: 'auto',
+            width: '90%',
             justifyContent: 'space-between',
           }}
         >
