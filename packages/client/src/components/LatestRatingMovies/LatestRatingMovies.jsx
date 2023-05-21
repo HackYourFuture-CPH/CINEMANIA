@@ -1,29 +1,30 @@
+import React, { useEffect, useState } from 'react';
+import styled from '@emotion/styled';
 import Masonry from '@mui/lab/Masonry';
 import { Box, Typography } from '@mui/material';
-import * as React from 'react';
-import { useEffect, useState } from 'react';
 import { apiURL } from '../../apiURL';
 import { MovieCard } from '../MovieCard/MovieCard';
-import styled from '@emotion/styled';
+import { useFavorites } from '../MovieCard/useFavorites';
 
 export const LatestRatingMovies = () => {
   const [movies, setMovies] = useState([]);
+  const [favorites, toggleFavorite] = useFavorites([]);
 
   useEffect(() => {
     async function fetchMovies() {
       try {
-        const response = await fetch(`${apiURL()}/movies`);
+        const response = await fetch(`${apiURL()}/reviews/rating/latest`);
         if (!response.ok) {
           throw new Error('Failed to fetch movies with the latest rating');
         }
         const data = await response.json();
-        setMovies(data.movies);
+        setMovies(data);
       } catch (error) {
-        return error;
+        throw new Error(error);
       }
     }
     fetchMovies();
-  }, []);
+  }, [favorites]);
 
   return (
     <StyledMovieGrid>
@@ -35,9 +36,16 @@ export const LatestRatingMovies = () => {
           width: '78rem',
         }}
       >
-        {movies
-          .map((movie) => <MovieCard key={movie.id} movie={movie} />)
-          .splice(2, 8)}
+        {movies.map(
+          (movie, index /* eslint-disable react/no-array-index-key */) => (
+            <MovieCard
+              key={`${movie.id}-${index}`}
+              movie={movie}
+              favorites={favorites}
+              toggleFavorite={toggleFavorite}
+            />
+          ),
+        )}
       </Masonry>
     </StyledMovieGrid>
   );

@@ -3,45 +3,45 @@ import { Card, CardMedia, Typography, Rating, Box } from '@mui/material';
 import styled from '@emotion/styled';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import { useFavorites } from './useFavorites'; // created a custom hook to manage favorites
+import { Link } from 'react-router-dom';
 
-const BasicRating = () => {
-  return <StyledRating name="read-only" value={4} readOnly />;
+const BasicRating = ({ rating }) => {
+  return <StyledRating name="read-only" value={rating} readOnly />;
 };
 
-export function MovieCard({ movie }) {
-  const [favorites, toggleFavorite] = useFavorites([]);
+export function MovieCard({ movie, favorites, toggleFavorite }) {
   const isFavorite = favorites.find(
     (favoriteMovie) => favoriteMovie.id === movie.id,
   );
 
   return (
     <StyledCard>
-      <Box
-        sx={{
-          position: 'relative',
-        }}
-      >
+      <Box sx={{ position: 'relative' }}>
         {isFavorite ? (
-          <StyledFavoriteIcon onClick={() => toggleFavorite(movie)} />
+          <StyledFavoriteIcon
+            onClick={() => toggleFavorite(movie, isFavorite)}
+          />
         ) : (
-          <StyledFavoriteBorderIcon onClick={() => toggleFavorite(movie)} />
+          <StyledFavoriteBorderIcon
+            onClick={() => toggleFavorite(movie, isFavorite)}
+          />
         )}
       </Box>
-      <StyledCardMedia
-        component="img"
-        image={movie.image_location}
-        alt={movie.title}
-      />
-      <StyledTypographyTitle>{movie.title}</StyledTypographyTitle>
-
-      <StyledTypographyDescription
-        paragraph
-        sx={{ top: '2rem', fontWeight: 400 }}
-      >
-        {movie.description}
-      </StyledTypographyDescription>
-      <BasicRating />
+      <StyledLink to={`/movies/${movie.id}`}>
+        <StyledCardMedia
+          component="img"
+          image={movie.image_location}
+          alt={movie.title}
+        />
+        <StyledTypographyTitle>{movie.title}</StyledTypographyTitle>
+        <StyledTypographyReviewText
+          paragraph
+          sx={{ top: '2rem', fontWeight: 400 }}
+        >
+          {movie.review_text}
+        </StyledTypographyReviewText>
+      </StyledLink>
+      <BasicRating rating={movie.rating} />
     </StyledCard>
   );
 }
@@ -73,20 +73,20 @@ const StyledCard = styled(Card)`
 `;
 
 const sharedIconStyles = `
-    display: block;
-    position: absolute;
-    width: 2rem;
-    height: 1.75rem;
-    top: 2.25rem;
-    right: 2rem;
-    color: #FFFFFF;
-    padding: .75rem;
-    background-color: #000000cc;
-    z-index: 1;
-    &:hover {
-      color: #ff0000;
-      cursor: pointer;
-    }
+  display: block;
+  position: absolute;
+  width: 2rem;
+  height: 1.75rem;
+  top: 2.25rem;
+  right: 2rem;
+  color: #FFFFFF;
+  padding: .75rem;
+  background-color: #000000cc;
+  z-index: 1;
+  &:hover {
+    color: #ff0000;
+    cursor: pointer;
+  }
 `;
 
 const StyledFavoriteIcon = styled(FavoriteIcon)`
@@ -126,8 +126,12 @@ const StyledTypographyTitle = styled(Typography)`
   font-weight: 700;
 `;
 
-const StyledTypographyDescription = styled(Typography)`
+const StyledTypographyReviewText = styled(Typography)`
   ${sharedTypographyStyles}
   top: 2rem;
   font-weight: 400;
+`;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
 `;
