@@ -30,6 +30,8 @@ export const Navbar = () => {
       <Box>
         <Toolbar
           sx={{
+            margin: 'auto',
+            width: '90%',
             height: '5.5rem',
             justifyContent: 'space-between',
           }}
