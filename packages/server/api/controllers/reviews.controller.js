@@ -38,7 +38,12 @@ const getReviewsOfMovieByID = async (id) => {
   }
 };
 
+const deleteReview = async (ReviewID) => {
+  return knex('reviews').where({ id: ReviewID }).del();
+};
+
 module.exports = {
   getLatestRatedMovies,
   getReviewsOfMovieByID,
+  deleteReview,
 };
