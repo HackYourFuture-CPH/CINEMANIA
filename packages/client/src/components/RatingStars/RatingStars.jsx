@@ -10,13 +10,17 @@ export const RatingStars = ({
   color,
   ratingText,
   handleOpenReview,
+  alignSelf,
 }) => {
+  const StarsRatingWrapper = styled(Box)`
+    align-self: ${alignSelf ?? ''};
+  `;
+
   return (
     <StarsRatingWrapper
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        alignSelf: 'flex-end',
       }}
     >
       <Rating
@@ -39,7 +43,3 @@ export const RatingStars = ({
     </StarsRatingWrapper>
   );
 };
-
-const StarsRatingWrapper = styled(Box)`
-  align-self: flex-end;
-`;

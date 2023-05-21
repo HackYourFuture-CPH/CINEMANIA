@@ -129,6 +129,7 @@ export const BigMovieCard = ({ currentMovie }) => {
               }
               clickable={true}
               ratingText={true}
+              alignSelf="flex-end"
             />
           ) : (
             ''
@@ -138,6 +139,7 @@ export const BigMovieCard = ({ currentMovie }) => {
             numberOfReviews={currentMovie?.number_of_ratings}
             clickable={false}
             ratingText={true}
+            alignSelf="flex-end"
           />
           <ReviewDialog
             initialState={open}
