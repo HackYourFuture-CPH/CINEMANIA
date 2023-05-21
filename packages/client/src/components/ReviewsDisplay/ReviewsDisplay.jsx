@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Box,
   List,
@@ -8,6 +8,7 @@ import {
   Avatar,
   Typography,
   Button,
+  CircularProgress,
 } from '@mui/material';
 
 import AddCircleIcon from '@mui/icons-material/AddCircle';
@@ -15,10 +16,42 @@ import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import { RatingStars } from '../RatingStars/RatingStars';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import { MovieDetailsLayout } from '../../containers/MovieDetailsLayout/MovieDetailsLayout';
 import styled from '@emotion/styled';
+import { apiURL } from '../../apiURL';
 
-export function ReviewsDisplay() {
+export function ReviewsDisplay({ movieID }) {
+  const [reviews, setReviews] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [showAllReviews, setShowAllReviews] = useState(false);
+
+  useEffect(() => {
+    const fetchReviewsList = async () => {
+      setIsLoading(true);
+      if (movieID) {
+        try {
+          const response = await fetch(`${apiURL()}/reviews/movie/${movieID}`);
+          const data = await response.json();
+          setReviews(data);
+        } catch (error) {
+          setIsLoading(false);
+        }
+      }
+      setIsLoading(false);
+    };
+    fetchReviewsList();
+  }, [movieID]);
+  const handleShowAllReviews = () => {
+    setShowAllReviews((previousAllReviewsState) => !previousAllReviewsState);
+  };
+  if (isLoading) {
+    return (
+      <MovieDetailsLayout>
+        <CircularProgress />
+      </MovieDetailsLayout>
+    );
+  }
   return (
     <MovieDetailsLayout>
       <List>
@@ -39,72 +72,73 @@ export function ReviewsDisplay() {
           </Box>
         </HeaderBox>
         <StyledDivider />
-        <ListItem alignItems="center">
-          <ListItemAvatar>
-            <StyledAvatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-          </ListItemAvatar>
-          <Box
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-            }}
-          >
-            <Box>
-              <Typography
+        {reviews.slice(0, showAllReviews ? reviews.length : 3).map((review) => (
+          <Box key={review.id}>
+            <ListItem alignItems="center">
+              <ListItemAvatar>
+                <StyledAvatar alt={review.full_name} />
+              </ListItemAvatar>
+              <Box
                 sx={{
-                  fontSize: 32,
-                  marginRight: '34px',
+                  display: 'flex',
+                  alignItems: 'center',
                 }}
-                color="#FFFFFF"
               >
-                Maren Vaccaro
-              </Typography>
-              <Typography color="#FFFFFF">24 April 2023</Typography>
-            </Box>
-            <RatingStars
-              averageRating={3.5}
-              numberOfReviews={5}
-              color="#00FFC2"
-              ratingText={false}
-            />
-            <Typography
+                <Box>
+                  <Typography
+                    sx={{
+                      fontSize: 32,
+                      marginRight: '34px',
+                    }}
+                    color="#FFFFFF"
+                  >
+                    {review.full_name}
+                  </Typography>
+                  <Typography color="#FFFFFF">
+                    {new Date(review.created_at).toISOString().split('T')[0]}
+                  </Typography>
+                </Box>
+                <RatingStars
+                  averageRating={review.rating}
+                  numberOfReviews={5}
+                  color="#00FFC2"
+                  ratingText={false}
+                />
+                <Typography
+                  sx={{
+                    fontSize: '20px',
+                    color: '#A4A4A4',
+                  }}
+                >
+                  {review.rating}/5
+                </Typography>
+              </Box>
+            </ListItem>
+            <Box
               sx={{
-                fontSize: '20px',
-                color: '#A4A4A4',
+                paddingLeft: 5,
+                display: 'inline-block',
               }}
             >
-              8/10
-            </Typography>
-          </Box>
-        </ListItem>
-        <Box
-          sx={{
-            paddingLeft: 5,
-            display: 'inline-block',
-          }}
-        >
-          <ReviewTextTypography>
-            Lorem ipsum dolor sit amet consectetur. Magna magna ut vulputate
-            lorem dignissim ac orci. Lacinia aenean ante ultrices diam sociis
-            blandit etiam turpis. Nullam viverra a aenean velit auctor. Mattis
-            volutpat sit et ultrices. At nunc tincidunt magna et pellentesque.
-          </ReviewTextTypography>
-        </Box>
-        <LikesBox>
-          <ThumbUpIcon sx={{ paddingRight: 2, color: '#00FFC2' }} />
-          <Typography color="#A4A4A4" sx={{ paddingRight: '49px' }}>
-            45 likes
-          </Typography>
-          <ThumbDownOffAltIcon
-            sx={{
-              paddingRight: 2,
-              color: '#00FFC2',
-            }}
-          />
+              <ReviewTextTypography>{review.review_text}</ReviewTextTypography>
+            </Box>
+            <LikesBox>
+              <ThumbUpIcon sx={{ paddingRight: 2, color: '#00FFC2' }} />
+              <Typography color="#A4A4A4" sx={{ paddingRight: '49px' }}>
+                45 likes
+              </Typography>
+              <ThumbDownOffAltIcon
+                sx={{
+                  paddingRight: 2,
+                  color: '#00FFC2',
+                }}
+              />
 
-          <Typography color="#A4A4A4"> 12 likes</Typography>
-        </LikesBox>
-        <StyledDivider />
+              <Typography color="#A4A4A4"> 12 likes</Typography>
+            </LikesBox>
+            <StyledDivider />
+          </Box>
+        ))}
         <Box
           sx={{
             width: '100%',
@@ -113,8 +147,14 @@ export function ReviewsDisplay() {
             alignItems: 'center',
           }}
         >
-          <StyledButton>More reviews...</StyledButton>
-          <StyledArrowDropDownIcon />
+          <StyledButton onClick={handleShowAllReviews}>
+            {showAllReviews ? 'Less reviews...' : 'More reviews...'}
+            {showAllReviews ? (
+              <StyledArrowDropUpIcon />
+            ) : (
+              <StyledArrowDropDownIcon />
+            )}
+          </StyledButton>
         </Box>
       </List>
     </MovieDetailsLayout>
@@ -182,8 +222,11 @@ const StyledButton = styled(Button)({
   fontWeight: 400,
 });
 
-const StyledArrowDropDownIcon = styled(ArrowDropDownIcon)({
+const arrowIconStyles = {
   width: '70px',
   height: '70px',
   color: '#00FFC2',
-});
+};
+
+const StyledArrowDropDownIcon = styled(ArrowDropDownIcon)(arrowIconStyles);
+const StyledArrowDropUpIcon = styled(ArrowDropUpIcon)(arrowIconStyles);
