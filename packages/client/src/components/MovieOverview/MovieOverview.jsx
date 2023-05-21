@@ -22,7 +22,7 @@ export const MovieOverview = ({ isFavouritePage }) => {
             paddingRight: '7rem',
           },
         }}
-        maxWidth="xl"
+        maxWidth="lg"
       >
         {isFavouritePage && <StyledTitle>FAVORITES </StyledTitle>}
         <Box
