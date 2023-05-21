@@ -1,22 +1,21 @@
-import * as React from 'react';
-import {
-  Box,
-  List,
-  ListItem,
-  Divider,
-  ListItemAvatar,
-  Avatar,
-  Typography,
-  Button,
-} from '@mui/material';
-
+import styled from '@emotion/styled';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
-import { RatingStars } from '../RatingStars/RatingStars';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import {
+  Avatar,
+  Box,
+  Button,
+  Divider,
+  List,
+  ListItem,
+  ListItemAvatar,
+  Typography,
+} from '@mui/material';
+import * as React from 'react';
 import { MovieDetailsLayout } from '../../containers/MovieDetailsLayout/MovieDetailsLayout';
-import styled from '@emotion/styled';
+import { RatingStars } from '../RatingStars/RatingStars';
 
 export function ReviewsDisplay() {
   return (
@@ -101,7 +100,6 @@ export function ReviewsDisplay() {
               color: '#00FFC2',
             }}
           />
-
           <Typography color="#A4A4A4"> 12 likes</Typography>
         </LikesBox>
         <StyledDivider />
@@ -120,14 +118,12 @@ export function ReviewsDisplay() {
     </MovieDetailsLayout>
   );
 }
-
 const HeaderBox = styled(Box)({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
   marginBottom: '39px',
 });
-
 const StyledTypography = styled(Typography)({
   height: 30,
   fontSize: 32,
@@ -139,7 +135,6 @@ const StyledTypography = styled(Typography)({
   color: '#FFFFFF',
   paddingLeft: '10px',
 });
-
 const StyledAddReviewTypography = styled(Typography)({
   height: 30,
   fontSize: 25,
@@ -147,33 +142,28 @@ const StyledAddReviewTypography = styled(Typography)({
   padding: '4px',
   color: '#00FFC2',
 });
-
 const StyledDivider = styled(Divider)({
   marginLeft: 0,
   borderBottomWidth: 1,
   marginBottom: '49px',
   borderColor: '#00FFC2',
 });
-
 const StyledAvatar = styled(Avatar)({
   width: '95px',
   height: '95px',
   marginRight: '45px',
 });
-
 const ReviewTextTypography = styled(Typography)({
   fontSize: '20px',
   marginTop: '30px',
   color: '#FFFFFF',
 });
-
 const LikesBox = styled(Box)({
   display: 'flex',
   alignItems: 'center',
   paddingTop: '34px',
   margin: '0 0 49px 40px',
 });
-
 const StyledButton = styled(Button)({
   color: '#00FFC2',
   textDecoration: 'underline',
@@ -181,7 +171,6 @@ const StyledButton = styled(Button)({
   fontSize: '20px',
   fontWeight: 400,
 });
-
 const StyledArrowDropDownIcon = styled(ArrowDropDownIcon)({
   width: '70px',
   height: '70px',
