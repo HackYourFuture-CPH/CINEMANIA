@@ -147,42 +147,50 @@ const getMovies = async (queryParams) => {
     )
     .groupBy('movies.id')
     .modify((queryBuilder) => {
-      if (categoryId) {
-        queryBuilder.where('movies.category_id', '=', categoryId);
-      }
-
-      if (sortBy === 'rating') {
-        queryBuilder.orderBy(
-          'average_rating',
-          `${isClickedSame ? 'asc' : 'desc'}`,
-        );
-      }
-
-      if (sortBy === 'recently_added') {
-        queryBuilder.orderBy(
-          'movies.created_at',
-          `${isClickedSame ? 'asc' : 'desc'}`,
-        );
-      }
-
-      if (sortBy === 'price') {
-        queryBuilder.orderBy(
-          'movies.price',
-          `${isClickedSame ? 'desc' : 'asc'}`,
-        );
-      }
-
-      if (title) {
-        queryBuilder.where('movies.title', 'like', `%${title}%`);
-      }
-
       if (isFavoritePage === 'true') {
         queryBuilder
           .join('favorites', 'favorites.movie_id', '=', 'movies.id')
           .where('favorites.user_id', '=', userId);
       }
+      if (title) {
+        queryBuilder.where('movies.title', 'like', `%${title}%`);
+      }
 
-      queryBuilder.limit(pageSize).offset(offset);
+      if (categoryId) {
+        queryBuilder.where('movies.category_id', '=', categoryId);
+      }
+
+      if (sortBy === 'rating') {
+        queryBuilder.orderBy([
+          {
+            column: 'average_rating',
+            order: `${isClickedSame ? 'asc' : 'desc'}`,
+          },
+          { column: 'movies.id' },
+        ]);
+      }
+
+      if (sortBy === 'recently_added') {
+        queryBuilder.orderBy([
+          {
+            column: 'movies.created_at',
+            order: `${isClickedSame ? 'asc' : 'desc'}`,
+          },
+          { column: 'movies.id' },
+        ]);
+      }
+
+      if (sortBy === 'price') {
+        queryBuilder.orderBy([
+          {
+            column: 'movies.price',
+            order: `${isClickedSame ? 'desc' : 'asc'}`,
+          },
+          { column: 'movies.id' },
+        ]);
+      }
+
+      queryBuilder.limit(pageSize, true).offset(offset, true);
     });
 
   const countQuery = knex('movies')
