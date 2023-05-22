@@ -92,10 +92,33 @@ const deleteReview = async (ReviewID) => {
   return knex('reviews').where({ id: ReviewID }).del();
 };
 
+const addReview = async (movieId, userId, rating, reviewText) => {
+  if (isNaN(movieId)) {
+    throw new HttpError('Movie ID should be a number', 400);
+  }
+  if (isNaN(userId)) {
+    throw new HttpError('User ID should be a number', 400);
+  }
+
+  try {
+    const review = await knex('reviews').insert({
+      movie_id: movieId,
+      user_id: userId,
+      rating,
+      review_text: reviewText,
+      created_at: moment().format(),
+    });
+    return review;
+  } catch (error) {
+    throw new HttpError(error.message, 500);
+  }
+};
+
 module.exports = {
   getLatestRatedMovies,
   getReviewsOfMovieByID,
   getReviewByIdUid,
   editReview,
   deleteReview,
+  addReview,
 };

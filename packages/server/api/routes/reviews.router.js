@@ -62,4 +62,17 @@ router.delete('/:id', (req, res) => {
   });
 });
 
+router.post('/', (req, res) => {
+  const { movieId, userId, rating, reviewText } = req.body;
+
+  reviewsController
+    .addReview(movieId, userId, rating, reviewText)
+    .then(() => {
+      res.sendStatus(201);
+    })
+    .catch((error) => {
+      res.status(500).json({ error: error.message });
+    });
+});
+
 module.exports = router;
