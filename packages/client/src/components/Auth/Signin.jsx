@@ -17,7 +17,7 @@ export const Signin = () => {
     try {
       await signIn(email, password);
       // TODO: Display a modal
-      navigate('/auth');
+      navigate('/');
     } catch (err) {
       // error
       setError(err.message);
@@ -52,7 +52,7 @@ export const Signin = () => {
 
         <Typography>
           Not a member?
-          <Link to="/signup">Signup</Link>
+          <Link to="/signup"> Signup</Link>
         </Typography>
       </Form>
     </Container>
@@ -79,7 +79,7 @@ const Form = styled.form`
 
 const InputField = styled.input`
   outline: none;
-  border: none;
+  border: 2px solid white;
   width: 100%;
   height: 2.5rem;
   padding: 0 0.5rem;
@@ -91,10 +91,14 @@ const InputField = styled.input`
     rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
   &:hover {
     outline: 0;
-    border: 0;
+    border: 2px solid #01b389;
   }
   &:active {
     border: ${(props) => props.theme.palette.mainGreen};
+  }
+
+  &:focus {
+    border: 2px solid #01b389;
   }
 `;
 
@@ -104,7 +108,7 @@ const Button = styled.button`
   border-radius: 0.5rem;
   border: none;
   padding: 0.5rem 2rem;
-
+  margin-bottom: 1rem;
   font-weight: bold;
   font-size: 1.1rem;
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,

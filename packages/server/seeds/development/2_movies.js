@@ -114,18 +114,6 @@ exports.seed = async function (knex) {
       price: '100.00',
     },
     {
-      category_id: 3,
-      title: 'The Dark Knight',
-      description:
-        'Batman raises the stakes in his war on crime. With the help of Lt. Jim Gordon and District Attorney Harvey Dent, Batman sets out to dismantle the remaining criminal organizations that plague the streets. The partnership proves to be effective.',
-      movie_year: 2008,
-      image_location:
-        'https://www.themoviedb.org/t/p/w1280/z4XwvnDZSm40PCdg9vFJmo0W9ri.jpg',
-      backdrop_URL:
-        'https://www.themoviedb.org/t/p/w1280//dqK9Hag1054tghRQSqLSfrkvQnA.jpg',
-      price: '120.00',
-    },
-    {
       category_id: 8,
       title: 'Interstellar',
       description:
@@ -508,18 +496,6 @@ exports.seed = async function (knex) {
       backdrop_URL:
         'https://www.themoviedb.org/t/p/w1280//wDe8LzwuvHYYiuwyNfxdYQq8ti4.jpg',
       price: '120.00',
-    },
-    {
-      category_id: 4,
-      title: 'Psycho',
-      description:
-        "A Phoenix secretary embezzles $40,000 from her employer's client, goes on the run, and checks into a remote motel run by a young man under the domination of his mother.",
-      movie_year: 1960,
-      image_location:
-        'https://www.themoviedb.org/t/p/w1280/81d8oyEFgj7FlxJqSDXWr8JH8kV.jpg',
-      backdrop_URL:
-        'https://www.themoviedb.org/t/p/w1280//uif5fUshJrXyyDzfpzp1DLw3N0S.jpg',
-      price: '150.00',
     },
     {
       category_id: 5,
@@ -1120,18 +1096,6 @@ exports.seed = async function (knex) {
       backdrop_URL:
         'https://www.themoviedb.org/t/p/w1280//eIi3klFf7mp3oL5EEF4mLIDs26r.jpg',
       price: '120.00',
-    },
-    {
-      category_id: 7,
-      title: 'Titanic',
-      description:
-        'A seventeen-year-old aristocrat falls in love with a kind but poor artist aboard the luxurious, ill-fated R.M.S. Titanic.',
-      movie_year: 1997,
-      image_location:
-        'https://www.themoviedb.org/t/p/w1280/9xjZS2rlVxm8SFx8kPC3aIGCOYQ.jpg',
-      backdrop_URL:
-        'https://www.themoviedb.org/t/p/w1280//rzdPqYx7Um4FUZeD8wpXqjAUcEm.jpg',
-      price: '95.00',
     },
     {
       category_id: 9,
