@@ -57,12 +57,6 @@ export const BigMovieCard = ({ currentMovie }) => {
     borderRadius: '1.25rem',
     margin: '2.5rem 0',
   });
-  // eslint-disable-next-line no-console
-  console.log(
-    '%cBigMovieCard.jsx line:60 currentMovie.rating',
-    'color: #007acc;',
-    user,
-  );
 
   return (
     <MovieDetailsLayout>
