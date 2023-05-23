@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Container, Typography } from '@mui/material';
+import { Container, TextField, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { apiURL } from '../../apiURL';
@@ -55,9 +55,9 @@ export const Signup = () => {
           <InputField
             required
             type="text"
-            placeholder="enter name"
+            label="Enter name"
             value={fullName}
-            minLength="6"
+            inputProps={{ minLength: 6 }}
             onChange={(e) => setFullName(e.target.value)}
           />
           <InputField
@@ -116,7 +116,7 @@ const Form = styled.form`
 
 const InputField = styled.input`
   outline: none;
-  border: none;
+  border: 2px solid white;
   width: 100%;
   height: 2.5rem;
   padding: 0 0.5rem;
@@ -128,10 +128,14 @@ const InputField = styled.input`
     rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
   &:hover {
     outline: 0;
-    border: 0;
+    border: 2px solid #01b389;
   }
   &:active {
     border: ${(props) => props.theme.palette.mainGreen};
+  }
+
+  &:focus {
+    border: 2px solid #01b389;
   }
 `;
 
