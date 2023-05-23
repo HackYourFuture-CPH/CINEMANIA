@@ -25,6 +25,22 @@ router.get('/rating/latest', (req, res) => {
     });
 });
 
+router.get('/:id/uid/:uid', (req, res) => {
+  reviewsController
+    .getReviewByIdUid(req.params.id, req.params.uid)
+    .then((result) => {
+      if (result.length === 0) {
+        res.status(404).send({});
+      } else {
+        res.json(result);
+      }
+    })
+    .catch((error) => {
+      res.status(500).json({ error: error.message });
+      throw error;
+    });
+});
+
 router.patch('/:id', (req, res) => {
   reviewsController.editReview(req.params.id, req.body).then((result) => {
     if (result === 0) {

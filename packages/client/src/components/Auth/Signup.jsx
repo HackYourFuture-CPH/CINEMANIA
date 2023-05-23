@@ -32,7 +32,7 @@ export const Signup = () => {
       });
 
       // TODO: Display a modal
-      navigate('/auth');
+      navigate('/');
     } catch (err) {
       // error
       // TODO: Display a modal
@@ -46,42 +46,55 @@ export const Signup = () => {
   }
 
   return (
-    <Container maxWidth="xs" sx={{ marginY: '2rem' }}>
-      <Typography variant="h3" textAlign="center" color="white">
-        Create Account
-      </Typography>
-      <Form onSubmit={handleSubmit}>
-        <InputField
-          required
-          type="text"
-          placeholder="enter name"
-          value={fullName}
-          onChange={(e) => setFullName(e.target.value)}
-        />
-        <InputField
-          required
-          type="email"
-          placeholder="enter email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <InputField
-          required
-          type="password"
-          placeholder="enter password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <Button type="submit">Create</Button>
-
-        <Typography>
-          Already a member?
-          <Link to="/auth">Login</Link>
+    <Section>
+      <Container maxWidth="xs" sx={{ marginY: '2rem' }}>
+        <Typography variant="h3" textAlign="center" color="white">
+          Create Account
         </Typography>
-      </Form>
-    </Container>
+        <Form onSubmit={handleSubmit}>
+          <InputField
+            required
+            type="text"
+            label="Enter name"
+            value={fullName}
+            inputProps={{ minLength: 6 }}
+            onChange={(e) => setFullName(e.target.value)}
+          />
+          <InputField
+            required
+            type="email"
+            placeholder="enter email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <InputField
+            required
+            type="password"
+            placeholder="enter password"
+            value={password}
+            minLength="6"
+            pattern="^(?=.*\d)(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]).{6,}$"
+            title="Password must have at least 6 characters, including 1 digit and 1 symbol"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <Button type="submit">Create</Button>
+          <Typography>
+            Already a member?
+            <Link to="/auth"> Login</Link>
+          </Typography>
+        </Form>
+      </Container>
+    </Section>
   );
 };
+
+const Section = styled.section`
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
 
 const Form = styled.form`
   font-family: 'Inter', sans-serif;
@@ -103,7 +116,7 @@ const Form = styled.form`
 
 const InputField = styled.input`
   outline: none;
-  border: none;
+  border: 2px solid white;
   width: 100%;
   height: 2.5rem;
   padding: 0 0.5rem;
@@ -115,10 +128,14 @@ const InputField = styled.input`
     rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
   &:hover {
     outline: 0;
-    border: 0;
+    border: 2px solid #01b389;
   }
   &:active {
     border: ${(props) => props.theme.palette.mainGreen};
+  }
+
+  &:focus {
+    border: 2px solid #01b389;
   }
 `;
 
@@ -128,7 +145,7 @@ const Button = styled.button`
   border-radius: 0.5rem;
   border: none;
   padding: 0.5rem 2rem;
-
+  margin-bottom: 1rem;
   font-weight: bold;
   font-size: 1.1rem;
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
