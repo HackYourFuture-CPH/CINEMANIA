@@ -101,14 +101,13 @@ const addReview = async (movieId, userId, rating, reviewText) => {
   }
 
   try {
-    const review = await knex('reviews').insert({
+    await knex('reviews').insert({
       movie_id: movieId,
       user_id: userId,
       rating,
       review_text: reviewText,
       created_at: moment().format(),
     });
-    return review;
   } catch (error) {
     throw new HttpError(error.message, 500);
   }
