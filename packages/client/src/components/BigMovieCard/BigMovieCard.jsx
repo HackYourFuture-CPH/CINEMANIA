@@ -6,6 +6,7 @@ import {
   CardMedia,
   Divider,
   Typography,
+  Snackbar,
 } from '@mui/material';
 import React, { useState } from 'react';
 
@@ -24,6 +25,19 @@ export const BigMovieCard = ({ currentMovie }) => {
     setOpen((status) => !status);
   }
   const { user } = useUserContext();
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const snackbarPosition = {
+    vertical: 'top',
+    horizontal: 'center',
+  };
+
+  const handleSnackbarOpen = () => {
+    setSnackbarOpen(true);
+  };
+
+  const handleSnackbarClose = () => {
+    setSnackbarOpen(false);
+  };
 
   const StyledTypography = styled(Typography)`
     font-family: 'Inter';
@@ -32,10 +46,12 @@ export const BigMovieCard = ({ currentMovie }) => {
     font-size: 1.75rem; /* 28px */
     line-height: 2.125rem; /* 34px */
   `;
+
   const StyledBoldTypography = styled(StyledTypography)`
     font-weight: 700;
     width: 8rem;
   `;
+
   const MovieTitle = styled(StyledBoldTypography)`
     width: 39.5rem;
     margin: 5rem 0 0 0;
@@ -47,6 +63,7 @@ export const BigMovieCard = ({ currentMovie }) => {
     display: flex;
     flex-direction: row;
   `;
+
   const MyButton = styled(Button)({
     height: '3.125rem',
     fontWeight: 500,
@@ -63,7 +80,6 @@ export const BigMovieCard = ({ currentMovie }) => {
       <Card
         sx={{
           bgcolor: 'mainGreen',
-
           display: 'flex',
           flexFlow: 'row wrap',
           alignItems: 'center',
@@ -78,9 +94,7 @@ export const BigMovieCard = ({ currentMovie }) => {
             bgcolor: 'white',
             display: 'flex',
             flexDirection: 'column',
-
             justifyContent: 'center',
-
             position: 'relative',
             alignItems: 'center',
             flex: '1 1 300px',
@@ -194,18 +208,37 @@ export const BigMovieCard = ({ currentMovie }) => {
           <MyButton
             variant="outlined"
             onClick={() => {
-              // eslint-disable-next-line no-alert
-              alert('Added to Shopping Cart');
+              if (!user) {
+                handleSnackbarOpen();
+              } else {
+                // eslint-disable-next-line no-alert
+                alert('Added to Shopping Cart');
+              }
             }}
             sx={{
               marginTop: '1rem',
-
               alignSelf: 'flex-end',
             }}
             startIcon={<AddShoppingCartIcon />}
           >
             Add to Cart
           </MyButton>
+          <Snackbar
+            anchorOrigin={snackbarPosition}
+            open={snackbarOpen}
+            autoHideDuration={3000}
+            onClose={handleSnackbarClose}
+            message="You are not logged in"
+            sx={{
+              '.css-dh0nqz-MuiPaper-root-MuiSnackbarContent-root': {
+                backgroundColor: 'hoverRed',
+                fontSize: '20px',
+                position: 'absolute',
+                marginTop: '20rem',
+                paddingLeft: '5rem',
+              },
+            }}
+          />
         </CardContent>
       </Card>
     </MovieDetailsLayout>
