@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -9,8 +9,32 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { Avatar } from '@mui/material';
 import { RatingStars } from '../RatingStars/RatingStars';
 import styled from '@emotion/styled';
+import { apiURL } from '../../apiURL';
+import fallBackMovies from '../../assets/fallBackMovies.json';
 
-export function ReviewDialog({ initialState, handleClose }) {
+export function ReviewDialog({ initialState, handleClose, user, movieId }) {
+  const [formData, setFormData] = useState(fallBackMovies);
+  useEffect(() => {
+    (async () => {
+      if (movieId) {
+        try {
+          const response = await fetch(
+            // Here I use A fixed uid value 123543d.This account doesn't have any reviews.When we realize the function of adding new reviews,I can use user.uid instaed
+            `${apiURL()}/reviews/${movieId}/uid/123543d`,
+          );
+          if (response.ok) {
+            const data = await response.json();
+            if (data) {
+              setFormData(data);
+            }
+          }
+        } catch (error) {
+          throw new Error(error);
+        }
+      }
+    })();
+  }, [movieId]);
+
   return (
     <Dialog open={initialState} onClose={handleClose}>
       <ReviewTitle
@@ -18,11 +42,10 @@ export function ReviewDialog({ initialState, handleClose }) {
       >
         Review <Avatar />
       </ReviewTitle>
-
       <ReviewContent
         sx={{ backgroundColor: 'backgroundDark', color: 'mainGreen' }}
       >
-        <RatingStars />
+        <RatingStars rating={formData[0].rating} />
         <DialogContentText sx={{ color: 'mainGreen' }}>
           Please, write your review of the movie
         </DialogContentText>
@@ -42,6 +65,7 @@ export function ReviewDialog({ initialState, handleClose }) {
             },
           }}
           InputProps={{ sx: { color: 'mainGreen' } }}
+          value={formData[0].review_text}
         />
       </ReviewContent>
       <DialogActions
@@ -52,6 +76,9 @@ export function ReviewDialog({ initialState, handleClose }) {
         </Button>
         <Button onClick={handleClose} sx={{ backgroundColor: 'mainGreen' }}>
           Save review
+        </Button>
+        <Button onClick={handleClose} sx={{ backgroundColor: 'mainGreen' }}>
+          Update review
         </Button>
       </DialogActions>
     </Dialog>

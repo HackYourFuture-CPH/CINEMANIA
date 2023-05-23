@@ -155,6 +155,8 @@ export const BigMovieCard = ({ currentMovie }) => {
             handleClose={(event, value) =>
               handleOpenReview(new Event('Review submitted'), value)
             }
+            user={user}
+            movieId={currentMovie?.id}
           />
           <MovieTitle
             sx={{
