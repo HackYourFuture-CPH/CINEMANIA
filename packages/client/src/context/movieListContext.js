@@ -73,16 +73,11 @@ export const MovieListProvider = ({ isFavoritePage, children }) => {
     setSortBy(value);
   }, []);
 
-  const onChangeDirection = useCallback(
-    (value) => {
-      setCurrentPage(1);
-      setMovies([]);
-      sortBy === value
-        ? setIsClickedSame((prevState) => !prevState)
-        : setIsClickedSame(false);
-    },
-    [sortBy],
-  );
+  const onChangeDirection = useCallback((value) => {
+    setCurrentPage(1);
+    setMovies([]);
+    setIsClickedSame((prevState) => !prevState);
+  }, []);
 
   const onLoadMore = useCallback(() => {
     setCurrentPage((prevPage) => prevPage + 1);

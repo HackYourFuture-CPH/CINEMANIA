@@ -10,7 +10,8 @@ import styled from '@emotion/styled';
 export const MovieOverview = ({ isFavouritePage }) => {
   return (
     <MovieListProvider isFavoritePage={isFavouritePage}>
-      <MovieOverviewContainer maxWidth="xl">
+      <MovieOverviewContainer maxWidth="lg">
+        {isFavouritePage && <StyledTitle>FAVORITES </StyledTitle>}
         <FlexContainer>
           <Categories />
           <SearchSelectContainer>

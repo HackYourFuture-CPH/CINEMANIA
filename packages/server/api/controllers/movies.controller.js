@@ -195,6 +195,12 @@ const getMovies = async (queryParams) => {
 
   const countQuery = knex('movies')
     .modify((queryBuilder) => {
+      if (isFavoritePage === 'true') {
+        queryBuilder
+          .join('favorites', 'favorites.movie_id', '=', 'movies.id')
+          .where('favorites.user_id', '=', userId);
+      }
+
       if (categoryId) {
         queryBuilder.where('movies.category_id', '=', categoryId);
       }
