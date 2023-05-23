@@ -4,11 +4,10 @@ import { useMovieList } from '../../context/movieListContext';
 import styled from '@emotion/styled';
 
 const CustomSelect = () => {
-  const { sortBy, setSortBy, setIsClickedSame } = useMovieList();
-  const handleMenuItemClick = (e) => {
-    e.target.id === sortBy
-      ? setIsClickedSame((prevState) => !prevState)
-      : setIsClickedSame(false);
+  const { sortBy, onSortMovies, onChangeDirection } = useMovieList();
+
+  const handleChangeDirection = (event) => {
+    onChangeDirection(event.target.value);
   };
   return (
     <StyledFormControl variant="standard">
@@ -18,21 +17,21 @@ const CustomSelect = () => {
         id="sort-by-select"
         value={sortBy}
         onChange={(e) => {
-          setSortBy(e.target.value);
+          onSortMovies(e.target.value);
         }}
         label="Sort by"
       >
-        <MenuItem id="rating" value="rating" onClick={handleMenuItemClick}>
+        <MenuItem id="rating" value="rating" onClick={handleChangeDirection}>
           Rating
         </MenuItem>
         <MenuItem
           id="recently_added"
           value="recently_added"
-          onClick={handleMenuItemClick}
+          onClick={handleChangeDirection}
         >
           Recently added
         </MenuItem>
-        <MenuItem id="price" value="price" onClick={handleMenuItemClick}>
+        <MenuItem id="price" value="price" onClick={handleChangeDirection}>
           Price
         </MenuItem>
       </StyledSelect>

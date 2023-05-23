@@ -5,14 +5,14 @@ import { useMovieList } from '../../context/movieListContext';
 import styled from '@emotion/styled';
 
 export const SearchBar = () => {
-  const { searchText, setSearchText } = useMovieList();
+  const { searchText, onSearch } = useMovieList();
 
   return (
     <StyledTextField
       placeholder="Search..."
       value={searchText}
       onChange={(e) => {
-        setSearchText(e.target.value);
+        onSearch(e.target.value);
       }}
       InputProps={{
         endAdornment: (

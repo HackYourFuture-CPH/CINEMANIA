@@ -4,13 +4,13 @@ import styled from '@emotion/styled';
 import { Button as MuiButton } from '@mui/material';
 
 export const CategoryButton = ({ label, categoryId }) => {
-  const { selectedCategoryId, setSelectedCategoryId } = useMovieList();
+  const { selectedCategoryId, onFilterByCategory } = useMovieList();
 
   const handleClick = () => {
     if (isActive) {
-      setSelectedCategoryId(null);
+      onFilterByCategory(null);
     } else {
-      setSelectedCategoryId(categoryId);
+      onFilterByCategory(categoryId);
     }
   };
 

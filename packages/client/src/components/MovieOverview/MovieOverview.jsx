@@ -1,5 +1,5 @@
 import { MovieListProvider } from '../../context/movieListContext';
-import { Box, Container } from '@mui/material';
+import { Box, Container, Typography } from '@mui/material';
 import { Categories } from '../Categories/Categories';
 import { SearchBar } from '../SearchBar/SearchBar';
 import { CustomSelect } from '../Select/CustomSelect';
@@ -10,7 +10,8 @@ import styled from '@emotion/styled';
 export const MovieOverview = ({ isFavouritePage }) => {
   return (
     <MovieListProvider isFavoritePage={isFavouritePage}>
-      <MovieOverviewContainer maxWidth="xl">
+      <MovieOverviewContainer maxWidth="lg">
+        {isFavouritePage && <StyledTitle>FAVORITES </StyledTitle>}
         <FlexContainer>
           <Categories />
           <SearchSelectContainer>
@@ -52,4 +53,14 @@ const SearchSelectContainer = styled(Box)`
     align-items: flex-start;
     margin-bottom: 3rem;
   }
+`;
+
+const StyledTitle = styled(Typography)`
+  height: 2.76rem;
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-align: start;
+  margin-bottom: 3rem;
+  margin-top: 3rem;
 `;
