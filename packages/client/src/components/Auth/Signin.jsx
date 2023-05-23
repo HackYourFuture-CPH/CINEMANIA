@@ -17,7 +17,7 @@ export const Signin = () => {
     try {
       await signIn(email, password);
       // TODO: Display a modal
-      navigate('/auth');
+      navigate('/');
     } catch (err) {
       // error
       setError(err.message);
