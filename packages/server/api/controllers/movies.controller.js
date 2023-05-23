@@ -262,20 +262,10 @@ const getNewArrivals = async (req, res) => {
       );
 
     if (newArrivals.length === 0) {
-      throw new HttpError('No movies found in the database');
+      return res.sendStatus(404);
     }
 
-    const latestMovies = newArrivals.map((latestMovie) => ({
-      movie_id: latestMovie.id,
-      category_id: latestMovie.category_id,
-      category_name: latestMovie.category_name,
-      title: latestMovie.title,
-      description: latestMovie.description,
-      image_location: latestMovie.image_location,
-      movie_year: latestMovie.movie_year,
-    }));
-
-    res.json({ movies: latestMovies });
+    res.json({ movies: newArrivals });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

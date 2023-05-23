@@ -3,6 +3,7 @@ import { apiURL } from '../../apiURL';
 
 export const useNewArrivals = () => {
   const [movies, setMovies] = React.useState([]);
+  const [error, setError] = React.useState(null);
 
   React.useEffect(() => {
     const fetchMovies = async () => {
@@ -14,13 +15,14 @@ export const useNewArrivals = () => {
         const data = await response.json();
 
         setMovies(data.movies);
-      } catch (error) {
-        return error;
+        setError(null);
+      } catch (errorCaught) {
+        setError(new Error(errorCaught));
       }
     };
 
     fetchMovies();
   }, []);
 
-  return [movies];
+  return [movies, error];
 };

@@ -13,6 +13,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import styled from '@emotion/styled';
 import { useNewArrivals } from './useNewArrivals';
 import './styles.css';
+import { error } from 'console';
 
 const settings = {
   className: 'center-slide',
@@ -42,24 +43,32 @@ export function NewArrivals() {
     sliderRef.current?.slickNext();
   };
 
+  if (error) {
+    return (
+      <div>
+        <h2>Error: {error.message}</h2>
+      </div>
+    );
+  }
+
   return (
-    <MainContainer maxWidth="false" className="MAIN-CONTAINER">
+    <MainContainer maxWidth="false">
       <Box display="flex" justifyContent="flex-start">
         <MostPopularText>NEW ARRIVALS</MostPopularText>
       </Box>
-      <CarouselWrapper className="CAROUSEL-WRAPPER">
+      <CarouselWrapper>
         <IconButton onClick={handleSliderPrev}>
           <LeftArrow />
         </IconButton>
-        <SliderWrapper className="SLIDER-WRAPPER">
-          <SliderMain {...settings} ref={sliderRef} className="SLIDER">
+        <SliderWrapper>
+          <SliderMain {...settings} ref={sliderRef}>
             {newArrivals?.map((movie) => (
               <StyledLink
                 rel="noopener noreferrer"
                 key={`slide-${movie.movie_id}`}
                 href={`/movies/${movie.movie_id}`}
               >
-                <SlideBox className="CURRENT-SLIDE">
+                <SlideBox>
                   <CarouselImg
                     component="img"
                     src={movie.image_location}
