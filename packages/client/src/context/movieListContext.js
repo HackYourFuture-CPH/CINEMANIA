@@ -14,7 +14,7 @@ export const MovieListProvider = ({ isFavoritePage, children }) => {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [sortBy, setSortBy] = useState('rating');
+  const [sortBy, setSortBy] = useState('');
   const [isClickedSame, setIsClickedSame] = useState(false);
   const [searchText, setSearchText] = useState('');
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
