@@ -122,8 +122,8 @@ export const BigMovieCard = ({ currentMovie }) => {
         >
           {user && (
             <RatingStars
-              handleOpenReview={(event, value) =>
-                handleOpenReview(event, value)
+              handleOpenReview={(_event, value) =>
+                handleOpenReview(_event, value)
               }
               clickable={true}
               ratingText={`Your rating is ${user?.auth?.name}`}
@@ -144,9 +144,7 @@ export const BigMovieCard = ({ currentMovie }) => {
           />
           <ReviewDialog
             initialState={open}
-            handleClose={(event, value) =>
-              handleOpenReview(new Event('Review submitted'), value)
-            }
+            handleClose={(_event, value) => handleOpenReview(_event, value)}
             user={user}
             movieId={currentMovie?.id}
           />
