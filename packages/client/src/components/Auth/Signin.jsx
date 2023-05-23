@@ -16,15 +16,12 @@ export const Signin = () => {
     setError('');
     try {
       await signIn(email, password);
-      // TODO: Display a modal
       navigate('/');
     } catch (err) {
-      // error
       setError(err.message);
     }
   };
   if (error) {
-    // TODO: Display a modal
     return <div>Error</div>;
   }
 
