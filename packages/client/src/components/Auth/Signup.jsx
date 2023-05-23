@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Container, Typography } from '@mui/material';
+import { Container, Typography, Modal, Box } from '@mui/material';
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { apiURL } from '../../apiURL';
@@ -10,6 +10,7 @@ export const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const { createUser } = useUserContext();
   const navigate = useNavigate();
 
@@ -31,19 +32,18 @@ export const Signup = () => {
         }),
       });
 
-      // TODO: Display a modal
-      navigate('/');
+      setIsModalOpen(true);
+      setTimeout(() => {
+        navigate('/');
+      }, 1500);
     } catch (err) {
-      // error
-      // TODO: Display a modal
       setError(err.message);
+      setIsModalOpen(true);
+      setTimeout(() => {
+        navigate('/signup');
+      }, 1500);
     }
   };
-
-  if (error) {
-    // TODO: Display a modal
-    return <div>Error</div>;
-  }
 
   return (
     <Section>
@@ -83,6 +83,15 @@ export const Signup = () => {
             <Link to="/auth"> Login</Link>
           </Typography>
         </Form>
+        <Modal open={isModalOpen}>
+          <ModalBox backgroundColor={error ? 'hoverRed' : 'mainGreen'}>
+            <Typography variant="h5">
+              {error
+                ? 'Something went wrong, please try again.'
+                : 'User created successfully!'}
+            </Typography>
+          </ModalBox>
+        </Modal>
       </Container>
     </Section>
   );
@@ -94,6 +103,17 @@ const Section = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+`;
+
+const ModalBox = styled(Box)`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: ${(props) => props.backgroundColor};
+  border-radius: 0.5rem;
+  box-shadow: 24;
+  padding: 3rem;
 `;
 
 const Form = styled.form`
