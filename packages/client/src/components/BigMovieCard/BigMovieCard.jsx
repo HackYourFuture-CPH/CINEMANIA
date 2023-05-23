@@ -14,16 +14,14 @@ import FavoriteIcon from '@mui/icons-material/FavoriteBorder';
 import { RatingStars } from '../RatingStars/RatingStars';
 import { MovieDetailsLayout } from '../../containers/MovieDetailsLayout/MovieDetailsLayout';
 import styled from '@emotion/styled';
-import { useUserContext } from '../../context/UserContext';
 import { ReviewDialog } from '../ReviewDialog/ReviewDialog';
 
-export const BigMovieCard = ({ currentMovie }) => {
+export const BigMovieCard = ({ currentMovie, currentReview, user }) => {
   const [open, setOpen] = useState(false);
 
   function handleOpenReview(event, value) {
     setOpen((status) => !status);
   }
-  const { user } = useUserContext();
 
   const StyledTypography = styled(Typography)`
     font-family: 'Inter';
@@ -126,8 +124,13 @@ export const BigMovieCard = ({ currentMovie }) => {
                 handleOpenReview(_event, value)
               }
               clickable={true}
-              ratingText={`Your rating is ${user?.auth?.name}`}
+              ratingText={
+                currentReview
+                  ? `Your rating is ${currentReview?.rating}`
+                  : 'Leave your review'
+              }
               alignSelf="flex-end"
+              rating={currentReview?.rating}
             />
           )}
           <RatingStars
@@ -145,7 +148,7 @@ export const BigMovieCard = ({ currentMovie }) => {
           <ReviewDialog
             initialState={open}
             handleClose={(_event, value) => handleOpenReview(_event, value)}
-            user={user}
+            currentReview={currentReview}
             movieId={currentMovie?.id}
           />
           <MovieTitle

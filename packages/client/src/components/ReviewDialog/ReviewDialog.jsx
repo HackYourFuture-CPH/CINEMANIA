@@ -9,32 +9,12 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { Avatar } from '@mui/material';
 import { RatingStars } from '../RatingStars/RatingStars';
 import styled from '@emotion/styled';
-import { apiURL } from '../../apiURL';
-import fallBackMovies from '../../assets/fallBackMovies.json';
 
-export function ReviewDialog({ initialState, handleClose, user, movieId }) {
-  const [formData, setFormData] = useState(fallBackMovies);
+export function ReviewDialog({ initialState, handleClose, currentReview }) {
+  const [formData, setFormData] = useState(currentReview);
   useEffect(() => {
-    (async () => {
-      if (movieId) {
-        try {
-          const response = await fetch(
-            // Here I use A fixed uid value 123543d.This account doesn't have any reviews.When we realize the function of adding new reviews,I can use user.uid instaed
-            `${apiURL()}/reviews/${movieId}/uid/123543d`,
-          );
-          if (response.ok) {
-            const data = await response.json();
-            if (data) {
-              setFormData(data);
-            }
-          }
-        } catch (error) {
-          throw new Error(error);
-        }
-      }
-    })();
-  }, [movieId]);
-
+    setFormData(currentReview);
+  }, [currentReview]);
   return (
     <Dialog open={initialState} onClose={handleClose}>
       <ReviewTitle
@@ -45,9 +25,7 @@ export function ReviewDialog({ initialState, handleClose, user, movieId }) {
       <ReviewContent
         sx={{ backgroundColor: 'backgroundDark', color: 'mainGreen' }}
       >
-        <RatingStars
-          rating={formData[0].movie_id === movieId ? formData[0].rating : 0}
-        />
+        <RatingStars rating={formData && formData.rating} />
         <DialogContentText sx={{ color: 'mainGreen' }}>
           Please, write your review of the movie
         </DialogContentText>
@@ -68,8 +46,8 @@ export function ReviewDialog({ initialState, handleClose, user, movieId }) {
           }}
           InputProps={{ sx: { color: 'mainGreen' } }}
           value={
-            formData[0].movie_id === movieId
-              ? formData[0].review_text
+            formData
+              ? formData.review_text
               : 'Leave your first review about this movie'
           }
         />
