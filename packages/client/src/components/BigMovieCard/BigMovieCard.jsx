@@ -120,7 +120,7 @@ export const BigMovieCard = ({ currentMovie }) => {
             alignSelf: 'flex-end',
           }}
         >
-          {user ? (
+          {user && (
             <RatingStars
               handleOpenReview={(event, value) =>
                 handleOpenReview(event, value)
@@ -129,8 +129,6 @@ export const BigMovieCard = ({ currentMovie }) => {
               ratingText={`Your rating is ${user?.auth?.name}`}
               alignSelf="flex-end"
             />
-          ) : (
-            ''
           )}
           <RatingStars
             clickable={false}
