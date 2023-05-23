@@ -52,7 +52,7 @@ export const Signin = () => {
 
         <Typography>
           Not a member?
-          <Link to="/signup">Signup</Link>
+          <Link to="/signup"> Signup</Link>
         </Typography>
       </Form>
     </Container>
@@ -104,7 +104,7 @@ const Button = styled.button`
   border-radius: 0.5rem;
   border: none;
   padding: 0.5rem 2rem;
-
+  margin-bottom: 1rem;
   font-weight: bold;
   font-size: 1.1rem;
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,

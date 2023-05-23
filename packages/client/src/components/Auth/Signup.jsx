@@ -46,42 +46,51 @@ export const Signup = () => {
   }
 
   return (
-    <Container maxWidth="xs" sx={{ marginY: '2rem' }}>
-      <Typography variant="h3" textAlign="center" color="white">
-        Create Account
-      </Typography>
-      <Form onSubmit={handleSubmit}>
-        <InputField
-          required
-          type="text"
-          placeholder="enter name"
-          value={fullName}
-          onChange={(e) => setFullName(e.target.value)}
-        />
-        <InputField
-          required
-          type="email"
-          placeholder="enter email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <InputField
-          required
-          type="password"
-          placeholder="enter password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <Button type="submit">Create</Button>
-
-        <Typography>
-          Already a member?
-          <Link to="/auth">Login</Link>
+    <Section>
+      <Container maxWidth="xs" sx={{ marginY: '2rem' }}>
+        <Typography variant="h3" textAlign="center" color="white">
+          Create Account
         </Typography>
-      </Form>
-    </Container>
+        <Form onSubmit={handleSubmit}>
+          <InputField
+            required
+            type="text"
+            placeholder="enter name"
+            value={fullName}
+            onChange={(e) => setFullName(e.target.value)}
+          />
+          <InputField
+            required
+            type="email"
+            placeholder="enter email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <InputField
+            required
+            type="password"
+            placeholder="enter password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <Button type="submit">Create</Button>
+          <Typography>
+            Already a member?
+            <Link to="/auth"> Login</Link>
+          </Typography>
+        </Form>
+      </Container>
+    </Section>
   );
 };
+
+const Section = styled.section`
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
 
 const Form = styled.form`
   font-family: 'Inter', sans-serif;
@@ -128,7 +137,7 @@ const Button = styled.button`
   border-radius: 0.5rem;
   border: none;
   padding: 0.5rem 2rem;
-
+  margin-bottom: 1rem;
   font-weight: bold;
   font-size: 1.1rem;
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,

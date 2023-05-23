@@ -12,7 +12,7 @@ export const AuthPage = () => {
 
 // ToDO: Remove after we create a global Styled Section
 const Section = styled.section`
-  height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
