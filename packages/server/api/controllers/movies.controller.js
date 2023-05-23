@@ -245,6 +245,32 @@ const getFeaturedMovie = async (req, res) => {
   }
 };
 
+const getNewArrivals = async (req, res) => {
+  try {
+    const newArrivals = await knex('movies')
+      .join('categories', 'movies.category_id', 'categories.id')
+      .orderBy('movies.movie_year', 'desc')
+      .limit(5)
+      .select(
+        'movies.id',
+        'movies.category_id',
+        'categories.name as category_name',
+        'movies.title',
+        'movies.description',
+        'movies.image_location',
+        'movies.movie_year',
+      );
+
+    if (newArrivals.length === 0) {
+      return res.sendStatus(404);
+    }
+
+    res.json({ movies: newArrivals });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 module.exports = {
   getMovies,
   getMovieByID,
@@ -254,4 +280,5 @@ module.exports = {
   getDetailsOfMovieByID,
   getMoviesByCategory,
   getFeaturedMovie,
+  getNewArrivals,
 };
