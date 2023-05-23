@@ -7,6 +7,23 @@ import { MovieList } from './MovieList';
 import React from 'react';
 import styled from '@emotion/styled';
 
+export const MovieOverview = ({ isFavouritePage }) => {
+  return (
+    <MovieListProvider isFavoritePage={isFavouritePage}>
+      <MovieOverviewContainer maxWidth="xl">
+        <FlexContainer>
+          <Categories />
+          <SearchSelectContainer>
+            <SearchBar />
+            <CustomSelect />
+          </SearchSelectContainer>
+        </FlexContainer>
+        <MovieList />
+      </MovieOverviewContainer>
+    </MovieListProvider>
+  );
+};
+
 const MovieOverviewContainer = styled(Container)`
   padding-top: 3rem;
   padding-bottom: 3rem;
@@ -36,20 +53,3 @@ const SearchSelectContainer = styled(Box)`
     margin-bottom: 3rem;
   }
 `;
-
-export const MovieOverview = ({ isFavouritePage }) => {
-  return (
-    <MovieListProvider isFavoritePage={isFavouritePage}>
-      <MovieOverviewContainer maxWidth="xl">
-        <FlexContainer>
-          <Categories />
-          <SearchSelectContainer>
-            <SearchBar />
-            <CustomSelect />
-          </SearchSelectContainer>
-        </FlexContainer>
-        <MovieList />
-      </MovieOverviewContainer>
-    </MovieListProvider>
-  );
-};

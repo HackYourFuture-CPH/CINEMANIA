@@ -5,6 +5,29 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { Link } from 'react-router-dom';
 import React from 'react';
 
+const MovieCard = ({ movie }) => {
+  return (
+    <MovieCardContainer item xs={12} sm={6} md={4} key={movie.id}>
+      <Box sx={{ position: 'relative' }}>
+        <OverlayContainer>
+          <IconButton favorite={movie.is_favorite} />
+          <MovieTitle component={Link} to={`/movies/${movie.id}`}>
+            See details...
+          </MovieTitle>
+        </OverlayContainer>
+        <CardMedia
+          component="img"
+          image={`${movie.image_location}`}
+          alt={movie.title}
+          sx={{ order: 2, aspectRatio: '414/623' }}
+        />
+      </Box>
+    </MovieCardContainer>
+  );
+};
+
+export { MovieCard };
+
 const MovieCardContainer = styled(Grid)`
   position: relative;
 `;
@@ -48,26 +71,3 @@ const MovieTitle = styled(Typography)`
   line-height: 30px;
   text-decoration: none;
 `;
-
-const MovieCard = ({ movie }) => {
-  return (
-    <MovieCardContainer item xs={12} sm={6} md={4} key={movie.id}>
-      <Box sx={{ position: 'relative' }}>
-        <OverlayContainer>
-          <IconButton favorite={movie.is_favorite} />
-          <MovieTitle component={Link} to={`/movies/${movie.id}`}>
-            See details...
-          </MovieTitle>
-        </OverlayContainer>
-        <CardMedia
-          component="img"
-          image={`${movie.image_location}`}
-          alt={movie.title}
-          sx={{ order: 2, aspectRatio: '414/623' }}
-        />
-      </Box>
-    </MovieCardContainer>
-  );
-};
-
-export { MovieCard };

@@ -4,17 +4,6 @@ import React from 'react';
 import { useMovieList } from '../../context/movieListContext';
 import styled from '@emotion/styled';
 
-const StyledTextField = styled(TextField)`
-  background: #dbdbdb;
-  color: #dbdbdb;
-  width: 258px;
-  height: 51.75px;
-  border-radius: 37.5px;
-  & fieldset {
-    border: none;
-  }
-`;
-
 export const SearchBar = () => {
   const { searchText, setSearchText } = useMovieList();
 
@@ -35,3 +24,14 @@ export const SearchBar = () => {
     />
   );
 };
+
+const StyledTextField = styled(TextField)`
+  background: #dbdbdb;
+  color: #dbdbdb;
+  width: 258px;
+  height: 51.75px;
+  border-radius: 37.5px;
+  & fieldset {
+    border: none;
+  }
+`;
