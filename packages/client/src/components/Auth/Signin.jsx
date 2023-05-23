@@ -1,5 +1,11 @@
 import React, { useState } from 'react';
-import { Typography, Container, Box, Modal } from '@mui/material';
+import {
+  Typography,
+  Container,
+  Box,
+  Modal,
+  CircularProgress,
+} from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import { useUserContext } from '../../context/UserContext';
 import styled from '@emotion/styled';
@@ -17,7 +23,10 @@ export const Signin = () => {
     setError('');
     try {
       await signIn(email, password);
-      navigate('/');
+      setIsModalOpen(true);
+      setTimeout(() => {
+        navigate('/');
+      }, 1500);
     } catch (err) {
       setError(err.message);
       setIsModalOpen(true);
@@ -56,11 +65,17 @@ export const Signin = () => {
       </Form>
 
       <Modal open={isModalOpen}>
-        <ModalBox>
-          <Typography variant="h5">
-            Something went wrong, please try again.
-          </Typography>
-        </ModalBox>
+        {error ? (
+          <ModalBox backgroundColor="hoverRed">
+            <Typography variant="h5">
+              Something went wrong, please try again.
+            </Typography>
+          </ModalBox>
+        ) : (
+          <ModalBox>
+            <CircularProgress color="primary" />
+          </ModalBox>
+        )}
       </Modal>
     </Container>
   );
@@ -89,7 +104,7 @@ const ModalBox = styled(Box)`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: ${(props) => props.theme.palette.hoverRed};
+  background-color: ${(props) => props.backgroundColor};
   border-radius: 0.5rem;
   box-shadow: 24;
   padding: 3rem;
