@@ -6,40 +6,32 @@ import styled from '@emotion/styled';
 
 export const RatingStars = ({
   rating,
-  numberOfReviews,
   color,
   ratingText,
   handleOpenReview,
+  alignSelf,
 }) => {
+  const StarsRatingWrapper = styled(Box)`
+    align-self: ${alignSelf ?? ''};
+  `;
+
   return (
     <StarsRatingWrapper
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        alignSelf: 'flex-end',
+        alignItems: 'flex-end',
       }}
     >
       <Rating
-        sx={{ width: '12.38%', color }}
+        sx={{ color }}
         name="half-rating"
         defaultValue={2.5}
         precision={0.5}
         value={isNaN(rating) ? 0 : `${Number(rating)}`}
         onChange={(e, v) => handleOpenReview(e, v)}
       />
-      {ratingText && (
-        <Typography component="legend">
-          {numberOfReviews
-            ? `${rating} based on ${numberOfReviews} review${
-                numberOfReviews === 1 ? '' : 's'
-              }`
-            : 'No rating given'}
-        </Typography>
-      )}
+      {ratingText && <Typography component="legend">{ratingText}</Typography>}
     </StarsRatingWrapper>
   );
 };
-
-const StarsRatingWrapper = styled(Box)`
-  align-self: flex-end;
-`;

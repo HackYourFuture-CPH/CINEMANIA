@@ -54,13 +54,14 @@ const getReviewByIdUid = async (id, uid) => {
         'm.description',
         'u.full_name',
         'u.uid',
+        'r.movie_id',
         'r.rating',
         'r.review_text',
         'r.created_at',
       )
       .join('movies as m', 'm.id', '=', 'r.movie_id')
       .join('users as u', 'u.id', '=', 'r.user_id')
-      .where('m.id', id)
+      .where('r.movie_id', id)
       .where('u.uid', uid)
       .orderBy('r.created_at', 'desc')
       .limit(9);
