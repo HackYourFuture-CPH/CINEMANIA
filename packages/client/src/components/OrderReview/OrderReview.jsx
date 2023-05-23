@@ -11,7 +11,7 @@ import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlin
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import styled from '@emotion/styled';
 
-export const ShoppingCartPage = () => {
+export const OrderReview = () => {
   return (
     <CartContainer maxWidth="l">
       <CartItemsBox sx={{ my: 4 }}>
