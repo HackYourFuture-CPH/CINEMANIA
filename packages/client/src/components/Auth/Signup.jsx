@@ -32,7 +32,7 @@ export const Signup = () => {
       });
 
       // TODO: Display a modal
-      navigate('/auth');
+      navigate('/');
     } catch (err) {
       // error
       // TODO: Display a modal
