@@ -32,7 +32,7 @@ export const Signup = () => {
       });
 
       // TODO: Display a modal
-      navigate('/auth');
+      navigate('/');
     } catch (err) {
       // error
       // TODO: Display a modal
@@ -55,8 +55,9 @@ export const Signup = () => {
           <InputField
             required
             type="text"
-            placeholder="enter name"
+            label="Enter name"
             value={fullName}
+            inputProps={{ minLength: 6 }}
             onChange={(e) => setFullName(e.target.value)}
           />
           <InputField
@@ -71,6 +72,9 @@ export const Signup = () => {
             type="password"
             placeholder="enter password"
             value={password}
+            minLength="6"
+            pattern="^(?=.*\d)(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]).{6,}$"
+            title="Password must have at least 6 characters, including 1 digit and 1 symbol"
             onChange={(e) => setPassword(e.target.value)}
           />
           <Button type="submit">Create</Button>
@@ -112,7 +116,7 @@ const Form = styled.form`
 
 const InputField = styled.input`
   outline: none;
-  border: none;
+  border: 2px solid white;
   width: 100%;
   height: 2.5rem;
   padding: 0 0.5rem;
@@ -124,10 +128,14 @@ const InputField = styled.input`
     rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
   &:hover {
     outline: 0;
-    border: 0;
+    border: 2px solid #01b389;
   }
   &:active {
     border: ${(props) => props.theme.palette.mainGreen};
+  }
+
+  &:focus {
+    border: 2px solid #01b389;
   }
 `;
 
