@@ -32,7 +32,6 @@ export const TopCastDisplay = ({ movieID }) => {
     };
     fetchCastList();
   }, [movieID]);
-
   const handleShowFullCast = () => {
     setShowFullCast((previousFullCastState) => !previousFullCastState);
   };
@@ -40,6 +39,7 @@ export const TopCastDisplay = ({ movieID }) => {
   const StyledTypography = styled(Typography)`
     font-family: 'Inter';
     color: #ffffff;
+    font-size: 2rem;
   `;
 
   const Title = styled(StyledTypography)`
@@ -81,38 +81,49 @@ export const TopCastDisplay = ({ movieID }) => {
   return (
     <MovieDetailsLayout>
       <Title>TOP CAST</Title>
-      <Stack
-        direction="row"
-        spacing={1}
-        sx={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}
-      >
-        {castList
-          .slice(0, showFullCast ? castList.length : 6)
-          .map((castMember) => (
-            <Box
-              key={castMember.id}
-              sx={{
-                width: '13.75rem',
-                p: 1,
-                textAlign: 'center',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between  ',
-                alignItems: 'center',
-              }}
-            >
-              <StyledAvatar
-                alt={`${castMember.full_name}`}
-                src={castMember.image_location}
-                variant="circular"
-              />
-              <StyledCastTitle variant="caption">
-                {`${castMember.full_name}`}
-              </StyledCastTitle>
-            </Box>
-          ))}
-      </Stack>
-      {isLoading ? (
+      {castList.length === 0 ? (
+        <StyledTypography>
+          No cast members available for this movie
+        </StyledTypography>
+      ) : (
+        <>
+          <Stack
+            direction="row"
+            spacing={1}
+            sx={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}
+          >
+            {castList
+              .slice(0, showFullCast ? castList.length : 6)
+              .map((castMember) => (
+                <Box
+                  key={castMember.id}
+                  sx={{
+                    width: '13.75rem',
+                    p: 1,
+                    textAlign: 'center',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between  ',
+                    alignItems: 'center',
+                  }}
+                >
+                  <StyledAvatar
+                    alt={`${castMember.full_name}`}
+                    src={castMember.image_location}
+                    variant="circular"
+                  />
+                  <StyledCastTitle variant="caption">
+                    {`${castMember.full_name}`}
+                  </StyledCastTitle>
+                </Box>
+              ))}
+          </Stack>
+          <MyButton onClick={handleShowFullCast}>
+            {showFullCast ? 'Show less' : 'Full Cast'}
+          </MyButton>
+        </>
+      )}
+      {isLoading && (
         <CircularProgress
           sx={{
             position: 'absolute',
@@ -120,10 +131,6 @@ export const TopCastDisplay = ({ movieID }) => {
             left: '50%',
           }}
         />
-      ) : (
-        <MyButton onClick={handleShowFullCast}>
-          {showFullCast ? 'Show less' : 'Full Cast'}
-        </MyButton>
       )}
     </MovieDetailsLayout>
   );
