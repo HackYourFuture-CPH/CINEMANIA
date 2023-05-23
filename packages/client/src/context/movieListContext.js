@@ -15,7 +15,7 @@ export const MovieListProvider = ({ isFavoritePage, children }) => {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [sortBy, setSortBy] = useState('rating');
+  const [sortBy, setSortBy] = useState('');
   const [isClickedSame, setIsClickedSame] = useState(false);
   const [searchText, setSearchText] = useState('');
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
@@ -33,7 +33,7 @@ export const MovieListProvider = ({ isFavoritePage, children }) => {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        let url = `${apiURL()}/movies?sortBy=${sortBy}&isFavoritePage=${isFavoritePage}&userId=${1}&pageNumber=${currentPage}&pageSize=${6}`;
+        let url = `${apiURL()}/movies?isFavoritePage=${isFavoritePage}&userId=${1}&pageNumber=${currentPage}&pageSize=${6}`;
         if (selectedCategoryId) {
           url += `&categoryId=${selectedCategoryId}`;
         }
@@ -42,6 +42,9 @@ export const MovieListProvider = ({ isFavoritePage, children }) => {
         }
         if (isClickedSame) {
           url += `&isClickedSame=${isClickedSame}`;
+        }
+        if (sortBy !== '') {
+          url += `&sortBy=${sortBy}`;
         }
         const response = await fetch(url);
         const data = await response.json();
