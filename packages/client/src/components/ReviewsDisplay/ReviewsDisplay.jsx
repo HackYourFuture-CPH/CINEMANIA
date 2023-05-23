@@ -27,6 +27,7 @@ export function ReviewsDisplay({ movieID }) {
   const [showAllReviews, setShowAllReviews] = useState(false);
 
   useEffect(() => {
+    if (!movieID) return;
     const fetchReviewsList = async () => {
       setIsLoading(true);
       if (movieID) {
