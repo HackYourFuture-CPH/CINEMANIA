@@ -7,15 +7,24 @@ import {
   Divider,
   Typography,
 } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import FavoriteIcon from '@mui/icons-material/FavoriteBorder';
 import { RatingStars } from '../RatingStars/RatingStars';
 import { MovieDetailsLayout } from '../../containers/MovieDetailsLayout/MovieDetailsLayout';
 import styled from '@emotion/styled';
+import { useUserContext } from '../../context/UserContext';
+import { ReviewDialog } from '../ReviewDialog/ReviewDialog';
 
 export const BigMovieCard = ({ currentMovie }) => {
+  const [open, setOpen] = useState(false);
+
+  function handleOpenReview(event, value) {
+    setOpen((status) => !status);
+  }
+  const { user } = useUserContext();
+
   const StyledTypography = styled(Typography)`
     font-family: 'Inter';
     font-style: normal;
@@ -111,14 +120,38 @@ export const BigMovieCard = ({ currentMovie }) => {
             alignSelf: 'flex-end',
           }}
         >
+          {user ? (
+            <RatingStars
+              handleOpenReview={(event, value) =>
+                handleOpenReview(event, value)
+              }
+              clickable={true}
+              ratingText={`Your rating is ${user?.auth?.name}`}
+              alignSelf="flex-end"
+            />
+          ) : (
+            ''
+          )}
           <RatingStars
-            rating={currentMovie?.rating ?? 0}
-            numberOfReviews={currentMovie?.number_of_ratings}
             clickable={false}
-            ratingText={true}
+            ratingText={
+              currentMovie.rating
+                ? `${currentMovie.rating} based on ${
+                    currentMovie.number_of_ratings
+                  } review${currentMovie.number_of_ratings === 1 ? '' : 's'}`
+                : 'No rating given'
+            }
+            rating={currentMovie.rating}
             alignSelf="flex-end"
           />
-
+          <ReviewDialog
+            initialState={open}
+            handleClose={(event, value) =>
+              handleOpenReview(new Event('Review submitted'), value)
+            }
+            user={user}
+            movieId={currentMovie?.id}
+          />
           <MovieTitle
             sx={{
               paddingTop: '0.625rem',
