@@ -11,10 +11,13 @@ import { RatingStars } from '../RatingStars/RatingStars';
 import styled from '@emotion/styled';
 
 export function ReviewDialog({ initialState, handleClose, currentReview }) {
+  const [review, setReview] = useState(currentReview);
   const [formData, setFormData] = useState(currentReview);
   useEffect(() => {
     setFormData(currentReview);
+    setReview(currentReview);
   }, [currentReview]);
+
   return (
     <Dialog open={initialState} onClose={handleClose}>
       <ReviewTitle
@@ -34,44 +37,96 @@ export function ReviewDialog({ initialState, handleClose, currentReview }) {
         <DialogContentText sx={{ color: 'mainGreen' }}>
           Please, write your review of the movie
         </DialogContentText>
-        <ReviewContentText
-          autoFocus
-          margin="dense"
-          id="name"
-          label="review"
-          multiline
-          rows={4}
-          fullWidth
-          variant="filled"
-          InputLabelProps={{
-            sx: {
-              color: 'mainGreen',
-              textTransform: 'capitalize',
-            },
-          }}
-          InputProps={{ sx: { color: 'mainGreen' } }}
-          value={
-            formData
-              ? formData.review_text
-              : 'Leave your first review about this movie'
-          }
-          onChange={(e) => {
-            setFormData({ ...formData, review_text: e.target.value });
-          }}
-        />
+        {formData ? (
+          <ReviewContentText
+            autoFocus
+            margin="dense"
+            id="name"
+            label="review"
+            multiline
+            rows={4}
+            fullWidth
+            variant="filled"
+            InputLabelProps={{
+              sx: {
+                color: 'mainGreen',
+                textTransform: 'capitalize',
+              },
+            }}
+            InputProps={{ sx: { color: 'mainGreen' } }}
+            defaultValue={formData.review_text}
+            onChange={(e) => {
+              setFormData({ ...formData, review_text: e.target.value });
+            }}
+          />
+        ) : (
+          <ReviewContentText
+            autoFocus
+            margin="dense"
+            id="name"
+            label="review"
+            multiline
+            rows={4}
+            fullWidth
+            variant="filled"
+            InputLabelProps={{
+              sx: {
+                color: 'mainGreen',
+                textTransform: 'capitalize',
+              },
+            }}
+            placeholder="Leave your first review about this movie"
+            InputProps={{ sx: { color: 'mainGreen' } }}
+            onChange={(e) => {
+              setFormData({ ...formData, review_text: e.target.value });
+            }}
+          />
+        )}
       </ReviewContent>
       <DialogActions
-        sx={{ backgroundColor: 'backgroundDark', color: 'mainGreen' }}
+        sx={{
+          backgroundColor: 'backgroundDark',
+          color: 'mainGreen',
+          display: 'flex',
+        }}
       >
-        <Button onClick={handleClose} sx={{ backgroundColor: 'mainGreen' }}>
-          Delete review
-        </Button>
-        <Button onClick={handleClose} sx={{ backgroundColor: 'mainGreen' }}>
-          Save review
-        </Button>
-        <Button onClick={handleClose} sx={{ backgroundColor: 'mainGreen' }}>
-          Update review
-        </Button>
+        {review ? (
+          <>
+            <Button onClick={handleClose} sx={{ backgroundColor: 'mainGreen' }}>
+              Delete review
+            </Button>
+            <Button onClick={handleClose} sx={{ backgroundColor: 'mainGreen' }}>
+              Update review
+            </Button>
+            <Button
+              onClick={handleClose}
+              sx={{ backgroundColor: 'mainGreen' }}
+              disabled
+            >
+              Save review
+            </Button>
+          </>
+        ) : (
+          <>
+            <Button
+              onClick={handleClose}
+              sx={{ backgroundColor: 'mainGreen' }}
+              disabled
+            >
+              Delete review
+            </Button>
+            <Button
+              onClick={handleClose}
+              sx={{ backgroundColor: 'mainGreen' }}
+              disabled
+            >
+              Update review
+            </Button>
+            <Button onClick={handleClose} sx={{ backgroundColor: 'mainGreen' }}>
+              Save review
+            </Button>
+          </>
+        )}
       </DialogActions>
     </Dialog>
   );

@@ -19,13 +19,11 @@ export const MovieDetails = () => {
     (async () => {
       if (movieID && user.uid) {
         try {
-          const response = await fetch(
-            `${apiURL()}/reviews/${movieID}/uid/${user.uid}`,
-          );
+          const response = await fetch(`${apiURL()}/reviews/${movieID}/uid/12`);
           if (response.ok) {
             const data = await response.json();
 
-            if (data.length === 1) {
+            if (data) {
               setCurrentUsersReview(data[0]);
             }
           }
