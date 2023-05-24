@@ -27,6 +27,8 @@ export const MovieDetails = () => {
 
             if (data.length === 1) {
               setCurrentUsersReview(data[0]);
+            } else {
+              setCurrentUsersReview({ rating: 0, review_text: '' });
             }
           }
         } catch (error) {
