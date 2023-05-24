@@ -80,7 +80,7 @@ export const Signup = () => {
           <Button type="submit">Create</Button>
           <Typography>
             Already a member?
-            <Link to="/auth"> Login</Link>
+            <Link to="/signin"> Login</Link>
           </Typography>
         </Form>
         <Modal open={isModalOpen}>
