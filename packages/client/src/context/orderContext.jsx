@@ -3,7 +3,10 @@ import React from 'react';
 export const OrderContext = React.createContext(null);
 
 export const OrderContextProvider = ({ children }) => {
-  const [movieInCart, setMovieInCart] = React.useState([]);
+  const [movieInCart, setMovieInCart] = React.useState(() => {
+    const storedMovieInCart = localStorage.getItem('movieInCart');
+    return storedMovieInCart ? JSON.parse(storedMovieInCart) : [];
+  });
 
   const addMovieToCart = React.useCallback((movie) => {
     const newMovie = { ...movie };
@@ -18,8 +21,7 @@ export const OrderContextProvider = ({ children }) => {
   }, []);
 
   React.useEffect(() => {
-    // eslint-disable-next-line no-console
-    console.log('Movie added:', movieInCart);
+    localStorage.setItem('movieInCart', JSON.stringify(movieInCart));
   }, [movieInCart]);
 
   const contextValue = React.useMemo(

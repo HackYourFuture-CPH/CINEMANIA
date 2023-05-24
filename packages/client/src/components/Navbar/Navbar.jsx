@@ -150,10 +150,9 @@ const NavButton = styled(Button)`
 `;
 
 const CountTypography = styled(Typography)`
-  margin-top: -5px;
-  width: 20px;
-  height: 20px;
-  border-radius: 12px;
-  background-color: var(--secondary-color);
+  font-size: 1.2rem;
+  color: red;
   overflow: hidden;
+  position: relative;
+  bottom: 20px;
 `;
