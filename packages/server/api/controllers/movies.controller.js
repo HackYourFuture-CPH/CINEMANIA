@@ -147,46 +147,60 @@ const getMovies = async (queryParams) => {
     )
     .groupBy('movies.id')
     .modify((queryBuilder) => {
+      if (isFavoritePage === 'true') {
+        queryBuilder
+          .join('favorites', 'favorites.movie_id', '=', 'movies.id')
+          .where('favorites.user_id', '=', userId);
+      }
+      if (title) {
+        queryBuilder.where('movies.title', 'like', `%${title}%`);
+      }
+
       if (categoryId) {
         queryBuilder.where('movies.category_id', '=', categoryId);
       }
 
       if (sortBy === 'rating') {
-        queryBuilder.orderBy(
-          'average_rating',
-          `${isClickedSame ? 'asc' : 'desc'}`,
-        );
+        queryBuilder.orderBy([
+          {
+            column: 'average_rating',
+            order: `${isClickedSame ? 'asc' : 'desc'}`,
+          },
+          { column: 'movies.id' },
+        ]);
       }
 
       if (sortBy === 'recently_added') {
-        queryBuilder.orderBy(
-          'movies.created_at',
-          `${isClickedSame ? 'asc' : 'desc'}`,
-        );
+        queryBuilder.orderBy([
+          {
+            column: 'movies.created_at',
+            order: `${isClickedSame ? 'asc' : 'desc'}`,
+          },
+          { column: 'movies.id' },
+        ]);
       }
 
       if (sortBy === 'price') {
-        queryBuilder.orderBy(
-          'movies.price',
-          `${isClickedSame ? 'desc' : 'asc'}`,
-        );
+        queryBuilder.orderBy([
+          {
+            column: 'movies.price',
+            order: `${isClickedSame ? 'desc' : 'asc'}`,
+          },
+          { column: 'movies.id' },
+        ]);
       }
 
-      if (title) {
-        queryBuilder.where('movies.title', 'like', `%${title}%`);
-      }
+      queryBuilder.limit(pageSize, true).offset(offset, true);
+    });
 
+  const countQuery = knex('movies')
+    .modify((queryBuilder) => {
       if (isFavoritePage === 'true') {
         queryBuilder
           .join('favorites', 'favorites.movie_id', '=', 'movies.id')
           .where('favorites.user_id', '=', userId);
       }
 
-      queryBuilder.limit(pageSize).offset(offset);
-    });
-
-  const countQuery = knex('movies')
-    .modify((queryBuilder) => {
       if (categoryId) {
         queryBuilder.where('movies.category_id', '=', categoryId);
       }

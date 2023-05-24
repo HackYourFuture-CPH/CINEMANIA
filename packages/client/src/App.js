@@ -6,7 +6,7 @@ import { MovieDetails } from './containers/MovieDetails/MovieDetails';
 import { MovieListPage } from './containers/MovieListPage/MovieListPage';
 import { PageNotFound } from './containers/PageNotFound/PageNotFound.Container';
 
-import { AuthPage } from './containers/Auth/AuthPage';
+import { Signin } from './components/Auth/Signin';
 import { Signup } from './components/Auth/Signup';
 import { UserProvider } from './context/UserContext';
 import { OrderContextProvider } from './context/orderContext';
@@ -26,8 +26,8 @@ const router = createBrowserRouter([
         element: <LandingPage />,
       },
       {
-        path: '/auth',
-        element: <AuthPage />,
+        path: '/signin',
+        element: <Signin />,
       },
       {
         path: '/signup',
