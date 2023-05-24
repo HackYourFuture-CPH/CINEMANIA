@@ -143,17 +143,16 @@ const CarouselImg = styled(Box)`
   margin: 0 0 0 4.75rem;
   @media (max-width: 1440px) {
     width: 14rem;
-    height: 24rem;
+    height: 21.75rem;
     margin: 0 0 0 2.75rem;
   }
 `;
 
-const SliderWrapper = styled.div`
+const SliderWrapper = styled(Box)`
   height: 37.75rem;
   width: 100%;
   @media (max-width: 1440px) {
-    height: 21.75rem;
-    width: 100%;
+    height: 28.75rem;
   }
 `;
 
@@ -174,8 +173,10 @@ const SlideBox = styled(Box)`
     transform: scale(1.02);
     cursor: pointer;
   }
+  border-radius: 3px;
+  box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
   @media (max-width: 1440px) {
-    height: 25rem;
+    height: 24.5rem;
   }
 `;
 
@@ -187,7 +188,7 @@ const TextBox = styled(Box)`
   display: flex;
   flex-direction: column;
   @media (max-width: 1440px) {
-    height: 19rem;
+    height: 21.75rem;
     margin: 0 2.5rem 0 2.75rem;
   }
 `;
@@ -200,7 +201,6 @@ const TitleTypography = styled(Typography)`
   @media (max-width: 1440px) {
     font-size: 30px;
     line-height: 36px;
-    margin-bottom: 10px;
   }
 `;
 
@@ -212,7 +212,6 @@ const DescriptionTypography = styled(Typography)`
   @media (max-width: 1440px) {
     font-size: 20px;
     line-height: 27px;
-    margin-bottom: 10px;
   }
 `;
 
