@@ -10,9 +10,11 @@ import {
   Link,
   MenuItem,
   Toolbar,
+  Typography,
 } from '@mui/material';
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { OrderContext } from '../../context/orderContext';
 
 const NavLink = (props) => {
   const { pathname } = useLocation();
@@ -24,6 +26,7 @@ const NavLink = (props) => {
 export const Navbar = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
+  const { movieInCart } = React.useContext(OrderContext);
 
   return (
     <StyledAppBar>
@@ -59,12 +62,17 @@ export const Navbar = () => {
             </Box>
           </Grid>
           <IconMenu>
-            <NavIcon isActive={pathname === '/shopping'}>
+            <NavIcon isActive={pathname === '/order'}>
               <ShoppingCartIcon
                 onClick={() => {
-                  navigate('/shopping');
+                  navigate('/order');
                 }}
               />
+              {movieInCart.length > 0 && (
+                <CountTypography variant="body">
+                  {movieInCart.length}
+                </CountTypography>
+              )}
             </NavIcon>
             <NavIcon isActive={pathname === '/favorites'}>
               <FavoriteBorderIcon
@@ -138,4 +146,13 @@ const NavButton = styled(Button)`
   &:hover {
     color: ${(props) => props.theme.palette.hoverRed};
   }
+`;
+
+const CountTypography = styled(Typography)`
+  margin-top: -5px;
+  width: 20px;
+  height: 20px;
+  border-radius: 12px;
+  background-color: var(--secondary-color);
+  overflow: hidden;
 `;

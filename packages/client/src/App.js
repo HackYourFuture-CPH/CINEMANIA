@@ -9,11 +9,12 @@ import { PageNotFound } from './containers/PageNotFound/PageNotFound.Container';
 import { AuthPage } from './containers/Auth/AuthPage';
 import { Signup } from './components/Auth/Signup';
 import { UserProvider } from './context/UserContext';
-
+import { OrderContextProvider } from './context/orderContext';
 // MUI THEME
 import { ThemeProvider } from '@mui/material';
 import { theme } from './lib/theme';
 import { FavoritesListPage } from './containers/FavoritesListPage/FavoritesListPage';
+import { HandleOrder } from './components/OrderReview/HandleOrder';
 
 // Routes
 const router = createBrowserRouter([
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
         element: <MovieListPage />,
       },
       {
+        path: '/order',
+        element: <HandleOrder />,
+      },
+      {
         path: '*',
         element: <PageNotFound />,
       },
@@ -55,9 +60,11 @@ const router = createBrowserRouter([
 export const App = () => {
   return (
     <UserProvider>
-      <ThemeProvider theme={theme}>
-        <RouterProvider router={router} />
-      </ThemeProvider>
+      <OrderContextProvider>
+        <ThemeProvider theme={theme}>
+          <RouterProvider router={router} />
+        </ThemeProvider>
+      </OrderContextProvider>
     </UserProvider>
   );
 };

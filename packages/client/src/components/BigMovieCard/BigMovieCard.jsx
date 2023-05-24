@@ -14,8 +14,11 @@ import FavoriteIcon from '@mui/icons-material/FavoriteBorder';
 import { RatingStars } from '../RatingStars/RatingStars';
 import { MovieDetailsLayout } from '../../containers/MovieDetailsLayout/MovieDetailsLayout';
 import styled from '@emotion/styled';
+import { OrderContext } from '../../context/orderContext';
 
 export const BigMovieCard = ({ currentMovie }) => {
+  const { addMovieToCart } = React.useContext(OrderContext);
+
   const StyledTypography = styled(Typography)`
     font-family: 'Inter';
     font-style: normal;
@@ -48,6 +51,8 @@ export const BigMovieCard = ({ currentMovie }) => {
     borderRadius: '1.25rem',
     margin: '2.5rem 0',
   });
+  // eslint-disable-next-line no-console
+  console.log(currentMovie);
 
   return (
     <MovieDetailsLayout>
@@ -165,6 +170,7 @@ export const BigMovieCard = ({ currentMovie }) => {
           <MyButton
             variant="outlined"
             onClick={() => {
+              addMovieToCart(currentMovie);
               // eslint-disable-next-line no-alert
               alert('Added to Shopping Cart');
             }}
