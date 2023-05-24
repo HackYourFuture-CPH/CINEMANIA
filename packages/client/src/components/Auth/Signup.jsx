@@ -37,10 +37,10 @@ export const Signup = () => {
         navigate('/');
       }, 1500);
     } catch (err) {
-      setError(err.message);
+      setError('Email already in use, please try again.');
       setIsModalOpen(true);
       setTimeout(() => {
-        navigate('/signup');
+        setIsModalOpen(false);
       }, 1500);
     }
   };
@@ -85,11 +85,11 @@ export const Signup = () => {
         </Form>
         <Modal open={isModalOpen}>
           <ModalBox backgroundColor={error ? 'hoverRed' : 'mainGreen'}>
-            <Typography variant="h5">
-              {error
-                ? 'Something went wrong, please try again.'
-                : 'User created successfully!'}
-            </Typography>
+            {error ? (
+              <Typography variant="h5"> {error}</Typography>
+            ) : (
+              <Typography variant="h5">User created successfully!</Typography>
+            )}
           </ModalBox>
         </Modal>
       </Container>

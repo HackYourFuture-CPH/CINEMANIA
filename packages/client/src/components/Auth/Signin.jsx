@@ -31,7 +31,7 @@ export const Signin = () => {
       setError(err.message);
       setIsModalOpen(true);
       setTimeout(() => {
-        navigate('/signin');
+        setIsModalOpen(false);
       }, 1500);
     }
   };
@@ -68,7 +68,7 @@ export const Signin = () => {
         {error ? (
           <ModalBox backgroundColor="hoverRed">
             <Typography variant="h5">
-              Something went wrong, please try again.
+              The email address or password you entered is invalid.
             </Typography>
           </ModalBox>
         ) : (
