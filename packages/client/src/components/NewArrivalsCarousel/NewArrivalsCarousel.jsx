@@ -1,13 +1,7 @@
 import React, { useRef } from 'react';
+import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
-import {
-  Box,
-  Button,
-  IconButton,
-  Typography,
-  Link,
-  Container,
-} from '@mui/material';
+import { Box, Button, IconButton, Typography, Container } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import styled from '@emotion/styled';
@@ -42,56 +36,65 @@ export const NewArrivalsCarousel = () => {
     sliderRef.current?.slickNext();
   };
 
+  if (error) {
+    const isUserActionable = error.isUserActionable || false;
+
+    if (!isUserActionable) {
+      // Error without user action
+      return null;
+    }
+
+    // Error with user action
+    return (
+      <ErrorMessage>
+        {error.message}
+        <RefreshButton onClick={() => window.location.reload()}>
+          Refresh
+        </RefreshButton>
+      </ErrorMessage>
+    );
+  }
+
   return (
     <MainContainer maxWidth="false">
       <Box display="flex" justifyContent="flex-start">
         <MostPopularText>NEW ARRIVALS</MostPopularText>
       </Box>
-      {error ? (
-        <ErrorMessage>{error.message}</ErrorMessage>
-      ) : (
-        <CarouselWrapper>
-          <IconButton onClick={handleSliderPrev}>
-            <LeftArrow />
-          </IconButton>
-          <SliderWrapper>
-            <SliderMain {...settings} ref={sliderRef}>
-              {newArrivals.map((movie) => (
-                <StyledLink
-                  rel="noopener noreferrer"
-                  key={`slide-${movie.id}`}
-                  href={`/movies/${movie.id}`}
-                >
-                  <SlideBox>
-                    <CarouselImg
-                      component="img"
-                      src={movie.image_location}
-                      alt={movie.title}
-                    />
-                    <TextBox>
-                      <TitleTypography variant="h4" component="div">
-                        {movie.title}
-                      </TitleTypography>
-                      <DescriptionTypography variant="h5">
-                        {movie.description}
-                      </DescriptionTypography>
-                      <DescriptionTypography>
-                        Read more...
-                      </DescriptionTypography>
-                      <MyButton key={`button-${movie.id}`} variant="outlined">
-                        {movie.category_name}
-                      </MyButton>
-                    </TextBox>
-                  </SlideBox>
-                </StyledLink>
-              ))}
-            </SliderMain>
-          </SliderWrapper>
-          <IconButton onClick={handleSliderNext}>
-            <RightArrow />
-          </IconButton>
-        </CarouselWrapper>
-      )}
+      <CarouselWrapper>
+        <IconButton onClick={handleSliderPrev}>
+          <LeftArrow />
+        </IconButton>
+        <SliderWrapper>
+          <SliderMain {...settings} ref={sliderRef}>
+            {newArrivals.map((movie) => (
+              <StyledLink key={`slide-${movie.id}`} to={`/movies/${movie.id}`}>
+                <SlideBox>
+                  <CarouselImg
+                    component="img"
+                    src={movie.image_location}
+                    alt={movie.title}
+                  />
+                  <TextBox>
+                    <TitleTypography variant="h4" component="div">
+                      {movie.title}
+                    </TitleTypography>
+                    <DescriptionTypography variant="h5">
+                      {movie.description}
+                    </DescriptionTypography>
+                    <DescriptionTypography>Read more...</DescriptionTypography>
+                    <MyButton key={`button-${movie.id}`} variant="outlined">
+                      {movie.category_name}
+                    </MyButton>
+                  </TextBox>
+                </SlideBox>
+              </StyledLink>
+            ))}
+          </SliderMain>
+        </SliderWrapper>
+        <IconButton onClick={handleSliderNext}>
+          <RightArrow />
+        </IconButton>
+      </CarouselWrapper>
     </MainContainer>
   );
 };
@@ -216,4 +219,8 @@ const MyButton = styled(Button)`
 const ErrorMessage = styled(Typography)`
   color: red;
   margin: 2rem;
+`;
+
+const RefreshButton = styled(Button)`
+  margin-left: 1rem;
 `;
