@@ -1,5 +1,11 @@
 import React, { useState } from 'react';
-import { Typography, Container } from '@mui/material';
+import {
+  Typography,
+  Container,
+  Box,
+  Modal,
+  CircularProgress,
+} from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import { useUserContext } from '../../context/UserContext';
 import styled from '@emotion/styled';
@@ -8,6 +14,7 @@ export const Signin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const { signIn } = useUserContext();
   const navigate = useNavigate();
 
@@ -16,17 +23,18 @@ export const Signin = () => {
     setError('');
     try {
       await signIn(email, password);
-      // TODO: Display a modal
-      navigate('/');
+      setIsModalOpen(true);
+      setTimeout(() => {
+        navigate('/');
+      }, 1500);
     } catch (err) {
-      // error
       setError(err.message);
+      setIsModalOpen(true);
+      setTimeout(() => {
+        setIsModalOpen(false);
+      }, 1500);
     }
   };
-  if (error) {
-    // TODO: Display a modal
-    return <div>Error</div>;
-  }
 
   return (
     <Container maxWidth="xs" sx={{ marginY: '2rem' }}>
@@ -55,6 +63,20 @@ export const Signin = () => {
           <Link to="/signup"> Signup</Link>
         </Typography>
       </Form>
+
+      <Modal open={isModalOpen}>
+        {error ? (
+          <ModalBox backgroundColor="hoverRed">
+            <Typography variant="h5">
+              The email address or password you entered is invalid.
+            </Typography>
+          </ModalBox>
+        ) : (
+          <ModalBox>
+            <CircularProgress color="primary" />
+          </ModalBox>
+        )}
+      </Modal>
     </Container>
   );
 };
@@ -75,6 +97,17 @@ const Form = styled.form`
   a:hover {
     color: ${(props) => props.theme.palette.hoverRed};
   }
+`;
+
+const ModalBox = styled(Box)`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: ${(props) => props.backgroundColor};
+  border-radius: 0.5rem;
+  box-shadow: 24;
+  padding: 3rem;
 `;
 
 const InputField = styled.input`
