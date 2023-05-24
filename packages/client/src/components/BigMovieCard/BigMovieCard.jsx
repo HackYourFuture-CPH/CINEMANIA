@@ -169,8 +169,6 @@ export const BigMovieCard = ({ currentMovie }) => {
             variant="outlined"
             onClick={() => {
               addMovieToCart(currentMovie);
-              // eslint-disable-next-line no-alert
-              alert('Added to Shopping Cart');
             }}
             sx={{
               marginTop: '1rem',

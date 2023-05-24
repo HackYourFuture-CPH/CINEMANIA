@@ -16,6 +16,13 @@ import { OrderContext } from '../../context/orderContext';
 export const OrderReview = ({ movies }) => {
   const { removeMovie } = React.useContext(OrderContext);
 
+  const totalPrice = movies.reduce(
+    (sum, movie) => sum + parseFloat(movie.price),
+    0,
+  );
+
+  const totalPriceWithVAT = totalPrice * 1.25;
+
   if (movies.length === 0) {
     return (
       <CartTypographyOrderID
@@ -51,6 +58,11 @@ export const OrderReview = ({ movies }) => {
                 defaultChecked
                 onChange={() => removeMovie(movie.id)}
                 inputProps={{ 'aria-label': 'controlled' }}
+                sx={{
+                  '&.Mui-checked': {
+                    color: '#001b14',
+                  },
+                }}
               />
               <ItemsCard>
                 <ItemsCardMedia
@@ -102,11 +114,11 @@ export const OrderReview = ({ movies }) => {
           <Typography variant="h6">Items:{movies.length}</Typography>
           <StyledDividerSummary />
           <SummaryTypographyTotal variant="h4">
-            Order Total: 95
+            Order Total: {totalPrice}
           </SummaryTypographyTotal>
           <StyledDividerSummary />
           <SummaryTypographyVAT variant="h5">
-            Order totals include VAT
+            Order totals include VAT : {totalPriceWithVAT}
           </SummaryTypographyVAT>
           <PaymentButton
             variant="contained"
@@ -132,8 +144,7 @@ const CartContainer = styled(Container)`
 
 const CartItemsBox = styled(Box)`
   width: 66%;
-  height: 73rem;
-  overflow-y: scroll;
+  height: 100%;
   background: linear-gradient(
       110.45deg,
       rgba(0, 60, 45, 0.5) 0%,
@@ -201,7 +212,6 @@ const ItemBox = styled(Box)`
 const SelectCheckbox = styled(Checkbox)`
   display: block;
   fill: false;
-  color: #001b14;
 `;
 
 const ItemsCard = styled(Box)`
