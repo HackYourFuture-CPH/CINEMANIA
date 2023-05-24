@@ -36,16 +36,7 @@ export const NewArrivalsCarousel = () => {
     sliderRef.current?.slickNext();
   };
 
-  if (error) {
-    let isUserActionable = false;
-
-    if (error.code === 408 || error.code === 401) {
-      isUserActionable = true;
-    }
-    if (!isUserActionable) {
-      // Error without user action
-      return null;
-    }
+  if (error && (error.code === 408 || error.code === 401)) {
     // Error with user action
     return (
       <ErrorMessage>
@@ -55,7 +46,12 @@ export const NewArrivalsCarousel = () => {
         </RefreshButton>
       </ErrorMessage>
     );
+    // eslint-disable-next-line no-else-return
+  } else if (error) {
+    // Error without user action
+    return null;
   }
+
   return (
     <MainContainer maxWidth="false">
       <Box display="flex" justifyContent="flex-start">
