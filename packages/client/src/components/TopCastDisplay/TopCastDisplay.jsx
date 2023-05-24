@@ -108,12 +108,12 @@ export const TopCastDisplay = ({ movieID }) => {
                   }}
                 >
                   <StyledAvatar
-                    alt={`${castMember.full_name}`}
+                    alt={castMember.full_name}
                     src={castMember.image_location}
                     variant="circular"
                   />
                   <StyledCastTitle variant="caption">
-                    {`${castMember.full_name}`}
+                    {castMember.full_name}
                   </StyledCastTitle>
                 </Box>
               ))}
