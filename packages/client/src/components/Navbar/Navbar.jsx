@@ -7,20 +7,21 @@ import {
   Box,
   Button,
   Grid,
-  Link,
   MenuItem,
   Toolbar,
   Typography,
 } from '@mui/material';
 import React from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { OrderContext } from '../../context/orderContext';
 
 const NavLink = (props) => {
   const { pathname } = useLocation();
-  const isActive = pathname === props.href;
+  const isActive = pathname === props.to; // Updated prop name from "href" to "to"
   const linkColor = isActive ? 'red' : 'inherit';
-  return <Link underline="none" color={linkColor} {...props} />;
+  return (
+    <Link style={{ textDecoration: 'none', color: linkColor }} {...props} />
+  );
 };
 
 export const Navbar = () => {
@@ -51,7 +52,7 @@ export const Navbar = () => {
           </IconMenu>
           <Grid item xs={12} align="center">
             <Box>
-              <NavLink href="/">
+              <NavLink to="/">
                 <img
                   src="https://i.ibb.co/7JGHhKm/image.png"
                   alt="logo"
@@ -95,16 +96,16 @@ export const Navbar = () => {
         }}
       >
         <NavButton>
-          <NavLink href="/movies">CATEGORIES</NavLink>
+          <NavLink to="/movies">CATEGORIES</NavLink>
         </NavButton>
         <NavButton>
-          <NavLink href="/top100">THE TOP 100</NavLink>
+          <NavLink to="/top100">THE TOP 100</NavLink>
         </NavButton>
         <NavButton>
-          <NavLink href="/about">ABOUT</NavLink>
+          <NavLink to="/about">ABOUT</NavLink>
         </NavButton>
         <NavButton>
-          <NavLink href="/contact-us">CONTACT US</NavLink>
+          <NavLink to="/contact-us">CONTACT US</NavLink>
         </NavButton>
       </Grid>
     </StyledAppBar>
