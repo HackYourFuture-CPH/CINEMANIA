@@ -1,6 +1,6 @@
 import React from 'react';
-
-import { Box, IconButton, Link, Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
+import { Box, IconButton, Typography } from '@mui/material';
 
 import styled from '@emotion/styled';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
@@ -59,7 +59,7 @@ const RoundCarousel = ({ carouselData }) => {
           <Slider {...settings} ref={slider}>
             {carouselData?.map((item) => (
               <Box key={item.id}>
-                <Link href={`/movies/${item.id}`} underline="none">
+                <Link to={`/movies/${item.id}`} underline="none">
                   <CarouselImg
                     component="img"
                     src={item.backdrop_URL}
