@@ -31,7 +31,7 @@ const settings = {
 };
 
 export const NewArrivalsCarousel = () => {
-  const [newArrivals] = useNewArrivals();
+  const [newArrivals, error] = useNewArrivals();
   const sliderRef = useRef();
 
   const handleSliderPrev = () => {
@@ -47,45 +47,51 @@ export const NewArrivalsCarousel = () => {
       <Box display="flex" justifyContent="flex-start">
         <MostPopularText>NEW ARRIVALS</MostPopularText>
       </Box>
-      <CarouselWrapper>
-        <IconButton onClick={handleSliderPrev}>
-          <LeftArrow />
-        </IconButton>
-        <SliderWrapper>
-          <SliderMain {...settings} ref={sliderRef}>
-            {newArrivals.map((movie) => (
-              <StyledLink
-                rel="noopener noreferrer"
-                key={`slide-${movie.id}`}
-                href={`/movies/${movie.id}`}
-              >
-                <SlideBox>
-                  <CarouselImg
-                    component="img"
-                    src={movie.image_location}
-                    alt={movie.title}
-                  />
-                  <TextBox>
-                    <TitleTypography variant="h4" component="div">
-                      {movie.title}
-                    </TitleTypography>
-                    <DescriptionTypography variant="h5">
-                      {movie.description}
-                    </DescriptionTypography>
-                    <DescriptionTypography>Read more...</DescriptionTypography>
-                    <MyButton key={`button-${movie.id}`} variant="outlined">
-                      {movie.category_name}
-                    </MyButton>
-                  </TextBox>
-                </SlideBox>
-              </StyledLink>
-            ))}
-          </SliderMain>
-        </SliderWrapper>
-        <IconButton onClick={handleSliderNext}>
-          <RightArrow />
-        </IconButton>
-      </CarouselWrapper>
+      {error ? (
+        <ErrorMessage>{error.message}</ErrorMessage>
+      ) : (
+        <CarouselWrapper>
+          <IconButton onClick={handleSliderPrev}>
+            <LeftArrow />
+          </IconButton>
+          <SliderWrapper>
+            <SliderMain {...settings} ref={sliderRef}>
+              {newArrivals.map((movie) => (
+                <StyledLink
+                  rel="noopener noreferrer"
+                  key={`slide-${movie.id}`}
+                  href={`/movies/${movie.id}`}
+                >
+                  <SlideBox>
+                    <CarouselImg
+                      component="img"
+                      src={movie.image_location}
+                      alt={movie.title}
+                    />
+                    <TextBox>
+                      <TitleTypography variant="h4" component="div">
+                        {movie.title}
+                      </TitleTypography>
+                      <DescriptionTypography variant="h5">
+                        {movie.description}
+                      </DescriptionTypography>
+                      <DescriptionTypography>
+                        Read more...
+                      </DescriptionTypography>
+                      <MyButton key={`button-${movie.id}`} variant="outlined">
+                        {movie.category_name}
+                      </MyButton>
+                    </TextBox>
+                  </SlideBox>
+                </StyledLink>
+              ))}
+            </SliderMain>
+          </SliderWrapper>
+          <IconButton onClick={handleSliderNext}>
+            <RightArrow />
+          </IconButton>
+        </CarouselWrapper>
+      )}
     </MainContainer>
   );
 };
@@ -205,4 +211,9 @@ const MyButton = styled(Button)`
   line-height: 29px;
   color: #003e2f;
   padding: 1rem 1.5rem;
+`;
+
+const ErrorMessage = styled(Typography)`
+  color: red;
+  margin: 2rem;
 `;
