@@ -16,14 +16,18 @@ import { MovieDetailsLayout } from '../../containers/MovieDetailsLayout/MovieDet
 import styled from '@emotion/styled';
 import { useUserContext } from '../../context/UserContext';
 import { ReviewDialog } from '../ReviewDialog/ReviewDialog';
+import { useNavigate } from 'react-router-dom';
 
 export const BigMovieCard = ({ currentMovie }) => {
   const [open, setOpen] = useState(false);
 
+  const { user } = useUserContext();
+
+  const navigate = useNavigate();
+
   function handleOpenReview(event, value) {
     setOpen((status) => !status);
   }
-  const { user } = useUserContext();
 
   const StyledTypography = styled(Typography)`
     font-family: 'Inter';
@@ -63,7 +67,6 @@ export const BigMovieCard = ({ currentMovie }) => {
       <Card
         sx={{
           bgcolor: 'mainGreen',
-
           display: 'flex',
           flexFlow: 'row wrap',
           alignItems: 'center',
@@ -120,7 +123,7 @@ export const BigMovieCard = ({ currentMovie }) => {
             alignSelf: 'flex-end',
           }}
         >
-          {user && (
+          {user ? (
             <RatingStars
               handleOpenReview={(_event, value) =>
                 handleOpenReview(_event, value)
@@ -129,7 +132,18 @@ export const BigMovieCard = ({ currentMovie }) => {
               ratingText={`Your rating is ${user?.auth?.name}`}
               alignSelf="flex-end"
             />
+          ) : (
+            <MyButton
+              onClick={() => {
+                // eslint-disable-next-line no-alert
+                navigate('/signup');
+              }}
+              sx={{ width: '10rem', alignSelf: 'flex-end' }}
+            >
+              Edit Rating
+            </MyButton>
           )}
+
           <RatingStars
             clickable={false}
             ratingText={
@@ -148,6 +162,7 @@ export const BigMovieCard = ({ currentMovie }) => {
             user={user}
             movieId={currentMovie?.id}
           />
+
           <MovieTitle
             sx={{
               paddingTop: '0.625rem',
@@ -199,7 +214,6 @@ export const BigMovieCard = ({ currentMovie }) => {
             }}
             sx={{
               marginTop: '1rem',
-
               alignSelf: 'flex-end',
             }}
             startIcon={<AddShoppingCartIcon />}
