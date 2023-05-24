@@ -33,6 +33,11 @@ const createUser = async (body) => {
   }
 };
 
+const getUserInformation = (uID) => {
+  return knex('users').select('id').where({ uid: uID });
+};
+
 module.exports = {
   createUser,
+  getUserInformation,
 };
