@@ -37,13 +37,15 @@ export const NewArrivalsCarousel = () => {
   };
 
   if (error) {
-    const isUserActionable = error.isUserActionable || false;
+    let isUserActionable = false;
 
+    if (error.code === 408 || error.code === 401) {
+      isUserActionable = true;
+    }
     if (!isUserActionable) {
       // Error without user action
       return null;
     }
-
     // Error with user action
     return (
       <ErrorMessage>
@@ -54,7 +56,6 @@ export const NewArrivalsCarousel = () => {
       </ErrorMessage>
     );
   }
-
   return (
     <MainContainer maxWidth="false">
       <Box display="flex" justifyContent="flex-start">
