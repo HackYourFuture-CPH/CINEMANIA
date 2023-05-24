@@ -25,7 +25,12 @@ export function ReviewDialog({ initialState, handleClose, currentReview }) {
       <ReviewContent
         sx={{ backgroundColor: 'backgroundDark', color: 'mainGreen' }}
       >
-        <RatingStars rating={formData && formData.rating} />
+        <RatingStars
+          rating={formData && formData.rating}
+          onChange={(e) => {
+            setFormData({ ...formData, rating: e.target.value });
+          }}
+        />
         <DialogContentText sx={{ color: 'mainGreen' }}>
           Please, write your review of the movie
         </DialogContentText>
@@ -50,6 +55,9 @@ export function ReviewDialog({ initialState, handleClose, currentReview }) {
               ? formData.review_text
               : 'Leave your first review about this movie'
           }
+          onChange={(e) => {
+            setFormData({ ...formData, review_text: e.target.value });
+          }}
         />
       </ReviewContent>
       <DialogActions
