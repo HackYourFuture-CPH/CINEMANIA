@@ -1,17 +1,18 @@
 ul.slick-dots {
-  margin: 29px 0;
-  bottom: -70px;
+  margin: 1.75rem 0;
+  bottom: -4.375rem;
 }
 
 .slick-dots li {
   display: block;
   width: 1rem;
   height: 1rem;
-  margin: 39px 9px;
+  margin: 2.5rem 0.5rem;
   border: none;
   border-radius: 25px;
   background-color: #003e2f;
 }
+
 .slick-dots li.slick-active {
   background-color: #00ffc2;
 }
@@ -38,4 +39,17 @@ button.ul {
 div.slick-track {
   display: flex;
   align-items: center;
+}
+
+@media (max-width: 1440px) {
+  .slick-active > div > a > div {
+    height: 28rem;
+  }
+
+  ul.slick-dots {
+    bottom: -3.5rem;
+  }
+  .slick-dots li {
+    margin: 2rem 0.5rem;
+  }
 }

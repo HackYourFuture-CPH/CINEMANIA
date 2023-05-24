@@ -99,8 +99,6 @@ export const NewArrivalsCarousel = () => {
 const MainContainer = styled(Container)`
   margin: 0 0 12.5rem 0;
   padding: 0;
-  height: 100%;
-  width: 100%;
 `;
 
 const MostPopularText = styled(Typography)`
@@ -111,6 +109,10 @@ const MostPopularText = styled(Typography)`
   border-left: 0.3rem solid #ffffff;
   padding-left: 0.8rem;
   margin: 0 0 1.5rem 10rem;
+  @media (max-width: 1440px) {
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+
 `;
 
 const CarouselWrapper = styled(Box)`
@@ -139,11 +141,20 @@ const CarouselImg = styled(Box)`
   width: 20rem;
   height: 29rem;
   margin: 0 0 0 4.75rem;
+  @media (max-width: 1440px) {
+    width: 14rem;
+    height: 24rem;
+    margin: 0 0 0 2.75rem;
+  }
 `;
 
 const SliderWrapper = styled.div`
   height: 37.75rem;
-  width: 117rem;
+  width: 100%;
+  @media (max-width: 1440px) {
+    height: 21.75rem;
+    width: 100%;
+  }
 `;
 
 const SlideBox = styled(Box)`
@@ -163,6 +174,9 @@ const SlideBox = styled(Box)`
     transform: scale(1.02);
     cursor: pointer;
   }
+  @media (max-width: 1440px) {
+    height: 25rem;
+  }
 `;
 
 const TextBox = styled(Box)`
@@ -172,6 +186,10 @@ const TextBox = styled(Box)`
   margin: 0 3.5rem 0 3.75rem;
   display: flex;
   flex-direction: column;
+  @media (max-width: 1440px) {
+    height: 19rem;
+    margin: 0 2.5rem 0 2.75rem;
+  }
 `;
 
 const TitleTypography = styled(Typography)`
@@ -179,6 +197,11 @@ const TitleTypography = styled(Typography)`
   font-size: 40px;
   line-height: 48px;
   margin-bottom: 20px;
+  @media (max-width: 1440px) {
+    font-size: 30px;
+    line-height: 36px;
+    margin-bottom: 10px;
+  }
 `;
 
 const DescriptionTypography = styled(Typography)`
@@ -186,6 +209,11 @@ const DescriptionTypography = styled(Typography)`
   font-size: 30px;
   line-height: 36px;
   margin-bottom: 20px;
+  @media (max-width: 1440px) {
+    font-size: 20px;
+    line-height: 27px;
+    margin-bottom: 10px;
+  }
 `;
 
 const StyledLink = styled(Link)`
@@ -211,6 +239,11 @@ const MyButton = styled(Button)`
   line-height: 29px;
   color: #003e2f;
   padding: 1rem 1.5rem;
+  @media (max-width: 1440px) {
+    font-size: 18px;
+    line-height: 21px;
+    padding: 0.5rem 1rem;
+  }
 `;
 
 const ErrorMessage = styled(Typography)`
