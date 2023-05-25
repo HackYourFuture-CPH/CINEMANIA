@@ -19,7 +19,9 @@ export const MovieDetails = () => {
     (async () => {
       if (movieID && user.uid) {
         try {
-          const response = await fetch(`${apiURL()}/reviews/${movieID}/uid/12`);
+          const response = await fetch(
+            `${apiURL()}/reviews/${movieID}/uid/523`,
+          );
           if (response.ok) {
             const data = await response.json();
 

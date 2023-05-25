@@ -52,7 +52,7 @@ const getReviewByIdUid = async (id, uid) => {
       .select(
         'm.title',
         'm.description',
-        'u.full_name',
+        'u.id as user_id',
         'u.uid',
         'r.id as reviewID',
         'r.movie_id',

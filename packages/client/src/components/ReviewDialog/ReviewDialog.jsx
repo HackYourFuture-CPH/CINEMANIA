@@ -9,14 +9,23 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { Avatar } from '@mui/material';
 import { RatingStars } from '../RatingStars/RatingStars';
 import styled from '@emotion/styled';
+import { apiURL } from '../../apiURL';
 
 export function ReviewDialog({ initialState, handleClose, currentReview }) {
+  let reviewId;
   const [review, setReview] = useState(currentReview);
   const [formData, setFormData] = useState(currentReview);
   useEffect(() => {
     setFormData(currentReview);
     setReview(currentReview);
   }, [currentReview]);
+  formData ? (reviewId = formData.reviewID) : (reviewId = null);
+
+  const deleteReview = async (id) => {
+    await fetch(`${apiURL()}/reviews/${id}`, {
+      method: 'DELETE',
+    });
+  };
 
   return (
     <Dialog open={initialState} onClose={handleClose}>
@@ -92,7 +101,13 @@ export function ReviewDialog({ initialState, handleClose, currentReview }) {
       >
         {review ? (
           <>
-            <Button onClick={handleClose} sx={{ backgroundColor: 'mainGreen' }}>
+            <Button
+              onClick={() => {
+                deleteReview(reviewId);
+                handleClose();
+              }}
+              sx={{ backgroundColor: 'mainGreen' }}
+            >
               Delete review
             </Button>
             <Button onClick={handleClose} sx={{ backgroundColor: 'mainGreen' }}>
