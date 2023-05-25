@@ -12,5 +12,13 @@ router.post('/', async (req, res, next) => {
     next(error);
   }
 });
-
+router.get('/:uid', (req, res) => {
+  const { uid } = req.params;
+  usersController
+    .getUserIdByUid(uid)
+    .then((result) => res.json(result))
+    .catch((error) => {
+      res.status(500).json({ error: error.message });
+    });
+});
 module.exports = router;

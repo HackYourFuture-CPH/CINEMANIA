@@ -11,21 +11,32 @@ import { RatingStars } from '../RatingStars/RatingStars';
 import styled from '@emotion/styled';
 import { apiURL } from '../../apiURL';
 
-export function ReviewDialog({ initialState, handleClose, currentReview }) {
-  let reviewId;
+export function ReviewDialog({
+  initialState,
+  handleClose,
+  currentReview,
+  movieId,
+  currentUserId,
+}) {
   const [review, setReview] = useState(currentReview);
   const [formData, setFormData] = useState(currentReview);
   useEffect(() => {
     setFormData(currentReview);
     setReview(currentReview);
   }, [currentReview]);
-  formData ? (reviewId = formData.reviewID) : (reviewId = null);
+  const postValue = {
+    movie_id: movieId,
+    user_id: currentUserId,
+    rating: formData ? formData.rating : '',
+    review_text: formData ? formData.review_text : '',
+  };
 
   const deleteReview = async (id) => {
     await fetch(`${apiURL()}/reviews/${id}`, {
       method: 'DELETE',
     });
   };
+
   const updateReview = async (id) => {
     const body = formData;
     await fetch(`${apiURL()}/reviews/${id}`, {
@@ -37,6 +48,19 @@ export function ReviewDialog({ initialState, handleClose, currentReview }) {
       },
     });
   };
+
+  const postReview = async () => {
+    const body = postValue;
+    await fetch(`${apiURL()}/reviews/`, {
+      method: 'POST',
+      body: JSON.stringify(body),
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    });
+  };
+
   return (
     <Dialog open={initialState} onClose={handleClose}>
       <ReviewTitle
@@ -113,7 +137,7 @@ export function ReviewDialog({ initialState, handleClose, currentReview }) {
           <>
             <Button
               onClick={() => {
-                deleteReview(reviewId);
+                deleteReview(review.reviewID);
                 handleClose();
               }}
               sx={{ backgroundColor: 'mainGreen' }}
@@ -122,7 +146,7 @@ export function ReviewDialog({ initialState, handleClose, currentReview }) {
             </Button>
             <Button
               onClick={() => {
-                updateReview(reviewId);
+                updateReview(review.reviewID);
               }}
               sx={{ backgroundColor: 'mainGreen' }}
             >
@@ -152,7 +176,13 @@ export function ReviewDialog({ initialState, handleClose, currentReview }) {
             >
               Update review
             </Button>
-            <Button onClick={handleClose} sx={{ backgroundColor: 'mainGreen' }}>
+            <Button
+              onClick={() => {
+                postReview();
+                handleClose();
+              }}
+              sx={{ backgroundColor: 'mainGreen' }}
+            >
               Save review
             </Button>
           </>

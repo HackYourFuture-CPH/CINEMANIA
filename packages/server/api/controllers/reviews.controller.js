@@ -95,10 +95,33 @@ const deleteReview = async (ReviewID) => {
   return knex('reviews').where({ id: ReviewID }).del();
 };
 
+const createReview = async (body) => {
+  try {
+    await knex('reviews').insert({
+      movie_id: body.movie_id,
+      user_id: body.user_id,
+      rating: body.rating,
+      review_text: body.review_text,
+      created_at: moment().format(),
+    });
+
+    return {
+      statusCode: 201,
+      message: 'Review is created successfully',
+    };
+  } catch (error) {
+    return {
+      statusCode: 500,
+      message: error.message,
+    };
+  }
+};
+
 module.exports = {
   getLatestRatedMovies,
   getReviewsOfMovieByID,
   getReviewByIdUid,
   editReview,
   deleteReview,
+  createReview,
 };

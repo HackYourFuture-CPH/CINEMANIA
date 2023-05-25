@@ -16,7 +16,12 @@ import { MovieDetailsLayout } from '../../containers/MovieDetailsLayout/MovieDet
 import styled from '@emotion/styled';
 import { ReviewDialog } from '../ReviewDialog/ReviewDialog';
 
-export const BigMovieCard = ({ currentMovie, currentReview, user }) => {
+export const BigMovieCard = ({
+  currentMovie,
+  currentReview,
+  user,
+  currentUserId,
+}) => {
   const [open, setOpen] = useState(false);
 
   function handleOpenReview(event, value) {
@@ -150,6 +155,7 @@ export const BigMovieCard = ({ currentMovie, currentReview, user }) => {
             handleClose={(_event, value) => handleOpenReview(_event, value)}
             currentReview={currentReview}
             movieId={currentMovie?.id}
+            currentUserId={currentUserId}
           />
           <MovieTitle
             sx={{
