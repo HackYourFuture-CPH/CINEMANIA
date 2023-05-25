@@ -14,8 +14,8 @@ export const Signin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const { signIn } = useUserContext();
+
+  const { signIn, isModalOpen, toggleModal } = useUserContext();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -23,15 +23,15 @@ export const Signin = () => {
     setError('');
     try {
       await signIn(email, password);
-      setIsModalOpen(true);
+      toggleModal();
       setTimeout(() => {
         navigate('/');
       }, 1500);
     } catch (err) {
       setError(err.message);
-      setIsModalOpen(true);
+      toggleModal();
       setTimeout(() => {
-        setIsModalOpen(false);
+        toggleModal();
       }, 1500);
     }
   };
