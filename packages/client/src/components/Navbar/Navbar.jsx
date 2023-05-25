@@ -37,10 +37,10 @@ export const Navbar = () => {
           }}
         >
           <IconMenu>
-            <NavIcon isActive={pathname === '/auth'}>
+            <NavIcon isActive={pathname === '/signin'}>
               <PersonIcon
                 onClick={() => {
-                  navigate('/auth');
+                  navigate('/signin');
                 }}
                 sx={{ borderRight: '2px solid #000000' }}
               />

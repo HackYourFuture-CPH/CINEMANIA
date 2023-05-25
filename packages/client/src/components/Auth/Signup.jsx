@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Container, Typography } from '@mui/material';
+import { Container, Typography, Modal, Box } from '@mui/material';
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { apiURL } from '../../apiURL';
@@ -10,7 +10,7 @@ export const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const { createUser } = useUserContext();
+  const { createUser, isModalOpen, toggleModal } = useUserContext();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -31,19 +31,18 @@ export const Signup = () => {
         }),
       });
 
-      // TODO: Display a modal
-      navigate('/');
+      toggleModal();
+      setTimeout(() => {
+        navigate('/');
+      }, 1500);
     } catch (err) {
-      // error
-      // TODO: Display a modal
-      setError(err.message);
+      setError('Email already in use, please try again.');
+      toggleModal();
+      setTimeout(() => {
+        toggleModal();
+      }, 1500);
     }
   };
-
-  if (error) {
-    // TODO: Display a modal
-    return <div>Error</div>;
-  }
 
   return (
     <Section>
@@ -80,9 +79,18 @@ export const Signup = () => {
           <Button type="submit">Create</Button>
           <Typography>
             Already a member?
-            <Link to="/auth"> Login</Link>
+            <Link to="/signin"> Login</Link>
           </Typography>
         </Form>
+        <Modal open={isModalOpen}>
+          <ModalBox backgroundColor={error ? 'hoverRed' : 'mainGreen'}>
+            {error ? (
+              <Typography variant="h5"> {error}</Typography>
+            ) : (
+              <Typography variant="h5">User created successfully!</Typography>
+            )}
+          </ModalBox>
+        </Modal>
       </Container>
     </Section>
   );
@@ -94,6 +102,17 @@ const Section = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+`;
+
+const ModalBox = styled(Box)`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: ${(props) => props.backgroundColor};
+  border-radius: 0.5rem;
+  box-shadow: 24;
+  padding: 3rem;
 `;
 
 const Form = styled.form`
