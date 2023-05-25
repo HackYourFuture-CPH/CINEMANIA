@@ -6,15 +6,21 @@ import {
   CardMedia,
   Divider,
   Typography,
+  Snackbar,
 } from '@mui/material';
 import React, { useState } from 'react';
 
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import FavoriteIcon from '@mui/icons-material/FavoriteBorder';
+
+import {
+  StyledFavoriteIcon,
+  StyledFavoriteBorderIcon,
+} from '../MovieCard/MovieCard';
 import { RatingStars } from '../RatingStars/RatingStars';
 import { MovieDetailsLayout } from '../../containers/MovieDetailsLayout/MovieDetailsLayout';
 import styled from '@emotion/styled';
 import { ReviewDialog } from '../ReviewDialog/ReviewDialog';
+import { useFavorites } from '../MovieCard/useFavorites';
 
 export const BigMovieCard = ({
   currentMovie,
@@ -23,10 +29,30 @@ export const BigMovieCard = ({
   currentUserId,
 }) => {
   const [open, setOpen] = useState(false);
+  const [favorites, toggleFavorite] = useFavorites([]);
+  const isFavorite = favorites.find(
+    (favoriteMovie) => favoriteMovie.id === currentMovie.id,
+  );
 
   function handleOpenReview(event, value) {
     setOpen((status) => !status);
   }
+
+  const { user } = useUserContext();
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const snackbarPosition = {
+    vertical: 'top',
+    horizontal: 'center',
+  };
+
+  const handleSnackbarOpen = () => {
+    setSnackbarOpen(true);
+  };
+
+  const handleSnackbarClose = () => {
+    setSnackbarOpen(false);
+  };
+
 
   const StyledTypography = styled(Typography)`
     font-family: 'Inter';
@@ -35,10 +61,12 @@ export const BigMovieCard = ({
     font-size: 1.75rem; /* 28px */
     line-height: 2.125rem; /* 34px */
   `;
+
   const StyledBoldTypography = styled(StyledTypography)`
     font-weight: 700;
     width: 8rem;
   `;
+
   const MovieTitle = styled(StyledBoldTypography)`
     width: 39.5rem;
     margin: 5rem 0 0 0;
@@ -50,6 +78,7 @@ export const BigMovieCard = ({
     display: flex;
     flex-direction: row;
   `;
+
   const MyButton = styled(Button)({
     height: '3.125rem',
     fontWeight: 500,
@@ -66,7 +95,6 @@ export const BigMovieCard = ({
       <Card
         sx={{
           bgcolor: 'mainGreen',
-
           display: 'flex',
           flexFlow: 'row wrap',
           alignItems: 'center',
@@ -81,9 +109,7 @@ export const BigMovieCard = ({
             bgcolor: 'white',
             display: 'flex',
             flexDirection: 'column',
-
             justifyContent: 'center',
-
             position: 'relative',
             alignItems: 'center',
             flex: '1 1 300px',
@@ -100,19 +126,15 @@ export const BigMovieCard = ({
             src={currentMovie?.image_location}
             alt="Movie Poster"
           />
-          <FavoriteIcon
-            sx={{
-              color: 'white',
-              backgroundColor: 'black',
-              position: 'absolute',
-              top: '1rem',
-              right: '1rem',
-              width: '2rem',
-              height: '2rem',
-              padding: '0.5rem',
-              zIndex: 1,
-            }}
-          />
+          {isFavorite ? (
+            <StyledFavoriteIcon
+              onClick={() => toggleFavorite(currentMovie, isFavorite)}
+            />
+          ) : (
+            <StyledFavoriteBorderIcon
+              onClick={() => toggleFavorite(currentMovie, isFavorite)}
+            />
+          )}
         </Box>
 
         <CardContent
@@ -203,18 +225,37 @@ export const BigMovieCard = ({
           <MyButton
             variant="outlined"
             onClick={() => {
-              // eslint-disable-next-line no-alert
-              alert('Added to Shopping Cart');
+              if (!user) {
+                handleSnackbarOpen();
+              } else {
+                // eslint-disable-next-line no-alert
+                alert('Added to Shopping Cart');
+              }
             }}
             sx={{
               marginTop: '1rem',
-
               alignSelf: 'flex-end',
             }}
             startIcon={<AddShoppingCartIcon />}
           >
             Add to Cart
           </MyButton>
+          <Snackbar
+            anchorOrigin={snackbarPosition}
+            open={snackbarOpen}
+            autoHideDuration={3000}
+            onClose={handleSnackbarClose}
+            message="You are not logged in"
+            sx={{
+              '.css-dh0nqz-MuiPaper-root-MuiSnackbarContent-root': {
+                backgroundColor: 'hoverRed',
+                fontSize: '20px',
+                position: 'absolute',
+                marginTop: '20rem',
+                paddingLeft: '5rem',
+              },
+            }}
+          />
         </CardContent>
       </Card>
     </MovieDetailsLayout>
