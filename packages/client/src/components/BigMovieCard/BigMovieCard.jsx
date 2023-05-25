@@ -26,9 +26,9 @@ import { useFavorites } from '../MovieCard/useFavorites';
 export const BigMovieCard = ({ currentMovie }) => {
   const [open, setOpen] = useState(false);
   const [favorites, toggleFavorite] = useFavorites([]);
-  const isFavorite = favorites.find(
-    (favoriteMovie) => favoriteMovie.id === currentMovie.id,
-  );
+  const isFavorite = favorites
+    ? favorites.find((favoriteMovie) => favoriteMovie.id === currentMovie.id)
+    : false;
 
   function handleOpenReview(event, value) {
     setOpen((status) => !status);
