@@ -10,8 +10,7 @@ export const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const { createUser } = useUserContext();
+  const { createUser, isModalOpen, toggleModal } = useUserContext();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -32,15 +31,15 @@ export const Signup = () => {
         }),
       });
 
-      setIsModalOpen(true);
+      toggleModal();
       setTimeout(() => {
         navigate('/');
       }, 1500);
     } catch (err) {
       setError('Email already in use, please try again.');
-      setIsModalOpen(true);
+      toggleModal();
       setTimeout(() => {
-        setIsModalOpen(false);
+        toggleModal();
       }, 1500);
     }
   };
