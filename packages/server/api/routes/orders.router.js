@@ -7,11 +7,6 @@ const ordersController = require('../controllers/orders.controller');
 
 router.get('/:id', (req, res) => {
   const userID = req.params.id;
-  const pattern = /^\d+$/;
-
-  if (!userID.match(pattern)) {
-    return res.status('400').send('This user id does not exist.');
-  }
 
   ordersController
     .getOrderIDCreatedStatus(userID)
@@ -19,7 +14,7 @@ router.get('/:id', (req, res) => {
       if (result.length === 0) {
         res
           .status(200)
-          .send("This user doesn't have order with created status pending");
+          .send("This user doesn't have orders with a 'created' status.");
       } else {
         res.json(result);
       }

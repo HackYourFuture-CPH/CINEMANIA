@@ -5,11 +5,11 @@ const router = express.Router({ mergeParams: true });
 // controllers
 const orderItemsController = require('../controllers/orderItems.controller');
 
-router.post('/', (req, res) => {
+router.put('/:orderID/:movieID', (req, res) => {
   orderItemsController
-    .addMovieToCart(req.body)
+    .addMovieToCart(req.params.orderID, req.params.movieID)
     .then((result) => {
-      res.status(201).json(result);
+      res.status(200).json(result);
     })
     .catch((error) => {
       res.status(400).send('Bad request').end();
@@ -42,11 +42,6 @@ router.delete('/:userID/:movieID/:orderID', (req, res) => {
 
 router.get('/:id', (req, res) => {
   const userID = req.params.id;
-  const pattern = /^\d+$/;
-
-  if (!userID.match(pattern)) {
-    return res.status('400').send('This user id does not exist.');
-  }
 
   orderItemsController
     .getOrderItemsByUserId(userID)

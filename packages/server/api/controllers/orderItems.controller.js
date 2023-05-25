@@ -1,18 +1,17 @@
 const knex = require('../../config/db');
 
 // add movie to the cart
-let createdID = 0;
-const addMovieToCart = async (body) => {
+const addMovieToCart = async (orderID, movieID) => {
   await knex('order_items').insert({
-    order_id: body.order_id,
-    movie_id: body.movie_id,
+    order_id: orderID,
+    movie_id: movieID,
   });
 
-  createdID += 1;
   return {
-    id: createdID,
+    order_id: orderID,
+    movie_id: movieID,
     success: true,
-    message: `Movie added to cart with order id ${body.order_id} successfully.`,
+    message: `Movie added to cart with order id ${orderID} successfully.`,
   };
 };
 
@@ -24,7 +23,16 @@ const removeMovieFromCart = (userID, movieID, orderID) => {
     .del();
 };
 
-const getOrderItemsByUserId = (userID) => {
+const getOrderItemsByUserId = async (userID) => {
+  if (!userID.match(/^\d+$/)) {
+    return Promise.reject(new Error('Invalid user ID format'));
+  }
+
+  const user = await knex('users').where('id', userID).first();
+  if (!user) {
+    throw new Error('User not found');
+  }
+
   return knex('order_items')
     .select(
       'order_items.order_id',
