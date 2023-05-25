@@ -26,7 +26,17 @@ export function ReviewDialog({ initialState, handleClose, currentReview }) {
       method: 'DELETE',
     });
   };
-
+  const updateReview = async (id) => {
+    const body = formData;
+    await fetch(`${apiURL()}/reviews/${id}`, {
+      method: 'PATCH',
+      body: JSON.stringify(body),
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    });
+  };
   return (
     <Dialog open={initialState} onClose={handleClose}>
       <ReviewTitle
@@ -110,7 +120,12 @@ export function ReviewDialog({ initialState, handleClose, currentReview }) {
             >
               Delete review
             </Button>
-            <Button onClick={handleClose} sx={{ backgroundColor: 'mainGreen' }}>
+            <Button
+              onClick={() => {
+                updateReview(reviewId);
+              }}
+              sx={{ backgroundColor: 'mainGreen' }}
+            >
               Update review
             </Button>
             <Button
