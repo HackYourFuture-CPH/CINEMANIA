@@ -23,7 +23,11 @@ import { useUserContext } from '../../context/UserContext';
 import { ReviewDialog } from '../ReviewDialog/ReviewDialog';
 import { useFavorites } from '../MovieCard/useFavorites';
 
-export const BigMovieCard = ({ currentMovie, currentReview }) => {
+export const BigMovieCard = ({
+  currentMovie,
+  currentReview,
+  currentUserId,
+}) => {
   const [open, setOpen] = useState(false);
   const [favorites, toggleFavorite] = useFavorites([]);
   const isFavorite = favorites.find(
@@ -33,6 +37,7 @@ export const BigMovieCard = ({ currentMovie, currentReview }) => {
   function handleOpenReview(event, value) {
     setOpen((status) => !status);
   }
+
   const { user } = useUserContext();
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const snackbarPosition = {
@@ -171,6 +176,7 @@ export const BigMovieCard = ({ currentMovie, currentReview }) => {
             handleClose={(_event, value) => handleOpenReview(_event, value)}
             currentReview={currentReview}
             movieId={currentMovie?.id}
+            currentUserId={currentUserId}
           />
           <MovieTitle
             sx={{

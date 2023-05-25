@@ -13,7 +13,20 @@ export const MovieDetails = () => {
   const movieID = useParams().id;
   const [currentMovie, setCurrentMovie] = useState(fallBackMovies[0]);
   const [currentUsersReview, setCurrentUsersReview] = useState(undefined);
+  const [currentUserId, setCurrentUserId] = useState(undefined);
   const { user } = useUserContext();
+
+  useEffect(() => {
+    if (user.uid) {
+      (async () => {
+        const response = await fetch(`${apiURL()}/users/${user.uid}`);
+        const getUser = await response.json();
+        if (getUser) {
+          setCurrentUserId(getUser[0].id);
+        }
+      })();
+    }
+  }, [user.uid]);
 
   useEffect(() => {
     (async () => {
@@ -25,7 +38,7 @@ export const MovieDetails = () => {
           if (response.ok) {
             const data = await response.json();
 
-            if (data.length === 1) {
+            if (data) {
               setCurrentUsersReview(data[0]);
             }
           }
@@ -54,6 +67,7 @@ export const MovieDetails = () => {
       <BigMovieCard
         currentMovie={currentMovie}
         currentReview={currentUsersReview}
+        currentUserId={currentUserId}
         user={user}
       />
       <TopCastDisplay movieID={currentMovie?.id} />
