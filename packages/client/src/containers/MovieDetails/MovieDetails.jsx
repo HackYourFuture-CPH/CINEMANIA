@@ -22,6 +22,10 @@ export const MovieDetails = () => {
       })();
     }
   }, [movieID]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   if (!currentMovie) return;
   return (
     <Container maxWidth="xl" sx={{ gap: '3rem' }}>
