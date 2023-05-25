@@ -18,6 +18,11 @@ const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState({});
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const toggleModal = () => {
+    setIsModalOpen((prevState) => !prevState);
+  };
 
   const createUser = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
@@ -41,8 +46,8 @@ export const UserProvider = ({ children }) => {
   }, []);
 
   const userContextValue = useMemo(
-    () => ({ createUser, user, logOut, signIn }),
-    [user],
+    () => ({ createUser, user, logOut, signIn, toggleModal, isModalOpen }),
+    [user, isModalOpen],
   );
 
   return (
