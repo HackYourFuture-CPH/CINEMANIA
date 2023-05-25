@@ -6,22 +6,40 @@ import { useUserContext } from '../../context/UserContext';
 
 export const useFavorites = (initialFavorites = []) => {
   const [favorites, setFavorites] = useState(initialFavorites);
-  const userId = 1; // placeholder userId
+  const [userId, setUserId] = useState(null);
   const { user } = useUserContext();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const getUserIdByUid = async () => {
+      if (user && user.uid) {
+        try {
+          const response = await fetch(`${apiURL()}/users/${user.uid}`);
+          const data = await response.json();
+          setUserId(data[0].id);
+        } catch (error) {
+          return error.name === 'Something wrong in the operation';
+        }
+      }
+    };
+
+    getUserIdByUid();
+  }, [user]);
 
   useEffect(() => {
     const abortController = new AbortController();
 
     const getFavoriteMovies = async () => {
-      try {
-        const response = await fetch(`${apiURL()}/favorites/${userId}`, {
-          signal: abortController.signal,
-        });
-        const data = await response.json();
-        setFavorites(data);
-      } catch (error) {
-        return error.name === 'this is an aborted error';
+      if (user && user.uid) {
+        try {
+          const response = await fetch(`${apiURL()}/favorites/${userId}`, {
+            signal: abortController.signal,
+          });
+          const data = await response.json();
+          setFavorites(data);
+        } catch (error) {
+          return error.name === 'this is an aborted error';
+        }
       }
     };
 
