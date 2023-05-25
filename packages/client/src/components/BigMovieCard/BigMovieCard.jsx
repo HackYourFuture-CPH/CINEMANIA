@@ -10,15 +10,24 @@ import {
 import React, { useState } from 'react';
 
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import FavoriteIcon from '@mui/icons-material/FavoriteBorder';
+
+import {
+  StyledFavoriteIcon,
+  StyledFavoriteBorderIcon,
+} from '../MovieCard/MovieCard';
 import { RatingStars } from '../RatingStars/RatingStars';
 import { MovieDetailsLayout } from '../../containers/MovieDetailsLayout/MovieDetailsLayout';
 import styled from '@emotion/styled';
 import { useUserContext } from '../../context/UserContext';
 import { ReviewDialog } from '../ReviewDialog/ReviewDialog';
+import { useFavorites } from '../MovieCard/useFavorites';
 
 export const BigMovieCard = ({ currentMovie }) => {
   const [open, setOpen] = useState(false);
+  const [favorites, toggleFavorite] = useFavorites([]);
+  const isFavorite = favorites.find(
+    (favoriteMovie) => favoriteMovie.id === currentMovie.id,
+  );
 
   function handleOpenReview(event, value) {
     setOpen((status) => !status);
@@ -97,19 +106,15 @@ export const BigMovieCard = ({ currentMovie }) => {
             src={currentMovie?.image_location}
             alt="Movie Poster"
           />
-          <FavoriteIcon
-            sx={{
-              color: 'white',
-              backgroundColor: 'black',
-              position: 'absolute',
-              top: '1rem',
-              right: '1rem',
-              width: '2rem',
-              height: '2rem',
-              padding: '0.5rem',
-              zIndex: 1,
-            }}
-          />
+          {isFavorite ? (
+            <StyledFavoriteIcon
+              onClick={() => toggleFavorite(currentMovie, isFavorite)}
+            />
+          ) : (
+            <StyledFavoriteBorderIcon
+              onClick={() => toggleFavorite(currentMovie, isFavorite)}
+            />
+          )}
         </Box>
 
         <CardContent
