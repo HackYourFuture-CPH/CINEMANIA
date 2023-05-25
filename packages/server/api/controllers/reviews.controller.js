@@ -54,7 +54,7 @@ const getReviewByIdUid = async (id, uid) => {
         'm.description',
         'u.full_name',
         'u.uid',
-        'r.id as reviewId',
+        'r.id as reviewID',
         'r.movie_id',
         'r.rating',
         'r.review_text',
@@ -85,6 +85,7 @@ const editReview = async (ReviewID, updateReview) => {
   }
 
   return knex('reviews').where({ id: ReviewID }).update({
+    rating: updateReview.rating,
     review_text: updateReview.review_text,
     created_at: moment().format(),
   });
