@@ -147,6 +147,7 @@ export function ReviewDialog({
             <Button
               onClick={() => {
                 updateReview(review.reviewID);
+                handleClose();
               }}
               sx={{ backgroundColor: 'mainGreen' }}
             >
