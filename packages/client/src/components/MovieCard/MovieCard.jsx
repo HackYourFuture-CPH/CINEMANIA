@@ -1,5 +1,12 @@
-import * as React from 'react';
-import { Card, CardMedia, Typography, Rating, Box } from '@mui/material';
+import React, { useState } from 'react';
+import {
+  Card,
+  CardMedia,
+  Typography,
+  Rating,
+  Box,
+  Snackbar,
+} from '@mui/material';
 import styled from '@emotion/styled';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
@@ -10,20 +17,36 @@ const BasicRating = ({ rating }) => {
 };
 
 export function MovieCard({ movie, favorites, toggleFavorite }) {
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState('');
+
   const isFavorite = favorites.find(
     (favoriteMovie) => favoriteMovie.id === movie.id,
   );
+
+  const handleSnackbarOpen = (message) => {
+    setSnackbarMessage(message);
+    setSnackbarOpen(true);
+  };
+
+  const handleSnackbarClose = () => {
+    setSnackbarOpen(false);
+  };
 
   return (
     <StyledCard>
       <Box sx={{ position: 'relative' }}>
         {isFavorite ? (
           <StyledFavoriteIcon
-            onClick={() => toggleFavorite(movie, isFavorite)}
+            onClick={() =>
+              toggleFavorite(movie, isFavorite, handleSnackbarOpen('removed'))
+            }
           />
         ) : (
           <StyledFavoriteBorderIcon
-            onClick={() => toggleFavorite(movie, isFavorite)}
+            onClick={() =>
+              toggleFavorite(movie, isFavorite, handleSnackbarOpen('added'))
+            }
           />
         )}
       </Box>
@@ -42,6 +65,28 @@ export function MovieCard({ movie, favorites, toggleFavorite }) {
         </StyledTypographyReviewText>
       </StyledLink>
       <BasicRating rating={movie.rating} />
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={1500}
+        onClose={handleSnackbarClose}
+        message={
+          snackbarMessage === 'added' ? (
+            <Box>
+              <StyledSnackbarTitle color="mainGreen">
+                {movie.title}
+              </StyledSnackbarTitle>
+              is added to Favorites
+            </Box>
+          ) : (
+            <Box>
+              <StyledSnackbarTitle color="hoverRed">
+                {movie.title}
+              </StyledSnackbarTitle>
+              is removed from Favorites
+            </Box>
+          )
+        }
+      />
     </StyledCard>
   );
 }
@@ -134,4 +179,8 @@ const StyledTypographyReviewText = styled(Typography)`
 
 const StyledLink = styled(Link)`
   text-decoration: none;
+`;
+
+const StyledSnackbarTitle = styled(Box)`
+  font-weight: 800;
 `;
