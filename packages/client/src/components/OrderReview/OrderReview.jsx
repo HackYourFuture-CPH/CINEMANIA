@@ -7,7 +7,6 @@ import {
   Button,
   Checkbox,
 } from '@mui/material';
-// import { apiURL } from '../../apiURL';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import styled from '@emotion/styled';
