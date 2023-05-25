@@ -2,7 +2,7 @@
   {
     "id": 2,
     "title": "The Shawshank Redemption",
-    "description": "Couldn't get the movie from the server, please try again later. Meanwhile showing you our favourite movie",
+    "description": "Couldn't get the movie from the server, please try again later. Meanwhile showing you our favourite movie.",
     "movie_year": 1994,
     "image_location": "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg",
     "price": "80.00",
