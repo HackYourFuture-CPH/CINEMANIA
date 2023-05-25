@@ -50,6 +50,7 @@ const getReviewByIdUid = async (id, uid) => {
   try {
     const userReview = knex('reviews as r')
       .select(
+        'r.id',
         'm.title',
         'm.description',
         'u.full_name',

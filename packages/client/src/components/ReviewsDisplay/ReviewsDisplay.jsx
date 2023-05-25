@@ -1,51 +1,68 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Box,
-  List,
-  ListItem,
-  Divider,
-  ListItemAvatar,
-  Avatar,
-  Typography,
-  Button,
-  CircularProgress,
-} from '@mui/material';
+import { Box, List, Divider, Button, CircularProgress } from '@mui/material';
 
-import AddCircleIcon from '@mui/icons-material/AddCircle';
-import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
-import ThumbUpIcon from '@mui/icons-material/ThumbUp';
-import { RatingStars } from '../RatingStars/RatingStars';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import { MovieDetailsLayout } from '../../containers/MovieDetailsLayout/MovieDetailsLayout';
 import styled from '@emotion/styled';
 import { apiURL } from '../../apiURL';
+import { ReviewItem } from './ReviewItem';
+import { HeaderReview } from './HeaderReview';
+import { useUserContext } from '../../context/UserContext';
 
 export function ReviewsDisplay({ movieID }) {
+  const { user } = useUserContext();
   const [reviews, setReviews] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [showAllReviews, setShowAllReviews] = useState(false);
+  const [userReview, setUserReview] = useState(null);
 
   useEffect(() => {
     if (!movieID) return;
     const fetchReviewsList = async () => {
       setIsLoading(true);
-      if (movieID) {
-        try {
-          const response = await fetch(`${apiURL()}/reviews/movie/${movieID}`);
-          const data = await response.json();
-          setReviews(data);
-        } catch (error) {
-          setIsLoading(false);
-        }
+      try {
+        const response = await fetch(`${apiURL()}/reviews/movie/${movieID}`);
+        const data = await response.json();
+        setReviews(data);
+      } catch (error) {
+        setIsLoading(false);
       }
       setIsLoading(false);
     };
     fetchReviewsList();
   }, [movieID]);
+
+  useEffect(() => {
+    if (!movieID || !user) return;
+    const fetchUserReview = async () => {
+      try {
+        const userReviewResponse = await fetch(
+          `${apiURL()}/reviews/${movieID}/uid/${user.uid}`,
+        );
+        const userReviewData = await userReviewResponse.json();
+        if (Array.isArray(userReviewData)) {
+          setUserReview(userReviewData);
+        } else {
+          setUserReview([]);
+        }
+      } catch (error) {
+        setUserReview([]);
+      }
+    };
+    fetchUserReview();
+  }, [movieID, user]);
+
   const handleShowAllReviews = () => {
     setShowAllReviews((previousAllReviewsState) => !previousAllReviewsState);
   };
+
+  const filteredReviews = userReview
+    ? reviews.filter(
+        (review) =>
+          !userReview.some((userReviewItem) => userReviewItem.id === review.id),
+      )
+    : reviews;
   if (isLoading) {
     return (
       <MovieDetailsLayout>
@@ -56,90 +73,21 @@ export function ReviewsDisplay({ movieID }) {
   return (
     <MovieDetailsLayout>
       <List>
-        <HeaderBox>
-          <StyledTypography>REVIEWS</StyledTypography>
-          <Box
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-            }}
-          >
-            <AddCircleIcon
-              sx={{
-                color: '#00FFC2',
-              }}
-            />
-            <StyledAddReviewTypography>Add a review</StyledAddReviewTypography>
-          </Box>
-        </HeaderBox>
+        {user && Array.isArray(userReview) && userReview.length > 0 && (
+          <>
+            <HeaderReview title="Your Reviews" />
+            {userReview.map((review) => (
+              <ReviewItem key={review.id} review={review} canEdit={true} />
+            ))}
+          </>
+        )}
+        <HeaderReview title="Reviews" />
         <StyledDivider />
-        {reviews.slice(0, showAllReviews ? reviews.length : 3).map((review) => (
-          <Box key={review.id}>
-            <ListItem alignItems="center">
-              <ListItemAvatar>
-                <StyledAvatar alt={review.full_name} />
-              </ListItemAvatar>
-              <Box
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                }}
-              >
-                <Box>
-                  <Typography
-                    sx={{
-                      fontSize: 32,
-                      marginRight: '34px',
-                    }}
-                    color="#FFFFFF"
-                  >
-                    {review.full_name}
-                  </Typography>
-                  <Typography color="#FFFFFF">
-                    {new Date(review.created_at).toISOString().split('T')[0]}
-                  </Typography>
-                </Box>
-                <RatingStars
-                  averageRating={review.rating}
-                  numberOfReviews={5}
-                  color="#00FFC2"
-                  ratingText={false}
-                />
-                <Typography
-                  sx={{
-                    fontSize: '20px',
-                    color: '#A4A4A4',
-                  }}
-                >
-                  {review.rating}/5
-                </Typography>
-              </Box>
-            </ListItem>
-            <Box
-              sx={{
-                paddingLeft: 5,
-                display: 'inline-block',
-              }}
-            >
-              <ReviewTextTypography>{review.review_text}</ReviewTextTypography>
-            </Box>
-            <LikesBox>
-              <ThumbUpIcon sx={{ paddingRight: 2, color: '#00FFC2' }} />
-              <Typography color="#A4A4A4" sx={{ paddingRight: '49px' }}>
-                45 likes
-              </Typography>
-              <ThumbDownOffAltIcon
-                sx={{
-                  paddingRight: 2,
-                  color: '#00FFC2',
-                }}
-              />
-
-              <Typography color="#A4A4A4"> 12 likes</Typography>
-            </LikesBox>
-            <StyledDivider />
-          </Box>
-        ))}
+        {filteredReviews
+          .slice(0, showAllReviews ? filteredReviews.length : 3)
+          .map((review) => (
+            <ReviewItem key={review.id} review={review} canEdit={false} />
+          ))}
         <Box
           sx={{
             width: '100%',
@@ -162,57 +110,11 @@ export function ReviewsDisplay({ movieID }) {
   );
 }
 
-const HeaderBox = styled(Box)({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  marginBottom: '39px',
-});
-
-const StyledTypography = styled(Typography)({
-  height: 30,
-  fontSize: 32,
-  fontWeight: 800,
-  borderLeft: '4px solid #FFFFFF',
-  padding: '4px',
-  display: 'flex',
-  alignItems: 'center',
-  color: '#FFFFFF',
-  paddingLeft: '10px',
-});
-
-const StyledAddReviewTypography = styled(Typography)({
-  height: 30,
-  fontSize: 25,
-  fontWeight: 800,
-  padding: '4px',
-  color: '#00FFC2',
-});
-
 const StyledDivider = styled(Divider)({
   marginLeft: 0,
   borderBottomWidth: 1,
   marginBottom: '49px',
   borderColor: '#00FFC2',
-});
-
-const StyledAvatar = styled(Avatar)({
-  width: '95px',
-  height: '95px',
-  marginRight: '45px',
-});
-
-const ReviewTextTypography = styled(Typography)({
-  fontSize: '20px',
-  marginTop: '30px',
-  color: '#FFFFFF',
-});
-
-const LikesBox = styled(Box)({
-  display: 'flex',
-  alignItems: 'center',
-  paddingTop: '34px',
-  margin: '0 0 49px 40px',
 });
 
 const StyledButton = styled(Button)({
