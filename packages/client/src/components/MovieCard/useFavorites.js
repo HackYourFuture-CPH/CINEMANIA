@@ -6,22 +6,23 @@ import { useUserContext } from '../../context/UserContext';
 
 export const useFavorites = (initialFavorites = []) => {
   const [favorites, setFavorites] = useState(initialFavorites);
-  const userId = 1; // placeholder userId
-  const { user } = useUserContext();
+  const { userId } = useUserContext();
   const navigate = useNavigate();
 
   useEffect(() => {
     const abortController = new AbortController();
 
     const getFavoriteMovies = async () => {
-      try {
-        const response = await fetch(`${apiURL()}/favorites/${userId}`, {
-          signal: abortController.signal,
-        });
-        const data = await response.json();
-        setFavorites(data);
-      } catch (error) {
-        return error.name === 'this is an aborted error';
+      if (userId) {
+        try {
+          const response = await fetch(`${apiURL()}/favorites/${userId}`, {
+            signal: abortController.signal,
+          });
+          const data = await response.json();
+          setFavorites(data);
+        } catch (error) {
+          return error.name === 'this is an aborted error';
+        }
       }
     };
 
@@ -30,12 +31,12 @@ export const useFavorites = (initialFavorites = []) => {
     return () => {
       abortController.abort();
     };
-  }, [user, navigate, userId]);
+  }, [navigate, userId]);
 
   const toggleFavorite = (item, isFavorites) => {
     if (isFavorites) {
       handleRemoveFavorite(item.id, item, favorites, setFavorites, userId);
-    } else if (!user) {
+    } else if (!userId) {
       navigate('/signin');
     } else {
       handleAddFavorite(item.id, item, favorites, setFavorites, userId);
