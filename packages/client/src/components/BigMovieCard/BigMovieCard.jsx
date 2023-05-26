@@ -27,6 +27,7 @@ export const BigMovieCard = ({
   currentMovie,
   currentReview,
   currentUserId,
+  setCurrentUsersReview,
 }) => {
   const [open, setOpen] = useState(false);
   const [favorites, toggleFavorite] = useFavorites([]);
@@ -177,6 +178,7 @@ export const BigMovieCard = ({
             currentReview={currentReview}
             movieId={currentMovie?.id}
             currentUserId={currentUserId}
+            setCurrentUsersReview={setCurrentUsersReview}
           />
           <MovieTitle
             sx={{

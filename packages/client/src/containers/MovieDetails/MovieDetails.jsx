@@ -67,6 +67,7 @@ export const MovieDetails = () => {
       <BigMovieCard
         currentMovie={currentMovie}
         currentReview={currentUsersReview}
+        setCurrentUsersReview={setCurrentUsersReview}
         currentUserId={currentUserId}
         user={user}
       />

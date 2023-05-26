@@ -17,6 +17,7 @@ export function ReviewDialog({
   currentReview,
   movieId,
   currentUserId,
+  setCurrentUsersReview,
 }) {
   const [review, setReview] = useState(currentReview);
   const [formData, setFormData] = useState(currentReview);
@@ -35,10 +36,11 @@ export function ReviewDialog({
     await fetch(`${apiURL()}/reviews/${id}`, {
       method: 'DELETE',
     });
+    setCurrentUsersReview({ ...formData, rating: 0, review_text: '' });
   };
 
   const updateReview = async (id) => {
-    const body = formData;
+    const body = { ...formData };
     await fetch(`${apiURL()}/reviews/${id}`, {
       method: 'PATCH',
       body: JSON.stringify(body),
@@ -47,6 +49,7 @@ export function ReviewDialog({
         'Content-Type': 'application/json',
       },
     });
+    setCurrentUsersReview(body);
   };
 
   const postReview = async () => {
@@ -59,6 +62,7 @@ export function ReviewDialog({
         'Content-Type': 'application/json',
       },
     });
+    setCurrentUsersReview(body);
   };
 
   return (
