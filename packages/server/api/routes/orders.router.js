@@ -32,8 +32,10 @@ router.post('/', (req, res) => {
       res.status(201).json(result);
     })
     .catch((error) => {
-      res.status(400).send('Bad request').end();
-      res.status(500).json({ error: error.message });
+      res
+        .status(400)
+        .json({ message: 'Bad request', error: error.message })
+        .end();
     });
 });
 

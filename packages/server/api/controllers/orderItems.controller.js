@@ -1,4 +1,5 @@
 const knex = require('../../config/db');
+const HttpError = require('../lib/utils/http-error');
 
 // add movie to the cart
 const addMovieToCart = async (orderID, movieID) => {
@@ -30,7 +31,7 @@ const getOrderItemsByUserId = async (userID) => {
 
   const user = await knex('users').where('id', userID).first();
   if (!user) {
-    throw new Error('User not found');
+    throw new HttpError('User not found', 404);
   }
 
   return knex('order_items')
