@@ -15,13 +15,30 @@ export const EllipseCarousel = ({ popularMovies }) => {
     slidesToScroll: 1,
     swipeToSlide: true,
     arrows: false,
-  };
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          dots: true,
+        },
+      },
 
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1.6,
+          slidesToScroll: 1,
+          dots: true,
+        },
+      },
+    ],
+  };
   return (
-    <Container maxWidth="false">
-      <Box display="flex" justifyContent="flex-start">
-        <MostPopularText>MOST POPULAR</MostPopularText>
-      </Box>
+    <MainContainer maxWidth="xl">
+      <TitleBox>
+        <Title>MOST POPULAR</Title>
+      </TitleBox>
       <CarouselWrapper>
         <IconBtn onClick={() => slider?.current?.slickPrev()}>
           <LeftArrow />
@@ -29,11 +46,13 @@ export const EllipseCarousel = ({ popularMovies }) => {
         <SliderWrapper>
           <Slider {...settings} ref={slider}>
             {popularMovies?.map((movie) => (
-              <Box key={movie.id}>
-                <Link to={`/movies/${movie.id}`}>
-                  <CarouselImg src={movie.backdrop_URL} alt={movie.title} />
-                </Link>
-              </Box>
+              <Link key={movie.id} to={`/movies/${movie.id}`}>
+                <CarouselImg
+                  component="img"
+                  src={movie.backdrop_URL}
+                  alt={movie.title}
+                />
+              </Link>
             ))}
           </Slider>
         </SliderWrapper>
@@ -41,24 +60,36 @@ export const EllipseCarousel = ({ popularMovies }) => {
           <RightArrow />
         </IconBtn>
       </CarouselWrapper>
-    </Container>
+    </MainContainer>
   );
 };
 
-const MostPopularText = styled(Typography)`
+const MainContainer = styled(Container)`
+  margin: 0;
+  padding: 0;
+`;
+
+const TitleBox = styled(Box)`
+  margin: 0 0 2.75rem 3rem;
+`;
+
+const Title = styled(Typography)`
   color: white;
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: 800;
   font-family: Inter, sans-serif;
   border-left: 0.3rem solid #ffffff;
   padding-left: 0.8rem;
-  margin: 0 0 1.5rem 6rem;
-  line-height: 1.8rem;
+  @media (max-width: 1440px) {
+    font-size: 1.5rem;
+    line-height: 1.5rem;
 `;
 
 const CarouselWrapper = styled(Box)`
+  width: 100%;
   display: flex;
   justify-content: center;
+  align-items: center;
 `;
 
 const IconBtn = styled(IconButton)`
@@ -67,6 +98,7 @@ const IconBtn = styled(IconButton)`
     background-color: transparent;
   }
 `;
+
 const RightArrow = styled(ArrowForwardIosIcon)`
   color: #00ffc2;
   font-size: 2rem;
@@ -79,18 +111,27 @@ const LeftArrow = styled(ArrowBackIosIcon)`
   font-weight: bolder;
 `;
 
-const CarouselImg = styled.img`
+const CarouselImg = styled(Box)`
   width: 25.75rem;
   height: 14rem;
+  object-fit: cover;
+  object-position: center;
   border-radius: 7rem;
   margin: auto auto;
   &:hover {
     transform: scale(1.02);
     cursor: pointer;
   }
+  @media (max-width: 1440px) {
+    margin: 0 0 0 2.75rem;
+  }
+  @media (max-width: 1280px) {
+    width: 18rem;
+    height: 11rem;
+  }
 `;
 
-const SliderWrapper = styled.div`
+const SliderWrapper = styled(Box)`
   height: 15rem;
-  width: 80rem;
+  width: 100%;
 `;

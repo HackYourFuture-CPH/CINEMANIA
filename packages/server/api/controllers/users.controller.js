@@ -1,5 +1,6 @@
 const knex = require('../../config/db');
 
+// POST NEW USER AND TOKENS BALANCE
 const createUser = async (body) => {
   try {
     const existingUser = await knex('users')
@@ -18,6 +19,11 @@ const createUser = async (body) => {
       full_name: body.full_name,
       email: body.email,
       uid: body.uid,
+    });
+
+    await knex('tokens').insert({
+      user_id: body.uid,
+      amount: 1000,
     });
 
     return {

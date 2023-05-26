@@ -65,6 +65,6 @@ const LatestRating = styled(Typography)`
   color: #ffffff;
   text-align: center;
   margin-bottom: 3rem;
-  margin-top: 3rem;
+  margin-top: 6rem;
   font-family: Inter;
 `;
