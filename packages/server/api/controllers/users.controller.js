@@ -1,6 +1,5 @@
 const knex = require('../../config/db');
 
-// POST
 const createUser = async (body) => {
   try {
     const existingUser = await knex('users')
@@ -33,8 +32,8 @@ const createUser = async (body) => {
   }
 };
 
-const getUserInformation = (uID) => {
-  return knex('users').select('id').where({ uid: uID });
+const getUserInformation = (uid) => {
+  return knex('users').select('id').where({ uid });
 };
 
 module.exports = {

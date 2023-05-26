@@ -20,7 +20,7 @@ router.get('/:id', (req, res) => {
     .getUserInformation(uid)
     .then((result) => {
       if (result.length === 0) {
-        res.status(404).send('Invalid user  id');
+        res.status(404).send("couldn't find user with this id");
       } else {
         res.json(result);
       }
