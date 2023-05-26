@@ -40,11 +40,9 @@ export function ReviewsDisplay({ movieID }) {
         const userReviewResponse = await fetch(
           `${apiURL()}/reviews/${movieID}/uid/${user.uid}`,
         );
-        const userReviewData = await userReviewResponse.json();
-        if (Array.isArray(userReviewData)) {
+        if (userReviewResponse.ok) {
+          const userReviewData = await userReviewResponse.json();
           setUserReview(userReviewData);
-        } else {
-          setUserReview([]);
         }
       } catch (error) {
         setUserReview([]);
@@ -73,7 +71,7 @@ export function ReviewsDisplay({ movieID }) {
   return (
     <MovieDetailsLayout>
       <List>
-        {user && Array.isArray(userReview) && userReview.length > 0 && (
+        {user && userReview && (
           <>
             <HeaderReview title="Your Reviews" />
             {userReview.map((review) => (
