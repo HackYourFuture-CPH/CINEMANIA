@@ -14,6 +14,7 @@ import {
 import React from 'react';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { OrderContext } from '../../context/orderContext';
+import { useUserContext } from '../../context/UserContext';
 
 const NavLink = (props) => {
   const { pathname } = useLocation();
@@ -28,6 +29,15 @@ export const Navbar = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const { movieInCart } = React.useContext(OrderContext);
+  const { userId, toggleLoginModal } = useUserContext();
+
+  const onFavoriteClick = () => {
+    if (!userId) {
+      toggleLoginModal();
+      return;
+    }
+    navigate('/favorites');
+  };
 
   return (
     <StyledAppBar>
@@ -76,11 +86,7 @@ export const Navbar = () => {
               )}
             </NavIcon>
             <NavIcon isActive={pathname === '/favorites'}>
-              <FavoriteBorderIcon
-                onClick={() => {
-                  navigate('/favorites');
-                }}
-              />
+              <FavoriteBorderIcon onClick={onFavoriteClick} />
             </NavIcon>
           </IconMenu>
         </Toolbar>
