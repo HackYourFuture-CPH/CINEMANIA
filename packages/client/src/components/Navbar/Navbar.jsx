@@ -31,32 +31,35 @@ const NavLink = (props) => {
 export const Navbar = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const { user, logOut } = useUserContext();
+  const { user, logOut, userId } = useUserContext();
   const [amount, setAmount] = useState(0);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+  const { movieInCart } = React.useContext(OrderContext);
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const { movieInCart } = React.useContext(OrderContext);
 
   useEffect(() => {
-    const getAmount = async () => {
-      if (user && user.uid) {
+    const accountBalance = async () => {
+      if (userId) {
         try {
-          const response = await fetch(`${apiURL()}/tokens/${user.uid}`);
+          const response = await fetch(`${apiURL()}/tokens/${userId}`);
           const data = await response.json();
-          setAmount(data);
+          setAmount(data[0].amount);
         } catch (error) {
           throw new Error('something went wrong');
         }
       }
     };
-    getAmount();
-  }, [user]);
+    if (userId) {
+      accountBalance();
+    }
+  }, [user, userId]);
 
   return (
     <StyledAppBar>
@@ -100,7 +103,7 @@ export const Navbar = () => {
                   </Box>
                   <AccountBalance>
                     <Typography variant="body2" sx={{ color: 'white' }}>
-                      Balance: {amount.amount}
+                      Balance: {amount}
                     </Typography>
                   </AccountBalance>
                 </Box>

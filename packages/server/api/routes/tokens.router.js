@@ -6,13 +6,13 @@ const router = express.Router({ mergeParams: true });
 const tokensController = require('../controllers/tokens.controller');
 
 router.get('/:id', (req, res) => {
-  const userID = req.params.id;
+  const userId = req.params.id;
 
   tokensController
-    .getOriginalAmount(userID)
+    .getAccountBalance(userId)
     .then((result) => {
       if (result.length === 0) {
-        res.status(404).send('This user id does\t have any favorite movies');
+        res.status(200).send('No balance remaining.');
       } else {
         res.json(result);
       }
