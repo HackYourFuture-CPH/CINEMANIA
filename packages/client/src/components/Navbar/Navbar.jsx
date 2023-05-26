@@ -2,28 +2,30 @@ import styled from '@emotion/styled';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import PersonIcon from '@mui/icons-material/Person';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import React, { useEffect, useState } from 'react';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
+import { useUserContext } from '../../context/UserContext';
+import { OrderContext } from '../../context/orderContext';
+import { apiURL } from '../../apiURL';
 import {
   AppBar,
   Box,
   Button,
   Grid,
-  Link,
   MenuItem,
   Toolbar,
   Avatar,
   Menu,
   Typography,
 } from '@mui/material';
-import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { useUserContext } from '../../context/UserContext';
-import { apiURL } from '../../apiURL';
 
 const NavLink = (props) => {
   const { pathname } = useLocation();
-  const isActive = pathname === props.href;
+  const isActive = pathname === props.to; // Updated prop name from "href" to "to"
   const linkColor = isActive ? 'red' : 'inherit';
-  return <Link underline="none" color={linkColor} {...props} />;
+  return (
+    <Link style={{ textDecoration: 'none', color: linkColor }} {...props} />
+  );
 };
 
 export const Navbar = () => {
@@ -39,6 +41,7 @@ export const Navbar = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const { movieInCart } = React.useContext(OrderContext);
 
   useEffect(() => {
     const getAmount = async () => {
@@ -55,8 +58,6 @@ export const Navbar = () => {
     getAmount();
   }, [user]);
 
-  /*eslint-disable */
-  console.log(user);
   return (
     <StyledAppBar>
       <Box>
@@ -117,7 +118,7 @@ export const Navbar = () => {
           </IconMenu>
           <Grid item xs={12} align="center">
             <Box>
-              <NavLink href="/">
+              <NavLink to="/">
                 <img
                   src="https://i.ibb.co/7JGHhKm/image.png"
                   alt="logo"
@@ -128,12 +129,17 @@ export const Navbar = () => {
             </Box>
           </Grid>
           <IconMenu>
-            <NavIcon isActive={pathname === '/shopping'}>
+            <NavIcon isActive={pathname === '/order'}>
               <ShoppingCartIcon
                 onClick={() => {
-                  navigate('/shopping');
+                  navigate('/order');
                 }}
               />
+              {movieInCart.length > 0 && (
+                <CountTypography variant="body">
+                  {movieInCart.length}
+                </CountTypography>
+              )}
             </NavIcon>
             <NavIcon isActive={pathname === '/favorites'}>
               <FavoriteBorderIcon
@@ -156,16 +162,16 @@ export const Navbar = () => {
         }}
       >
         <NavButton>
-          <NavLink href="/movies">CATEGORIES</NavLink>
+          <NavLink to="/movies">CATEGORIES</NavLink>
         </NavButton>
         <NavButton>
-          <NavLink href="/top100">THE TOP 100</NavLink>
+          <NavLink to="/top100">THE TOP 100</NavLink>
         </NavButton>
         <NavButton>
-          <NavLink href="/about">ABOUT</NavLink>
+          <NavLink to="/about">ABOUT</NavLink>
         </NavButton>
         <NavButton>
-          <NavLink href="/contact-us">CONTACT US</NavLink>
+          <NavLink to="/contact-us">CONTACT US</NavLink>
         </NavButton>
       </Grid>
     </StyledAppBar>
@@ -210,4 +216,12 @@ const AccountBalance = styled(Box)`
   padding: 0.7rem;
   border-radius: 0.5rem;
   margin-left: 0.2rem;
+`;
+
+const CountTypography = styled(Typography)`
+  font-size: 1.2rem;
+  color: red;
+  overflow: hidden;
+  position: relative;
+  bottom: 20px;
 `;
