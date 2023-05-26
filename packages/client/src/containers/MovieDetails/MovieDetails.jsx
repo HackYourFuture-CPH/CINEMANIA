@@ -37,9 +37,19 @@ export const MovieDetails = () => {
           );
           if (response.ok) {
             const data = await response.json();
-
             if (data) {
-              setCurrentUsersReview(data[0]);
+              if (!currentUsersReview) {
+                setCurrentUsersReview(data[0]);
+              } else if (
+                !(
+                  Object.values(currentUsersReview).includes(data[0].rating) &&
+                  Object.values(currentUsersReview).includes(
+                    data[0].review_text,
+                  )
+                )
+              ) {
+                setCurrentUsersReview(data[0]);
+              }
             }
           }
         } catch (error) {
@@ -47,7 +57,7 @@ export const MovieDetails = () => {
         }
       }
     })();
-  }, [movieID, user]);
+  }, [movieID, user, currentUsersReview]);
 
   useEffect(() => {
     if (movieID) {

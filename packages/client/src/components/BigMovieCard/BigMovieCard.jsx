@@ -152,7 +152,7 @@ export const BigMovieCard = ({
               }
               clickable={true}
               ratingText={
-                currentReview
+                currentReview && currentReview?.rating
                   ? `Your rating is ${currentReview?.rating}`
                   : 'Leave your review'
               }

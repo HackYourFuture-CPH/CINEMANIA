@@ -36,7 +36,7 @@ export function ReviewDialog({
     await fetch(`${apiURL()}/reviews/${id}`, {
       method: 'DELETE',
     });
-    setCurrentUsersReview({ ...formData, rating: 0, review_text: '' });
+    setCurrentUsersReview({});
   };
 
   const updateReview = async (id) => {
@@ -137,11 +137,11 @@ export function ReviewDialog({
           display: 'flex',
         }}
       >
-        {review ? (
+        {currentReview ? (
           <>
             <Button
               onClick={() => {
-                deleteReview(review.reviewID);
+                deleteReview(formData.reviewID);
                 handleClose();
               }}
               sx={{ backgroundColor: 'mainGreen' }}
@@ -150,7 +150,7 @@ export function ReviewDialog({
             </Button>
             <Button
               onClick={() => {
-                updateReview(review.reviewID);
+                updateReview(formData.reviewID);
                 handleClose();
               }}
               sx={{ backgroundColor: 'mainGreen' }}
