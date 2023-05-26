@@ -20,11 +20,16 @@ import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import { MovieDetailsLayout } from '../../containers/MovieDetailsLayout/MovieDetailsLayout';
 import styled from '@emotion/styled';
 import { apiURL } from '../../apiURL';
+import Alert from '@mui/material/Alert';
 
 export function ReviewsDisplay({ movieID }) {
   const [reviews, setReviews] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [showAllReviews, setShowAllReviews] = useState(false);
+
+  const alertStyle = {
+    backgroundColor: 'transparent',
+  };
 
   useEffect(() => {
     if (!movieID) return;
@@ -55,7 +60,7 @@ export function ReviewsDisplay({ movieID }) {
   }
   return (
     <MovieDetailsLayout>
-      <List>
+      <List sx={{ width: '100%' }}>
         <HeaderBox>
           <StyledTypography>REVIEWS</StyledTypography>
           <Box
@@ -69,10 +74,27 @@ export function ReviewsDisplay({ movieID }) {
                 color: '#00FFC2',
               }}
             />
-            <StyledAddReviewTypography>Add a review</StyledAddReviewTypography>
+            {reviews.length > 0 ? (
+              <StyledAddReviewTypography>
+                Add a review
+              </StyledAddReviewTypography>
+            ) : (
+              <StyledAddReviewTypography>
+                Be the first to review
+              </StyledAddReviewTypography>
+            )}
           </Box>
         </HeaderBox>
         <StyledDivider />
+
+        {reviews.length < 1 && (
+          <Alert variant="filled" style={alertStyle}>
+            <Typography variant="h2" align="center" color="#00FFC2">
+              No Reviews to display!{' '}
+            </Typography>
+          </Alert>
+        )}
+
         {reviews.slice(0, showAllReviews ? reviews.length : 3).map((review) => (
           <Box key={review.id}>
             <ListItem alignItems="center">
@@ -140,6 +162,7 @@ export function ReviewsDisplay({ movieID }) {
             <StyledDivider />
           </Box>
         ))}
+
         <Box
           sx={{
             width: '100%',
@@ -148,14 +171,16 @@ export function ReviewsDisplay({ movieID }) {
             alignItems: 'center',
           }}
         >
-          <StyledButton onClick={handleShowAllReviews}>
-            {showAllReviews ? 'Less reviews...' : 'More reviews...'}
-            {showAllReviews ? (
-              <StyledArrowDropUpIcon />
-            ) : (
-              <StyledArrowDropDownIcon />
-            )}
-          </StyledButton>
+          {reviews.length > 0 && (
+            <StyledButton onClick={handleShowAllReviews}>
+              {showAllReviews ? 'Less reviews...' : 'More reviews...'}
+              {showAllReviews ? (
+                <StyledArrowDropUpIcon />
+              ) : (
+                <StyledArrowDropDownIcon />
+              )}
+            </StyledButton>
+          )}
         </Box>
       </List>
     </MovieDetailsLayout>
@@ -164,7 +189,7 @@ export function ReviewsDisplay({ movieID }) {
 
 const HeaderBox = styled(Box)({
   display: 'flex',
-  alignItems: 'center',
+  flexDirection: 'row',
   justifyContent: 'space-between',
   marginBottom: '39px',
 });
