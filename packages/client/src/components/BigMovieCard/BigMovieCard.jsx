@@ -9,7 +9,6 @@ import {
   Snackbar,
 } from '@mui/material';
 import React, { useState } from 'react';
-
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 import {
@@ -22,6 +21,7 @@ import styled from '@emotion/styled';
 import { useUserContext } from '../../context/UserContext';
 import { ReviewDialog } from '../ReviewDialog/ReviewDialog';
 import { useFavorites } from '../MovieCard/useFavorites';
+import { OrderContext } from '../../context/orderContext';
 
 export const BigMovieCard = ({ currentMovie }) => {
   const [open, setOpen] = useState(false);
@@ -29,6 +29,7 @@ export const BigMovieCard = ({ currentMovie }) => {
   const isFavorite = favorites.find(
     (favoriteMovie) => favoriteMovie.id === currentMovie.id,
   );
+  const { addMovieToCart } = React.useContext(OrderContext);
 
   function handleOpenReview(event, value) {
     setOpen((status) => !status);
@@ -216,8 +217,7 @@ export const BigMovieCard = ({ currentMovie }) => {
               if (!user) {
                 handleSnackbarOpen();
               } else {
-                // eslint-disable-next-line no-alert
-                alert('Added to Shopping Cart');
+                addMovieToCart(currentMovie);
               }
             }}
             sx={{
