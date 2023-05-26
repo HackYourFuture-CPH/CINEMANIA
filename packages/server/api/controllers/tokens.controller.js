@@ -1,4 +1,5 @@
 const knex = require('../../config/db');
+const HttpError = require('../lib/utils/http-error');
 
 const getAccountBalance = async (userId) => {
   if (!userId.match(/^\d+$/)) {
@@ -7,7 +8,7 @@ const getAccountBalance = async (userId) => {
 
   const user = await knex('users').where('id', userId).first();
   if (!user) {
-    throw new Error('User not found');
+    throw new HttpError('User not found', 404);
   }
 
   return knex('tokens')
