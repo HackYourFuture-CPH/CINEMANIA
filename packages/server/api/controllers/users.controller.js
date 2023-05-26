@@ -1,5 +1,5 @@
 const knex = require('../../config/db');
-const HttpError = require('../lib/utils/http-error');
+
 // POST NEW USER AND TOKENS BALANCE
 const createUser = async (body) => {
   try {
@@ -37,19 +37,12 @@ const createUser = async (body) => {
     };
   }
 };
-// Get
-const getUserIdByUid = async (uid) => {
-  if (!uid) {
-    throw new HttpError("The user hasn't logged in", 400);
-  }
-  try {
-    const user = await knex('users').select('id', 'uid').where('uid', uid);
-    return user;
-  } catch (error) {
-    throw new HttpError(error.message, 500);
-  }
+
+const getUserInformation = (uid) => {
+  return knex('users').select('id').where({ uid });
 };
+
 module.exports = {
   createUser,
-  getUserIdByUid,
+  getUserInformation,
 };
