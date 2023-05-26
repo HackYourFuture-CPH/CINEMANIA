@@ -100,17 +100,13 @@ const addReview = async (movieId, userId, rating, reviewText) => {
     throw new HttpError('User ID should be a number', 400);
   }
 
-  try {
-    await knex('reviews').insert({
-      movie_id: movieId,
-      user_id: userId,
-      rating,
-      review_text: reviewText,
-      created_at: moment().format(),
-    });
-  } catch (error) {
-    throw new HttpError(error.message, 500);
-  }
+  return knex('reviews').insert({
+    movie_id: movieId,
+    user_id: userId,
+    rating,
+    review_text: reviewText,
+    created_at: moment().format(),
+  });
 };
 
 module.exports = {
