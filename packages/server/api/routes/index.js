@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 
 const movies = require('./movies.router');
-
+const tokens = require('./tokens.router');
 const crew = require('./crew.router');
 const views = require('./views.router');
 const categories = require('./categories.router');
@@ -39,6 +39,7 @@ router.use('/reviews', reviews);
 router.use('/views', views);
 router.use('/crew', crew);
 router.use('/favorites', favorites);
+router.use('/tokens', tokens);
 
 module.exports = router;
 router.use('/categories', categories);

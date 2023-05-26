@@ -36,7 +36,7 @@ export const useFavorites = (initialFavorites = []) => {
     if (isFavorites) {
       handleRemoveFavorite(item.id, item, favorites, setFavorites, userId);
     } else if (!user) {
-      navigate('/auth');
+      navigate('/signin');
     } else {
       handleAddFavorite(item.id, item, favorites, setFavorites, userId);
     }

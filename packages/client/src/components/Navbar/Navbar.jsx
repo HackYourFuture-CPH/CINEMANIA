@@ -10,9 +10,14 @@ import {
   Link,
   MenuItem,
   Toolbar,
+  Avatar,
+  Menu,
+  Typography,
 } from '@mui/material';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useUserContext } from '../../context/UserContext';
+import { apiURL } from '../../apiURL';
 
 const NavLink = (props) => {
   const { pathname } = useLocation();
@@ -24,7 +29,34 @@ const NavLink = (props) => {
 export const Navbar = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
+  const { user, logOut } = useUserContext();
+  const [amount, setAmount] = useState(0);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
+  useEffect(() => {
+    const getAmount = async () => {
+      if (user && user.uid) {
+        try {
+          const response = await fetch(`${apiURL()}/tokens/${user.uid}`);
+          const data = await response.json();
+          setAmount(data);
+        } catch (error) {
+          throw new Error('something went wrong');
+        }
+      }
+    };
+    getAmount();
+  }, [user]);
+
+  /*eslint-disable */
+  console.log(user);
   return (
     <StyledAppBar>
       <Box>
@@ -37,14 +69,51 @@ export const Navbar = () => {
           }}
         >
           <IconMenu>
-            <NavIcon isActive={pathname === '/signin'}>
-              <PersonIcon
-                onClick={() => {
-                  navigate('/signin');
-                }}
-                sx={{ borderRight: '2px solid #000000' }}
-              />
-            </NavIcon>
+            {user ? (
+              <NavIcon isActive={pathname === '/signin'}>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
+                >
+                  <Box>
+                    <Avatar
+                      onClick={handleClick}
+                      alt={`${user.email}`}
+                      src="/static/images/avatar/2.jpg"
+                      sx={{ background: 'black' }}
+                    />
+                    <Menu
+                      id="basic-menu"
+                      anchorEl={anchorEl}
+                      open={open}
+                      onClose={handleClose}
+                      MenuListProps={{
+                        'aria-labelledby': 'basic-button',
+                      }}
+                    >
+                      <MenuItem onClick={logOut}>Log out</MenuItem>
+                    </Menu>
+                  </Box>
+                  <AccountBalance>
+                    <Typography variant="body2" sx={{ color: 'white' }}>
+                      Balance: {amount.amount}
+                    </Typography>
+                  </AccountBalance>
+                </Box>
+              </NavIcon>
+            ) : (
+              <NavIcon isActive={pathname === '/signin'}>
+                <PersonIcon
+                  onClick={() => {
+                    navigate('/signin');
+                  }}
+                  sx={{ borderRight: '2px solid #000000' }}
+                />
+              </NavIcon>
+            )}
           </IconMenu>
           <Grid item xs={12} align="center">
             <Box>
@@ -115,10 +184,6 @@ const NavIcon = styled.button`
   color: ${(props) => (props.isActive ? 'red' : 'black')};
   cursor: pointer;
   border: none;
-  width: '2rem';
-  height: '2rem';
-  border-right: '2px solid #000000';
-  padding-right: '.5rem';
   outline: none;
   &:hover {
     color: ${(props) => props.theme.palette.hoverRed};
@@ -138,4 +203,11 @@ const NavButton = styled(Button)`
   &:hover {
     color: ${(props) => props.theme.palette.hoverRed};
   }
+`;
+
+const AccountBalance = styled(Box)`
+  background: black;
+  padding: 0.7rem;
+  border-radius: 0.5rem;
+  margin-left: 0.2rem;
 `;
