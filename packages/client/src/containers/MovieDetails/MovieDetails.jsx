@@ -40,6 +40,8 @@ export const MovieDetails = () => {
 
             if (data) {
               setCurrentUsersReview(data[0]);
+            } else {
+              setCurrentUsersReview({ rating: 0, review_text: '' });
             }
           }
         } catch (error) {
@@ -52,14 +54,27 @@ export const MovieDetails = () => {
   useEffect(() => {
     if (movieID) {
       (async () => {
-        const response = await fetch(`${apiURL()}/movies/${movieID}/details`);
-        const movie = await response.json();
-        if (movie) {
-          setCurrentMovie(movie);
+        try {
+          const response = await fetch(`${apiURL()}/movies/${movieID}/details`);
+          const movie = await response.json();
+          if (movie) {
+            setCurrentMovie(movie);
+          }
+        } catch (error) {
+          setCurrentMovie({
+            ...fallBackMovies[0],
+            description: fallBackMovies[0].description.concat(
+              ` Here what happened: ${error.message}`,
+            ),
+          });
         }
       })();
     }
   }, [movieID]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   if (!currentMovie) return;
 
   return (

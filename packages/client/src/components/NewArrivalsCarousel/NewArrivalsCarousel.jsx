@@ -22,6 +22,38 @@ const settings = {
   speed: 500,
   autoplaySpeed: 3000,
   cssEase: 'linear',
+  responsive: [
+    {
+      breakpoint: 1280,
+      settings: {
+        centerPadding: '200px',
+      },
+    },
+    {
+      breakpoint: 1024,
+      settings: {
+        centerPadding: '150px',
+      },
+    },
+    {
+      breakpoint: 768,
+      settings: {
+        centerPadding: '100px',
+      },
+    },
+    {
+      breakpoint: 600,
+      settings: {
+        centerPadding: '50px',
+      },
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        centerPadding: '25px',
+      },
+    },
+  ],
 };
 
 export const NewArrivalsCarousel = () => {
@@ -54,9 +86,9 @@ export const NewArrivalsCarousel = () => {
 
   return (
     <MainContainer maxWidth="false">
-      <Box display="flex" justifyContent="flex-start">
-        <MostPopularText>NEW ARRIVALS</MostPopularText>
-      </Box>
+      <NewArrivalsTitleBox>
+        <NewArrivalsTitle>NEW ARRIVALS</NewArrivalsTitle>
+      </NewArrivalsTitleBox>
       <CarouselWrapper>
         <IconButton onClick={handleSliderPrev}>
           <LeftArrow />
@@ -97,28 +129,32 @@ export const NewArrivalsCarousel = () => {
 };
 
 const MainContainer = styled(Container)`
-  margin: 0 0 12.5rem 0;
+  margin: 10rem 0 12.25rem 0;
   padding: 0;
 `;
 
-const MostPopularText = styled(Typography)`
+const NewArrivalsTitleBox = styled(Box)`
+  margin: 0 0 2.75rem 24rem;
+`;
+
+const NewArrivalsTitle = styled(Typography)`
   color: white;
   font-size: 2rem;
-  font-weight: 700;
+  font-weight: 800;
   font-family: Inter, sans-serif;
   border-left: 0.3rem solid #ffffff;
   padding-left: 0.8rem;
-  margin: 0 0 1.5rem 10rem;
   @media (max-width: 1440px) {
     font-size: 1.5rem;
     line-height: 1.5rem;
-
+  }
 `;
 
 const CarouselWrapper = styled(Box)`
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
 `;
 
 const RightArrow = styled(ArrowForwardIosIcon)`
@@ -138,22 +174,16 @@ const LeftArrow = styled(ArrowBackIosIcon)`
 `;
 
 const CarouselImg = styled(Box)`
-  width: 20rem;
-  height: 29rem;
+  width: 29%;
+  height: 77%;
   margin: 0 0 0 4.75rem;
   @media (max-width: 1440px) {
-    width: 14rem;
-    height: 21.75rem;
     margin: 0 0 0 2.75rem;
   }
 `;
 
 const SliderWrapper = styled(Box)`
-  height: 37.75rem;
   width: 100%;
-  @media (max-width: 1440px) {
-    height: 28.75rem;
-  }
 `;
 
 const SlideBox = styled(Box)`
@@ -182,10 +212,9 @@ const SlideBox = styled(Box)`
 
 const TextBox = styled(Box)`
   color: black;
-  width: 100%;
-  height: 26.25rem;
+  width: 70%;
+  height: 78%;
   margin: 0 3.5rem 0 3.75rem;
-  display: flex;
   flex-direction: column;
   @media (max-width: 1440px) {
     height: 21.75rem;
@@ -221,7 +250,6 @@ const StyledLink = styled(Link)`
 
 const SliderMain = styled(Slider)`
   width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
 `;
