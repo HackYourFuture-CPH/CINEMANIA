@@ -35,8 +35,10 @@ export const MovieDetails = () => {
           const response = await fetch(
             `${apiURL()}/reviews/${movieID}/uid/${user.uid}`,
           );
+
           if (response.ok) {
             const data = await response.json();
+
             if (data) {
               if (!currentUsersReview) {
                 setCurrentUsersReview(data[0]);
@@ -45,7 +47,8 @@ export const MovieDetails = () => {
                   Object.values(currentUsersReview).includes(data[0].rating) &&
                   Object.values(currentUsersReview).includes(
                     data[0].review_text,
-                  )
+                  ) &&
+                  Object.values(currentUsersReview).includes(data[0].reviewID)
                 )
               ) {
                 setCurrentUsersReview(data[0]);

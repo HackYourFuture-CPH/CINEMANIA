@@ -19,11 +19,9 @@ export function ReviewDialog({
   currentUserId,
   setCurrentUsersReview,
 }) {
-  const [review, setReview] = useState(currentReview);
   const [formData, setFormData] = useState(currentReview);
   useEffect(() => {
     setFormData(currentReview);
-    setReview(currentReview);
   }, [currentReview]);
   const postValue = {
     movie_id: movieId,
@@ -36,7 +34,7 @@ export function ReviewDialog({
     await fetch(`${apiURL()}/reviews/${id}`, {
       method: 'DELETE',
     });
-    setCurrentUsersReview({});
+    setCurrentUsersReview(undefined);
   };
 
   const updateReview = async (id) => {
@@ -141,7 +139,7 @@ export function ReviewDialog({
           <>
             <Button
               onClick={() => {
-                deleteReview(formData.reviewID);
+                deleteReview(currentReview.reviewID);
                 handleClose();
               }}
               sx={{ backgroundColor: 'mainGreen' }}
@@ -150,7 +148,7 @@ export function ReviewDialog({
             </Button>
             <Button
               onClick={() => {
-                updateReview(formData.reviewID);
+                updateReview(currentReview.reviewID);
                 handleClose();
               }}
               sx={{ backgroundColor: 'mainGreen' }}
