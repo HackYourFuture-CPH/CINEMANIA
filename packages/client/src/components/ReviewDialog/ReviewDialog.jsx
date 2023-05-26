@@ -19,12 +19,11 @@ export function ReviewDialog({
   currentUserId,
   setCurrentUsersReview,
 }) {
-  const [review, setReview] = useState(currentReview);
   const [formData, setFormData] = useState(currentReview);
   useEffect(() => {
     setFormData(currentReview);
-    setReview(currentReview);
   }, [currentReview]);
+
   const postValue = {
     movie_id: movieId,
     user_id: currentUserId,
@@ -84,51 +83,31 @@ export function ReviewDialog({
         <DialogContentText sx={{ color: 'mainGreen' }}>
           Please, write your review of the movie
         </DialogContentText>
-        {formData ? (
-          <ReviewContentText
-            autoFocus
-            margin="dense"
-            id="name"
-            label="review"
-            multiline
-            rows={4}
-            fullWidth
-            variant="filled"
-            InputLabelProps={{
-              sx: {
-                color: 'mainGreen',
-                textTransform: 'capitalize',
-              },
-            }}
-            InputProps={{ sx: { color: 'mainGreen' } }}
-            defaultValue={formData.review_text}
-            onChange={(e) => {
-              setFormData({ ...formData, review_text: e.target.value });
-            }}
-          />
-        ) : (
-          <ReviewContentText
-            autoFocus
-            margin="dense"
-            id="name"
-            label="review"
-            multiline
-            rows={4}
-            fullWidth
-            variant="filled"
-            InputLabelProps={{
-              sx: {
-                color: 'mainGreen',
-                textTransform: 'capitalize',
-              },
-            }}
-            placeholder="Leave your first review about this movie"
-            InputProps={{ sx: { color: 'mainGreen' } }}
-            onChange={(e) => {
-              setFormData({ ...formData, review_text: e.target.value });
-            }}
-          />
-        )}
+
+        <ReviewContentText
+          autoFocus
+          margin="dense"
+          id="name"
+          label="review"
+          multiline
+          rows={4}
+          fullWidth
+          variant="filled"
+          InputLabelProps={{
+            sx: {
+              color: 'mainGreen',
+              textTransform: 'capitalize',
+            },
+          }}
+          InputProps={{ sx: { color: 'mainGreen' } }}
+          placeholder={
+            formData ? '' : 'Leave your first review about this movie'
+          }
+          defaultValue={formData ? formData.review_text : ''}
+          onChange={(e) => {
+            setFormData({ ...formData, review_text: e.target.value });
+          }}
+        />
       </ReviewContent>
       <DialogActions
         sx={{
@@ -137,61 +116,39 @@ export function ReviewDialog({
           display: 'flex',
         }}
       >
-        {review ? (
-          <>
-            <Button
-              onClick={() => {
-                deleteReview(review.reviewID);
-                handleClose();
-              }}
-              sx={{ backgroundColor: 'mainGreen' }}
-            >
-              Delete review
-            </Button>
-            <Button
-              onClick={() => {
-                updateReview(review.reviewID);
-                handleClose();
-              }}
-              sx={{ backgroundColor: 'mainGreen' }}
-            >
-              Update review
-            </Button>
-            <Button
-              onClick={handleClose}
-              sx={{ backgroundColor: 'mainGreen' }}
-              disabled
-            >
-              Save review
-            </Button>
-          </>
-        ) : (
-          <>
-            <Button
-              onClick={handleClose}
-              sx={{ backgroundColor: 'mainGreen' }}
-              disabled
-            >
-              Delete review
-            </Button>
-            <Button
-              onClick={handleClose}
-              sx={{ backgroundColor: 'mainGreen' }}
-              disabled
-            >
-              Update review
-            </Button>
-            <Button
-              onClick={() => {
-                postReview();
-                handleClose();
-              }}
-              sx={{ backgroundColor: 'mainGreen' }}
-            >
-              Save review
-            </Button>
-          </>
-        )}
+        <Button
+          onClick={() => {
+            deleteReview(currentReview.reviewID);
+            window.location.reload(true);
+            handleClose();
+          }}
+          sx={{ backgroundColor: 'mainGreen' }}
+          disabled={!currentReview}
+        >
+          Delete review
+        </Button>
+        <Button
+          onClick={() => {
+            updateReview(currentReview.reviewID);
+            window.location.reload(true);
+            handleClose();
+          }}
+          sx={{ backgroundColor: 'mainGreen' }}
+          disabled={!currentReview}
+        >
+          Update review
+        </Button>
+        <Button
+          onClick={() => {
+            postReview();
+
+            handleClose();
+          }}
+          sx={{ backgroundColor: 'mainGreen' }}
+          disabled={currentReview}
+        >
+          Save review
+        </Button>
       </DialogActions>
     </Dialog>
   );
