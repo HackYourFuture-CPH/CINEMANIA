@@ -13,8 +13,8 @@ exports.up = function (knex) {
     })
     .createTable('tokens', (table) => {
       table.increments();
-      table.string('user_id').notNullable().unique();
-      table.foreign('user_id').references('uid');
+      table.integer('user_id').unsigned();
+      table.foreign('user_id').references('users.id');
       table.decimal('amount');
       table
         .datetime('last_updated', { precision: 6 })

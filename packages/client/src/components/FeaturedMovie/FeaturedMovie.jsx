@@ -34,38 +34,49 @@ export const FeaturedMovie = () => {
   }
 
   return (
-    <CenteredBox>
-      <ImageShadow>
-        <Image
-          component="img"
-          alt={featuredMovie.title}
-          src={featuredMovie.backdrop_URL}
-        />
-      </ImageShadow>
-      <TitleWrapper>
-        <StyledTypography component="div">
-          Ready for {featuredMovie.title}?
-        </StyledTypography>
-        <TrailerWrapper>
-          <IconButton
-            sx={{ backgroundColor: '#00FFC2' }}
-            aria-label="play/pause"
-          >
-            <PlayArrowIcon sx={{ width: '2rem', height: '2rem' }} />
-          </IconButton>
-          <StyledTypographyLink component="div">
-            Watch the trailer
-          </StyledTypographyLink>
-        </TrailerWrapper>
-      </TitleWrapper>
-    </CenteredBox>
+    <Section>
+      <CenteredBox>
+        <ImageShadow>
+          <Image
+            component="img"
+            alt={featuredMovie.title}
+            src={featuredMovie.backdrop_URL}
+          />
+        </ImageShadow>
+        <TitleWrapper>
+          <StyledTypography component="div">
+            Ready for {featuredMovie.title}?
+          </StyledTypography>
+          <TrailerWrapper>
+            <IconButton
+              sx={{ backgroundColor: '#00FFC2' }}
+              aria-label="play/pause"
+            >
+              <PlayArrowIcon sx={{ width: '2rem', height: '2rem' }} />
+            </IconButton>
+            <StyledTypographyLink component="div">
+              Watch the trailer
+            </StyledTypographyLink>
+          </TrailerWrapper>
+        </TitleWrapper>
+      </CenteredBox>
+    </Section>
   );
 };
 
+const Section = styled.section`
+  top: 15rem;
+  height: 85vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
 const Image = styled(Box)`
-  width: 100%;
-  height: 100%;
-  border-radius: 25rem;
+  width: 78.375rem;
+  height: 37.031rem;
+  border-radius: 18.5rem;
   z-index: -100;
   position: relative;
 `;
@@ -76,11 +87,10 @@ const ImageShadow = styled(Box)`
     rgba(0, 0, 0, 0.8) 0%,
     rgba(0, 0, 0, 0) 51.56%
   );
-  border-radius: 25rem;
+  border-radius: 18.5rem;
 `;
 
 const TitleWrapper = styled(Box)`
-  width: 100%;
   position: absolute;
   display: flex;
   text-align: center;
@@ -92,14 +102,10 @@ const TitleWrapper = styled(Box)`
 `;
 
 const StyledTypography = styled(Typography)`
-  font-size: 200%;
+  font-size: 3.375rem;
   font-weight: 300;
   line-height: 4.08rem;
   max-width: 61rem;
-  @media (max-width: 640px) {
-    font-size: 1.5rem;
-    line-height: 1.5rem;
-  }
 `;
 
 const StyledTypographyLink = styled(Typography)`
@@ -119,10 +125,8 @@ const TrailerWrapper = styled(Box)`
 `;
 
 const CenteredBox = styled(Box)`
-  position: relative;
+  position: absolute;
   display: flex;
   flex-direction: column;
   align-items: center;
-  top: 4.25rem;
-  margin-bottom: 4.25rem;
 `;
