@@ -20,14 +20,17 @@ import styled from '@emotion/styled';
 import { ReviewDialog } from '../ReviewDialog/ReviewDialog';
 import { useFavorites } from '../MovieCard/useFavorites';
 import { OrderContext } from '../../context/orderContext';
+import { PopUpModulMenu } from '../OrderReview/PopUpModulMenu';
 
 export const BigMovieCard = ({ currentMovie, currentReview, user }) => {
   const [open, setOpen] = useState(false);
   const [favorites, toggleFavorite] = useFavorites([]);
+  const [triggerPopUp, setTriggerPopUp] = useState(false);
 
-  const isFavorite = favorites
-    ? favorites.find((favoriteMovie) => favoriteMovie.id === currentMovie.id)
-    : false;
+  const isFavorite =
+    currentMovie && favorites
+      ? favorites.find((favoriteMovie) => favoriteMovie.id === currentMovie.id)
+      : false;
   const { addMovieToCart } = React.useContext(OrderContext);
 
   function handleOpenReview(event, value) {
@@ -154,18 +157,20 @@ export const BigMovieCard = ({ currentMovie, currentReview, user }) => {
               rating={currentReview?.rating}
             />
           )}
-          <RatingStars
-            clickable={false}
-            ratingText={
-              currentMovie.rating
-                ? `${currentMovie.rating} based on ${
-                    currentMovie.number_of_ratings
-                  } review${currentMovie.number_of_ratings === 1 ? '' : 's'}`
-                : 'No rating given'
-            }
-            rating={currentMovie.rating}
-            alignSelf="flex-end"
-          />
+          {currentMovie && (
+            <RatingStars
+              clickable={false}
+              ratingText={
+                currentMovie.rating
+                  ? `${currentMovie.rating} based on ${
+                      currentMovie.number_of_ratings
+                    } review${currentMovie.number_of_ratings === 1 ? '' : 's'}`
+                  : 'No rating given'
+              }
+              rating={currentMovie.rating}
+              alignSelf="flex-end"
+            />
+          )}
           <ReviewDialog
             initialState={open}
             handleClose={(_event, value) => handleOpenReview(_event, value)}
@@ -222,6 +227,7 @@ export const BigMovieCard = ({ currentMovie, currentReview, user }) => {
                 handleSnackbarOpen();
               } else {
                 addMovieToCart(currentMovie);
+                setTriggerPopUp(true);
               }
             }}
             sx={{
@@ -250,6 +256,11 @@ export const BigMovieCard = ({ currentMovie, currentReview, user }) => {
           />
         </CardContent>
       </Card>
+      <PopUpModulMenu
+        trigger={triggerPopUp}
+        currentMovie={currentMovie}
+        setTrigger={setTriggerPopUp}
+      />
     </MovieDetailsLayout>
   );
 };
