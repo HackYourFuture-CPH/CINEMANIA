@@ -7,7 +7,7 @@ import styled from '@emotion/styled';
 export const HeaderReview = ({ title, review }) => {
   return (
     <HeaderBox>
-      <StyledTypography>REVIEWS</StyledTypography>
+      <StyledTypography>{title}</StyledTypography>
       <Box
         sx={{
           display: 'flex',
