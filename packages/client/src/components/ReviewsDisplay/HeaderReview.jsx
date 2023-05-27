@@ -4,10 +4,10 @@ import { Box, Typography } from '@mui/material';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import styled from '@emotion/styled';
 
-export const HeaderReview = ({ title }) => {
+export const HeaderReview = ({ title, review }) => {
   return (
     <HeaderBox>
-      <StyledTypography>{title}</StyledTypography>
+      <StyledTypography>REVIEWS</StyledTypography>
       <Box
         sx={{
           display: 'flex',
@@ -19,7 +19,13 @@ export const HeaderReview = ({ title }) => {
             color: '#00FFC2',
           }}
         />
-        <StyledAddReviewTypography>Add a review</StyledAddReviewTypography>
+        {review.length > 0 ? (
+          <StyledAddReviewTypography>Add a review</StyledAddReviewTypography>
+        ) : (
+          <StyledAddReviewTypography>
+            Be the first to review
+          </StyledAddReviewTypography>
+        )}
       </Box>
     </HeaderBox>
   );

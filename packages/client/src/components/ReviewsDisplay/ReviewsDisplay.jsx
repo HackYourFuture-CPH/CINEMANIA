@@ -1,5 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Box, List, Divider, Button, CircularProgress } from '@mui/material';
+import {
+  Box,
+  List,
+  Divider,
+  Button,
+  CircularProgress,
+  Alert,
+  Typography,
+} from '@mui/material';
 
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
@@ -16,6 +24,9 @@ export function ReviewsDisplay({ movieID }) {
   const [isLoading, setIsLoading] = useState(false);
   const [showAllReviews, setShowAllReviews] = useState(false);
   const [userReview, setUserReview] = useState(null);
+  const alertStyle = {
+    backgroundColor: 'transparent',
+  };
 
   useEffect(() => {
     if (!movieID) return;
@@ -70,17 +81,24 @@ export function ReviewsDisplay({ movieID }) {
   }
   return (
     <MovieDetailsLayout>
-      <List>
+      <List sx={{ width: '100%' }}>
         {user && userReview && (
           <>
-            <HeaderReview title="Your Reviews" />
+            <HeaderReview review={reviews} title="Your Reviews" />
             {userReview.map((review) => (
               <ReviewItem key={review.id} review={review} canEdit={true} />
             ))}
           </>
         )}
-        <HeaderReview title="Reviews" />
+        <HeaderReview review={reviews} title="Reviews" />
         <StyledDivider />
+        {reviews.length < 1 && (
+          <Alert variant="filled" style={alertStyle}>
+            <Typography variant="h2" align="center" color="#00FFC2">
+              No Reviews to display!{' '}
+            </Typography>
+          </Alert>
+        )}
         {filteredReviews
           .slice(0, showAllReviews ? filteredReviews.length : 3)
           .map((review) => (
@@ -94,14 +112,16 @@ export function ReviewsDisplay({ movieID }) {
             alignItems: 'center',
           }}
         >
-          <StyledButton onClick={handleShowAllReviews}>
-            {showAllReviews ? 'Less reviews...' : 'More reviews...'}
-            {showAllReviews ? (
-              <StyledArrowDropUpIcon />
-            ) : (
-              <StyledArrowDropDownIcon />
-            )}
-          </StyledButton>
+          {reviews.length > 0 && (
+            <StyledButton onClick={handleShowAllReviews}>
+              {showAllReviews ? 'Less reviews...' : 'More reviews...'}
+              {showAllReviews ? (
+                <StyledArrowDropUpIcon />
+              ) : (
+                <StyledArrowDropDownIcon />
+              )}
+            </StyledButton>
+          )}
         </Box>
       </List>
     </MovieDetailsLayout>
