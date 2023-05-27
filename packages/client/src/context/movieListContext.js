@@ -73,12 +73,14 @@ export const MovieListProvider = ({ isFavoritePage, children }) => {
     setSortBy(value);
   }, []);
 
-  const onChangeDirection = useCallback((value) => {
-    setCurrentPage(1);
-    setMovies([]);
-    setIsClickedSame((prevState) => !prevState);
-  }, []);
-
+  const onChangeDirection = useCallback(
+    (value) => {
+      setCurrentPage(1);
+      setMovies([]);
+      setIsClickedSame((prev) => !prev);
+    },
+    [setIsClickedSame],
+  );
   const onLoadMore = useCallback(() => {
     setCurrentPage((prevPage) => prevPage + 1);
   }, [setCurrentPage]);
@@ -107,6 +109,7 @@ export const MovieListProvider = ({ isFavoritePage, children }) => {
       onSearch,
       onLoadMore,
       hasNextPage,
+      isClickedSame,
     }),
     [
       movies,
@@ -121,6 +124,7 @@ export const MovieListProvider = ({ isFavoritePage, children }) => {
       onSearch,
       onLoadMore,
       hasNextPage,
+      isClickedSame,
     ],
   );
 

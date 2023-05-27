@@ -1,63 +1,93 @@
 import React from 'react';
 import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import { useMovieList } from '../../context/movieListContext';
-import styled from '@emotion/styled';
+import FilterListIcon from '@mui/icons-material/FilterList';
 
 const CustomSelect = () => {
-  const { sortBy, onSortMovies, onChangeDirection } = useMovieList();
-
+  const { sortBy, onSortMovies, onChangeDirection, isClickedSame } =
+    useMovieList();
+  const [showComponent, setShowComponent] = React.useState(false);
   const handleChangeDirection = (event) => {
     onChangeDirection(event.target.value);
   };
+  const handleChange = (event) => {
+    onSortMovies(event.target.value);
+    setShowComponent(true);
+  };
+  const iconStyle = {
+    fontSize: '15px',
+    color: '#00FFC2',
+    marginRight: '.3rem',
+  };
+
   return (
-    <StyledFormControl variant="standard">
-      <StyledInputLabel id="sort-by-label">Sort by</StyledInputLabel>
-      <StyledSelect
-        labelId="sort-by-label"
-        id="sort-by-select"
-        value={sortBy}
-        onChange={(e) => {
-          onSortMovies(e.target.value);
-        }}
-        label="Sort by"
-      >
-        <MenuItem id="rating" value="rating" onClick={handleChangeDirection}>
-          Rating
-        </MenuItem>
-        <MenuItem
-          id="recently_added"
-          value="recently_added"
-          onClick={handleChangeDirection}
+    <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+      <FormControl variant="standard" sx={{ m: 1, minWidth: 85 }}>
+        <InputLabel
+          id="sort-by-label"
+          style={{ color: '#00FFC2', borderBottom: '1px solid #00FFC2' }}
         >
-          Recently added
-        </MenuItem>
-        <MenuItem id="price" value="price" onClick={handleChangeDirection}>
-          Price
-        </MenuItem>
-      </StyledSelect>
-    </StyledFormControl>
+          Sort by
+        </InputLabel>
+
+        <Select
+          labelId="sort-by-label"
+          id="sort-by-select"
+          value={sortBy}
+          onChange={handleChange}
+          label="Sort by"
+          sx={{
+            color: '#00FFC2',
+            '& .MuiSelect-icon': {
+              color: '#00FFC2',
+              fontSize: '2.25rem',
+            },
+            '&:before, &:after': {
+              border: 'none !important',
+            },
+          }}
+        >
+          <MenuItem id="rating" value="rating" onClick={handleChangeDirection}>
+            <FilterListIcon
+              style={
+                sortBy === 'rating' && isClickedSame
+                  ? { ...iconStyle }
+                  : { ...iconStyle, transform: 'rotate(180deg)' }
+              }
+            />
+            Rating{' '}
+          </MenuItem>
+          <MenuItem
+            id="recently_added"
+            value="recently_added"
+            onClick={handleChangeDirection}
+          >
+            {showComponent && (
+              <FilterListIcon
+                style={
+                  sortBy === 'recently_added' && isClickedSame
+                    ? { ...iconStyle, transform: 'rotate(180deg)' }
+                    : { ...iconStyle }
+                }
+              />
+            )}
+            Recently added
+          </MenuItem>
+          <MenuItem id="price" value="price" onClick={handleChangeDirection}>
+            {showComponent && (
+              <FilterListIcon
+                style={
+                  sortBy === 'price' && isClickedSame
+                    ? { ...iconStyle }
+                    : { ...iconStyle, transform: 'rotate(180deg)' }
+                }
+              />
+            )}
+            Price{' '}
+          </MenuItem>
+        </Select>
+      </FormControl>
+    </div>
   );
 };
 export { CustomSelect };
-
-const StyledFormControl = styled(FormControl)`
-  display: flex;
-  justify-content: flex-end;
-  margin: 1rem;
-  min-width: 85px;
-`;
-const StyledInputLabel = styled(InputLabel)`
-  color: #00ffc2;
-  border-bottom: 1px solid #00ffc2;
-`;
-const StyledSelect = styled(Select)`
-  color: #00ffc2;
-  & .MuiSelect-icon {
-    color: #00ffc2;
-    font-size: 2.25rem;
-  }
-  &:before,
-  &:after {
-    border: none !important;
-  }
-`;
