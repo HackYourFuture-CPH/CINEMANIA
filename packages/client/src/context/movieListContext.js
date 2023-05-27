@@ -76,7 +76,6 @@ export const MovieListProvider = ({ isFavoritePage, children }) => {
     setSortBy(value);
   }, []);
 
-
   const onChangeDirection = useCallback(
     (value) => {
       setCurrentPage(1);
