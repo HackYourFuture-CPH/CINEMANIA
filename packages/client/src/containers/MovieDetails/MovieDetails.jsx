@@ -7,6 +7,8 @@ import { BigMovieCard } from '../../components/BigMovieCard/BigMovieCard';
 import { TopCastDisplay } from '../../components/TopCastDisplay/TopCastDisplay';
 import { SimilarMovies } from '../CarouselWrapper/SimilarMovies';
 import { ReviewsDisplay } from '../../components/ReviewsDisplay/ReviewsDisplay';
+import { useUserContext } from '../../context/UserContext';
+
 
 export const MovieDetails = () => {
   const movieID = useParams().id;
