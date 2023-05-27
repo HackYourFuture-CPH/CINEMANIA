@@ -17,7 +17,7 @@ export const MovieDetails = () => {
   const { user } = useUserContext();
 
   useEffect(() => {
-    if (user.uid) {
+    if (user) {
       (async () => {
         const response = await fetch(`${apiURL()}/users/${user.uid}`);
         const getUser = await response.json();
@@ -26,7 +26,7 @@ export const MovieDetails = () => {
         }
       })();
     }
-  }, [user.uid]);
+  }, [user]);
 
   useEffect(() => {
     (async () => {
