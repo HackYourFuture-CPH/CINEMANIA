@@ -50,11 +50,11 @@ const getReviewByIdUid = async (id, uid) => {
   try {
     const userReview = knex('reviews as r')
       .select(
+        'r.id',
         'm.title',
         'm.description',
-        'u.id as user_id',
+        'u.full_name',
         'u.uid',
-        'r.id as reviewID',
         'r.movie_id',
         'r.rating',
         'r.review_text',
@@ -85,7 +85,6 @@ const editReview = async (ReviewID, updateReview) => {
   }
 
   return knex('reviews').where({ id: ReviewID }).update({
-    rating: updateReview.rating,
     review_text: updateReview.review_text,
     created_at: moment().format(),
   });
@@ -95,30 +94,10 @@ const deleteReview = async (ReviewID) => {
   return knex('reviews').where({ id: ReviewID }).del();
 };
 
-const createReview = async (body) => {
-  try {
-    await knex('reviews').insert({
-      movie_id: body.movie_id,
-      user_id: body.user_id,
-      rating: body.rating,
-      review_text: body.review_text,
-      created_at: moment().format(),
-    });
-
-    return {
-      statusCode: 201,
-      message: 'Review is created successfully',
-    };
-  } catch (error) {
-    throw new HttpError(error.message, 500);
-  }
-};
-
 module.exports = {
   getLatestRatedMovies,
   getReviewsOfMovieByID,
   getReviewByIdUid,
   editReview,
   deleteReview,
-  createReview,
 };

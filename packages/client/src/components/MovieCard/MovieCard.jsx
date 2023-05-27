@@ -89,12 +89,12 @@ const sharedIconStyles = `
   }
 `;
 
-export const StyledFavoriteIcon = styled(FavoriteIcon)`
+const StyledFavoriteIcon = styled(FavoriteIcon)`
   ${sharedIconStyles}
   color: #ff0000;
 `;
 
-export const StyledFavoriteBorderIcon = styled(FavoriteBorderIcon)`
+const StyledFavoriteBorderIcon = styled(FavoriteBorderIcon)`
   ${sharedIconStyles}
 `;
 
