@@ -21,7 +21,13 @@ import { ReviewDialog } from '../ReviewDialog/ReviewDialog';
 import { useFavorites } from '../MovieCard/useFavorites';
 import { OrderContext } from '../../context/orderContext';
 
-export const BigMovieCard = ({ currentMovie, currentReview, user }) => {
+export const BigMovieCard = ({
+  currentMovie,
+  currentReview,
+  user,
+  currentUserId,
+  setCurrentUsersReview,
+}) => {
   const [open, setOpen] = useState(false);
   const [favorites, toggleFavorite] = useFavorites([]);
 
@@ -146,7 +152,7 @@ export const BigMovieCard = ({ currentMovie, currentReview, user }) => {
               }
               clickable={true}
               ratingText={
-                currentReview
+                currentReview && currentReview?.rating
                   ? `Your rating is ${currentReview?.rating}`
                   : 'Leave your review'
               }
@@ -171,6 +177,8 @@ export const BigMovieCard = ({ currentMovie, currentReview, user }) => {
             handleClose={(_event, value) => handleOpenReview(_event, value)}
             currentReview={currentReview}
             movieId={currentMovie?.id}
+            currentUserId={currentUserId}
+            setCurrentUsersReview={setCurrentUsersReview}
           />
           <MovieTitle
             sx={{

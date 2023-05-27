@@ -57,12 +57,13 @@ export const Signup = () => {
             label="Enter name"
             value={fullName}
             inputProps={{ minLength: 6 }}
+            placeholder="enter name"
             onChange={(e) => setFullName(e.target.value)}
           />
           <InputField
             required
-            type="email"
             placeholder="enter email"
+            type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
