@@ -15,6 +15,9 @@ import { ThemeProvider } from '@mui/material';
 import { theme } from './lib/theme';
 import { FavoritesListPage } from './containers/FavoritesListPage/FavoritesListPage';
 import { HandleOrder } from './components/OrderReview/HandleOrder';
+import { LoginModal } from './components/LoginModal/LoginModal';
+import { SnackBarProvider } from './components/SnackBar/SnackBarProvider';
+import { AboutPage } from './containers/About/AboutPage';
 
 // Routes
 const router = createBrowserRouter([
@@ -50,6 +53,10 @@ const router = createBrowserRouter([
         element: <HandleOrder />,
       },
       {
+        path: '/about',
+        element: <AboutPage />,
+      },
+      {
         path: '*',
         element: <PageNotFound />,
       },
@@ -62,7 +69,10 @@ export const App = () => {
     <UserProvider>
       <OrderContextProvider>
         <ThemeProvider theme={theme}>
-          <RouterProvider router={router} />
+          <SnackBarProvider>
+            <RouterProvider router={router} />
+            <LoginModal />
+          </SnackBarProvider>
         </ThemeProvider>
       </OrderContextProvider>
     </UserProvider>

@@ -13,7 +13,7 @@ router.get('/:id', (req, res) => {
     .getFavoriteMovie(userId)
     .then((result) => {
       if (result.length === 0) {
-        res.status(404).send('This user id does\t have any favorite movies');
+        res.status(200).send("This user id does't have any favorite movies");
       } else {
         res.json(result);
       }
