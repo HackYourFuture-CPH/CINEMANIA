@@ -126,7 +126,7 @@ const CardButtons = styled(CardActions)`
 const CheckOutButton = styled(Button)`
   width: 237px;
   height: 61px;
-  background: #003e2f;
+  background: ${(props) => props.theme.palette.darkGreen};
   border-radius: 50px;
   font-family: 'Inter';
   font-style: normal;
@@ -142,14 +142,14 @@ const CheckOutButton = styled(Button)`
 const ContinueShoppingBtn = styled(Button)`
   width: 237px;
   height: 61px;
-  border: 1px solid #003c2d;
+  border: 1px solid ${(props) => props.theme.palette.darkGreen};
   border-radius: 50px;
   font-family: 'Inter';
   font-style: normal;
   font-weight: 500;
   font-size: 24px;
   line-height: 29px;
-  color: #003e2f;
+  color: ${(props) => props.theme.palette.darkGreen};
   &:hover {
     background: ${(props) => props.theme.palette.mainGreen};
   }
