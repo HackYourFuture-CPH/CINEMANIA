@@ -13,7 +13,20 @@ export const MovieDetails = () => {
   const movieID = useParams().id;
   const [currentMovie, setCurrentMovie] = useState(fallBackMovies[0]);
   const [currentUsersReview, setCurrentUsersReview] = useState(undefined);
+  const [currentUserId, setCurrentUserId] = useState(undefined);
   const { user } = useUserContext();
+
+  useEffect(() => {
+    if (user.uid) {
+      (async () => {
+        const response = await fetch(`${apiURL()}/users/${user.uid}`);
+        const getUser = await response.json();
+        if (getUser) {
+          setCurrentUserId(getUser[0].id);
+        }
+      })();
+    }
+  }, [user.uid]);
 
   useEffect(() => {
     (async () => {
@@ -22,13 +35,24 @@ export const MovieDetails = () => {
           const response = await fetch(
             `${apiURL()}/reviews/${movieID}/uid/${user.uid}`,
           );
+
           if (response.ok) {
             const data = await response.json();
 
-            if (data.length === 1) {
-              setCurrentUsersReview(data[0]);
-            } else {
-              setCurrentUsersReview({ rating: 0, review_text: '' });
+            if (data) {
+              if (!currentUsersReview) {
+                setCurrentUsersReview(data[0]);
+              } else if (
+                !(
+                  Object.values(currentUsersReview).includes(data[0].rating) &&
+                  Object.values(currentUsersReview).includes(
+                    data[0].review_text,
+                  ) &&
+                  Object.values(currentUsersReview).includes(data[0].reviewID)
+                )
+              ) {
+                setCurrentUsersReview(data[0]);
+              }
             }
           }
         } catch (error) {
@@ -36,7 +60,7 @@ export const MovieDetails = () => {
         }
       }
     })();
-  }, [movieID, user]);
+  }, [movieID, user, currentUsersReview]);
 
   useEffect(() => {
     if (movieID) {
@@ -69,6 +93,8 @@ export const MovieDetails = () => {
       <BigMovieCard
         currentMovie={currentMovie}
         currentReview={currentUsersReview}
+        setCurrentUsersReview={setCurrentUsersReview}
+        currentUserId={currentUserId}
         user={user}
       />
       <TopCastDisplay movieID={currentMovie?.id} />
