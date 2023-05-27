@@ -151,4 +151,5 @@ const ContinueShoppingBtn = styled(Button)`
 
 const StyledLink = styled(Link)`
   text-decoration: none;
+  color: #ffffff;
 `;
