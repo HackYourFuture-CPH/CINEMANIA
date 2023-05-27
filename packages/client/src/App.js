@@ -17,6 +17,7 @@ import { FavoritesListPage } from './containers/FavoritesListPage/FavoritesListP
 import { HandleOrder } from './components/OrderReview/HandleOrder';
 import { LoginModal } from './components/LoginModal/LoginModal';
 import { SnackBarProvider } from './components/SnackBar/SnackBarProvider';
+import { AboutPage } from './containers/About/AboutPage';
 
 // Routes
 const router = createBrowserRouter([
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
       {
         path: '/order',
         element: <HandleOrder />,
+      },
+      {
+        path: '/about',
+        element: <AboutPage />,
       },
       {
         path: '*',
