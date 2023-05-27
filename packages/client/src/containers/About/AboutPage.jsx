@@ -39,5 +39,5 @@ const Paragraph = styled(Typography)`
   text-align: center;
   width: 70%;
   font-size: 1.5rem;
-  text-shadow: 0px 0px 2px black;
+  text-shadow: 1px 0px 1px black;
 `;
