@@ -10,6 +10,8 @@ const categories = require('./categories.router');
 const reviews = require('./reviews.router');
 const favorites = require('./favorites.router');
 const users = require('./users.router');
+const orders = require('./orders.router');
+const orderItems = require('./orderItems.router');
 
 const swaggerJsDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
@@ -40,6 +42,8 @@ router.use('/views', views);
 router.use('/crew', crew);
 router.use('/favorites', favorites);
 router.use('/tokens', tokens);
+router.use('/orders', orders);
+router.use('/order-items', orderItems);
 
 module.exports = router;
 router.use('/categories', categories);

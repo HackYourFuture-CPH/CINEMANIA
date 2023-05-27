@@ -9,12 +9,61 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { Avatar } from '@mui/material';
 import { RatingStars } from '../RatingStars/RatingStars';
 import styled from '@emotion/styled';
+import { apiURL } from '../../apiURL';
 
-export function ReviewDialog({ initialState, handleClose, currentReview }) {
+export function ReviewDialog({
+  initialState,
+  handleClose,
+  currentReview,
+  movieId,
+  currentUserId,
+  setCurrentUsersReview,
+}) {
   const [formData, setFormData] = useState(currentReview);
   useEffect(() => {
     setFormData(currentReview);
   }, [currentReview]);
+
+  const postValue = {
+    movie_id: movieId,
+    user_id: currentUserId,
+    rating: formData ? formData.rating : '',
+    review_text: formData ? formData.review_text : '',
+  };
+
+  const deleteReview = async (id) => {
+    await fetch(`${apiURL()}/reviews/${id}`, {
+      method: 'DELETE',
+    });
+    setCurrentUsersReview(undefined);
+  };
+
+  const updateReview = async (id) => {
+    const body = { ...formData };
+    await fetch(`${apiURL()}/reviews/${id}`, {
+      method: 'PATCH',
+      body: JSON.stringify(body),
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    });
+    setCurrentUsersReview(body);
+  };
+
+  const postReview = async () => {
+    const body = postValue;
+    await fetch(`${apiURL()}/reviews/`, {
+      method: 'POST',
+      body: JSON.stringify(body),
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    });
+    setCurrentUsersReview(body);
+  };
+
   return (
     <Dialog open={initialState} onClose={handleClose}>
       <ReviewTitle
@@ -34,6 +83,7 @@ export function ReviewDialog({ initialState, handleClose, currentReview }) {
         <DialogContentText sx={{ color: 'mainGreen' }}>
           Please, write your review of the movie
         </DialogContentText>
+
         <ReviewContentText
           autoFocus
           margin="dense"
@@ -50,27 +100,54 @@ export function ReviewDialog({ initialState, handleClose, currentReview }) {
             },
           }}
           InputProps={{ sx: { color: 'mainGreen' } }}
-          value={
-            formData
-              ? formData.review_text
-              : 'Leave your first review about this movie'
+          placeholder={
+            formData ? '' : 'Leave your first review about this movie'
           }
+          defaultValue={formData ? formData.review_text : ''}
           onChange={(e) => {
             setFormData({ ...formData, review_text: e.target.value });
           }}
         />
       </ReviewContent>
       <DialogActions
-        sx={{ backgroundColor: 'backgroundDark', color: 'mainGreen' }}
+        sx={{
+          backgroundColor: 'backgroundDark',
+          color: 'mainGreen',
+          display: 'flex',
+        }}
       >
-        <Button onClick={handleClose} sx={{ backgroundColor: 'mainGreen' }}>
+        <Button
+          onClick={() => {
+            deleteReview(currentReview.reviewID);
+
+            handleClose();
+          }}
+          sx={{ backgroundColor: 'mainGreen' }}
+          disabled={Boolean(!currentReview)}
+        >
           Delete review
         </Button>
-        <Button onClick={handleClose} sx={{ backgroundColor: 'mainGreen' }}>
-          Save review
-        </Button>
-        <Button onClick={handleClose} sx={{ backgroundColor: 'mainGreen' }}>
+        <Button
+          onClick={() => {
+            updateReview(currentReview.reviewID);
+
+            handleClose();
+          }}
+          sx={{ backgroundColor: 'mainGreen' }}
+          disabled={Boolean(!currentReview)}
+        >
           Update review
+        </Button>
+        <Button
+          onClick={() => {
+            postReview();
+
+            handleClose();
+          }}
+          sx={{ backgroundColor: 'mainGreen' }}
+          disabled={Boolean(currentReview)}
+        >
+          Save review
         </Button>
       </DialogActions>
     </Dialog>
