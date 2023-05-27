@@ -13,23 +13,12 @@ import React, {
 } from 'react';
 
 import { auth } from '../firebase';
-import { apiURL } from '../apiURL';
 
 const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState({});
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [userId, setUserId] = useState(null);
-  const [showLoginModal, setShowLoginModal] = useState(false);
 
-  const toggleModal = () => {
-    setIsModalOpen((prevState) => !prevState);
-  };
-
-  const toggleLoginModal = () => {
-    setShowLoginModal((prevState) => !prevState);
-  };
   const createUser = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
   };
@@ -51,35 +40,9 @@ export const UserProvider = ({ children }) => {
     };
   }, []);
 
-  useEffect(() => {
-    const getUserIdByUid = async () => {
-      if (user && user.uid) {
-        try {
-          const response = await fetch(`${apiURL()}/users/${user.uid}`);
-          const data = await response.json();
-          setUserId(data[0].id);
-        } catch (error) {
-          return error.name === 'Something wrong in the operation';
-        }
-      }
-    };
-
-    getUserIdByUid();
-  }, [user]);
-
   const userContextValue = useMemo(
-    () => ({
-      createUser,
-      user,
-      logOut,
-      signIn,
-      toggleModal,
-      isModalOpen,
-      toggleLoginModal,
-      showLoginModal,
-      userId,
-    }),
-    [user, isModalOpen, showLoginModal, userId],
+    () => ({ createUser, user, logOut, signIn }),
+    [user],
   );
 
   return (

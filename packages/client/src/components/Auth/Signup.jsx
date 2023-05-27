@@ -10,7 +10,8 @@ export const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const { createUser, isModalOpen, toggleModal } = useUserContext();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { createUser } = useUserContext();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -31,15 +32,15 @@ export const Signup = () => {
         }),
       });
 
-      toggleModal();
+      setIsModalOpen(true);
       setTimeout(() => {
         navigate('/');
       }, 1500);
     } catch (err) {
       setError('Email already in use, please try again.');
-      toggleModal();
+      setIsModalOpen(true);
       setTimeout(() => {
-        toggleModal();
+        setIsModalOpen(false);
       }, 1500);
     }
   };
@@ -57,13 +58,12 @@ export const Signup = () => {
             label="Enter name"
             value={fullName}
             inputProps={{ minLength: 6 }}
-            placeholder="enter name"
             onChange={(e) => setFullName(e.target.value)}
           />
           <InputField
             required
-            placeholder="enter email"
             type="email"
+            placeholder="enter email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />

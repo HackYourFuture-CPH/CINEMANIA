@@ -11,6 +11,7 @@ import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlin
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import styled from '@emotion/styled';
 import { OrderContext } from '../../context/orderContext';
+import { handleAddFavorite } from '../MovieCard/handlerFavorite';
 
 export const OrderReview = ({ movies }) => {
   const { removeMovie } = React.useContext(OrderContext);
@@ -83,7 +84,11 @@ export const OrderReview = ({ movies }) => {
                   </ItemsCardTypographyDescription>
                   <ItemFavRemoveBox>
                     <FavRemoveBox>
-                      <FavRemoveButton onClick={(e) => e.preventDefault()}>
+                      <FavRemoveButton
+                        onClick={() => {
+                          handleAddFavorite(movie);
+                        }}
+                      >
                         <StyledFavoriteBorderOutlinedIcon />
                         <FavoriteTypography variant="h6">
                           Move to my favorites
