@@ -62,4 +62,12 @@ router.delete('/:id', (req, res) => {
   });
 });
 
+router.post('/', async (req, res, next) => {
+  try {
+    const result = await reviewsController.createReview(req.body);
+    res.json(result);
+  } catch (error) {
+    next(error);
+  }
+});
 module.exports = router;
