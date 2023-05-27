@@ -74,7 +74,7 @@ export const Navbar = () => {
         >
           <IconMenu>
             {user ? (
-              <NavIcon isActive={pathname === '/signin'}>
+              <NavIcon>
                 <Box
                   sx={{
                     display: 'flex',
