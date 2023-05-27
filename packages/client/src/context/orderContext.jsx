@@ -42,6 +42,7 @@ export const OrderContextProvider = ({ children }) => {
   const removeMovie = React.useCallback((movieId) => {
     setMovieInCart((prevState) => {
       const updatedCart = prevState.filter((movie) => movie.id !== movieId);
+      setAlert(<Alert severity="success">Movie removed from cart!</Alert>);
       return updatedCart;
     });
   }, []);
