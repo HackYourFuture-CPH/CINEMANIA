@@ -134,6 +134,9 @@ const CheckOutButton = styled(Button)`
   font-size: 24px;
   line-height: 29px;
   color: #ffffff;
+  &:hover {
+    background: black;
+  }
 `;
 
 const ContinueShoppingBtn = styled(Button)`
@@ -147,6 +150,9 @@ const ContinueShoppingBtn = styled(Button)`
   font-size: 24px;
   line-height: 29px;
   color: #003e2f;
+  &:hover {
+    background: ${(props) => props.theme.palette.mainGreen};
+  }
 `;
 
 const StyledLink = styled(Link)`
