@@ -119,7 +119,7 @@ export function ReviewDialog({
         <Button
           onClick={() => {
             deleteReview(currentReview.reviewID);
-            // window.location.reload(true);
+
             handleClose();
           }}
           sx={{ backgroundColor: 'mainGreen' }}
@@ -141,7 +141,7 @@ export function ReviewDialog({
         <Button
           onClick={() => {
             postReview();
-            // window.location.reload(true);
+
             handleClose();
           }}
           sx={{ backgroundColor: 'mainGreen' }}
