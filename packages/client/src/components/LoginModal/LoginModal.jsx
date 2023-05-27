@@ -9,7 +9,7 @@ import {
 import styled from '@emotion/styled';
 import { useUserContext } from '../../context/UserContext';
 
-export const LoginModel = () => {
+export const LoginModal = () => {
   const { toggleLoginModal, showLoginModal } = useUserContext();
 
   const handleLoginClick = () => {

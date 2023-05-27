@@ -24,12 +24,13 @@ export const MovieListProvider = ({ isFavoritePage, children }) => {
   const [hasNextPage, setHasNextPage] = useState(false);
   const debouncedSearchText = useDebounce(searchText, 1000);
   const { userId } = useUserContext();
+
   useEffect(() => {
-    if (debouncedSearchText) {
+    if (debouncedSearchText === searchText) {
       setCurrentPage(1);
       setMovies([]);
     }
-  }, [debouncedSearchText]);
+  }, [debouncedSearchText, searchText]);
 
   useEffect(() => {
     const fetchMovies = async () => {

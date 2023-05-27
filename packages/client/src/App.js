@@ -15,7 +15,7 @@ import { ThemeProvider } from '@mui/material';
 import { theme } from './lib/theme';
 import { FavoritesListPage } from './containers/FavoritesListPage/FavoritesListPage';
 import { HandleOrder } from './components/OrderReview/HandleOrder';
-import { LoginModel } from './components/LoginModel/LoginModel';
+import { LoginModal } from './components/LoginModal/LoginModal';
 import { SnackBarProvider } from './components/SnackBar/SnackBarProvider';
 
 // Routes
@@ -66,7 +66,7 @@ export const App = () => {
         <ThemeProvider theme={theme}>
           <SnackBarProvider>
             <RouterProvider router={router} />
-            <LoginModel />
+            <LoginModal />
           </SnackBarProvider>
         </ThemeProvider>
       </OrderContextProvider>
