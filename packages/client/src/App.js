@@ -15,6 +15,7 @@ import { ThemeProvider } from '@mui/material';
 import { theme } from './lib/theme';
 import { FavoritesListPage } from './containers/FavoritesListPage/FavoritesListPage';
 import { HandleOrder } from './components/OrderReview/HandleOrder';
+import { AboutPage } from './containers/About/AboutPage';
 
 // Routes
 const router = createBrowserRouter([
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
       {
         path: '/order',
         element: <HandleOrder />,
+      },
+      {
+        path: '/about',
+        element: <AboutPage />,
       },
       {
         path: '*',
