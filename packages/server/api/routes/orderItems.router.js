@@ -5,9 +5,9 @@ const router = express.Router({ mergeParams: true });
 // controllers
 const orderItemsController = require('../controllers/orderItems.controller');
 
-router.put('/orderID/:orderID/movieID/:movieID', (req, res) => {
+router.put('/orderId/:orderId/movieId/:movieId', (req, res) => {
   orderItemsController
-    .addMovieToCart(req.params.orderID, req.params.movieID)
+    .addMovieToCart(req.params.orderId, req.params.movieId)
     .then((result) => {
       res.status(200).json(result);
     })
@@ -20,13 +20,13 @@ router.put('/orderID/:orderID/movieID/:movieID', (req, res) => {
 });
 
 router.delete(
-  '/userId/:userID/movieID/:movieID/orderId/:orderID',
+  '/userId/:userId/movieId/:movieId/orderId/:orderId',
   (req, res) => {
     orderItemsController
       .removeMovieFromCart(
-        req.params.userID,
-        req.params.movieID,
-        req.params.orderID,
+        req.params.userId,
+        req.params.movieId,
+        req.params.orderId,
       )
       .then((result) => {
         if (result === 0) {
@@ -50,10 +50,10 @@ router.delete(
 );
 
 router.get('/:id', (req, res) => {
-  const userID = req.params.id;
+  const userId = req.params.id;
 
   orderItemsController
-    .getOrderItemsByUserId(userID)
+    .getOrderItemsByuserId(userId)
     .then((result) => {
       if (result.length === 0) {
         res

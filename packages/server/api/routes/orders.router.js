@@ -6,10 +6,10 @@ const router = express.Router({ mergeParams: true });
 const ordersController = require('../controllers/orders.controller');
 
 router.get('/:id', (req, res) => {
-  const userID = req.params.id;
+  const userId = req.params.id;
 
   ordersController
-    .getOrderIDCreatedStatus(userID)
+    .getOrderIdCreatedStatus(userId)
     .then((result) => {
       if (result.length === 0) {
         res
@@ -27,7 +27,7 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
   ordersController
-    .addMovieToCartWithNewOrderID(req.body)
+    .addMovieToCartWithNewOrderId(req.body)
     .then((result) => {
       res.status(201).json(result);
     })
