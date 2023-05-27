@@ -127,13 +127,26 @@ export const BigMovieCard = ({
             src={currentMovie?.image_location}
             alt="Movie Poster"
           />
+
           {isFavorite ? (
             <StyledFavoriteIcon
-              onClick={() => toggleFavorite(currentMovie, isFavorite)}
+              onClick={() => {
+                if (!user) {
+                  handleSnackbarOpen();
+                } else {
+                  toggleFavorite(currentMovie, isFavorite);
+                }
+              }}
             />
           ) : (
             <StyledFavoriteBorderIcon
-              onClick={() => toggleFavorite(currentMovie, isFavorite)}
+              onClick={() => {
+                if (!user) {
+                  handleSnackbarOpen();
+                } else {
+                  toggleFavorite(currentMovie, isFavorite);
+                }
+              }}
             />
           )}
         </Box>
