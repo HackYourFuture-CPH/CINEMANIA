@@ -119,11 +119,11 @@ export function ReviewDialog({
         <Button
           onClick={() => {
             deleteReview(currentReview.reviewID);
-            window.location.reload(true);
+            // window.location.reload(true);
             handleClose();
           }}
           sx={{ backgroundColor: 'mainGreen' }}
-          disabled={!currentReview}
+          disabled={Boolean(!currentReview)}
         >
           Delete review
         </Button>
@@ -134,18 +134,18 @@ export function ReviewDialog({
             handleClose();
           }}
           sx={{ backgroundColor: 'mainGreen' }}
-          disabled={!currentReview}
+          disabled={Boolean(!currentReview)}
         >
           Update review
         </Button>
         <Button
           onClick={() => {
             postReview();
-            window.location.reload(true);
+            // window.location.reload(true);
             handleClose();
           }}
           sx={{ backgroundColor: 'mainGreen' }}
-          disabled={currentReview}
+          disabled={Boolean(currentReview)}
         >
           Save review
         </Button>
