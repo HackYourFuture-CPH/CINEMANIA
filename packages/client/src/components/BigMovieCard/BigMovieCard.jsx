@@ -20,15 +20,6 @@ import { ReviewDialog } from '../ReviewDialog/ReviewDialog';
 export const BigMovieCard = ({ currentMovie }) => {
   const [open, setOpen] = useState(false);
 
-  const [favorites, toggleFavorite] = useFavorites([]);
-
-  const isFavorite =
-    currentMovie && favorites
-      ? favorites.find((favoriteMovie) => favoriteMovie.id === currentMovie.id)
-      : false;
-  const { addMovieToCart } = React.useContext(OrderContext);
-
-
   function handleOpenReview(event, value) {
     setOpen((status) => !status);
   }
@@ -139,20 +130,18 @@ export const BigMovieCard = ({ currentMovie }) => {
               alignSelf="flex-end"
             />
           )}
-          {currentMovie && (
-            <RatingStars
-              clickable={false}
-              ratingText={
-                currentMovie.rating
-                  ? `${currentMovie.rating} based on ${
-                      currentMovie.number_of_ratings
-                    } review${currentMovie.number_of_ratings === 1 ? '' : 's'}`
-                  : 'No rating given'
-              }
-              rating={currentMovie.rating}
-              alignSelf="flex-end"
-            />
-          )}
+          <RatingStars
+            clickable={false}
+            ratingText={
+              currentMovie.rating
+                ? `${currentMovie.rating} based on ${
+                    currentMovie.number_of_ratings
+                  } review${currentMovie.number_of_ratings === 1 ? '' : 's'}`
+                : 'No rating given'
+            }
+            rating={currentMovie.rating}
+            alignSelf="flex-end"
+          />
           <ReviewDialog
             initialState={open}
             handleClose={(_event, value) => handleOpenReview(_event, value)}
