@@ -9,11 +9,15 @@ import { PageNotFound } from './containers/PageNotFound/PageNotFound.Container';
 import { Signin } from './components/Auth/Signin';
 import { Signup } from './components/Auth/Signup';
 import { UserProvider } from './context/UserContext';
-
+import { OrderContextProvider } from './context/orderContext';
 // MUI THEME
 import { ThemeProvider } from '@mui/material';
 import { theme } from './lib/theme';
 import { FavoritesListPage } from './containers/FavoritesListPage/FavoritesListPage';
+import { HandleOrder } from './components/OrderReview/HandleOrder';
+import { LoginModal } from './components/LoginModal/LoginModal';
+import { SnackBarProvider } from './components/SnackBar/SnackBarProvider';
+import { AboutPage } from './containers/About/AboutPage';
 
 // Routes
 const router = createBrowserRouter([
@@ -45,6 +49,14 @@ const router = createBrowserRouter([
         element: <MovieListPage />,
       },
       {
+        path: '/order',
+        element: <HandleOrder />,
+      },
+      {
+        path: '/about',
+        element: <AboutPage />,
+      },
+      {
         path: '*',
         element: <PageNotFound />,
       },
@@ -55,9 +67,14 @@ const router = createBrowserRouter([
 export const App = () => {
   return (
     <UserProvider>
-      <ThemeProvider theme={theme}>
-        <RouterProvider router={router} />
-      </ThemeProvider>
+      <OrderContextProvider>
+        <ThemeProvider theme={theme}>
+          <SnackBarProvider>
+            <RouterProvider router={router} />
+            <LoginModal />
+          </SnackBarProvider>
+        </ThemeProvider>
+      </OrderContextProvider>
     </UserProvider>
   );
 };
