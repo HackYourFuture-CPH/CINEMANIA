@@ -110,10 +110,7 @@ const createReview = async (body) => {
       message: 'Review is created successfully',
     };
   } catch (error) {
-    return {
-      statusCode: 500,
-      message: error.message,
-    };
+    throw new HttpError(error.message, 500);
   }
 };
 
