@@ -35,9 +35,12 @@ const Section = styled.section`
 `;
 
 const Paragraph = styled(Typography)`
-  color: white;
+  background-color: ${(props) => props.theme.palette.mainGreen};
   text-align: center;
-  width: 70%;
+  font-weight: 500;
+  width: 60%;
   font-size: 1.5rem;
-  text-shadow: 1px 0px 1px black;
+  padding: 3rem;
+  color: #003c2d;
+  box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
 `;
