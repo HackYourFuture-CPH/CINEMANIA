@@ -14,7 +14,7 @@ router.get('/movie/:id', (req, res) => {
       }
     })
     .catch((error) => {
-      res.status(500).json({ error: error.message });
+      res.status(error.status).json({ error: error.message });
       throw error;
     });
 });

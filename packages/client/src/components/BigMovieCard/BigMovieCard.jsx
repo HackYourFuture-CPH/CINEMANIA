@@ -21,9 +21,14 @@ import { ReviewDialog } from '../ReviewDialog/ReviewDialog';
 import { useFavorites } from '../MovieCard/useFavorites';
 import { OrderContext } from '../../context/orderContext';
 import { useNavigate } from 'react-router-dom';
-// import { LogInDialog } from '../LogInDialog/LogInDialog';
 
-export const BigMovieCard = ({ currentMovie, currentReview, user }) => {
+export const BigMovieCard = ({
+  currentMovie,
+  currentReview,
+  user,
+  currentUserId,
+  setCurrentUsersReview,
+}) => {
   const [open, setOpen] = useState(false);
   const [favorites, toggleFavorite] = useFavorites([]);
 
@@ -148,6 +153,7 @@ export const BigMovieCard = ({ currentMovie, currentReview, user }) => {
             alignSelf: 'flex-end',
           }}
         >
+
           <RatingStars
             alignSelf="flex-end"
             rating={currentReview?.rating}
@@ -179,6 +185,8 @@ export const BigMovieCard = ({ currentMovie, currentReview, user }) => {
             handleClose={(_event, value) => handleOpenReview(_event, value)}
             currentReview={currentReview}
             movieId={currentMovie?.id}
+            currentUserId={currentUserId}
+            setCurrentUsersReview={setCurrentUsersReview}
           />
           <MovieTitle
             sx={{

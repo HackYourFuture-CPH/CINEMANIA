@@ -10,12 +10,17 @@ import { Signin } from './components/Auth/Signin';
 import { Signup } from './components/Auth/Signup';
 import { UserProvider } from './context/UserContext';
 import { OrderContextProvider } from './context/orderContext';
+import { LogInDialog } from './components/LogInDialog/LogInDialog';
 // MUI THEME
 import { ThemeProvider } from '@mui/material';
 import { theme } from './lib/theme';
 import { FavoritesListPage } from './containers/FavoritesListPage/FavoritesListPage';
 import { HandleOrder } from './components/OrderReview/HandleOrder';
-import { LogInDialog } from './components/LogInDialog/LogInDialog';
+import { LoginModal } from './components/LoginModal/LoginModal';
+import { SnackBarProvider } from './components/SnackBar/SnackBarProvider';
+import { AboutPage } from './containers/About/AboutPage';
+
+
 
 // Routes
 const router = createBrowserRouter([
@@ -55,6 +60,10 @@ const router = createBrowserRouter([
         element: <LogInDialog />,
       },
       {
+        path: '/about',
+        element: <AboutPage />,
+      },
+      {
         path: '*',
         element: <PageNotFound />,
       },
@@ -67,7 +76,10 @@ export const App = () => {
     <UserProvider>
       <OrderContextProvider>
         <ThemeProvider theme={theme}>
-          <RouterProvider router={router} />
+          <SnackBarProvider>
+            <RouterProvider router={router} />
+            <LoginModal />
+          </SnackBarProvider>
         </ThemeProvider>
       </OrderContextProvider>
     </UserProvider>
