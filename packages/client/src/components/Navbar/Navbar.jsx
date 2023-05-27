@@ -2,6 +2,11 @@ import styled from '@emotion/styled';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import PersonIcon from '@mui/icons-material/Person';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import React, { useEffect, useState } from 'react';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
+import { useUserContext } from '../../context/UserContext';
+import { OrderContext } from '../../context/orderContext';
+import { apiURL } from '../../apiURL';
 import {
   AppBar,
   Box,
@@ -9,11 +14,10 @@ import {
   Grid,
   MenuItem,
   Toolbar,
+  Avatar,
+  Menu,
   Typography,
 } from '@mui/material';
-import React from 'react';
-import { useLocation, useNavigate, Link } from 'react-router-dom';
-import { OrderContext } from '../../context/orderContext';
 
 const NavLink = (props) => {
   const { pathname } = useLocation();
@@ -27,7 +31,35 @@ const NavLink = (props) => {
 export const Navbar = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
+  const { user, logOut, userId } = useUserContext();
+  const [amount, setAmount] = useState(0);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
   const { movieInCart } = React.useContext(OrderContext);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  useEffect(() => {
+    const accountBalance = async () => {
+      if (userId) {
+        try {
+          const response = await fetch(`${apiURL()}/tokens/${userId}`);
+          const data = await response.json();
+          setAmount(data[0].amount);
+        } catch (error) {
+          throw new Error('something went wrong');
+        }
+      }
+    };
+    if (userId) {
+      accountBalance();
+    }
+  }, [user, userId]);
 
   return (
     <StyledAppBar>
@@ -41,14 +73,51 @@ export const Navbar = () => {
           }}
         >
           <IconMenu>
-            <NavIcon isActive={pathname === '/signin'}>
-              <PersonIcon
-                onClick={() => {
-                  navigate('/signin');
-                }}
-                sx={{ borderRight: '2px solid #000000' }}
-              />
-            </NavIcon>
+            {user ? (
+              <NavIcon>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
+                >
+                  <Box>
+                    <Avatar
+                      onClick={handleClick}
+                      alt={`${user.email}`}
+                      src="/static/images/avatar/2.jpg"
+                      sx={{ background: 'black' }}
+                    />
+                    <Menu
+                      id="basic-menu"
+                      anchorEl={anchorEl}
+                      open={open}
+                      onClose={handleClose}
+                      MenuListProps={{
+                        'aria-labelledby': 'basic-button',
+                      }}
+                    >
+                      <MenuItem onClick={logOut}>Log out</MenuItem>
+                    </Menu>
+                  </Box>
+                  <AccountBalance>
+                    <Typography variant="body2" sx={{ color: 'white' }}>
+                      Balance: {amount}
+                    </Typography>
+                  </AccountBalance>
+                </Box>
+              </NavIcon>
+            ) : (
+              <NavIcon isActive={pathname === '/signin'}>
+                <PersonIcon
+                  onClick={() => {
+                    navigate('/signin');
+                  }}
+                  sx={{ borderRight: '2px solid #000000' }}
+                />
+              </NavIcon>
+            )}
           </IconMenu>
           <Grid item xs={12} align="center">
             <Box>
@@ -124,10 +193,6 @@ const NavIcon = styled.button`
   color: ${(props) => (props.isActive ? 'red' : 'black')};
   cursor: pointer;
   border: none;
-  width: '2rem';
-  height: '2rem';
-  border-right: '2px solid #000000';
-  padding-right: '.5rem';
   outline: none;
   &:hover {
     color: ${(props) => props.theme.palette.hoverRed};
@@ -147,6 +212,13 @@ const NavButton = styled(Button)`
   &:hover {
     color: ${(props) => props.theme.palette.hoverRed};
   }
+`;
+
+const AccountBalance = styled(Box)`
+  background: black;
+  padding: 0.7rem;
+  border-radius: 0.5rem;
+  margin-left: 0.2rem;
 `;
 
 const CountTypography = styled(Typography)`
