@@ -163,7 +163,6 @@ export const BigMovieCard = ({
           )}
           {currentMovie && (
             <RatingStars
-              clickable={false}
               ratingText={
                 currentMovie.rating
                   ? `${currentMovie.rating} based on ${
