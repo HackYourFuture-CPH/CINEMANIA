@@ -18,6 +18,9 @@ router.get('/', (req, res, next) => {
 // GET /featured-movie
 router.get('/featured', moviesController.getFeaturedMovie);
 
+// GET New Arrivals
+router.get('/latest', moviesController.getNewArrivals);
+
 // get /:id
 router.get('/:id', (req, res, next) => {
   moviesController

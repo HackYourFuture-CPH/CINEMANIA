@@ -1,11 +1,20 @@
 const knex = require('../../config/db');
 
-// get  favorite movies by userID
-const getFavoriteMovie = async (userID) => {
+// get  favorite movies by userId
+const getFavoriteMovie = async (userId) => {
+  if (!userId.match(/^\d+$/)) {
+    return Promise.reject(new Error('Invalid user ID format'));
+  }
+
+  const user = await knex('users').where('id', userId).first();
+  if (!user) {
+    throw new Error('User not found');
+  }
+
   return knex('movies')
     .select('*')
     .join('favorites', 'favorites.movie_id', '=', 'movies.id')
-    .where({ user_id: userID });
+    .where({ user_id: userId });
 };
 
 // add favorite movie
@@ -24,9 +33,9 @@ const addFavoriteMovie = async (body) => {
   };
 };
 
-// remove favorite movie by movieID and userID
-const removeFavoriteMovie = async (movieID, userID) => {
-  return knex('favorites').where({ movie_id: movieID, user_id: userID }).del();
+// remove favorite movie by movieID and userId
+const removeFavoriteMovie = async (movieID, userId) => {
+  return knex('favorites').where({ movie_id: movieID, user_id: userId }).del();
 };
 
 module.exports = {
