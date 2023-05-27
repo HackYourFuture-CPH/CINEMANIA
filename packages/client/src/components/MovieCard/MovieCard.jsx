@@ -4,12 +4,14 @@ import styled from '@emotion/styled';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { Link } from 'react-router-dom';
+import { useSnackbar } from '../SnackBar/SnackBarProvider';
 
 const BasicRating = ({ rating }) => {
   return <StyledRating name="read-only" value={Number(rating)} readOnly />;
 };
 
 export function MovieCard({ movie, favorites, toggleFavorite }) {
+  const { handleSnackbarOpen } = useSnackbar();
   const isFavorite = favorites.find(
     (favoriteMovie) => favoriteMovie.id === movie.id,
   );
@@ -19,11 +21,15 @@ export function MovieCard({ movie, favorites, toggleFavorite }) {
       <Box sx={{ position: 'relative' }}>
         {isFavorite ? (
           <StyledFavoriteIcon
-            onClick={() => toggleFavorite(movie, isFavorite)}
+            onClick={() =>
+              toggleFavorite(movie, isFavorite, handleSnackbarOpen)
+            }
           />
         ) : (
           <StyledFavoriteBorderIcon
-            onClick={() => toggleFavorite(movie, isFavorite)}
+            onClick={() =>
+              toggleFavorite(movie, isFavorite, handleSnackbarOpen)
+            }
           />
         )}
       </Box>
