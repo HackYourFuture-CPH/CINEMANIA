@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { OrderContext } from '../../context/orderContext';
 import {
   Box,
   Button,
@@ -14,7 +15,9 @@ import { Link } from 'react-router-dom';
 import { MovieDetailsLayout } from '../../containers/MovieDetailsLayout/MovieDetailsLayout';
 
 export function PopUpModulMenu(props) {
-  return props.trigger ? (
+  const { isPopUpOpen, togglePopUp } = React.useContext(OrderContext);
+
+  return isPopUpOpen ? (
     <MovieDetailsLayout>
       <PopUpContainer>
         <ModulCard>
@@ -35,10 +38,7 @@ export function PopUpModulMenu(props) {
             <CheckOutButton>
               <StyledLink to="/order">Check out</StyledLink>
             </CheckOutButton>
-            <ContinueShoppingBtn
-              size="small"
-              onClick={() => props.setTrigger(false)}
-            >
+            <ContinueShoppingBtn size="small" onClick={() => togglePopUp()}>
               Keep shopping
             </ContinueShoppingBtn>
           </CardButtons>

@@ -25,7 +25,6 @@ import { PopUpModulMenu } from '../OrderReview/PopUpModulMenu';
 export const BigMovieCard = ({ currentMovie, currentReview, user }) => {
   const [open, setOpen] = useState(false);
   const [favorites, toggleFavorite] = useFavorites([]);
-  const [triggerPopUp, setTriggerPopUp] = useState(false);
 
   const isFavorite =
     currentMovie && favorites
@@ -227,7 +226,6 @@ export const BigMovieCard = ({ currentMovie, currentReview, user }) => {
                 handleSnackbarOpen();
               } else {
                 addMovieToCart(currentMovie);
-                setTriggerPopUp(true);
               }
             }}
             sx={{
@@ -256,11 +254,7 @@ export const BigMovieCard = ({ currentMovie, currentReview, user }) => {
           />
         </CardContent>
       </Card>
-      <PopUpModulMenu
-        trigger={triggerPopUp}
-        currentMovie={currentMovie}
-        setTrigger={setTriggerPopUp}
-      />
+      <PopUpModulMenu currentMovie={currentMovie} />
     </MovieDetailsLayout>
   );
 };
