@@ -100,7 +100,10 @@ export const MovieDetails = () => {
       <TopCastDisplay movieID={currentMovie?.id} />
 
       <SimilarMovies categoryID={currentMovie?.category_id} />
-      <ReviewsDisplay movieID={currentMovie?.id} />
+      <ReviewsDisplay
+        movieID={currentMovie?.id}
+        currentReview={currentUsersReview}
+      />
     </Container>
   );
 };
