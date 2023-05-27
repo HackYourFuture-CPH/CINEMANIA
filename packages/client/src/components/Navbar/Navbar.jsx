@@ -31,12 +31,19 @@ const NavLink = (props) => {
 export const Navbar = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const { user, logOut, userId } = useUserContext();
+  const { user, logOut, userId, toggleLoginModal } = useUserContext();
   const [amount, setAmount] = useState(0);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const { movieInCart } = React.useContext(OrderContext);
 
+  const onFavoriteClick = () => {
+    if (!userId) {
+      toggleLoginModal();
+      return;
+    }
+    navigate('/favorites');
+  };
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -145,11 +152,7 @@ export const Navbar = () => {
               )}
             </NavIcon>
             <NavIcon isActive={pathname === '/favorites'}>
-              <FavoriteBorderIcon
-                onClick={() => {
-                  navigate('/favorites');
-                }}
-              />
+              <FavoriteBorderIcon onClick={onFavoriteClick} />
             </NavIcon>
           </IconMenu>
         </Toolbar>
