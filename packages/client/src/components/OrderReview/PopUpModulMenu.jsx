@@ -17,7 +17,7 @@ import { MovieDetailsLayout } from '../../containers/MovieDetailsLayout/MovieDet
 export function PopUpModulMenu(props) {
   const { isPopUpOpen, togglePopUp } = React.useContext(OrderContext);
 
-  return isPopUpOpen ? (
+  return isPopUpOpen && props.currentMovie ? (
     <MovieDetailsLayout>
       <PopUpContainer>
         <ModulCard>
