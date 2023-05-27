@@ -19,8 +19,9 @@ import { MovieDetailsLayout } from '../../containers/MovieDetailsLayout/MovieDet
 import styled from '@emotion/styled';
 import { ReviewDialog } from '../ReviewDialog/ReviewDialog';
 import { useFavorites } from '../MovieCard/useFavorites';
-import { useNavigate } from 'react-router-dom';
 import { OrderContext } from '../../context/orderContext';
+import { useNavigate } from 'react-router-dom';
+// import { LogInDialog } from '../LogInDialog/LogInDialog';
 
 export const BigMovieCard = ({ currentMovie, currentReview, user }) => {
   const [open, setOpen] = useState(false);
@@ -35,6 +36,11 @@ export const BigMovieCard = ({ currentMovie, currentReview, user }) => {
 
   function handleOpenReview(event, value) {
     setOpen((status) => !status);
+  }
+
+  function handleLogIn() {
+    // <LogInDialog />
+    navigate('/userLogIn');
   }
 
   const [snackbarOpen, setSnackbarOpen] = useState(false);
@@ -142,31 +148,19 @@ export const BigMovieCard = ({ currentMovie, currentReview, user }) => {
             alignSelf: 'flex-end',
           }}
         >
-          {user ? (
-            <RatingStars
-              handleOpenReview={(_event, value) =>
-                handleOpenReview(_event, value)
-              }
-              clickable={true}
-              ratingText={
-                currentReview
-                  ? `Your rating is ${currentReview?.rating}`
-                  : 'Leave your review'
-              }
-              alignSelf="flex-end"
-              rating={currentReview?.rating}
-            />
-          ) : (
-            <MyButton
-              onClick={() => {
-                // eslint-disable-next-line no-alert
-                navigate('/signup');
-              }}
-              sx={{ width: '10rem', alignSelf: 'flex-end' }}
-            >
-              Edit Rating
-            </MyButton>
-          )}
+          <RatingStars
+            alignSelf="flex-end"
+            rating={currentReview?.rating}
+            clickable={true}
+            ratingText={
+              currentReview
+                ? `Your rating is ${currentReview?.rating}`
+                : 'Leave your review'
+            }
+            handleOpenReview={(_event, value) => {
+              user ? handleOpenReview(_event, value) : handleLogIn();
+            }}
+          />
 
           <RatingStars
             clickable={false}
