@@ -20,8 +20,6 @@ import { LoginModal } from './components/LoginModal/LoginModal';
 import { SnackBarProvider } from './components/SnackBar/SnackBarProvider';
 import { AboutPage } from './containers/About/AboutPage';
 
-
-
 // Routes
 const router = createBrowserRouter([
   {

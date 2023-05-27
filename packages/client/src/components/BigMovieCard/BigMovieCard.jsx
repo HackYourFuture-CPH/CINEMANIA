@@ -153,7 +153,6 @@ export const BigMovieCard = ({
             alignSelf: 'flex-end',
           }}
         >
-
           <RatingStars
             alignSelf="flex-end"
             rating={currentReview?.rating}
