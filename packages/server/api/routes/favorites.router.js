@@ -5,20 +5,15 @@ const router = express.Router({ mergeParams: true });
 // controllers
 const favoritesController = require('../controllers/favorites.controller');
 
-// get favorite movies by userID
+// get favorite movies by userId
 router.get('/:id', (req, res) => {
-  const userID = req.params.id;
-  const pattern = /^\d+$/;
-
-  if (!userID.match(pattern)) {
-    return res.status('400').send('This user id does not exist.');
-  }
+  const userId = req.params.id;
 
   favoritesController
-    .getFavoriteMovie(userID)
+    .getFavoriteMovie(userId)
     .then((result) => {
       if (result.length === 0) {
-        res.status(404).send('This user id does\t have any favorite movies');
+        res.status(200).send("This user id does't have any favorite movies");
       } else {
         res.json(result);
       }
@@ -43,9 +38,9 @@ router.post('/', (req, res) => {
 });
 
 // remove favorite movie
-router.delete('/:movieID/:userID', (req, res) => {
+router.delete('/:movieID/:userId', (req, res) => {
   favoritesController
-    .removeFavoriteMovie(req.params.movieID, req.params.userID)
+    .removeFavoriteMovie(req.params.movieID, req.params.userId)
     .then((result) => {
       // If result is equal to 0, then that means the movie id does not exist
       if (result === 0) {

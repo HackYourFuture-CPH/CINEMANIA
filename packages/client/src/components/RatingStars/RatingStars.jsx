@@ -10,6 +10,7 @@ export const RatingStars = ({
   ratingText,
   handleOpenReview,
   alignSelf,
+  onChange,
 }) => {
   const StarsRatingWrapper = styled(Box)`
     align-self: ${alignSelf ?? ''};
@@ -28,8 +29,9 @@ export const RatingStars = ({
         name="half-rating"
         defaultValue={2.5}
         precision={0.5}
-        value={isNaN(rating) ? 0 : `${Number(rating)}`}
-        onChange={(e, v) => handleOpenReview(e, v)}
+        value={isNaN(rating) ? 0 : Number(rating)}
+        onClick={handleOpenReview ? (e, v) => handleOpenReview(e, v) : null}
+        onChange={onChange}
       />
       {ratingText && <Typography component="legend">{ratingText}</Typography>}
     </StarsRatingWrapper>

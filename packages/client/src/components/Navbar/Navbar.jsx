@@ -2,28 +2,71 @@ import styled from '@emotion/styled';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import PersonIcon from '@mui/icons-material/Person';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import React, { useEffect, useState } from 'react';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
+import { useUserContext } from '../../context/UserContext';
+import { OrderContext } from '../../context/orderContext';
+import { apiURL } from '../../apiURL';
 import {
   AppBar,
   Box,
   Button,
   Grid,
-  Link,
   MenuItem,
   Toolbar,
+  Avatar,
+  Menu,
+  Typography,
 } from '@mui/material';
-import React from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
 
 const NavLink = (props) => {
   const { pathname } = useLocation();
-  const isActive = pathname === props.href;
+  const isActive = pathname === props.to; // Updated prop name from "href" to "to"
   const linkColor = isActive ? 'red' : 'inherit';
-  return <Link underline="none" color={linkColor} {...props} />;
+  return (
+    <Link style={{ textDecoration: 'none', color: linkColor }} {...props} />
+  );
 };
 
 export const Navbar = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
+  const { user, logOut, userId, toggleLoginModal } = useUserContext();
+  const [amount, setAmount] = useState(0);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const { movieInCart } = React.useContext(OrderContext);
+
+  const onFavoriteClick = () => {
+    if (!userId) {
+      toggleLoginModal();
+      return;
+    }
+    navigate('/favorites');
+  };
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  useEffect(() => {
+    const accountBalance = async () => {
+      if (userId) {
+        try {
+          const response = await fetch(`${apiURL()}/tokens/${userId}`);
+          const data = await response.json();
+          setAmount(data[0].amount);
+        } catch (error) {
+          throw new Error('something went wrong');
+        }
+      }
+    };
+    if (userId) {
+      accountBalance();
+    }
+  }, [user, userId]);
 
   return (
     <StyledAppBar>
@@ -37,18 +80,55 @@ export const Navbar = () => {
           }}
         >
           <IconMenu>
-            <NavIcon isActive={pathname === '/signin'}>
-              <PersonIcon
-                onClick={() => {
-                  navigate('/signin');
-                }}
-                sx={{ borderRight: '2px solid #000000' }}
-              />
-            </NavIcon>
+            {user ? (
+              <NavIcon>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
+                >
+                  <Box>
+                    <Avatar
+                      onClick={handleClick}
+                      alt={`${user.email}`}
+                      src="/static/images/avatar/2.jpg"
+                      sx={{ background: 'black' }}
+                    />
+                    <Menu
+                      id="basic-menu"
+                      anchorEl={anchorEl}
+                      open={open}
+                      onClose={handleClose}
+                      MenuListProps={{
+                        'aria-labelledby': 'basic-button',
+                      }}
+                    >
+                      <MenuItem onClick={logOut}>Log out</MenuItem>
+                    </Menu>
+                  </Box>
+                  <AccountBalance>
+                    <Typography variant="body2" sx={{ color: 'white' }}>
+                      Balance: {amount}
+                    </Typography>
+                  </AccountBalance>
+                </Box>
+              </NavIcon>
+            ) : (
+              <NavIcon isActive={pathname === '/signin'}>
+                <PersonIcon
+                  onClick={() => {
+                    navigate('/signin');
+                  }}
+                  sx={{ borderRight: '2px solid #000000' }}
+                />
+              </NavIcon>
+            )}
           </IconMenu>
           <Grid item xs={12} align="center">
             <Box>
-              <NavLink href="/">
+              <NavLink to="/">
                 <img
                   src="https://i.ibb.co/7JGHhKm/image.png"
                   alt="logo"
@@ -59,19 +139,20 @@ export const Navbar = () => {
             </Box>
           </Grid>
           <IconMenu>
-            <NavIcon isActive={pathname === '/shopping'}>
+            <NavIcon isActive={pathname === '/order'}>
               <ShoppingCartIcon
                 onClick={() => {
-                  navigate('/shopping');
+                  navigate('/order');
                 }}
               />
+              {movieInCart.length > 0 && (
+                <CountTypography variant="body">
+                  {movieInCart.length}
+                </CountTypography>
+              )}
             </NavIcon>
             <NavIcon isActive={pathname === '/favorites'}>
-              <FavoriteBorderIcon
-                onClick={() => {
-                  navigate('/favorites');
-                }}
-              />
+              <FavoriteBorderIcon onClick={onFavoriteClick} />
             </NavIcon>
           </IconMenu>
         </Toolbar>
@@ -87,16 +168,16 @@ export const Navbar = () => {
         }}
       >
         <NavButton>
-          <NavLink href="/movies">CATEGORIES</NavLink>
+          <NavLink to="/movies">CATEGORIES</NavLink>
         </NavButton>
         <NavButton>
-          <NavLink href="/top100">THE TOP 100</NavLink>
+          <NavLink to="/top100">THE TOP 100</NavLink>
         </NavButton>
         <NavButton>
-          <NavLink href="/about">ABOUT</NavLink>
+          <NavLink to="/about">ABOUT</NavLink>
         </NavButton>
         <NavButton>
-          <NavLink href="/contact-us">CONTACT US</NavLink>
+          <NavLink to="/contact-us">CONTACT US</NavLink>
         </NavButton>
       </Grid>
     </StyledAppBar>
@@ -115,10 +196,6 @@ const NavIcon = styled.button`
   color: ${(props) => (props.isActive ? 'red' : 'black')};
   cursor: pointer;
   border: none;
-  width: '2rem';
-  height: '2rem';
-  border-right: '2px solid #000000';
-  padding-right: '.5rem';
   outline: none;
   &:hover {
     color: ${(props) => props.theme.palette.hoverRed};
@@ -138,4 +215,19 @@ const NavButton = styled(Button)`
   &:hover {
     color: ${(props) => props.theme.palette.hoverRed};
   }
+`;
+
+const AccountBalance = styled(Box)`
+  background: black;
+  padding: 0.7rem;
+  border-radius: 0.5rem;
+  margin-left: 0.2rem;
+`;
+
+const CountTypography = styled(Typography)`
+  font-size: 1.2rem;
+  color: red;
+  overflow: hidden;
+  position: relative;
+  bottom: 20px;
 `;

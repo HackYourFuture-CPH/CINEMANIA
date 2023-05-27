@@ -6,24 +6,53 @@ import {
   CardMedia,
   Divider,
   Typography,
+  Snackbar,
 } from '@mui/material';
 import React, { useState } from 'react';
-
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import FavoriteIcon from '@mui/icons-material/FavoriteBorder';
+import {
+  StyledFavoriteIcon,
+  StyledFavoriteBorderIcon,
+} from '../MovieCard/MovieCard';
 import { RatingStars } from '../RatingStars/RatingStars';
 import { MovieDetailsLayout } from '../../containers/MovieDetailsLayout/MovieDetailsLayout';
 import styled from '@emotion/styled';
-import { useUserContext } from '../../context/UserContext';
 import { ReviewDialog } from '../ReviewDialog/ReviewDialog';
+import { useFavorites } from '../MovieCard/useFavorites';
+import { OrderContext } from '../../context/orderContext';
 
-export const BigMovieCard = ({ currentMovie }) => {
+export const BigMovieCard = ({
+  currentMovie,
+  currentReview,
+  user,
+  currentUserId,
+  setCurrentUsersReview,
+}) => {
   const [open, setOpen] = useState(false);
+  const [favorites, toggleFavorite] = useFavorites([]);
+
+  const isFavorite = favorites
+    ? favorites.find((favoriteMovie) => favoriteMovie.id === currentMovie.id)
+    : false;
+  const { addMovieToCart } = React.useContext(OrderContext);
 
   function handleOpenReview(event, value) {
     setOpen((status) => !status);
   }
-  const { user } = useUserContext();
+
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const snackbarPosition = {
+    vertical: 'top',
+    horizontal: 'center',
+  };
+
+  const handleSnackbarOpen = () => {
+    setSnackbarOpen(true);
+  };
+
+  const handleSnackbarClose = () => {
+    setSnackbarOpen(false);
+  };
 
   const StyledTypography = styled(Typography)`
     font-family: 'Inter';
@@ -32,10 +61,12 @@ export const BigMovieCard = ({ currentMovie }) => {
     font-size: 1.75rem; /* 28px */
     line-height: 2.125rem; /* 34px */
   `;
+
   const StyledBoldTypography = styled(StyledTypography)`
     font-weight: 700;
     width: 8rem;
   `;
+
   const MovieTitle = styled(StyledBoldTypography)`
     width: 39.5rem;
     margin: 5rem 0 0 0;
@@ -47,6 +78,7 @@ export const BigMovieCard = ({ currentMovie }) => {
     display: flex;
     flex-direction: row;
   `;
+
   const MyButton = styled(Button)({
     height: '3.125rem',
     fontWeight: 500,
@@ -63,7 +95,6 @@ export const BigMovieCard = ({ currentMovie }) => {
       <Card
         sx={{
           bgcolor: 'mainGreen',
-
           display: 'flex',
           flexFlow: 'row wrap',
           alignItems: 'center',
@@ -78,9 +109,7 @@ export const BigMovieCard = ({ currentMovie }) => {
             bgcolor: 'white',
             display: 'flex',
             flexDirection: 'column',
-
             justifyContent: 'center',
-
             position: 'relative',
             alignItems: 'center',
             flex: '1 1 300px',
@@ -97,19 +126,15 @@ export const BigMovieCard = ({ currentMovie }) => {
             src={currentMovie?.image_location}
             alt="Movie Poster"
           />
-          <FavoriteIcon
-            sx={{
-              color: 'white',
-              backgroundColor: 'black',
-              position: 'absolute',
-              top: '1rem',
-              right: '1rem',
-              width: '2rem',
-              height: '2rem',
-              padding: '0.5rem',
-              zIndex: 1,
-            }}
-          />
+          {isFavorite ? (
+            <StyledFavoriteIcon
+              onClick={() => toggleFavorite(currentMovie, isFavorite)}
+            />
+          ) : (
+            <StyledFavoriteBorderIcon
+              onClick={() => toggleFavorite(currentMovie, isFavorite)}
+            />
+          )}
         </Box>
 
         <CardContent
@@ -126,8 +151,13 @@ export const BigMovieCard = ({ currentMovie }) => {
                 handleOpenReview(_event, value)
               }
               clickable={true}
-              ratingText={`Your rating is ${user?.auth?.name}`}
+              ratingText={
+                currentReview && currentReview?.rating
+                  ? `Your rating is ${currentReview?.rating}`
+                  : 'Leave your review'
+              }
               alignSelf="flex-end"
+              rating={currentReview?.rating}
             />
           )}
           <RatingStars
@@ -145,8 +175,10 @@ export const BigMovieCard = ({ currentMovie }) => {
           <ReviewDialog
             initialState={open}
             handleClose={(_event, value) => handleOpenReview(_event, value)}
-            user={user}
+            currentReview={currentReview}
             movieId={currentMovie?.id}
+            currentUserId={currentUserId}
+            setCurrentUsersReview={setCurrentUsersReview}
           />
           <MovieTitle
             sx={{
@@ -194,18 +226,36 @@ export const BigMovieCard = ({ currentMovie }) => {
           <MyButton
             variant="outlined"
             onClick={() => {
-              // eslint-disable-next-line no-alert
-              alert('Added to Shopping Cart');
+              if (!user) {
+                handleSnackbarOpen();
+              } else {
+                addMovieToCart(currentMovie);
+              }
             }}
             sx={{
               marginTop: '1rem',
-
               alignSelf: 'flex-end',
             }}
             startIcon={<AddShoppingCartIcon />}
           >
             Add to Cart
           </MyButton>
+          <Snackbar
+            anchorOrigin={snackbarPosition}
+            open={snackbarOpen}
+            autoHideDuration={3000}
+            onClose={handleSnackbarClose}
+            message="You are not logged in"
+            sx={{
+              '.css-dh0nqz-MuiPaper-root-MuiSnackbarContent-root': {
+                backgroundColor: 'hoverRed',
+                fontSize: '20px',
+                position: 'absolute',
+                marginTop: '20rem',
+                paddingLeft: '5rem',
+              },
+            }}
+          />
         </CardContent>
       </Card>
     </MovieDetailsLayout>
