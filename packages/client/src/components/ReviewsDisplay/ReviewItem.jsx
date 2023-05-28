@@ -46,7 +46,7 @@ export const ReviewItem = ({ review, canEdit }) => {
             </Typography>
           </Box>
           <RatingStars
-            averageRating={review.rating}
+            rating={review.rating}
             numberOfReviews={5}
             color="#00FFC2"
             ratingText={false}
