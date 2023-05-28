@@ -69,7 +69,9 @@ export function ReviewsDisplay({ movieID }) {
   const filteredReviews = userReview
     ? reviews.filter(
         (review) =>
-          !userReview.some((userReviewItem) => userReviewItem.id === review.id),
+          !userReview.some(
+            (userReviewItem) => userReviewItem.reviewID === review.id,
+          ),
       )
     : reviews;
   if (isLoading) {
@@ -79,6 +81,7 @@ export function ReviewsDisplay({ movieID }) {
       </MovieDetailsLayout>
     );
   }
+
   return (
     <MovieDetailsLayout>
       <List sx={{ width: '100%' }}>
