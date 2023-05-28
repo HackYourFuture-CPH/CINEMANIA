@@ -14,7 +14,7 @@ export const theme = createTheme({
     mobile: `(max-width: 374px)`,
     sm_tablet: `(max-width: 499px)`,
     tablet: `(max-width: 799px)`,
-    laptop: `(max-width: 1023px)`,
-    desktop: `(max-width: 1439px)`,
+    laptop: `(max-width: 1439px)`,
+    desktop: `(max-width: 1919px)`,
   },
 });
