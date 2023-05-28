@@ -11,6 +11,7 @@ import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlin
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import styled from '@emotion/styled';
 import { OrderContext } from '../../context/orderContext';
+import { handleAddFavorite } from '../MovieCard/handlerFavorite';
 
 export const OrderReview = ({ movies }) => {
   const { removeMovie } = React.useContext(OrderContext);
@@ -20,16 +21,16 @@ export const OrderReview = ({ movies }) => {
     0,
   );
 
-  const totalPriceWithVAT = totalPrice * 1.25;
+  const totalPriceWithVAT = (totalPrice * 1.25).toFixed(2);
 
   if (movies.length === 0) {
     return (
-      <CartTypographyOrderID
+      <CartTypographyOrder
         variant="h5"
         sx={{ alignSelf: 'center', mt: '10rem' }}
       >
         Your basket is currently empty! Please add some movies.
-      </CartTypographyOrderID>
+      </CartTypographyOrder>
     );
   }
 
@@ -82,7 +83,11 @@ export const OrderReview = ({ movies }) => {
                   </ItemsCardTypographyDescription>
                   <ItemFavRemoveBox>
                     <FavRemoveBox>
-                      <FavRemoveButton onClick={(e) => e.preventDefault()}>
+                      <FavRemoveButton
+                        onClick={() => {
+                          handleAddFavorite(movie);
+                        }}
+                      >
                         <StyledFavoriteBorderOutlinedIcon />
                         <FavoriteTypography variant="h6">
                           Move to my favorites
@@ -164,7 +169,7 @@ const CartTypographyTitle = styled(Typography)`
   font-size: 2.5rem;
 `;
 
-const CartTypographyOrderID = styled(Typography)`
+const CartTypographyOrder = styled(Typography)`
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
@@ -250,7 +255,7 @@ const ItemsCardTypographyTitle = styled(Typography)`
   font-weight: 500;
   font-size: 32px;
   color: #003c2d;
-  max-width: 20rem;
+  max-width: 25rem;
 `;
 
 const ItemsCardTypographyPrice = styled(Typography)`

@@ -6,7 +6,7 @@ import { useUserContext } from '../../context/UserContext';
 
 export const useFavorites = (initialFavorites = []) => {
   const [favorites, setFavorites] = useState(initialFavorites);
-  const { userId } = useUserContext();
+  const { userId, toggleLoginModal } = useUserContext();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -33,13 +33,15 @@ export const useFavorites = (initialFavorites = []) => {
     };
   }, [navigate, userId]);
 
-  const toggleFavorite = (item, isFavorites) => {
+  const toggleFavorite = (item, isFavorites, handleSnackbarOpen) => {
     if (isFavorites) {
       handleRemoveFavorite(item.id, item, favorites, setFavorites, userId);
+      handleSnackbarOpen(item.title, 'removed from favorites', 'remove');
     } else if (!userId) {
-      navigate('/signin');
-    } else {
+      toggleLoginModal();
+    } else if (!isFavorites) {
       handleAddFavorite(item.id, item, favorites, setFavorites, userId);
+      handleSnackbarOpen(item.title, 'added to favorites', 'success');
     }
   };
 

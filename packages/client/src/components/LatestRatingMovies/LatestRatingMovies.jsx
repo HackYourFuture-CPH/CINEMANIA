@@ -29,13 +29,7 @@ export const LatestRatingMovies = () => {
   return (
     <StyledMovieGrid>
       <LatestRating>LATEST RATINGS</LatestRating>
-      <Masonry
-        columns={4}
-        spacing={5}
-        sx={{
-          width: '78rem',
-        }}
-      >
+      <StyledMasonry columns={{ xs: 2, sm: 3, md: 4 }} spacing={5}>
         {movies.map(
           (movie, index /* eslint-disable react/no-array-index-key */) => (
             <MovieCard
@@ -46,7 +40,7 @@ export const LatestRatingMovies = () => {
             />
           ),
         )}
-      </Masonry>
+      </StyledMasonry>
     </StyledMovieGrid>
   );
 };
@@ -67,4 +61,21 @@ const LatestRating = styled(Typography)`
   margin-bottom: 3rem;
   margin-top: 6rem;
   font-family: Inter;
+
+  @media (max-width: 1280px) {
+    font-size: 1.8rem;
+    margin-top: 4rem;
+  }
+`;
+
+const StyledMasonry = styled(Masonry)`
+  width: 78rem;
+
+  @media (max-width: 1280px) {
+    width: 60rem;
+  }
+
+  @media (max-width: 768px) {
+    width: 40rem;
+  }
 `;

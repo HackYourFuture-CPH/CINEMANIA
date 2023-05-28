@@ -22,7 +22,13 @@ import { useFavorites } from '../MovieCard/useFavorites';
 import { OrderContext } from '../../context/orderContext';
 import { AddToCartConfirmation } from '../OrderReview/AddToCartConfirmation';
 
-export const BigMovieCard = ({ currentMovie, currentReview, user }) => {
+export const BigMovieCard = ({
+  currentMovie,
+  currentReview,
+  user,
+  currentUserId,
+  setCurrentUsersReview,
+}) => {
   const [open, setOpen] = useState(false);
   const [favorites, toggleFavorite] = useFavorites([]);
 
@@ -122,13 +128,26 @@ export const BigMovieCard = ({ currentMovie, currentReview, user }) => {
             src={currentMovie?.image_location}
             alt="Movie Poster"
           />
+
           {isFavorite ? (
             <StyledFavoriteIcon
-              onClick={() => toggleFavorite(currentMovie, isFavorite)}
+              onClick={() => {
+                if (!user) {
+                  handleSnackbarOpen();
+                } else {
+                  toggleFavorite(currentMovie, isFavorite);
+                }
+              }}
             />
           ) : (
             <StyledFavoriteBorderIcon
-              onClick={() => toggleFavorite(currentMovie, isFavorite)}
+              onClick={() => {
+                if (!user) {
+                  handleSnackbarOpen();
+                } else {
+                  toggleFavorite(currentMovie, isFavorite);
+                }
+              }}
             />
           )}
         </Box>
@@ -148,7 +167,7 @@ export const BigMovieCard = ({ currentMovie, currentReview, user }) => {
               }
               clickable={true}
               ratingText={
-                currentReview
+                currentReview && currentReview?.rating
                   ? `Your rating is ${currentReview?.rating}`
                   : 'Leave your review'
               }
@@ -158,7 +177,6 @@ export const BigMovieCard = ({ currentMovie, currentReview, user }) => {
           )}
           {currentMovie && (
             <RatingStars
-              clickable={false}
               ratingText={
                 currentMovie.rating
                   ? `${currentMovie.rating} based on ${
@@ -175,6 +193,8 @@ export const BigMovieCard = ({ currentMovie, currentReview, user }) => {
             handleClose={(_event, value) => handleOpenReview(_event, value)}
             currentReview={currentReview}
             movieId={currentMovie?.id}
+            currentUserId={currentUserId}
+            setCurrentUsersReview={setCurrentUsersReview}
           />
           <MovieTitle
             sx={{

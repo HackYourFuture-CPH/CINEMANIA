@@ -21,11 +21,15 @@ export const UserProvider = ({ children }) => {
   const [user, setUser] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [userId, setUserId] = useState(null);
+  const [showLoginModal, setShowLoginModal] = useState(false);
 
   const toggleModal = () => {
     setIsModalOpen((prevState) => !prevState);
   };
 
+  const toggleLoginModal = () => {
+    setShowLoginModal((prevState) => !prevState);
+  };
   const createUser = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
   };
@@ -57,6 +61,8 @@ export const UserProvider = ({ children }) => {
         } catch (error) {
           return error.name === 'Something wrong in the operation';
         }
+      } else {
+        setUserId(null);
       }
     };
 
@@ -71,9 +77,11 @@ export const UserProvider = ({ children }) => {
       signIn,
       toggleModal,
       isModalOpen,
+      toggleLoginModal,
+      showLoginModal,
       userId,
     }),
-    [user, isModalOpen, userId],
+    [user, isModalOpen, showLoginModal, userId],
   );
 
   return (

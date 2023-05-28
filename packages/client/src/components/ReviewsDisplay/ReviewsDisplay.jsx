@@ -22,7 +22,7 @@ import styled from '@emotion/styled';
 import { apiURL } from '../../apiURL';
 import Alert from '@mui/material/Alert';
 
-export function ReviewsDisplay({ movieID }) {
+export function ReviewsDisplay({ movieID, currentReview }) {
   const [reviews, setReviews] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [showAllReviews, setShowAllReviews] = useState(false);
@@ -47,7 +47,7 @@ export function ReviewsDisplay({ movieID }) {
       setIsLoading(false);
     };
     fetchReviewsList();
-  }, [movieID]);
+  }, [movieID, currentReview]);
   const handleShowAllReviews = () => {
     setShowAllReviews((previousAllReviewsState) => !previousAllReviewsState);
   };
@@ -122,7 +122,7 @@ export function ReviewsDisplay({ movieID }) {
                   </Typography>
                 </Box>
                 <RatingStars
-                  averageRating={review.rating}
+                  rating={review.rating}
                   numberOfReviews={5}
                   color="#00FFC2"
                   ratingText={false}
