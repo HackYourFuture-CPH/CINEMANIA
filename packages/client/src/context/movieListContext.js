@@ -17,7 +17,7 @@ export const MovieListProvider = ({ isFavoritePage, children }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [sortBy, setSortBy] = useState('');
-  const [isClickedSame, setIsClickedSame] = useState(false);
+  const [isSameOptionClicked, setIsSameOptionClicked] = useState(false);
   const [searchText, setSearchText] = useState('');
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
@@ -42,8 +42,8 @@ export const MovieListProvider = ({ isFavoritePage, children }) => {
         if (debouncedSearchText) {
           url += `&title=${debouncedSearchText}`;
         }
-        if (isClickedSame) {
-          url += `&isClickedSame=${isClickedSame}`;
+        if (isSameOptionClicked) {
+          url += `&isClickedSame=${isSameOptionClicked}`;
         }
         if (sortBy !== '') {
           url += `&sortBy=${sortBy}`;
@@ -65,7 +65,7 @@ export const MovieListProvider = ({ isFavoritePage, children }) => {
     debouncedSearchText,
     selectedCategoryId,
     isFavoritePage,
-    isClickedSame,
+    isSameOptionClicked,
     currentPage,
     userId,
   ]);
@@ -76,11 +76,14 @@ export const MovieListProvider = ({ isFavoritePage, children }) => {
     setSortBy(value);
   }, []);
 
-  const onChangeDirection = useCallback(() => {
-    setCurrentPage(1);
-    setMovies([]);
-    setIsClickedSame((prevState) => !prevState);
-  }, []);
+  const onChangeDirection = useCallback(
+    (value) => {
+      setCurrentPage(1);
+      setMovies([]);
+      setIsSameOptionClicked((prev) => !prev);
+    },
+    [setIsSameOptionClicked],
+  );
 
   const onLoadMore = useCallback(() => {
     setCurrentPage((prevPage) => prevPage + 1);
@@ -110,6 +113,7 @@ export const MovieListProvider = ({ isFavoritePage, children }) => {
       onSearch,
       onLoadMore,
       hasNextPage,
+      isSameOptionClicked,
     }),
     [
       movies,
@@ -124,6 +128,7 @@ export const MovieListProvider = ({ isFavoritePage, children }) => {
       onSearch,
       onLoadMore,
       hasNextPage,
+      isSameOptionClicked,
     ],
   );
 
