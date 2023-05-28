@@ -4,7 +4,7 @@ import { useMovieList } from '../../context/movieListContext';
 import FilterListIcon from '@mui/icons-material/FilterList';
 
 const CustomSelect = () => {
-  const { sortBy, onSortMovies, onChangeDirection, isClickedSame } =
+  const { sortBy, onSortMovies, onChangeDirection, isSameOptionClicked } =
     useMovieList();
   const [showComponent, setShowComponent] = React.useState(false);
   const handleChangeDirection = (event) => {
@@ -22,7 +22,7 @@ const CustomSelect = () => {
 
   return (
     <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-      <FormControl variant="standard" sx={{ m: 1, minWidth: 85 }}>
+      <FormControl variant="standard" sx={{ m: 1, minWidth: 90 }}>
         <InputLabel
           id="sort-by-label"
           style={{ color: '#00FFC2', borderBottom: '1px solid #00FFC2' }}
@@ -50,7 +50,7 @@ const CustomSelect = () => {
           <MenuItem id="rating" value="rating" onClick={handleChangeDirection}>
             <FilterListIcon
               style={
-                sortBy === 'rating' && isClickedSame
+                sortBy === 'rating' && isSameOptionClicked
                   ? { ...iconStyle }
                   : { ...iconStyle, transform: 'rotate(180deg)' }
               }
@@ -65,7 +65,7 @@ const CustomSelect = () => {
             {showComponent && (
               <FilterListIcon
                 style={
-                  sortBy === 'recently_added' && isClickedSame
+                  sortBy === 'recently_added' && isSameOptionClicked
                     ? { ...iconStyle, transform: 'rotate(180deg)' }
                     : { ...iconStyle }
                 }
@@ -77,7 +77,7 @@ const CustomSelect = () => {
             {showComponent && (
               <FilterListIcon
                 style={
-                  sortBy === 'price' && isClickedSame
+                  sortBy === 'price' && isSameOptionClicked
                     ? { ...iconStyle }
                     : { ...iconStyle, transform: 'rotate(180deg)' }
                 }
