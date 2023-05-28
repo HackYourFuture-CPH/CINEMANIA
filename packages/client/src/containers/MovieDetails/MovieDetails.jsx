@@ -17,20 +17,20 @@ export const MovieDetails = () => {
   const { user } = useUserContext();
 
   useEffect(() => {
-    if (user.uid) {
+    if (user?.uid) {
       (async () => {
-        const response = await fetch(`${apiURL()}/users/${user.uid}`);
+        const response = await fetch(`${apiURL()}/users/${user?.uid}`);
         const getUser = await response.json();
         if (getUser) {
           setCurrentUserId(getUser[0].id);
         }
       })();
     }
-  }, [user.uid]);
+  }, [user?.uid]);
 
   useEffect(() => {
     (async () => {
-      if (movieID && user.uid) {
+      if (movieID && user?.uid) {
         try {
           const response = await fetch(
             `${apiURL()}/reviews/${movieID}/uid/${user.uid}`,
@@ -100,7 +100,10 @@ export const MovieDetails = () => {
       <TopCastDisplay movieID={currentMovie?.id} />
 
       <SimilarMovies categoryID={currentMovie?.category_id} />
-      <ReviewsDisplay movieID={currentMovie?.id} />
+      <ReviewsDisplay
+        movieID={currentMovie?.id}
+        currentReview={currentUsersReview}
+      />
     </Container>
   );
 };
