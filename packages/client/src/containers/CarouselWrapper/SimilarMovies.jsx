@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { apiURL } from '../../apiURL';
-import fallBackMovies from '../../assets/fallBackMovies.json';
 import { RoundCarousel } from '../../components/RoundCarousel/RoundCarousel';
 import { MovieDetailsLayout } from '../MovieDetailsLayout/MovieDetailsLayout';
 
 const SimilarMovies = ({ categoryID }) => {
-  const [carouselData, setCarouselData] = useState(fallBackMovies);
+  const [carouselData, setCarouselData] = useState(null);
   useEffect(() => {
     (async () => {
       if (categoryID) {

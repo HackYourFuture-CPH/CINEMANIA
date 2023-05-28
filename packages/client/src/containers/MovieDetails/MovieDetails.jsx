@@ -1,8 +1,7 @@
-import { Container } from '@mui/material';
+import { Container, CircularProgress } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { apiURL } from '../../apiURL';
-import fallBackMovies from '../../assets/fallBackMovies.json';
 import { BigMovieCard } from '../../components/BigMovieCard/BigMovieCard';
 import { TopCastDisplay } from '../../components/TopCastDisplay/TopCastDisplay';
 import { SimilarMovies } from '../CarouselWrapper/SimilarMovies';
@@ -11,7 +10,7 @@ import { useUserContext } from '../../context/UserContext';
 
 export const MovieDetails = () => {
   const movieID = useParams().id;
-  const [currentMovie, setCurrentMovie] = useState(fallBackMovies[0]);
+  const [currentMovie, setCurrentMovie] = useState(null);
   const [currentUsersReview, setCurrentUsersReview] = useState(undefined);
   const [currentUserId, setCurrentUserId] = useState(undefined);
   const { user } = useUserContext();
@@ -73,10 +72,7 @@ export const MovieDetails = () => {
           }
         } catch (error) {
           setCurrentMovie({
-            ...fallBackMovies[0],
-            description: fallBackMovies[0].description.concat(
-              ` Here what happened: ${error.message}`,
-            ),
+            description: ` Error happened: ${error.message}`,
           });
         }
       })();
@@ -85,8 +81,7 @@ export const MovieDetails = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
-  if (!currentMovie) return;
+  }, [currentMovie]);
 
   return (
     <Container
@@ -99,13 +94,24 @@ export const MovieDetails = () => {
         gap: '3rem',
       }}
     >
-      <BigMovieCard
-        currentMovie={currentMovie}
-        currentReview={currentUsersReview}
-        setCurrentUsersReview={setCurrentUsersReview}
-        currentUserId={currentUserId}
-        user={user}
-      />
+      {currentMovie ? (
+        <BigMovieCard
+          currentMovie={currentMovie}
+          currentReview={currentUsersReview}
+          setCurrentUsersReview={setCurrentUsersReview}
+          currentUserId={currentUserId}
+          user={user}
+        />
+      ) : (
+        <CircularProgress
+          sx={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+          }}
+        />
+      )}
+
       <TopCastDisplay movieID={currentMovie?.id} />
       <SimilarMovies categoryID={currentMovie?.category_id} />
       <ReviewsDisplay
