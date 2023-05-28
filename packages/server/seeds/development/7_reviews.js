@@ -14,7 +14,7 @@ exports.seed = async function (knex) {
         'I love The Matrix! It is definitely most masterpiece movie I had ever seen. I give this masterpiece film a 10/10!',
     },
     {
-      movie_id: 2,
+      movie_id: 44,
       user_id: 3,
       rating: 5,
       review_text:
@@ -29,7 +29,7 @@ exports.seed = async function (knex) {
     },
     {
       id: 4,
-      movie_id: 2,
+      movie_id: 11,
       user_id: 5,
       rating: 4,
       review_text:
@@ -43,7 +43,7 @@ exports.seed = async function (knex) {
         'I quite enjoyed it, but it was strange. Keanu Reeves was brilliant as Neo, and fit the role quite well. But there a lot of unexplained things. So overall a good movie, but with a range of flaws.',
     },
     {
-      movie_id: 2,
+      movie_id: 43,
       user_id: 1,
       rating: 4,
       review_text:
