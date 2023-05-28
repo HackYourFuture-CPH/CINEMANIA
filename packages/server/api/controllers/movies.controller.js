@@ -56,6 +56,7 @@ const getDetailsOfMovieByID = async (id) => {
         'm.image_location',
         'm.backdrop_URL',
         'm.category_id',
+        'm.price',
         knex.raw('ROUND(AVG(r.rating),1) as rating'),
         knex.raw('COUNT(DISTINCT r.user_id) as number_of_ratings'),
         'c.name as category_name',

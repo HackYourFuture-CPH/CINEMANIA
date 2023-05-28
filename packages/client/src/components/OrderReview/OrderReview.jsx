@@ -21,16 +21,16 @@ export const OrderReview = ({ movies }) => {
     0,
   );
 
-  const totalPriceWithVAT = totalPrice * 1.25;
+  const totalPriceWithVAT = (totalPrice * 1.25).toFixed(2);
 
   if (movies.length === 0) {
     return (
-      <CartTypographyOrderID
+      <CartTypographyOrder
         variant="h5"
         sx={{ alignSelf: 'center', mt: '10rem' }}
       >
         Your basket is currently empty! Please add some movies.
-      </CartTypographyOrderID>
+      </CartTypographyOrder>
     );
   }
 
@@ -41,7 +41,6 @@ export const OrderReview = ({ movies }) => {
           <CartTypographyTitle variant="h4">
             Shopping Basket
           </CartTypographyTitle>
-          <CartTypographyOrderID variant="h5">Order ID:</CartTypographyOrderID>
         </CartTypographyBox>
         <CartTypographyBox>
           <CartTypographyPrice variant="subtitle2">
@@ -170,7 +169,7 @@ const CartTypographyTitle = styled(Typography)`
   font-size: 2.5rem;
 `;
 
-const CartTypographyOrderID = styled(Typography)`
+const CartTypographyOrder = styled(Typography)`
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
@@ -256,6 +255,7 @@ const ItemsCardTypographyTitle = styled(Typography)`
   font-weight: 500;
   font-size: 32px;
   color: #003c2d;
+  max-width: 25rem;
 `;
 
 const ItemsCardTypographyPrice = styled(Typography)`
