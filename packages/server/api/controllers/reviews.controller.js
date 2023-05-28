@@ -54,6 +54,7 @@ const getReviewByIdUid = async (id, uid) => {
         'm.description',
         'u.id as user_id',
         'u.uid',
+        'u.full_name',
         'r.id as reviewID',
         'r.movie_id',
         'r.rating',
