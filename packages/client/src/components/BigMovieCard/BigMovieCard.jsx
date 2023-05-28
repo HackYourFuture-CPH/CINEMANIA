@@ -32,20 +32,16 @@ export const BigMovieCard = ({
   const [open, setOpen] = useState(false);
   const [favorites, toggleFavorite] = useFavorites([]);
 
-  const isFavorite = favorites
-    ? favorites.find((favoriteMovie) => favoriteMovie.id === currentMovie.id)
-    : false;
+  const isFavorite =
+    currentMovie && favorites
+      ? favorites.find((favoriteMovie) => favoriteMovie.id === currentMovie.id)
+      : false;
   const { addMovieToCart } = React.useContext(OrderContext);
 
   const navigate = useNavigate();
 
   function handleOpenReview(event, value) {
     setOpen((status) => !status);
-  }
-
-  function handleLogIn() {
-    // <LogInDialog />
-    navigate('/userLogIn');
   }
 
   const [snackbarOpen, setSnackbarOpen] = useState(false);
@@ -134,13 +130,26 @@ export const BigMovieCard = ({
             src={currentMovie?.image_location}
             alt="Movie Poster"
           />
+
           {isFavorite ? (
             <StyledFavoriteIcon
-              onClick={() => toggleFavorite(currentMovie, isFavorite)}
+              onClick={() => {
+                if (!user) {
+                  handleSnackbarOpen();
+                } else {
+                  toggleFavorite(currentMovie, isFavorite);
+                }
+              }}
             />
           ) : (
             <StyledFavoriteBorderIcon
-              onClick={() => toggleFavorite(currentMovie, isFavorite)}
+              onClick={() => {
+                if (!user) {
+                  handleSnackbarOpen();
+                } else {
+                  toggleFavorite(currentMovie, isFavorite);
+                }
+              }}
             />
           )}
         </Box>
@@ -153,32 +162,36 @@ export const BigMovieCard = ({
             alignSelf: 'flex-end',
           }}
         >
-          <RatingStars
-            alignSelf="flex-end"
-            rating={currentReview?.rating}
-            clickable={true}
-            ratingText={
-              currentReview
-                ? `Your rating is ${currentReview?.rating}`
-                : 'Leave your review'
-            }
-            handleOpenReview={(_event, value) => {
-              user ? handleOpenReview(_event, value) : handleLogIn();
-            }}
-          />
-
-          <RatingStars
-            clickable={false}
-            ratingText={
-              currentMovie.rating
-                ? `${currentMovie.rating} based on ${
-                    currentMovie.number_of_ratings
-                  } review${currentMovie.number_of_ratings === 1 ? '' : 's'}`
-                : 'No rating given'
-            }
-            rating={currentMovie.rating}
-            alignSelf="flex-end"
-          />
+          {user && currentReview ? (
+            <RatingStars
+              handleOpenReview={(_event, value) =>
+                handleOpenReview(_event, value)
+              }
+              clickable={true}
+              ratingText={
+                currentReview && currentReview?.rating
+                  ? `Your rating is ${currentReview?.rating}`
+                  : 'Leave your review'
+              }
+              alignSelf="flex-end"
+              rating={currentReview?.rating}
+            />
+          ) : (
+            ''
+          )}
+          {currentMovie && (
+            <RatingStars
+              ratingText={
+                currentMovie.rating
+                  ? `${currentMovie.rating} based on ${
+                      currentMovie.number_of_ratings
+                    } review${currentMovie.number_of_ratings === 1 ? '' : 's'}`
+                  : 'No rating given'
+              }
+              rating={currentMovie.rating}
+              alignSelf="flex-end"
+            />
+          )}
           <ReviewDialog
             initialState={open}
             handleClose={(_event, value) => handleOpenReview(_event, value)}

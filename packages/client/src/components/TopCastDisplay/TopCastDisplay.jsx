@@ -22,8 +22,13 @@ export const TopCastDisplay = ({ movieID }) => {
       if (movieID) {
         try {
           const response = await fetch(`${apiURL()}/crew/movie/${movieID}`);
-          const data = await response.json();
-          setCastList(data);
+
+          if (response.ok) {
+            const data = await response.json();
+            setCastList(data);
+          } else {
+            throw new Error(`Status code error : ${response.status}`);
+          }
         } catch (error) {
           setIsLoading(false);
         }
