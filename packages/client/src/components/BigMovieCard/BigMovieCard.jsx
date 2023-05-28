@@ -1,3 +1,5 @@
+import styled from '@emotion/styled';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import {
   Box,
   Button,
@@ -5,23 +7,22 @@ import {
   CardContent,
   CardMedia,
   Divider,
-  Typography,
   Snackbar,
+  Typography,
 } from '@mui/material';
 import React, { useState } from 'react';
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import { MovieDetailsLayout } from '../../containers/MovieDetailsLayout/MovieDetailsLayout';
+import { OrderContext } from '../../context/orderContext';
 import {
-  StyledFavoriteIcon,
   StyledFavoriteBorderIcon,
+  StyledFavoriteIcon,
 } from '../MovieCard/MovieCard';
 import { RatingStars } from '../RatingStars/RatingStars';
-import { MovieDetailsLayout } from '../../containers/MovieDetailsLayout/MovieDetailsLayout';
-import styled from '@emotion/styled';
 import { ReviewDialog } from '../ReviewDialog/ReviewDialog';
-import { useFavorites } from '../MovieCard/useFavorites';
-import { OrderContext } from '../../context/orderContext';
-import { LoginModal } from '../LoginModal/LoginModal';
+
 import { useUserContext } from '../../context/UserContext';
+import { LoginModal } from '../LoginModal/LoginModal';
+import { useFavorites } from '../MovieCard/useFavorites';
 import { AddToCartConfirmation } from '../OrderReview/AddToCartConfirmation';
 
 export const BigMovieCard = ({
@@ -249,29 +250,41 @@ export const BigMovieCard = ({
               <StyledBoldTypography>Director: </StyledBoldTypography>
               <StyledTypography>{currentMovie?.director}</StyledTypography>
             </TextDivider>
+
             <TextDivider>
               <StyledBoldTypography> Writer: </StyledBoldTypography>
               <StyledTypography>{currentMovie?.writer}</StyledTypography>
             </TextDivider>
           </Box>
-
-          <MyButton
-            variant="outlined"
-            onClick={() => {
-              if (!user) {
-                handleSnackbarOpen();
-              } else {
-                addMovieToCart(currentMovie);
-              }
-            }}
+          <Box
             sx={{
               marginTop: '1rem',
               alignSelf: 'flex-end',
             }}
-            startIcon={<AddShoppingCartIcon />}
           >
-            Add to Cart
-          </MyButton>
+            <StyledTypography
+              sx={{
+                textAlign: 'right',
+              }}
+            >
+              {currentMovie?.price}
+            </StyledTypography>
+
+            <MyButton
+              variant="outlined"
+              onClick={() => {
+                if (!user) {
+                  handleSnackbarOpen();
+                } else {
+                  addMovieToCart(currentMovie);
+                }
+              }}
+              startIcon={<AddShoppingCartIcon />}
+            >
+              Add to Cart
+            </MyButton>
+          </Box>
+
           <Snackbar
             anchorOrigin={snackbarPosition}
             open={snackbarOpen}
