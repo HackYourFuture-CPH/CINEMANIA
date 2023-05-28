@@ -18,9 +18,9 @@ export const LoginModal = () => {
 
   return (
     <CustomDialog open={showLoginModal} onClose={() => toggleLoginModal()}>
-      <CustomDialogTitle>You are not logged in!</CustomDialogTitle>
+      <CustomDialogTitle>You are not logged in</CustomDialogTitle>
       <CustomDialogContent>
-        <p>Please log in!!!</p>
+        <p>Please log in</p>
       </CustomDialogContent>
       <DialogActions>
         <CustomButton onClick={handleLoginClick}>Go to login</CustomButton>

@@ -61,6 +61,8 @@ export const UserProvider = ({ children }) => {
         } catch (error) {
           return error.name === 'Something wrong in the operation';
         }
+      } else {
+        setUserId(null);
       }
     };
 
