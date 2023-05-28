@@ -20,6 +20,8 @@ import styled from '@emotion/styled';
 import { ReviewDialog } from '../ReviewDialog/ReviewDialog';
 import { useFavorites } from '../MovieCard/useFavorites';
 import { OrderContext } from '../../context/orderContext';
+import { LoginModal } from '../LoginModal/LoginModal';
+import { useUserContext } from '../../context/UserContext';
 import { AddToCartConfirmation } from '../OrderReview/AddToCartConfirmation';
 
 export const BigMovieCard = ({
@@ -31,7 +33,7 @@ export const BigMovieCard = ({
 }) => {
   const [open, setOpen] = useState(false);
   const [favorites, toggleFavorite] = useFavorites([]);
-
+  const { toggleLoginModal } = useUserContext();
   const isFavorite =
     currentMovie && favorites
       ? favorites.find((favoriteMovie) => favoriteMovie.id === currentMovie.id)
@@ -160,7 +162,7 @@ export const BigMovieCard = ({
             alignSelf: 'flex-end',
           }}
         >
-          {user && (
+          {user && currentReview ? (
             <RatingStars
               handleOpenReview={(_event, value) =>
                 handleOpenReview(_event, value)
@@ -174,6 +176,20 @@ export const BigMovieCard = ({
               alignSelf="flex-end"
               rating={currentReview?.rating}
             />
+          ) : (
+            <>
+              <MyButton
+                sx={{ width: '10rem', alignSelf: 'flex-end' }}
+                onClick={
+                  user
+                    ? (_event, value) => handleOpenReview(_event, value)
+                    : () => toggleLoginModal()
+                }
+              >
+                Rate
+              </MyButton>
+              <LoginModal />
+            </>
           )}
           {currentMovie && (
             <RatingStars
