@@ -17,7 +17,6 @@ import {
   StyledFavoriteBorderIcon,
   StyledFavoriteIcon,
 } from '../MovieCard/MovieCard';
-import { useFavorites } from '../MovieCard/useFavorites';
 import { RatingStars } from '../RatingStars/RatingStars';
 import { ReviewDialog } from '../ReviewDialog/ReviewDialog';
 
