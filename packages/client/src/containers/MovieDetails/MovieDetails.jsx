@@ -89,7 +89,16 @@ export const MovieDetails = () => {
   if (!currentMovie) return;
 
   return (
-    <Container maxWidth="xl" sx={{ gap: '3rem' }}>
+    <Container
+      maxWidth="xl"
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: '3rem',
+      }}
+    >
       <BigMovieCard
         currentMovie={currentMovie}
         currentReview={currentUsersReview}
@@ -98,7 +107,6 @@ export const MovieDetails = () => {
         user={user}
       />
       <TopCastDisplay movieID={currentMovie?.id} />
-
       <SimilarMovies categoryID={currentMovie?.category_id} />
       <ReviewsDisplay
         movieID={currentMovie?.id}

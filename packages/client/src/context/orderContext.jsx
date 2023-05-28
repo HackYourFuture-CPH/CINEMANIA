@@ -15,6 +15,11 @@ export const OrderContextProvider = ({ children }) => {
   });
 
   const [alert, setAlert] = useState(null);
+  const [isPopUpOpen, setIsPopUpOpen] = useState(false);
+
+  const togglePopUp = () => {
+    setIsPopUpOpen((prevState) => !prevState);
+  };
 
   const addMovieToCart = React.useCallback(
     (movie) => {
@@ -22,14 +27,14 @@ export const OrderContextProvider = ({ children }) => {
         (cartMovie) => cartMovie.id === movie.id,
       );
       if (isMovieAlreadyInCart) {
-        setAlert(
+        return setAlert(
           <Alert severity="warning">This movie is already in your cart!</Alert>,
         );
-      } else {
-        const newMovie = { ...movie };
-        setMovieInCart((prevState) => [...prevState, newMovie]);
-        setAlert(<Alert severity="success">Movie added to cart!</Alert>);
       }
+      const newMovie = { ...movie };
+      setMovieInCart((prevState) => [...prevState, newMovie]);
+      setIsPopUpOpen(true);
+      setAlert(<Alert severity="success">Movie added to cart!</Alert>);
     },
     [movieInCart],
   );
@@ -37,6 +42,7 @@ export const OrderContextProvider = ({ children }) => {
   const removeMovie = React.useCallback((movieId) => {
     setMovieInCart((prevState) => {
       const updatedCart = prevState.filter((movie) => movie.id !== movieId);
+      setAlert(<Alert severity="success">Movie removed from cart!</Alert>);
       return updatedCart;
     });
   }, []);
@@ -46,8 +52,14 @@ export const OrderContextProvider = ({ children }) => {
   }, [movieInCart]);
 
   const contextValue = React.useMemo(
-    () => ({ movieInCart, addMovieToCart, removeMovie }),
-    [movieInCart, addMovieToCart, removeMovie],
+    () => ({
+      movieInCart,
+      addMovieToCart,
+      removeMovie,
+      isPopUpOpen,
+      togglePopUp,
+    }),
+    [movieInCart, addMovieToCart, removeMovie, isPopUpOpen],
   );
 
   return (

@@ -22,6 +22,7 @@ import { useFavorites } from '../MovieCard/useFavorites';
 import { OrderContext } from '../../context/orderContext';
 import { LoginModal } from '../LoginModal/LoginModal';
 import { useUserContext } from '../../context/UserContext';
+import { AddToCartConfirmation } from '../OrderReview/AddToCartConfirmation';
 
 export const BigMovieCard = ({
   currentMovie,
@@ -289,6 +290,7 @@ export const BigMovieCard = ({
           />
         </CardContent>
       </Card>
+      <AddToCartConfirmation currentMovie={currentMovie} />
     </MovieDetailsLayout>
   );
 };
