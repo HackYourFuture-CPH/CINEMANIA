@@ -125,7 +125,7 @@ export const BigMovieCard = ({
               alignSelf: 'flex-start',
               minWidth: '150px',
             }}
-            src={currentMovie?.image_location}
+            src={currentMovie?.image_location || ''}
             alt="Movie Poster"
           />
 
@@ -201,7 +201,7 @@ export const BigMovieCard = ({
               paddingTop: '0.625rem',
             }}
           >
-            {currentMovie?.title}
+            {currentMovie?.title || 'loading movie title...'}
           </MovieTitle>
 
           <MyButton
@@ -227,7 +227,7 @@ export const BigMovieCard = ({
             }}
           >
             <StyledTypography sx={{ margin: '1.5rem 0' }}>
-              {currentMovie?.description}
+              {currentMovie?.description || 'loading movie details...'}
             </StyledTypography>
             <TextDivider>
               <StyledBoldTypography>Director: </StyledBoldTypography>
