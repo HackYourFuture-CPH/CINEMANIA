@@ -20,6 +20,7 @@ import styled from '@emotion/styled';
 import { ReviewDialog } from '../ReviewDialog/ReviewDialog';
 import { useFavorites } from '../MovieCard/useFavorites';
 import { OrderContext } from '../../context/orderContext';
+import { AddToCartConfirmation } from '../OrderReview/AddToCartConfirmation';
 
 export const BigMovieCard = ({
   currentMovie,
@@ -273,6 +274,7 @@ export const BigMovieCard = ({
           />
         </CardContent>
       </Card>
+      <AddToCartConfirmation currentMovie={currentMovie} />
     </MovieDetailsLayout>
   );
 };
