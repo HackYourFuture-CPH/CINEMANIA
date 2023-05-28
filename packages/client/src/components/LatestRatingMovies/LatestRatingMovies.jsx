@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import Masonry from '@mui/lab/Masonry';
-import { Box, Typography, CircularProgress } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { apiURL } from '../../apiURL';
 import { MovieCard } from '../MovieCard/MovieCard';
 import { useFavorites } from '../MovieCard/useFavorites';
@@ -25,10 +25,6 @@ export const LatestRatingMovies = () => {
     }
     fetchMovies();
   }, [favorites]);
-
-  if (movies.length === 0) {
-    return <CircularProgress sx={{ color: 'mainGreen' }} />;
-  }
 
   return (
     <StyledMovieGrid>

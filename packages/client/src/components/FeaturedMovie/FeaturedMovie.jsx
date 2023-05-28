@@ -1,5 +1,5 @@
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import { Box, IconButton, Typography, CircularProgress } from '@mui/material';
+import { Box, IconButton, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { apiURL } from '../../apiURL';
 import styled from '@emotion/styled';
@@ -30,7 +30,7 @@ export const FeaturedMovie = () => {
   }, []);
 
   if (featuredMovie.length === 0) {
-    return <CircularProgress sx={{ color: 'mainGreen' }} />;
+    return <h4>..Loading</h4>;
   }
 
   return (
