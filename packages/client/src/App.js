@@ -5,12 +5,11 @@ import { Layout } from './containers/Layout/Layout';
 import { MovieDetails } from './containers/MovieDetails/MovieDetails';
 import { MovieListPage } from './containers/MovieListPage/MovieListPage';
 import { PageNotFound } from './containers/PageNotFound/PageNotFound.Container';
-
 import { Signin } from './components/Auth/Signin';
 import { Signup } from './components/Auth/Signup';
 import { UserProvider } from './context/UserContext';
 import { OrderContextProvider } from './context/orderContext';
-import { LogInDialog } from './components/LogInDialog/LogInDialog';
+
 // MUI THEME
 import { ThemeProvider } from '@mui/material';
 import { theme } from './lib/theme';
@@ -52,10 +51,6 @@ const router = createBrowserRouter([
       {
         path: '/order',
         element: <HandleOrder />,
-      },
-      {
-        path: '/userLogIn',
-        element: <LogInDialog />,
       },
       {
         path: '/about',
