@@ -20,7 +20,7 @@ import styled from '@emotion/styled';
 import { ReviewDialog } from '../ReviewDialog/ReviewDialog';
 import { useFavorites } from '../MovieCard/useFavorites';
 import { OrderContext } from '../../context/orderContext';
-import { PopUpModulMenu } from '../OrderReview/PopUpModulMenu';
+import { AddToCartConfirmation } from '../OrderReview/AddToCartConfirmation';
 
 export const BigMovieCard = ({ currentMovie, currentReview, user }) => {
   const [open, setOpen] = useState(false);
@@ -254,7 +254,7 @@ export const BigMovieCard = ({ currentMovie, currentReview, user }) => {
           />
         </CardContent>
       </Card>
-      <PopUpModulMenu currentMovie={currentMovie} />
+      <AddToCartConfirmation currentMovie={currentMovie} />
     </MovieDetailsLayout>
   );
 };

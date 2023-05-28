@@ -14,7 +14,7 @@ import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
 import { MovieDetailsLayout } from '../../containers/MovieDetailsLayout/MovieDetailsLayout';
 
-export function PopUpModulMenu(props) {
+export function AddToCartConfirmation(props) {
   const { isPopUpOpen, togglePopUp } = React.useContext(OrderContext);
 
   return isPopUpOpen && props.currentMovie ? (

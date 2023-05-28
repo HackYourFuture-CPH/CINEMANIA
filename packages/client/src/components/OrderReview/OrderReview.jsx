@@ -40,7 +40,6 @@ export const OrderReview = ({ movies }) => {
           <CartTypographyTitle variant="h4">
             Shopping Basket
           </CartTypographyTitle>
-          <CartTypographyOrderID variant="h5">Order ID:</CartTypographyOrderID>
         </CartTypographyBox>
         <CartTypographyBox>
           <CartTypographyPrice variant="subtitle2">
@@ -251,6 +250,7 @@ const ItemsCardTypographyTitle = styled(Typography)`
   font-weight: 500;
   font-size: 32px;
   color: #003c2d;
+  max-width: 20rem;
 `;
 
 const ItemsCardTypographyPrice = styled(Typography)`
