@@ -20,10 +20,9 @@ import {
 import { RatingStars } from '../RatingStars/RatingStars';
 import { ReviewDialog } from '../ReviewDialog/ReviewDialog';
 
-import { useFavorites } from '../MovieCard/useFavorites';
-import { OrderContext } from '../../context/orderContext';
-import { LoginModal } from '../LoginModal/LoginModal';
 import { useUserContext } from '../../context/UserContext';
+import { LoginModal } from '../LoginModal/LoginModal';
+import { useFavorites } from '../MovieCard/useFavorites';
 import { AddToCartConfirmation } from '../OrderReview/AddToCartConfirmation';
 
 export const BigMovieCard = ({
