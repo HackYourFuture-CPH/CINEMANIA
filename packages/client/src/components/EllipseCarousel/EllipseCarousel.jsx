@@ -1,6 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Box, IconButton, Typography, Container } from '@mui/material';
+import {
+  Box,
+  IconButton,
+  Typography,
+  Container,
+  CircularProgress,
+} from '@mui/material';
 import Slider from 'react-slick';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
@@ -34,6 +40,11 @@ export const EllipseCarousel = ({ popularMovies }) => {
       },
     ],
   };
+
+  if (popularMovies.length === 0) {
+    return <CircularProgress sx={{ color: 'mainGreen' }} />;
+  }
+
   return (
     <MainContainer maxWidth="xl">
       <TitleBox>
