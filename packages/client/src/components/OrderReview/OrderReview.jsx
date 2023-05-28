@@ -12,16 +12,16 @@ import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined
 import styled from '@emotion/styled';
 import { OrderContext } from '../../context/orderContext';
 import { handleAddFavorite } from '../MovieCard/handlerFavorite';
+import { OrderPageLayout } from '../../containers/OrderPage/OrderPageLayout';
+import { ConfirmedOrderPage } from '../ConfirmedOrderPage/ConfirmedOrderPage';
+import { calculateTotalPrice, calculateTotalPriceWithVAT } from './utils';
 
 export const OrderReview = ({ movies }) => {
   const { removeMovie } = React.useContext(OrderContext);
+  const { isPopUpOpen, togglePopUp } = React.useContext(OrderContext);
 
-  const totalPrice = movies.reduce(
-    (sum, movie) => sum + parseFloat(movie.price),
-    0,
-  );
-
-  const totalPriceWithVAT = (totalPrice * 1.25).toFixed(2);
+  const totalPrice = calculateTotalPrice(movies);
+  const totalPriceWithVAT = calculateTotalPriceWithVAT(totalPrice);
 
   if (movies.length === 0) {
     return (
@@ -35,55 +35,55 @@ export const OrderReview = ({ movies }) => {
   }
 
   return (
-    <CartContainer maxWidth="l">
-      <CartItemsBox sx={{ my: 4 }}>
-        <CartTypographyBox>
-          <CartTypographyTitle variant="h4">
-            Shopping Basket
-          </CartTypographyTitle>
-        </CartTypographyBox>
-        <CartTypographyBox>
-          <CartTypographyPrice variant="subtitle2">
-            Deselect
-          </CartTypographyPrice>
-          <CartTypographyPrice variant="subtitle2">Price</CartTypographyPrice>
-        </CartTypographyBox>
-        <StyledDivider />
+    <OrderPageLayout>
+      <CartContainer maxWidth="l">
+        <CartItemsBox sx={{ my: 4 }}>
+          <CartTypographyBox>
+            <CartTypographyTitle variant="h4">
+              Shopping Basket
+            </CartTypographyTitle>
+          </CartTypographyBox>
+          <CartTypographyBox>
+            <CartTypographyPrice variant="subtitle2">
+              Deselect
+            </CartTypographyPrice>
+            <CartTypographyPrice variant="subtitle2">Price</CartTypographyPrice>
+          </CartTypographyBox>
+          <StyledDivider />
 
-        {movies.map((movie) => (
-          <ItemsContainer key={movie.id} className="ItemsContainer">
-            <ItemBox>
-              <SelectCheckbox
-                defaultChecked
-                onChange={() => removeMovie(movie.id)}
-                inputProps={{ 'aria-label': 'controlled' }}
-                sx={{
-                  '&.Mui-checked': {
-                    color: '#001b14',
-                  },
-                }}
-              />
-              <ItemsCard>
-                <ItemsCardMedia
-                  component="img"
-                  src={movie.image_location}
-                  alt={movie.title}
+          {movies.map((movie) => (
+            <ItemsContainer key={movie.id} className="ItemsContainer">
+              <ItemBox>
+                <SelectCheckbox
+                  defaultChecked
+                  onChange={() => removeMovie(movie.id)}
+                  inputProps={{ 'aria-label': 'controlled' }}
+                  sx={{
+                    '&.Mui-checked': {
+                      color: '#001b14',
+                    },
+                  }}
                 />
-                <ItemsCardContent>
-                  <TitlePriceBox>
-                    <ItemsCardTypographyTitle variant="h4">
-                      {movie.title}
-                    </ItemsCardTypographyTitle>
-                    <ItemsCardTypographyPrice>
-                      {movie.price}
-                    </ItemsCardTypographyPrice>
-                  </TitlePriceBox>
-                  <ItemsCardTypographyDescription variant="h5">
-                    {movie.description}
-                  </ItemsCardTypographyDescription>
-                  <ItemFavRemoveBox>
-                    <FavRemoveBox>
-                      <FavRemoveButton
+                <ItemsCard>
+                  <ItemsCardMedia
+                    component="img"
+                    src={movie.image_location}
+                    alt={movie.title}
+                  />
+                  <ItemsCardContent>
+                    <TitlePriceBox>
+                      <ItemsCardTypographyTitle variant="h4">
+                        {movie.title}
+                      </ItemsCardTypographyTitle>
+                      <ItemsCardTypographyPrice>
+                        {movie.price}
+                      </ItemsCardTypographyPrice>
+                    </TitlePriceBox>
+                    <ItemsCardTypographyDescription variant="h5">
+                      {movie.description}
+                    </ItemsCardTypographyDescription>
+                    <ItemFavRemoveBox>
+                      <FavButton
                         onClick={() => {
                           handleAddFavorite(movie);
                         }}
@@ -92,49 +92,48 @@ export const OrderReview = ({ movies }) => {
                         <FavoriteTypography variant="h6">
                           Move to my favorites
                         </FavoriteTypography>
-                      </FavRemoveButton>
-                    </FavRemoveBox>
-                    <FavRemoveDivider orientation="vertical" flexItem />
-                    <FavRemoveBox>
-                      <FavRemoveButton onClick={() => removeMovie(movie.id)}>
+                      </FavButton>
+                      <FavRemoveDivider orientation="vertical" flexItem />
+                      <RemoveButton onClick={() => removeMovie(movie.id)}>
                         <StyledDeleteOutlineOutlinedIcon />
                         <RemoveTypography variant="h6">
                           Remove from cart
                         </RemoveTypography>
-                      </FavRemoveButton>
-                    </FavRemoveBox>
-                  </ItemFavRemoveBox>
-                </ItemsCardContent>
-              </ItemsCard>
-            </ItemBox>
-          </ItemsContainer>
-        ))}
-      </CartItemsBox>
-      <OrderSummaryContainer>
-        <SummaryBox>
-          <SummaryTypography variant="h4">Order Summary</SummaryTypography>
-          <StyledDividerSummary />
-          <Typography variant="h6">Items:{movies.length}</Typography>
-          <StyledDividerSummary />
-          <SummaryTypographyTotal variant="h4">
-            Order Total: {totalPrice}
-          </SummaryTypographyTotal>
-          <StyledDividerSummary />
-          <SummaryTypographyVAT variant="h5">
-            Order totals include VAT : {totalPriceWithVAT}
-          </SummaryTypographyVAT>
-          <PaymentButton
-            variant="contained"
-            color="primary"
-            onClick={(e) => e.preventDefault}
-          >
-            <Typography variant="h6" display="block">
-              Payment
-            </Typography>
-          </PaymentButton>
-        </SummaryBox>
-      </OrderSummaryContainer>
-    </CartContainer>
+                      </RemoveButton>
+                    </ItemFavRemoveBox>
+                  </ItemsCardContent>
+                </ItemsCard>
+              </ItemBox>
+            </ItemsContainer>
+          ))}
+        </CartItemsBox>
+        <OrderSummaryContainer>
+          <SummaryBox>
+            <SummaryTypography variant="h4">Order Summary</SummaryTypography>
+            <StyledDividerSummary />
+            <Typography variant="h6">Items:{movies.length}</Typography>
+            <StyledDividerSummary />
+            <SummaryTypographyTotal variant="h4">
+              Order Total: {totalPrice}
+            </SummaryTypographyTotal>
+            <StyledDividerSummary />
+            <SummaryTypographyVAT variant="h5">
+              Order totals include VAT : {totalPriceWithVAT}
+            </SummaryTypographyVAT>
+            <PaymentButton
+              variant="contained"
+              color="primary"
+              onClick={() => togglePopUp(true)}
+            >
+              <Typography variant="h6" display="block">
+                Payment
+              </Typography>
+            </PaymentButton>
+          </SummaryBox>
+        </OrderSummaryContainer>
+      </CartContainer>
+      <ConfirmedOrderPage movies={movies} />
+    </OrderPageLayout>
   );
 };
 
@@ -280,27 +279,21 @@ const ItemFavRemoveBox = styled(Box)`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: 65%;
 `;
 
-const FavRemoveBox = styled(Box)`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+const FavButton = styled(Button)`
+  text-transform: none;
 `;
-
-const FavRemoveButton = styled(Button)`
+const RemoveButton = styled(Button)`
   text-transform: none;
 `;
 
 const StyledFavoriteBorderOutlinedIcon = styled(FavoriteBorderOutlinedIcon)`
-  margin-right: 0.5rem;
   width: 1.5rem;
   height: 1.5rem;
 `;
 
 const StyledDeleteOutlineOutlinedIcon = styled(DeleteOutlineOutlinedIcon)`
-  margin-right: 0.5rem;
   width: 1.5rem;
   height: 1.75rem;
 `;
@@ -312,6 +305,7 @@ const FavoriteTypography = styled(Typography)`
   font-size: 20px;
   line-height: 24px;
   color: #003e2f;
+  width: max-content;
 `;
 
 const RemoveTypography = styled(Typography)`
@@ -321,6 +315,7 @@ const RemoveTypography = styled(Typography)`
   font-size: 20px;
   line-height: 24px;
   color: #003e2f;
+  width: max-content;
 `;
 
 const FavRemoveDivider = styled(Divider)`
