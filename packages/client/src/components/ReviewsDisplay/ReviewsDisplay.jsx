@@ -89,7 +89,11 @@ export function ReviewsDisplay({ movieID }) {
           <>
             <HeaderReview review={reviews} title="Your Reviews" />
             {userReview.map((review) => (
-              <ReviewItem key={review.id} review={review} canEdit={true} />
+              <ReviewItem
+                key={review.reviewID}
+                review={review}
+                canEdit={true}
+              />
             ))}
           </>
         )}
