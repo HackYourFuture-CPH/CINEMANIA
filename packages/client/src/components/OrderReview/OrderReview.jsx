@@ -11,17 +11,20 @@ import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlin
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import styled from '@emotion/styled';
 import { OrderContext } from '../../context/orderContext';
-import { handleAddFavorite } from '../MovieCard/handlerFavorite';
-import { OrderPageLayout } from '../../containers/OrderPage/OrderPageLayout';
-import { ConfirmedOrderPage } from '../ConfirmedOrderPage/ConfirmedOrderPage';
-import { calculateTotalPrice, calculateTotalPriceWithVAT } from './utils';
+import { useFavorites } from '../MovieCard/useFavorites';
+import { useSnackbar } from '../SnackBar/SnackBarProvider';
 
 export const OrderReview = ({ movies }) => {
   const { removeMovie } = React.useContext(OrderContext);
-  const { togglePopUp } = React.useContext(OrderContext);
+  const [favorites, toggleFavorite] = useFavorites([]);
+  const { handleSnackbarOpen } = useSnackbar();
 
-  const totalPrice = calculateTotalPrice(movies);
-  const totalPriceWithVAT = calculateTotalPriceWithVAT(totalPrice);
+  const totalPrice = movies.reduce(
+    (sum, movie) => sum + parseFloat(movie.price),
+    0,
+  );
+
+  const totalPriceWithVAT = (totalPrice * 1.25).toFixed(2);
 
   if (movies.length === 0) {
     return (
@@ -35,23 +38,26 @@ export const OrderReview = ({ movies }) => {
   }
 
   return (
-    <OrderPageLayout>
-      <CartContainer maxWidth="l">
-        <CartItemsBox sx={{ my: 4 }}>
-          <CartTypographyBox>
-            <CartTypographyTitle variant="h4">
-              Shopping Basket
-            </CartTypographyTitle>
-          </CartTypographyBox>
-          <CartTypographyBox>
-            <CartTypographyPrice variant="subtitle2">
-              Deselect
-            </CartTypographyPrice>
-            <CartTypographyPrice variant="subtitle2">Price</CartTypographyPrice>
-          </CartTypographyBox>
-          <StyledDivider />
+    <CartContainer maxWidth="l">
+      <CartItemsBox sx={{ my: 4 }}>
+        <CartTypographyBox>
+          <CartTypographyTitle variant="h4">
+            Shopping Basket
+          </CartTypographyTitle>
+        </CartTypographyBox>
+        <CartTypographyBox>
+          <CartTypographyPrice variant="subtitle2">
+            Deselect
+          </CartTypographyPrice>
+          <CartTypographyPrice variant="subtitle2">Price</CartTypographyPrice>
+        </CartTypographyBox>
+        <StyledDivider />
 
-          {movies.map((movie) => (
+        {movies.map((movie) => {
+          const isFavorite = favorites.find(
+            (favorite) => favorite.id === movie.id,
+          );
+          return (
             <ItemsContainer key={movie.id} className="ItemsContainer">
               <ItemBox>
                 <SelectCheckbox
@@ -83,57 +89,70 @@ export const OrderReview = ({ movies }) => {
                       {movie.description}
                     </ItemsCardTypographyDescription>
                     <ItemFavRemoveBox>
-                      <FavButton
-                        onClick={() => {
-                          handleAddFavorite(movie);
-                        }}
-                      >
-                        <StyledFavoriteBorderOutlinedIcon />
-                        <FavoriteTypography variant="h6">
-                          Move to my favorites
-                        </FavoriteTypography>
-                      </FavButton>
+                      <FavRemoveBox>
+                        <FavRemoveButton
+                          onClick={() => {
+                            toggleFavorite(
+                              movie,
+                              isFavorite,
+                              handleSnackbarOpen,
+                            );
+                          }}
+                        >
+                          <StyledFavoriteBorderOutlinedIcon />
+                          {isFavorite ? (
+                            <FavoriteTypography variant="h6">
+                              Remove to my favorites
+                            </FavoriteTypography>
+                          ) : (
+                            <FavoriteTypography variant="h6">
+                              Add to my favorites
+                            </FavoriteTypography>
+                          )}
+                        </FavRemoveButton>
+                      </FavRemoveBox>
                       <FavRemoveDivider orientation="vertical" flexItem />
-                      <RemoveButton onClick={() => removeMovie(movie.id)}>
-                        <StyledDeleteOutlineOutlinedIcon />
-                        <RemoveTypography variant="h6">
-                          Remove from cart
-                        </RemoveTypography>
-                      </RemoveButton>
+                      <FavRemoveBox>
+                        <FavRemoveButton onClick={() => removeMovie(movie.id)}>
+                          <StyledDeleteOutlineOutlinedIcon />
+                          <RemoveTypography variant="h6">
+                            Remove from cart
+                          </RemoveTypography>
+                        </FavRemoveButton>
+                      </FavRemoveBox>
                     </ItemFavRemoveBox>
                   </ItemsCardContent>
                 </ItemsCard>
               </ItemBox>
             </ItemsContainer>
-          ))}
-        </CartItemsBox>
-        <OrderSummaryContainer>
-          <SummaryBox>
-            <SummaryTypography variant="h4">Order Summary</SummaryTypography>
-            <StyledDividerSummary />
-            <Typography variant="h6">Items:{movies.length}</Typography>
-            <StyledDividerSummary />
-            <SummaryTypographyTotal variant="h4">
-              Order Total: {totalPrice}
-            </SummaryTypographyTotal>
-            <StyledDividerSummary />
-            <SummaryTypographyVAT variant="h5">
-              Order totals include VAT : {totalPriceWithVAT}
-            </SummaryTypographyVAT>
-            <PaymentButton
-              variant="contained"
-              color="primary"
-              onClick={() => togglePopUp(true)}
-            >
-              <Typography variant="h6" display="block">
-                Payment
-              </Typography>
-            </PaymentButton>
-          </SummaryBox>
-        </OrderSummaryContainer>
-      </CartContainer>
-      <ConfirmedOrderPage movies={movies} />
-    </OrderPageLayout>
+          );
+        })}
+      </CartItemsBox>
+      <OrderSummaryContainer>
+        <SummaryBox>
+          <SummaryTypography variant="h4">Order Summary</SummaryTypography>
+          <StyledDividerSummary />
+          <Typography variant="h6">Items:{movies.length}</Typography>
+          <StyledDividerSummary />
+          <SummaryTypographyTotal variant="h4">
+            Order Total: {totalPrice}
+          </SummaryTypographyTotal>
+          <StyledDividerSummary />
+          <SummaryTypographyVAT variant="h5">
+            Order totals include VAT : {totalPriceWithVAT}
+          </SummaryTypographyVAT>
+          <PaymentButton
+            variant="contained"
+            color="primary"
+            onClick={(e) => e.preventDefault}
+          >
+            <Typography variant="h6" display="block">
+              Payment
+            </Typography>
+          </PaymentButton>
+        </SummaryBox>
+      </OrderSummaryContainer>
+    </CartContainer>
   );
 };
 
@@ -279,21 +298,27 @@ const ItemFavRemoveBox = styled(Box)`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  width: 65%;
 `;
 
-const FavButton = styled(Button)`
-  text-transform: none;
+const FavRemoveBox = styled(Box)`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 `;
-const RemoveButton = styled(Button)`
+
+const FavRemoveButton = styled(Button)`
   text-transform: none;
 `;
 
 const StyledFavoriteBorderOutlinedIcon = styled(FavoriteBorderOutlinedIcon)`
+  margin-right: 0.5rem;
   width: 1.5rem;
   height: 1.5rem;
 `;
 
 const StyledDeleteOutlineOutlinedIcon = styled(DeleteOutlineOutlinedIcon)`
+  margin-right: 0.5rem;
   width: 1.5rem;
   height: 1.75rem;
 `;
@@ -305,7 +330,6 @@ const FavoriteTypography = styled(Typography)`
   font-size: 20px;
   line-height: 24px;
   color: #003e2f;
-  width: max-content;
 `;
 
 const RemoveTypography = styled(Typography)`
@@ -315,7 +339,6 @@ const RemoveTypography = styled(Typography)`
   font-size: 20px;
   line-height: 24px;
   color: #003e2f;
-  width: max-content;
 `;
 
 const FavRemoveDivider = styled(Divider)`
