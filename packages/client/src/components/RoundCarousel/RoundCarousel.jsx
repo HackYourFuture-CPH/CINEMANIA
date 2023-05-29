@@ -9,49 +9,22 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
 
+const settings = {
+  focusOnSelect: true,
+  infinite: true,
+  slidesToShow: 3,
+  slidesToScroll: 1,
+  speed: 500,
+  arrows: false,
+};
+
 const RoundCarousel = ({ carouselData }) => {
   const slider = React.useRef(null);
-  const settings = {
-    className: 'center',
-    infinite: true,
-    centerPadding: '60px',
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    swipeToSlide: true,
-    arrows: false,
-    responsive: [
-      {
-        breakpoint: 1440,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 1,
-          infinite: true,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 800,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-          initialSlide: 2,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-  };
-
   return (
     <>
       <Title>SIMILAR MOVIES</Title>
 
-      <CarouselWrapper maxWidth="xl">
+      <CarouselWrapper>
         <IconButton onClick={() => slider?.current?.slickPrev()}>
           <LeftArrow />
         </IconButton>
@@ -94,11 +67,10 @@ const Title = styled(Typography)`
 const CarouselWrapper = styled(Box)`
   display: flex;
   justify-content: space-between;
-  width: 95%;
 `;
 
 const SliderWrapper = styled(Box)`
-  width: 95%;
+  width: 81rem;
 `;
 
 const RightArrow = styled(ArrowForwardIosIcon)`
@@ -114,14 +86,16 @@ const LeftArrow = styled(ArrowBackIosIcon)`
 `;
 
 const CarouselImg = styled.img`
-  height: 13rem;
-  width: 95%;
+  width: 25rem;
+  height: 12.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
   object-fit: cover;
   object-position: 20% 0;
   border-radius: 8rem;
   margin: auto auto;
   &:hover {
-    transform: scale(1.02);
+    transform: scale(1.05);
     cursor: pointer;
   }
 `;
