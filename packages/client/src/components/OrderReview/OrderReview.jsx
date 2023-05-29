@@ -34,7 +34,7 @@ export const OrderReview = ({ movies }) => {
     );
   }
 
-  return isPopUpOpen ? (
+  return (
     <OrderPageLayout>
       <CartContainer maxWidth="l">
         <CartItemsBox sx={{ my: 4 }}>
@@ -134,8 +134,6 @@ export const OrderReview = ({ movies }) => {
       </CartContainer>
       <ConfirmedOrderPage movies={movies} />
     </OrderPageLayout>
-  ) : (
-    ''
   );
 };
 
