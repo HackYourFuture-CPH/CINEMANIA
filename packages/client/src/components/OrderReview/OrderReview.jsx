@@ -18,7 +18,7 @@ import { calculateTotalPrice, calculateTotalPriceWithVAT } from './utils';
 
 export const OrderReview = ({ movies }) => {
   const { removeMovie } = React.useContext(OrderContext);
-  const { isPopUpOpen, togglePopUp } = React.useContext(OrderContext);
+  const { togglePopUp } = React.useContext(OrderContext);
 
   const totalPrice = calculateTotalPrice(movies);
   const totalPriceWithVAT = calculateTotalPriceWithVAT(totalPrice);
