@@ -18,7 +18,7 @@ import { calculateTotalPrice, calculateTotalPriceWithVAT } from './utils';
 
 export const OrderReview = ({ movies }) => {
   const { removeMovie } = React.useContext(OrderContext);
-  const { isPopUpOpen, togglePopUp } = React.useContext(OrderContext);
+  const { togglePopUp } = React.useContext(OrderContext);
 
   const totalPrice = calculateTotalPrice(movies);
   const totalPriceWithVAT = calculateTotalPriceWithVAT(totalPrice);
@@ -34,7 +34,7 @@ export const OrderReview = ({ movies }) => {
     );
   }
 
-  return isPopUpOpen ? (
+  return (
     <OrderPageLayout>
       <CartContainer maxWidth="l">
         <CartItemsBox sx={{ my: 4 }}>
@@ -134,8 +134,6 @@ export const OrderReview = ({ movies }) => {
       </CartContainer>
       <ConfirmedOrderPage movies={movies} />
     </OrderPageLayout>
-  ) : (
-    ''
   );
 };
 
