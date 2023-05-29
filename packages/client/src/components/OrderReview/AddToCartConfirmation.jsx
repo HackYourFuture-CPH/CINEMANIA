@@ -35,7 +35,7 @@ export function AddToCartConfirmation(props) {
           </TextContent>
           <Box sx={{ height: '14.75rem', width: '7.5rem' }} />
           <CardButtons>
-            <CheckOutButton>
+            <CheckOutButton onClick={() => togglePopUp()}>
               <StyledLink to="/order">Check out</StyledLink>
             </CheckOutButton>
             <ContinueShoppingBtn size="small" onClick={() => togglePopUp()}>
