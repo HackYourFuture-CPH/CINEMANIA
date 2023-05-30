@@ -27,6 +27,7 @@ export const TopCastDisplay = ({ movieID }) => {
             const data = await response.json();
             setCastList(data);
           } else {
+            setCastList([]);
             throw new Error(`Status code error : ${response.status}`);
           }
         } catch (error) {
