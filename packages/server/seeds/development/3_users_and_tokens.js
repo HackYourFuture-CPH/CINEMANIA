@@ -10,7 +10,7 @@ exports.seed = async function (knex) {
     {
       full_name: 'Ada Lovelace',
       email: 'ada.lovelace@example.com',
-      uid: '12',
+      uid: 'A9x50O4wAfbHVr9PrhGY1q2rvO13',
     },
     {
       full_name: 'Grace Hopper',
@@ -20,7 +20,7 @@ exports.seed = async function (knex) {
     {
       full_name: 'Alan Turing',
       email: 'alan.turing@example.com',
-      uid: '123543d',
+      uid: 'hMIIhfZobnS2eMxtsKRF44nvcna2',
     },
     {
       full_name: 'Vint Cerf',
