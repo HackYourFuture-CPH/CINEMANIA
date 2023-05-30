@@ -1,8 +1,8 @@
+import styled from '@emotion/styled';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import { Box, IconButton, Typography, CircularProgress } from '@mui/material';
+import { Box, CircularProgress, IconButton, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { apiURL } from '../../apiURL';
-import styled from '@emotion/styled';
 
 export const FeaturedMovie = () => {
   const [featuredMovie, setFeaturedMovie] = useState([]);
@@ -25,7 +25,7 @@ export const FeaturedMovie = () => {
     }
 
     fetchMovies();
-    const interval = setInterval(fetchMovies, 30000);
+    const interval = setInterval(fetchMovies, 10000);
     return () => clearInterval(interval);
   }, []);
 
