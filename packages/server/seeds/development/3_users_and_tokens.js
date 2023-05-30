@@ -20,7 +20,7 @@ exports.seed = async function (knex) {
     {
       full_name: 'Alan Turing',
       email: 'alan.turing@example.com',
-      uid: '',
+      uid: 'hMIIhfZobnS2eMxtsKRF44nvcna2',
     },
     {
       full_name: 'Vint Cerf',
