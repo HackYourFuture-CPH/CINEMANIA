@@ -79,10 +79,10 @@ export const BigMovieCard = ({
     line-height: 3rem; /* 48px */
   `;
 
-  const TextDivider = styled(Box)`
-    display: flex;
-    flex-direction: row;
-  `;
+  // const TextDivider = styled(Box)`
+  //   display: flex;
+  //   flex-direction: row;
+  // `;
 
   const MyButton = styled(Button)({
     height: '3.125rem',
