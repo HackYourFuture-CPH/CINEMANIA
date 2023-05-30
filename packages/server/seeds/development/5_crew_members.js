@@ -413,5 +413,113 @@ exports.seed = async function (knex) {
       birth_date: '1952-04-09',
       image_location: '',
     },
+    {
+      full_name: 'Daniel Radcliffe',
+      birth_date: '1989-07-23',
+      image_location:
+        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/iPg0J9UzAlPj1fLEJNllpW9IhGe.jpg',
+    },
+
+    {
+      full_name: 'Emma Watson',
+      birth_date: '1990-04-15',
+      image_location:
+        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/tvPPRGzAzdQFhlKzLbMO1EpuTJI.jpg',
+    },
+
+    {
+      full_name: 'Rupert Grint',
+      birth_date: '1988-08-24',
+      image_location:
+        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/q2KZZ0ltTEl7Sf8volNFV1JDEP4.jpg',
+    },
+
+    {
+      full_name: 'Helena Bonham Carter',
+      birth_date: '1966-05-26',
+      image_location:
+        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/DDeITcCpnBd0CkAIRPhggy9bt5.jpg',
+    },
+
+    {
+      full_name: 'Gary Oldman',
+      birth_date: '1958-03-21',
+      image_location:
+        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/2v9FVVBUrrkW2m3QOcYkuhq9A6o.jpg',
+    },
+    {
+      full_name: 'Ralph Fiennes',
+      birth_date: '1962-12-22',
+      image_location:
+        'https://www.themoviedb.org/t/p/w300_and_h450_bestv2/tJr9GcmGNHhLVVEH3i7QYbj6hBi.jpg',
+    },
+
+    {
+      full_name: 'Alan Rickman',
+      birth_date: '1946-02-21',
+      image_location:
+        'https://www.themoviedb.org/t/p/w300_and_h450_bestv2/wo4ckFUWfixbW7i28ebOtBK4qpd.jpg',
+    },
+
+    {
+      full_name: 'Maggie Smith',
+      birth_date: '1934-12-28',
+      image_location:
+        'https://www.themoviedb.org/t/p/w300_and_h450_bestv2/sv65umrWnnODOvGsOMVRaLdEDiy.jpg',
+    },
+
+    {
+      full_name: 'Evanna Lynch',
+      birth_date: '1991-08-16',
+      image_location:
+        'https://www.themoviedb.org/t/p/w300_and_h450_bestv2/mebDQC5FnPVYYRxqmhCVVdl8fVM.jpg',
+    },
+
+    {
+      full_name: 'Brendan Gleeson',
+      birth_date: '1955-03-29',
+      image_location:
+        'https://www.themoviedb.org/t/p/w300_and_h450_bestv2/379TXtBPRrkBDrEBWPQ5v3up7kT.jpg',
+    },
+    {
+      full_name: 'Michael Goldenberg',
+      birth_date: '1965-01-01',
+      image_location: '',
+    },
+    {
+      full_name: 'David Yates',
+      birth_date: '1963-10-08',
+      image_location: '',
+    },
+    {
+      full_name: 'Mark Hamill',
+      birth_date: '1951-09-25',
+      image_location:
+        'https://www.themoviedb.org/t/p/w300_and_h450_bestv2/2ZulC2Ccq1yv3pemusks6Zlfy2s.jpg',
+    },
+    {
+      full_name: 'Harrison Ford',
+      birth_date: '1942-07-13',
+      image_location:
+        'https://www.themoviedb.org/t/p/w300_and_h450_bestv2/klPehAfaQDatLLQ8dN4lMcb4ESo.jpg',
+    },
+    {
+      full_name: 'Carrie Fisher',
+      birth_date: '1956-10-21',
+      image_location:
+        'https://www.themoviedb.org/t/p/w300_and_h450_bestv2/utKPqWm9MAcL6NqN0Kd71dWUmXM.jpg',
+    },
+    {
+      full_name: 'Billy Dee Williams',
+      birth_date: '1937-04-06',
+      image_location:
+        'https://www.themoviedb.org/t/p/w300_and_h450_bestv2/dCiHLiCapPuRwKkM1ytVZ7PwYQY.jpg',
+    },
+    {
+      full_name: 'Anthony Daniels',
+      birth_date: '1946-02-21',
+      image_location:
+        'https://www.themoviedb.org/t/p/w300_and_h450_bestv2/7kR4kwXtvXtvrsxWeX3QLX5NS5V.jpg',
+    },
   ]);
 };
