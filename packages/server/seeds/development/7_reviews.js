@@ -211,7 +211,7 @@ exports.seed = async function (knex) {
         "Pulp Fiction is a Quentin Tarantino masterpiece that weaves multiple interconnected stories with style and wit. The film's non-linear narrative, memorable dialogue, and stellar ensemble cast create a unique and engrossing cinematic experience that keeps viewers hooked from start to finish.",
     },
     {
-      movie_id: 24,
+      movie_id: 23,
       user_id: 4,
       rating: 5,
       review_text:
@@ -533,7 +533,7 @@ exports.seed = async function (knex) {
         "Shutter Island is a mind-bending psychological thriller that keeps you guessing until the very end. With Leonardo DiCaprio's brilliant performance and Martin Scorsese's masterful direction, the film immerses you in a world of mystery, suspense, and paranoia, leaving you questioning what is real and what is illusion.",
     },
     {
-      movie_id: 71,
+      movie_id: 69,
       user_id: 2,
       rating: 5,
       review_text:
@@ -1105,6 +1105,78 @@ exports.seed = async function (knex) {
       rating: 2,
       review_text:
         'I was highly disappointed with this film. The story was predictable, and the characters were poorly developed. The film lacked any meaningful substance and failed to engage me on any level.',
+    },
+    {
+      movie_id: 71,
+      user_id: 2,
+      rating: 5,
+      review_text:
+        "Harry Potter and the Order of the Phoenix is a thrilling ride from start to finish. The film beautifully captures the dark and intense tone of the book, bringing the wizarding world to life with stunning visuals and incredible performances. It's a must-watch for any Harry Potter fan!",
+    },
+    {
+      movie_id: 71,
+      user_id: 4,
+      rating: 5,
+      review_text:
+        "The fifth installment in the Harry Potter series, Order of the Phoenix, delivers a powerful and emotionally charged story. The film delves deeper into the characters' struggles, showcasing exceptional acting and breathtaking visuals. It's a testament to the magic of the series and leaves you eagerly anticipating the next chapter.",
+    },
+    {
+      movie_id: 71,
+      user_id: 5,
+      rating: 4,
+      review_text:
+        "Harry Potter and the Order of the Phoenix successfully balances the action-packed moments with heartfelt character development. The film introduces new and memorable characters while maintaining the core essence of the series. It's a captivating chapter that leaves you wanting more.",
+    },
+    {
+      movie_id: 71,
+      user_id: 6,
+      rating: 4,
+      review_text:
+        'Order of the Phoenix takes the Harry Potter series to a darker and more mature level. The film tackles themes of rebellion, friendship, and sacrifice with remarkable depth. The visual effects are top-notch, and the performances by the talented cast make this movie a standout in the franchise.',
+    },
+    {
+      movie_id: 71,
+      user_id: 7,
+      rating: 3,
+      review_text:
+        "Harry Potter and the Order of the Phoenix is a thrilling addition to the magical world of Hogwarts. The film captures the essence of the book with its strong storytelling, captivating visuals, and impeccable direction. It's a must-see for fans and a testament to the enduring popularity of the Harry Potter series.",
+    },
+    {
+      movie_id: 24,
+      user_id: 2,
+      rating: 5,
+      review_text:
+        'Star Wars Episode VI: Return of the Jedi delivers a thrilling and satisfying conclusion to the original Star Wars trilogy. With its epic battles, memorable characters, and a climactic showdown between the light and dark sides of the Force, this film is a must-watch for any Star Wars fan.',
+    },
+
+    {
+      movie_id: 24,
+      user_id: 4,
+      rating: 4,
+      review_text:
+        "Return of the Jedi perfectly balances action, adventure, and emotion. The movie ties up loose ends and leaves a sense of fulfillment for fans. It's a classic that showcases the enduring power of the Star Wars saga.",
+    },
+
+    {
+      movie_id: 24,
+      user_id: 5,
+      rating: 3,
+      review_text:
+        'While Return of the Jedi has its moments, it feels somewhat overshadowed by its predecessors. The story is a bit convoluted, and some of the plot choices left me disappointed. Not the strongest entry in the franchise.',
+    },
+    {
+      movie_id: 24,
+      user_id: 6,
+      rating: 2,
+      review_text:
+        "Return of the Jedi concludes the original trilogy but lacks the same depth and darkness as its predecessors. The Ewoks, while cute, felt out of place and diminished the overall seriousness of the story. It's an enjoyable watch but falls short of the greatness of the first two films.",
+    },
+    {
+      movie_id: 24,
+      user_id: 7,
+      rating: 4,
+      review_text:
+        'Return of the Jedi delivers a satisfying conclusion to the original Star Wars saga. The visual effects are impressive, and the final battle scenes are thrilling. Though it may not reach the same level as the previous films, it still provides an entertaining and nostalgic experience for fans.',
     },
   ]);
 };

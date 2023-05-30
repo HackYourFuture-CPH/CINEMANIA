@@ -102,7 +102,7 @@ exports.seed = async function (knex) {
       price: '85.00',
     },
     {
-      category_id: 4,
+      category_id: 3,
       title: 'Stuart Little',
       description:
         'The adventures of a heroic and debonair stalwart mouse named Stuart Little with human qualities, who faces some comic misadventures while searching for his lost bird friend and living with a human family as their child.',
@@ -246,7 +246,7 @@ exports.seed = async function (knex) {
       price: '95.00',
     },
     {
-      category_id: 2,
+      category_id: 4,
       title: 'Star Wars Episode V: The Empire Strikes Back',
       description:
         'After the rebels have been brutally overpowered by the Empire on their newly established base, Luke Skywalker takes advanced Jedi training with Master Yoda, while his friends are pursued by Darth Vader as part of his plan to capture Luke.',
@@ -258,7 +258,7 @@ exports.seed = async function (knex) {
       price: '120.00',
     },
     {
-      category_id: 2,
+      category_id: 1,
       title: 'Pulp Fiction',
       description:
         'Pulp Fiction is a stylized and quintessential film about the intertwining lives of two mob hitmen, a boxer, a gangster’s wife, and a pair of diner bandits. The movie is known for its nonlinear narrative structure and the iconic dance scene by Uma Thurman and John Travolta. With its unique blend of dark humor, violence, and pop culture references, Pulp Fiction is widely regarded as one of the greatest films ever made.',
@@ -270,7 +270,7 @@ exports.seed = async function (knex) {
       price: '150.00',
     },
     {
-      category_id: 2,
+      category_id: 4,
       title: 'The Lord of the Rings: The Return of the King',
       description:
         'The final battle for Middle-earth begins as Frodo and Sam, led by Gollum, continue their dangerous mission toward the fires of Mount Doom in order to destroy the One Ring. Aragorn struggles to fulfill his legacy as he leads his outnumbered followers against the growing power of the Dark Lord Sauron, so that the Ring-bearer may complete his quest. Winner of 11 Academy Awards including Best Picture, Best Director and Best Adapted Screenplay.',
@@ -282,7 +282,7 @@ exports.seed = async function (knex) {
       price: '150.00',
     },
     {
-      category_id: 2,
+      category_id: 4,
       title: 'Star Wars Episode VI: Return of the Jedi',
       description:
         "Luke Skywalker attempts to bring his father back to the light side of the Force, while Han Solo and Princess Leia race to save the rebel alliance from the Empire's world-destroying battle-station, the Death Star.",
@@ -294,7 +294,7 @@ exports.seed = async function (knex) {
       price: '120.00',
     },
     {
-      category_id: 2,
+      category_id: 4,
       title: 'Star Wars Episode II: Attack of the Clones',
       description:
         'Ten years after initially meeting, Anakin Skywalker shares a forbidden romance with Padmé Amidala, while Obi-Wan Kenobi investigates an assassination attempt on the senator and discovers a secret clone army crafted for the Jedi.',
@@ -306,7 +306,7 @@ exports.seed = async function (knex) {
       price: '120.00',
     },
     {
-      category_id: 2,
+      category_id: 4,
       title: 'Star Wars Episode IV: A New Hope',
       description:
         "Luke Skywalker, a spirited farm boy, joins rebel forces to save Princess Leia from the evil Darth Vader, and the galaxy from the Empire's planet-destroying Death Star.",
@@ -318,7 +318,7 @@ exports.seed = async function (knex) {
       price: '120.00',
     },
     {
-      category_id: 2,
+      category_id: 4,
       title: 'Star Wars: Episode VII - The Force Awakens',
       description:
         "Three decades after the Empire's defeat, a new threat arises in the militant First Order. Stormtrooper defector Finn and the scavenger Rey are caught up in the Resistance's search for the missing Luke Skywalker, who may be the only hope for restoring peace to the galaxy.",
@@ -330,7 +330,7 @@ exports.seed = async function (knex) {
       price: '180.00',
     },
     {
-      category_id: 2,
+      category_id: 4,
       title: 'Star Wars: Episode III - Revenge of the Sith',
       description:
         "The Clone Wars rage on, and the rift between Anakin Skywalker and Obi-Wan Kenobi widens with the former's growing obsession with power. Anakin becomes the Sith Lord Darth Vader, while Palpatine, the evil Sith Lord, rises to power to become the Emperor, enforcing his brutal rule over the galaxy.",
@@ -342,7 +342,7 @@ exports.seed = async function (knex) {
       price: '150.00',
     },
     {
-      category_id: 2,
+      category_id: 4,
       title: 'Star Wars: Episode VIII - The Last Jedi',
       description:
         'Rey develops her newly discovered abilities with the guidance of Luke Skywalker, who is unsettled by the strength of her powers. Meanwhile, the Resistance prepares for battle with the First Order.',
@@ -354,7 +354,7 @@ exports.seed = async function (knex) {
       price: '200.00',
     },
     {
-      category_id: 2,
+      category_id: 4,
       title: 'Star Wars: Episode IX - The Rise of Skywalker',
       description:
         "The surviving Resistance faces the First Order once more as Rey, Finn and Poe Dameron's journey continues. With the power and knowledge of generations behind them, the final battle commences.",
@@ -366,7 +366,7 @@ exports.seed = async function (knex) {
       price: '220.00',
     },
     {
-      category_id: 2,
+      category_id: 3,
       title: 'The Green Mile',
       description:
         'The lives of guards on Death Row are affected by one of their charges: a black man accused of child murder and rape, yet who has a mysterious gift.',
@@ -390,7 +390,7 @@ exports.seed = async function (knex) {
       price: '90.00',
     },
     {
-      category_id: 2,
+      category_id: 6,
       title: "Don't Look Up",
       description:
         'Two astronomers go on a media tour to warn humankind of a comet that will destroy planet Earth.',
@@ -402,7 +402,7 @@ exports.seed = async function (knex) {
       price: '120.00',
     },
     {
-      category_id: 3,
+      category_id: 1,
       title: 'Spider-Man: No Way Home',
       description:
         'Peter Parker teams up with his counterparts from two different universes to stop a dangerous threat.',
@@ -426,7 +426,7 @@ exports.seed = async function (knex) {
       price: '75.00',
     },
     {
-      category_id: 2,
+      category_id: 8,
       title: 'Back to the Future',
       description:
         'Marty McFly, a 17-year-old high school student, is accidentally sent thirty years into the past in a time-traveling DeLorean invented by his close friend, the eccentric scientist Doc Brown.',
@@ -450,7 +450,7 @@ exports.seed = async function (knex) {
       price: '150.00',
     },
     {
-      category_id: 5,
+      category_id: 10,
       title: 'Shang-Chi and the Legend of the Ten Rings',
       description:
         'Shang-Chi is forced to confront his past when he is drawn into the web of the mysterious Ten Rings organization.',
@@ -462,7 +462,7 @@ exports.seed = async function (knex) {
       price: '180.00',
     },
     {
-      category_id: 4,
+      category_id: 3,
       title: 'Coda',
       description:
         'A young woman who is the only hearing member of her family dreams of becoming a singer.',
@@ -486,7 +486,7 @@ exports.seed = async function (knex) {
       price: '99.99',
     },
     {
-      category_id: 2,
+      category_id: 8,
       title: 'Star Wars Episode I: The Phantom Menace',
       description:
         'Two Jedi Knights escape a hostile blockade to find allies and come across a young boy who may bring balance to the Force, but the long dormant Sith resurface to claim their old glory.',
@@ -510,7 +510,7 @@ exports.seed = async function (knex) {
       price: '90.00',
     },
     {
-      category_id: 4,
+      category_id: 3,
       title: 'Cinema Paradiso',
       description:
         "A filmmaker recalls his childhood when falling in love with the pictures at the cinema of his home village and forms a deep friendship with the cinema's projectionist.",
@@ -522,7 +522,7 @@ exports.seed = async function (knex) {
       price: '100.00',
     },
     {
-      category_id: 4,
+      category_id: 6,
       title: 'The Intouchables',
       description:
         'After he becomes a quadriplegic from a paragliding accident, an aristocrat hires a young man from the projects to be his caregiver.',
@@ -822,7 +822,7 @@ exports.seed = async function (knex) {
       price: '110.00',
     },
     {
-      category_id: 2,
+      category_id: 3,
       title: 'Whiplash',
       description:
         "A promising young drummer enrolls at a cut-throat music conservatory where his dreams of greatness are mentored by an instructor who will stop at nothing to realize a student's potential.",

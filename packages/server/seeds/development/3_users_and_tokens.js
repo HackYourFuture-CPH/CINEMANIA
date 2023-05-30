@@ -20,7 +20,7 @@ exports.seed = async function (knex) {
     {
       full_name: 'Alan Turing',
       email: 'alan.turing@example.com',
-      uid: 'hMIIhfZobnS2eMxtsKRF44nvcna2',
+      uid: '',
     },
     {
       full_name: 'Vint Cerf',
@@ -31,6 +31,37 @@ exports.seed = async function (knex) {
       full_name: 'Tim Berners-Lee',
       email: 'tim.berners.lee@example.com',
       uid: '1bchbwjdee',
+    },
+    {
+      full_name: 'Katherine Johnson',
+      email: 'katherine.johnson@example.com',
+      uid: '5bcm82jdnf',
+    },
+    {
+      full_name: 'Elon Musk',
+      email: 'elon.musk@example.com',
+      uid: '6vbm9ahc72',
+    },
+    {
+      full_name: 'Marie Curie',
+      email: 'marie.curie@example.com',
+      uid: '7hjfnb5n4a',
+    },
+    {
+      full_name: 'Nikola Tesla',
+      email: 'nikola.tesla@example.com',
+      uid: '8mcs3hd63n',
+    },
+    {
+      full_name: 'Rosalind Franklin',
+      email: 'rosalind.franklin@example.com',
+      uid: '9nfh2mz6bs',
+    },
+
+    {
+      full_name: 'Albert Einstein',
+      email: 'albert.einstein@example.com',
+      uid: '0sv1kj2mcd',
     },
   ]);
   await knex('tokens').insert([
