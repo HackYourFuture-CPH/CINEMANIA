@@ -18,7 +18,7 @@ import { ReviewItem } from './ReviewItem';
 import { HeaderReview } from './HeaderReview';
 import { useUserContext } from '../../context/UserContext';
 
-export function ReviewsDisplay({ movieID }) {
+export function ReviewsDisplay({ movieID, currentReview }) {
   const { user } = useUserContext();
   const [reviews, setReviews] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -60,7 +60,7 @@ export function ReviewsDisplay({ movieID }) {
       }
     };
     fetchUserReview();
-  }, [movieID, user]);
+  }, [movieID, user, currentReview]);
 
   const handleShowAllReviews = () => {
     setShowAllReviews((previousAllReviewsState) => !previousAllReviewsState);
