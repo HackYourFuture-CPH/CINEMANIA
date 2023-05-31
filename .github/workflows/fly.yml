@@ -17,4 +17,4 @@ jobs:
         with:
           ref: feat/deploy
       - uses: superfly/flyctl-actions/setup-flyctl@master
-      - run: flyctl deploy --remote-only
+      - run: flyctl deploy --build-arg REACT_APP_FIREBASE_KEY=${{ secrets.REACT_APP_FIREBASE_KEY }} --remote-only
