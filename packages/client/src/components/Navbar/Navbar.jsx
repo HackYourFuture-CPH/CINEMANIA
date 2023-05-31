@@ -57,7 +57,7 @@ export const Navbar = () => {
         try {
           const response = await fetch(`${apiURL()}/tokens/${userId}`);
           const data = await response.json();
-          setAmount(data[0].amount);
+          setAmount(Math.floor(data[0].amount));
         } catch (error) {
           throw new Error('something went wrong');
         }
