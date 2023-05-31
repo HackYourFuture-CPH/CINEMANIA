@@ -56,9 +56,9 @@ Full stack web application built as Final Project for Class 23 of [Hack Your Fut
 
 ## Screenshots
 
-![](https://https://github.com/HackYourFuture-CPH/CINEMANIA/tree/main/screenshots/screen1.png)
-![](https://https://github.com/HackYourFuture-CPH/CINEMANIA/tree/main/screenshots/screen2.png)
-![](https://https://github.com/HackYourFuture-CPH/CINEMANIA/tree/main/screenshots/screen3.png)
+![](https://github.com/HackYourFuture-CPH/CINEMANIA/blob/feat/readme-update/screenshots/screen1.png)
+![](https://github.com/HackYourFuture-CPH/CINEMANIA/blob/feat/readme-update/screenshots/screen2.png)
+![](https://github.com/HackYourFuture-CPH/CINEMANIA/blob/feat/readme-update/screenshots/screen3.png)
 
 ## Development
 
