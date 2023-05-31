@@ -4,7 +4,7 @@
 
 ## Description
 
-Full stack web application built as Final Project for Class 23 of [Hack Your Future Denmark](https://github.com/HackYourFuture-CPH)
+Full stack web application built as Final Project for Class 23 of [**Hack Your Future Denmark**](https://github.com/HackYourFuture-CPH)
 
 #### The main functionalities of the app are:
 
