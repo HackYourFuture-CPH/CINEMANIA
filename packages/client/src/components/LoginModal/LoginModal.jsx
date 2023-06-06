@@ -60,6 +60,7 @@ const CustomDialogContent = styled(DialogContent)`
 
   p {
     font-size: 2rem;
+    font-family: 'Inter', sans-serif;
   }
 `;
 
