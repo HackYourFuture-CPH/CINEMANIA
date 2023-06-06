@@ -16,12 +16,14 @@ root.render(<App />);
 reportWebVitals();
 
 function assertEnvironment() {
-  if (process.env.REACT_APP_API_HOST === undefined) {
-    throw new Error('Missing environment variable: REACT_APP_API_HOST');
-  }
+  if (process.env.NODE_ENV !== 'production') {
+    if (process.env.REACT_APP_API_HOST === undefined) {
+      throw new Error('Missing environment variable: REACT_APP_API_HOST');
+    }
 
-  if (process.env.REACT_APP_API_PORT === undefined) {
-    throw new Error('Missing environment variable: REACT_APP_API_PORT');
+    if (process.env.REACT_APP_API_PORT === undefined) {
+      throw new Error('Missing environment variable: REACT_APP_API_PORT');
+    }
   }
 
   if (process.env.REACT_APP_API_PATH === undefined) {
