@@ -4,7 +4,7 @@
 #
 
 app = "cinemania"
-app_name= "cinemania"
+app_name = "cinemania"
 primary_region = "ams"
 
 
